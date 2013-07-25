@@ -60,6 +60,7 @@ return array(
 			'username' => 'root',
 			'password' => '',
 			'charset' => 'utf8',
+            'tablePrefix' => 'hyip_',
 		),
 
 		'errorHandler'=>array(
