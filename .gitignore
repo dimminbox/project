@@ -2,3 +2,7 @@
 /www/protected/config/console.php
 
 /.idea
+
+/www/assets
+
+/www/protected/runtime
