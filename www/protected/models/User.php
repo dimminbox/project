@@ -5,6 +5,7 @@
  *
  * The followings are the available columns in table '{{users}}':
  * @property integer $id
+ * @property string $name
  * @property string $email
  * @property string $password
  * @property string $register_time
@@ -31,13 +32,13 @@ class User extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('email, password', 'length', 'max'=>255),
+			array('name, email, password', 'length', 'max'=>255),
             array('email', 'email'),
-            array('role, purse','integer'),
+            array('email', 'unique'),
 			array('register_time, update_time', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, email, password, register_time, update_time, role, tel, purse', 'safe', 'on'=>'search'),
+			array('id, name, email, password, register_time, update_time, role, tel, purse', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -59,6 +60,7 @@ class User extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
+            'name' => 'Name',
 			'email' => 'Email',
 			'password' => 'Password',
 			'register_time' => 'Register Time',
@@ -69,8 +71,38 @@ class User extends CActiveRecord
 
 		);
 	}
+    public function behaviors(){
+        return array(
+            'CTimestampBehavior' => array(
+                'class' => 'zii.behaviors.CTimestampBehavior',
+                'createAttribute' => 'register_time',
+                'updateAttribute' => 'update_time',
+                'setUpdateOnCreate' => true,
+                'timestampExpression' => new CDbExpression('NOW()'),
+            ),
+        );
+    }
 
-	/**
+    public static function cryptPassword($password, $salt=null) {
+        return crypt($password, $salt);
+    }
+
+    protected function beforeSave() {
+
+        if ( $this->getIsNewRecord() ) {
+            $this->password = self::cryptPassword($this->password);
+        } else {
+            $old_password = self::model()->findByPk($this->id)->password;
+            if ( $old_password != $this->password ) {
+                $this->password = self::cryptPassword($this->password);
+            }
+        }
+
+        return parent::beforeSave();
+
+    }
+
+    /**
 	 * Retrieves a list of models based on the current search/filter conditions.
 	 *
 	 * Typical usecase:
@@ -89,6 +121,7 @@ class User extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
+        $criteria->compare('name',$this->name,true);
 		$criteria->compare('email',$this->email,true);
 		$criteria->compare('password',$this->password,true);
 		$criteria->compare('register_time',$this->register_time,true);

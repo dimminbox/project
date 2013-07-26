@@ -74,7 +74,23 @@ class SiteController extends Controller
 
 	/**
 	 * Displays the login page
+     * @param string $email
 	 */
+    public function actionRegister() {
+
+        $register = new Register();
+
+        if(isset($_POST['Register']))
+        {
+            $register->attributes=$_POST['Register'];
+            if( $register->validate() && $register->register() ) {
+                $this->redirect(Yii::app()->user->returnUrl);
+            }
+        }
+
+        $this->render('register',array('model'=>$register));
+    }
+
 	public function actionLogin()
 	{
 		$model=new LoginForm;

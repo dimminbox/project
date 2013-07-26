@@ -16,7 +16,9 @@ class UserIdentity extends CUserIdentity
 	 * @return boolean whether authentication succeeds.
 	 */
     private $_id;
+    public $name;
     public $email;
+
     const ERROR_EMAIL_INVALID = 'Неправильный email';
 
     public function __construct($email,$password)
@@ -36,6 +38,7 @@ class UserIdentity extends CUserIdentity
         {
             $this->_id = $record->id;
             $this->setState('id', $record->id);
+            $this->setState('name', $record->name);
             $this->setState('email', $record->email);
             $this->errorCode=self::ERROR_NONE;
         }
