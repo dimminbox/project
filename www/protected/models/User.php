@@ -9,6 +9,9 @@
  * @property string $password
  * @property string $register_time
  * @property string $update_time
+ * @property integer $tel
+ * @property integer $role
+ * @property integer $purse
  */
 class User extends CActiveRecord
 {
@@ -29,10 +32,12 @@ class User extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('email, password', 'length', 'max'=>255),
+            array('email', 'email'),
+            array('role, purse','integer'),
 			array('register_time, update_time', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, email, password, register_time, update_time', 'safe', 'on'=>'search'),
+			array('id, email, password, register_time, update_time, role, tel, purse', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -58,6 +63,10 @@ class User extends CActiveRecord
 			'password' => 'Password',
 			'register_time' => 'Register Time',
 			'update_time' => 'Update Time',
+            'tel' => 'Phone',
+            'role' => 'Role',
+            'purse' => 'Purse',
+
 		);
 	}
 
@@ -84,6 +93,9 @@ class User extends CActiveRecord
 		$criteria->compare('password',$this->password,true);
 		$criteria->compare('register_time',$this->register_time,true);
 		$criteria->compare('update_time',$this->update_time,true);
+        $criteria->compare('role',$this->role,true);
+        $criteria->compare('tel',$this->tel,true);
+        $criteria->compare('purse',$this->purse,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
