@@ -44,8 +44,9 @@
         </p>
     </div>
 
-    <?php if ( Yii::app()->user->getState('ref') != null ) : ?>
-    <?php $user = User::model()->referralUser(Yii::app()->user->getState('ref')); ?>
+    <?php if ( Yii::app()->user->getState('ref') != null &&
+            $user = User::model()->referralUser(Yii::app()->user->getState('ref')) ) : ?>
+    <?php ; ?>
         <div class="row">
             <?php echo $form->labelEx($model,'referrer'); ?>
             <?php echo $form->textField($model,'referrer',array('value' => $user->name,

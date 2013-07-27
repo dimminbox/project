@@ -90,6 +90,7 @@ class User extends CActiveRecord
         if ( $user != null ) {
             return $user;
         } else {
+            Yii::app()->user->setState('ref',null);
             return false;
         }
     }
