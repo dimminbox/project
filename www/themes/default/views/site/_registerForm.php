@@ -44,9 +44,15 @@
         </p>
     </div>
 
-    <?php if ( Yii::app()->user->getState('ref') != null ) {
-        echo 'Реферал: ' . Yii::app()->user->getState('ref');
-    } ?>
+    <?php if ( Yii::app()->user->getState('ref') != null ) : ?>
+        <div class="row">
+            <?php echo $form->labelEx($model,'tel'); ?>
+        <?php echo $form->textField($model,'tel'); ?>
+        <?php echo $form->error($model,'tel'); ?>
+        <p class="hint">
+        </p>
+        </div>
+    <?php endif; ?>
 
     <div class="row buttons">
         <?php echo CHtml::submitButton('Зарегистрироваться'); ?>
