@@ -52,6 +52,7 @@ class User extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+            'refs' => array(self::HAS_MANY, 'Referral', 'user_id'),
 		);
 	}
 
@@ -104,18 +105,8 @@ class User extends CActiveRecord
 
     }
 
-    protected function afterSave($user_name = null) {
+    protected function afterSave() {
 
-        if ( $user_name != null ) {
-
-        $user = User::model()->findByAttributes(array('name' => $user_name));
-        $ref = new Referral();
-        $ref->ref_id = $this->id;
-        $ref->user_id = $user->id;
-
-        }
-
-        return parent::afterSave();
     }
 
     /**
