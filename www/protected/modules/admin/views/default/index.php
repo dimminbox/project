@@ -1,17 +1,21 @@
 <?php
-/* @var $this DefaultController */
+/* @var $this AdminController */
+/* @var $model User */
+?>
 
+<?php
 $this->breadcrumbs=array(
-	$this->module->id,
+    'Админпанель'
 );
 ?>
-<h1><?php echo $this->uniqueId . '/' . $this->action->id; ?></h1>
 
-<p>
-This is the view content for action "<?php echo $this->action->id; ?>".
-The action belongs to the controller "<?php echo get_class($this); ?>"
-in the "<?php echo $this->module->id; ?>" module.
-</p>
-<p>
-You may customize this page by editing <tt><?php echo __FILE__; ?></tt>
-</p>
+<?php
+$this->menu=array(
+    array('label'=>'Пользователи', 'url'=>array('/admin/user')),
+    array('label'=>'Транзакции', 'url'=>array('/admin/userTransaction')),
+);
+?>
+
+<h1>Админпанель</h1>
+
+<p>тут мы будем выводить некую статистику по сайту</p>
