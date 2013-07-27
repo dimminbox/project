@@ -37,7 +37,7 @@ class Register extends CFormModel
     public function attributeLabels()
     {
         return array(
-            'name' => 'Имя',
+            'name' => 'Никнейм',
             'email' => 'Адрес электронной почты',
             'password' => 'Пароль',
             'password_repeat' => 'Повторите пароль',

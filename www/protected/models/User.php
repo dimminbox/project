@@ -36,7 +36,10 @@ class User extends CActiveRecord
 		return array(
 			array('name, email, password', 'length', 'max'=>255),
             array('email', 'email'),
-            array('email', 'unique'),
+            array('password', 'length', 'min'=>6),
+            array('name, email', 'unique'),
+            array('name', 'match', 'pattern'=>'/^[A-Za-zs,]+$/u',
+                'message'=>'Имя должно содержать только символы латинского алфавита.'),
 			array('register_time, update_time', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
