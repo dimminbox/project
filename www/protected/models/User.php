@@ -16,6 +16,8 @@
  */
 class User extends CActiveRecord
 {
+    const ROLE_USER = 1;
+    const ROLE_ADMIN = 7;
 	/**
 	 * @return string the associated database table name
 	 */
@@ -50,6 +52,7 @@ class User extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+            'refs' => array(self::HAS_MANY, 'Referral', 'user_id'),
 		);
 	}
 
@@ -99,6 +102,10 @@ class User extends CActiveRecord
         }
 
         return parent::beforeSave();
+
+    }
+
+    protected function afterSave() {
 
     }
 
