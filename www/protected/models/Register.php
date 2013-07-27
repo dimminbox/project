@@ -12,6 +12,8 @@ class Register extends CFormModel
     public $password_repeat;
     public $email;
     public $tel;
+    public $referrer;
+    public $referrer_id;
     private $_identity;
 
     /**
@@ -24,6 +26,7 @@ class Register extends CFormModel
         return array(
 // username and password are required
             array('name, password, password_repeat, email', 'required'),
+            array('tel, referrer_id', 'safe'),
             array('password_repeat', 'compare', 'compareAttribute'=>'password'),
         );
     }
@@ -39,6 +42,7 @@ class Register extends CFormModel
             'password' => 'Пароль',
             'password_repeat' => 'Повторите пароль',
             'tel' => 'Телефон',
+            'referrer' => 'Вас пригласил:',
         );
     }
 
@@ -54,7 +58,7 @@ class Register extends CFormModel
         $user->password = $this->password;
         $user->email = $this->email;
         $user->tel = $this->tel;
-        $user->role = User::ROLE_USER;
+        //$user->role = User::ROLE_USER;
         $result = $user->save();
 
         if ( false === $result ) {
@@ -62,6 +66,12 @@ class Register extends CFormModel
                 $this->addError($field, implode('<br />', $errors));
             }
             return false;
+        }
+        if ( $this->referrer_id > 0 ) {
+            $referral = new Referral();
+            $referral->ref_id = $user->id;
+            $referral->user_id = $this->referrer_id;
+            $referral->save();
         }
 
         $this->_identity=new UserIdentity($this->email, $this->password);

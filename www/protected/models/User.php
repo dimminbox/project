@@ -88,7 +88,9 @@ class User extends CActiveRecord
     public function referralUser($user_name) {
         $user = User::model()->findByAttributes(array('name' => $user_name));
         if ( $user != null ) {
-            
+            return $user;
+        } else {
+            return false;
         }
     }
     public static function cryptPassword($password, $salt=null) {

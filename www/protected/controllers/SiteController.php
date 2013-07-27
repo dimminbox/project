@@ -29,6 +29,7 @@ class SiteController extends Controller
 	{
 		if ( Yii::app()->user->getState('ref') == null && $ref != null ) {
             Yii::app()->user->setState('ref', $ref);
+            $this->redirect('/');
         }
 
 		$this->render('index');
@@ -85,10 +86,12 @@ class SiteController extends Controller
         if(isset($_POST['Register']))
         {
             $register->attributes=$_POST['Register'];
+
             if( $register->validate() && $register->registerSave() ) {
                 $this->redirect(Yii::app()->user->returnUrl);
             }
         }
+
 
         $this->render('register',array('model'=>$register));
     }

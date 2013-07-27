@@ -45,13 +45,17 @@
     </div>
 
     <?php if ( Yii::app()->user->getState('ref') != null ) : ?>
+    <?php $user = User::model()->referralUser(Yii::app()->user->getState('ref')); ?>
         <div class="row">
-            <?php echo $form->labelEx($model,'tel'); ?>
-        <?php echo $form->textField($model,'tel'); ?>
-        <?php echo $form->error($model,'tel'); ?>
-        <p class="hint">
-        </p>
+            <?php echo $form->labelEx($model,'referrer'); ?>
+            <?php echo $form->textField($model,'referrer',array('value' => $user->name,
+                                                                'disabled' => 'disabled'
+                                                                )); ?>
+            <?php echo $form->error($model,'referrer'); ?>
+            <p class="hint">
+            </p>
         </div>
+        <?php echo $form->hiddenField($model,'referrer_id',array('value' => $user->id,)); ?>
     <?php endif; ?>
 
     <div class="row buttons">
