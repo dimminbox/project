@@ -44,6 +44,10 @@
         </p>
     </div>
 
+    <?php if ( Yii::app()->user->getState('ref') != null ) {
+        echo 'Реферал: ' . Yii::app()->user->getState('ref');
+    } ?>
+
     <div class="row buttons">
         <?php echo CHtml::submitButton('Зарегистрироваться'); ?>
         <!-- a class="alter-button" href="#"

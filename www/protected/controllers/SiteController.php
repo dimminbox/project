@@ -25,10 +25,12 @@ class SiteController extends Controller
 	 * This is the default 'index' action that is invoked
 	 * when an action is not explicitly requested by users.
 	 */
-	public function actionIndex()
+	public function actionIndex($ref = null)
 	{
-		// renders the view file 'protected/views/site/index.php'
-		// using the default layout 'protected/views/layouts/main.php'
+		if ( Yii::app()->user->getState('ref') == null && $ref != null ) {
+            Yii::app()->user->setState('ref', $ref);
+        }
+
 		$this->render('index');
 	}
 
@@ -83,7 +85,7 @@ class SiteController extends Controller
         if(isset($_POST['Register']))
         {
             $register->attributes=$_POST['Register'];
-            if( $register->validate() && $register->register() ) {
+            if( $register->validate() && $register->registerSave() ) {
                 $this->redirect(Yii::app()->user->returnUrl);
             }
         }

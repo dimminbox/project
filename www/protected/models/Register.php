@@ -46,12 +46,14 @@ class Register extends CFormModel
      * Logs in the user using the given username and password in the model.
      * @return boolean whether login is successful
      */
-    public function register()
+    public function registerSave()
     {
 
         $user = new User();
+        $user->name = $this->name;
         $user->password = $this->password;
         $user->email = $this->email;
+        $user->tel = $this->tel;
         $result = $user->save();
 
         if ( false === $result ) {
