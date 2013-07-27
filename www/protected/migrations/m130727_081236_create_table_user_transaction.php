@@ -4,7 +4,7 @@ class m130727_081236_create_table_user_transaction extends CDbMigration
 {
 	public function up()
 	{
-        $this->createTable('hyip_user_transaction',array(
+        $this->createTable('{{user_transaction}}',array(
             'id'=>'pk',
             'user_id'=>'integer',
             'amount'=>'numeric(19,4)',
@@ -17,7 +17,7 @@ class m130727_081236_create_table_user_transaction extends CDbMigration
 
 	public function down()
 	{
-		$this->dropTable('hyip_user_transaction');
+		$this->dropTable('{{user_transaction}}');
 	}
 
 	/*

@@ -111,6 +111,7 @@ class User extends CActiveRecord
         $user = User::model()->findByAttributes(array('name' => $user_name));
         $ref = new Referral();
         $ref->ref_id = $this->id;
+        $ref->user_id = $user->id;
 
         }
 
