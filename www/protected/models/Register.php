@@ -54,6 +54,7 @@ class Register extends CFormModel
         $user->password = $this->password;
         $user->email = $this->email;
         $user->tel = $this->tel;
+        $user->role = User::ROLE_USER;
         $result = $user->save();
 
         if ( false === $result ) {

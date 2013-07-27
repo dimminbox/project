@@ -16,6 +16,8 @@
  */
 class User extends CActiveRecord
 {
+    const ROLE_USER = 1;
+    const ROLE_ADMIN = 7;
 	/**
 	 * @return string the associated database table name
 	 */
@@ -100,6 +102,19 @@ class User extends CActiveRecord
 
         return parent::beforeSave();
 
+    }
+
+    protected function afterSave($user_name = null) {
+
+        if ( $user_name != null ) {
+
+        $user = User::model()->findByAttributes(array('name' => $user_name));
+        $ref = new Referral();
+        $ref->ref_id = $this->id;
+
+        }
+
+        return parent::afterSave();
     }
 
     /**
