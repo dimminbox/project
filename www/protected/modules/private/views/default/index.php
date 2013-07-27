@@ -5,3 +5,6 @@ $this->breadcrumbs=array(
 	$this->module->id,
 );?>
 <h1>Личный кабинет</h1>
+Ваш баланс: 0
+<br />
+<?php echo CHtml::link('Пополнить счет', 'private/default/deposit') ?>
