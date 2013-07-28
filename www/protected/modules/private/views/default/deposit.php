@@ -35,7 +35,6 @@ $this->breadcrumbs=array(
     <?php echo $form->hiddenField($deposit,'PAYMENT_URL', array('name' => 'PAYMENT_URL')); ?>
     <?php echo $form->hiddenField($deposit,'PAYMENT_URL_METHOD', array('name' => 'PAYMENT_URL_METHOD')); ?>
     <?php echo $form->hiddenField($deposit,'NOPAYMENT_URL', array('name' => 'NOPAYMENT_URL')); ?>
-    <?php echo $form->hiddenField($deposit,'NOPAYMENT_URL', array('name' => 'NOPAYMENT_URL')); ?>
 
     <div class="row buttons">
         <?php echo CHtml::submitButton('Пополнить счет', array('name', 'PAYMENT_METHOD')); ?>

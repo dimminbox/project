@@ -57,6 +57,7 @@ class User extends CActiveRecord
 		return array(
             'refs' => array(self::HAS_MANY, 'Referral', 'user_id'),
             'role' => array(self::BELONGS_TO, 'UserRole', 'role_id'),
+            'transaction' => array(self::HAS_MANY, 'UserTransaction', 'user_id'),
 		);
 	}
 
@@ -118,6 +119,20 @@ class User extends CActiveRecord
 
     protected function afterSave() {
 
+    }
+    public function getAmount() {
+        if ( !$this->isNewRecord ) {
+            $result = Yii::app()->db->createCommand("
+                SELECT amount_after
+                FROM " . UserTransaction::model()->tableName() . "
+                WHERE user_id=" . $this->id . "
+                ORDER BY id DESC
+                LIMIT 1
+                ")->queryScalar();
+            return $result ?: 0;
+        } else {
+            return 0;
+        }
     }
 
     /**

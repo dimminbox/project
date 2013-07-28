@@ -10,7 +10,8 @@ foreach(Yii::app()->user->getFlashes() as $key => $message) {
     echo '<div style="color:green;font-size: 16px" class="flash-' . $key . '">' . $message . "</div>\n";
 }
 ?>
-Ваш баланс: 0
+Ваш баланс:
+<?php echo sprintf("%0.0f", $user->amount); ?>
 <br />
 <?php echo CHtml::link('Пополнить счет', 'private/default/deposit') ?><br /><br />
 <?php echo CHtml::link('Партнерская программа', 'private/default/referral') ?>

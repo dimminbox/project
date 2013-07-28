@@ -7,6 +7,8 @@
  * @property integer $id
  * @property integer $user_id
  * @property string $amount
+ * @property string $payer
+ * @property string $hash
  * @property string $reason
  * @property string $time
  */
@@ -34,7 +36,7 @@ class UserTransactionsIncomplete extends CActiveRecord
 			array('time', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, user_id, amount, reason, time', 'safe', 'on'=>'search'),
+			array('id, user_id, payment_id, amount, payer, hash, reason, time', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -57,7 +59,10 @@ class UserTransactionsIncomplete extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'user_id' => 'User',
+            'payment_id' => 'Payment_id',
 			'amount' => 'Amount',
+            'payer' => 'Payer',
+            'hash' => 'Hash',
 			'reason' => 'Reason',
 			'time' => 'Time',
 		);
@@ -83,7 +88,10 @@ class UserTransactionsIncomplete extends CActiveRecord
 
 		$criteria->compare('id',$this->id);
 		$criteria->compare('user_id',$this->user_id);
+        $criteria->compare('payment_id',$this->payment_id,true);
 		$criteria->compare('amount',$this->amount,true);
+        $criteria->compare('payer',$this->payer,true);
+        $criteria->compare('hash',$this->hash,true);
 		$criteria->compare('reason',$this->reason,true);
 		$criteria->compare('time',$this->time,true);
 
