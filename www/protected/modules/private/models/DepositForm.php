@@ -12,7 +12,7 @@ class DepositForm extends CFormModel {
                         //платежей на указанный e-mail.
     public $PAYMENT_URL = 'http://yborsc.bget.ru/index.php/private/default/depositSucces'; //* Это URL куда пользователь будет перенаправлен после успешного проведения платежа.
     public $PAYMENT_URL_METHOD = 'POST'; //GET / POST / LINK
-    public $NOPAYMENT_URL = 'http://project.local/index.php/private/default/depositFail'; //* Это URL куда пользователь будет перенаправлен после неудачной попытки провести платеж.
+    public $NOPAYMENT_URL = 'http://yborsc.bget.ru/index.php/private/default/depositFail'; //* Это URL куда пользователь будет перенаправлен после неудачной попытки провести платеж.
     public $NOPAYMENT_URL_METHOD = 'POST'; //GET / POST / LINK
     public $SUGGESTED_MEMO; //Дополнительные поля.
 
