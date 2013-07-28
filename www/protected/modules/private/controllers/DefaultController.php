@@ -7,7 +7,7 @@ class DefaultController extends PrivateController
 		$this->render('index');
 	}
     //Пополнение счета
-    public function actionDeposit($amount=null) {
+    public function actionDeposit() {
         $user = User::model()->findByPk(Yii::app()->user->id);
         $deposit = new DepositForm();
 
@@ -16,10 +16,30 @@ class DefaultController extends PrivateController
             'deposit' => $deposit,
         ));
     }
+
     public function actionDepositFail() {
         Yii::app()->user->setFlash('DepositFail', 'Платеж не был завершен или возникла ошибка в процессе оплаты.');
-        $this->redirect($this->createUrl('/private/default/deposit/'));
+        $this->redirect($this->createUrl('/private/'));
     }
+
+    public function actionDepositSuccess() {
+        $transaction = new UserTransactionsIncomplete();
+        if ( isset($_POST) ) {
+            $transaction->amount = $_POST['PAYMENT_AMOUNT'];
+            $transaction->payer = $_POST['PAYER_ACCOUNT'];
+            $transaction->hash = $_POST['V2_HASH'];
+
+            if ( $transaction->save() ) {
+                Yii::app()->user->setFlash('DepositSuccess', 'Платеж успешно завершен');
+
+            } else {
+                Yii::app()->user->setFlash('DepositSuccess', 'Произошла ошибка');
+            }
+
+        }
+        $this->redirect($this->createUrl('/private/'));
+    }
+
     public function actionDepositStatus() {
 
         define('ALTERNATE_PHRASE_HASH',  '748GH678GFH896HJ465GH9ZQP');
@@ -66,10 +86,7 @@ class DefaultController extends PrivateController
 
 
     }
-    public function actionDepositSuccess() {
-        Yii::app()->user->setFlash('DepositSuccess', 'Платеж успешно завершен.');
-        $this->redirect($this->createUrl('/private/default/deposit/'));
-    }
+
     //Партнерская программа
     public function actionReferral() {
         $user = User::model()->findByPk(Yii::app()->user->id);

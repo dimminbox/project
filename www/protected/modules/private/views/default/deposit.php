@@ -13,11 +13,7 @@ $this->breadcrumbs=array(
 
     <h1>Пополнение счета</h1>
 
-<?php
-foreach(Yii::app()->user->getFlashes() as $key => $message) {
-    echo '<div style="color:green;font-size: 16px" class="flash-' . $key . '">' . $message . "</div>\n";
-}
-?>
+
 
 <div class="form">
     <?php $form=$this->beginWidget('CActiveForm', array(
