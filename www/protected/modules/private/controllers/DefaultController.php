@@ -6,6 +6,7 @@ class DefaultController extends PrivateController
 	{
 		$this->render('index');
 	}
+    //Пополнение счета
     public function actionDeposit($amount=null) {
         $user = User::model()->findByPk(Yii::app()->user->id);
         $deposit = new DepositForm();
@@ -23,5 +24,12 @@ class DefaultController extends PrivateController
     public function actionDepositSuccess() {
         Yii::app()->user->setFlash('DepositSuccess', 'Платеж успешно завершен.');
         $this->redirect($this->createUrl('/private/default/deposit/'));
+    }
+    //Партнерская программа
+    public function actionReferral() {
+        $user = User::model()->findByPk(Yii::app()->user->id);
+        $this->render('referral', array(
+            'user' => $user,
+        ));
     }
 }
