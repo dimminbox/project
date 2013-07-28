@@ -10,10 +10,14 @@ $this->breadcrumbs=array(
 <strong>Процентная ставка: 8%</strong><br />
 </p>
 <p>
-<h2>Список рефералов</h2>
+<h2>Список рефералов:</h2>
 </p>
-<ol>
-<?php foreach ( $user->refs as $referral ): ?>
-    <li><?php echo $referral->user->name?></li>
-<?php endforeach; ?>
-</ol>
+<?php if ( !empty($user->refs) ) :?>
+    <ol>
+        <?php foreach ( $user->refs as $referral ): ?>
+            <li><?php echo $referral->user->name?></li>
+        <?php endforeach; ?>
+    </ol>
+<?php else : ?>
+    У Вас нет приглашенных инвесторов
+<?php endif ?>
