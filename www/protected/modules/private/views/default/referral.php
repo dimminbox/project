@@ -12,3 +12,8 @@ $this->breadcrumbs=array(
 <p>
 <h2>Список рефералов</h2>
 </p>
+<ol>
+<?php foreach ( $user->refs as $referral ): ?>
+    <li><?php echo $referral->user->name?></li>
+<?php endforeach; ?>
+</ol>
