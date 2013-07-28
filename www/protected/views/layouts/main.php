@@ -1,4 +1,5 @@
 <?php /* @var $this Controller */ ?>
+<?php $user = User::model()->findByPk(Yii::app()->user->id);?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
@@ -27,7 +28,7 @@
 	</div><!-- header -->
 
 	<div id="mainmenu">
-		<?php $this->widget('zii.widgets.CMenu',array(
+        <?php $this->widget('zii.widgets.CMenu',array(
 			'items'=>array(
 				array('label'=>'Home', 'url'=>array('/site/index')),
 				array('label'=>'About', 'url'=>array('/site/page', 'view'=>'about')),
@@ -36,7 +37,7 @@
 				array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest),
                 array('label'=>'Register', 'url'=>array('/site/register'), 'visible'=>Yii::app()->user->isGuest),
                 array('label'=>'Личный кабинет', 'url'=>array('/private'),'visible'=>!Yii::app()->user->isGuest),
-                array('label'=>'Админпанель', 'url'=>array('/admin') /*'visible'=> Yii::app()->user->role == 'admin' */),
+                array('label'=>'Админпанель', 'url'=>array('/admin'), 'visible'=> $user->role->name == 'admin' ),
 			),
 		)); ?>
 	</div><!-- mainmenu -->

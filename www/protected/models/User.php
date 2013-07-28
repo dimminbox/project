@@ -11,7 +11,7 @@
  * @property string $register_time
  * @property string $update_time
  * @property integer $tel
- * @property integer $role
+ * @property integer $role_id
  * @property integer $purse
  */
 class User extends CActiveRecord
@@ -40,10 +40,10 @@ class User extends CActiveRecord
             array('name, email', 'unique'),
             array('name', 'match', 'pattern'=>'/^[A-Za-zs,]+$/u',
                 'message'=>'Имя должно содержать только символы латинского алфавита.'),
-			array('register_time, update_time', 'safe'),
+			array('register_time, update_time, role_id', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, name, email, password, register_time, update_time, role, tel, purse', 'safe', 'on'=>'search'),
+			array('id, name, email, password, register_time, update_time, role_id, tel, purse', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -56,6 +56,7 @@ class User extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
             'refs' => array(self::HAS_MANY, 'Referral', 'user_id'),
+            'role' => array(self::BELONGS_TO, 'UserRole', 'role_id'),
 		);
 	}
 
@@ -72,10 +73,9 @@ class User extends CActiveRecord
 			'register_time' => 'Register Time',
 			'update_time' => 'Update Time',
             'tel' => 'Phone',
-            'role' => 'Role',
+            'role_id' => 'Role',
             'purse' => 'Purse',
-
-		);
+  		);
 	}
     public function behaviors(){
         return array(
@@ -144,7 +144,7 @@ class User extends CActiveRecord
 		$criteria->compare('password',$this->password,true);
 		$criteria->compare('register_time',$this->register_time,true);
 		$criteria->compare('update_time',$this->update_time,true);
-        $criteria->compare('role',$this->role,true);
+        $criteria->compare('role_id',$this->role_id,true);
         $criteria->compare('tel',$this->tel,true);
         $criteria->compare('purse',$this->purse,true);
 

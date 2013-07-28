@@ -21,27 +21,39 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'email'); ?>
-		<?php echo $form->textField($model,'email',array('size'=>60,'maxlength'=>255)); ?>
+		<?php echo $form->textField($model,'email',array('size'=>40,'maxlength'=>255)); ?>
 		<?php echo $form->error($model,'email'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'password'); ?>
-		<?php echo $form->passwordField($model,'password',array('size'=>60,'maxlength'=>255)); ?>
+		<?php echo $form->passwordField($model,'password',array('size'=>40,'maxlength'=>255)); ?>
 		<?php echo $form->error($model,'password'); ?>
 	</div>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'register_time'); ?>
-		<?php echo $form->textField($model,'register_time'); ?>
-		<?php echo $form->error($model,'register_time'); ?>
-	</div>
+    <div class="row">
+        <?php echo $form->labelEx($model,'name'); ?>
+        <?php echo $form->passwordField($model,'name',array('size'=>40,'maxlength'=>255)); ?>
+        <?php echo $form->error($model,'name'); ?>
+    </div>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'update_time'); ?>
-		<?php echo $form->textField($model,'update_time'); ?>
-		<?php echo $form->error($model,'update_time'); ?>
-	</div>
+    <div class="row">
+        <?php echo $form->labelEx($model,'purse'); ?>
+        <?php echo $form->passwordField($model,'purse',array('size'=>40,'maxlength'=>255)); ?>
+        <?php echo $form->error($model,'purse'); ?>
+    </div>
+
+    <div class="row">
+        <?php echo $form->labelEx($model,'tel'); ?>
+        <?php echo $form->passwordField($model,'tel',array('size'=>40,'maxlength'=>255)); ?>
+        <?php echo $form->error($model,'tel'); ?>
+    </div>
+
+    <div class="row">
+        <?php echo $form->labelEx($model,'role'); ?>
+        <?php echo $form->dropDownList($model,'role_id', CHtml::listData( UserRole::model()->findAll(), 'id', 'name' )); ?>
+        <?php echo $form->error($model,'role_id'); ?>
+    </div>
 
 	<div class="row buttons">
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
