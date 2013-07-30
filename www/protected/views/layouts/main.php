@@ -27,7 +27,8 @@
 	</div><!-- header -->
 
 	<div id="mainmenu">
-        <?php $this->widget('zii.widgets.CMenu',array(
+        <?php
+         $this->widget('zii.widgets.CMenu',array(
 			'items'=>array(
 				array('label'=>'Home', 'url'=>array('/site/index')),
 				array('label'=>'About', 'url'=>array('/site/page', 'view'=>'about')),
@@ -36,9 +37,11 @@
 				array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest),
                 array('label'=>'Register', 'url'=>array('/site/register'), 'visible'=>Yii::app()->user->isGuest),
                 array('label'=>'Личный кабинет', 'url'=>array('/private'),'visible'=>!Yii::app()->user->isGuest),
-                //array('label'=>'Админпанель', 'url'=>array('/admin'), 'visible'=> Yii::app()->user->role == 'admin' ),
+                array('label'=>'Админпанель', 'url'=>array('/admin'), 'visible'=> Yii::app()->user->role == 'admin' ),
 			),
-		)); ?>
+		));
+
+        ?>
 	</div><!-- mainmenu -->
 	<?php if(isset($this->breadcrumbs)):?>
 		<?php $this->widget('zii.widgets.CBreadcrumbs', array(

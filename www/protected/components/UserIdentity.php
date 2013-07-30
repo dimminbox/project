@@ -15,7 +15,7 @@ class UserIdentity extends CUserIdentity
 	 * against some persistent user identity storage (e.g. database).
 	 * @return boolean whether authentication succeeds.
 	 */
-    private $_id;
+    protected $_id;
     public $name;
     public $email;
 
@@ -40,6 +40,7 @@ class UserIdentity extends CUserIdentity
             $this->setState('id', $record->id);
             $this->setState('name', $record->name);
             $this->setState('email', $record->email);
+            $this->setState('role', $record->role->name);
             $this->errorCode=self::ERROR_NONE;
         }
         return !$this->errorCode;

@@ -16,8 +16,7 @@
  */
 class User extends CActiveRecord
 {
-    const ROLE_USER = 1;
-    const ROLE_ADMIN = 7;
+
 	/**
 	 * @return string the associated database table name
 	 */

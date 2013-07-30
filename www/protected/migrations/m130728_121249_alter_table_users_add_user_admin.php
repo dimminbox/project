@@ -6,7 +6,7 @@ class m130728_121249_alter_table_users_add_user_admin extends CDbMigration
 	{
         $this->insert('{{users}}', array(
             'name' => 'admin',
-            'password' => 'a$naBbVaP.9Zo',
+            'password' => 'adminka',
             'email' => 'admin@project.ru',
             'role_id' => '1',
         ));
