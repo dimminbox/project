@@ -7,47 +7,52 @@
  */
 class UserIdentity extends CUserIdentity
 {
-	/**
-	 * Authenticates a user.
-	 * The example implementation makes sure if the username and password
-	 * are both 'demo'.
-	 * In practical applications, this should be changed to authenticate
-	 * against some persistent user identity storage (e.g. database).
-	 * @return boolean whether authentication succeeds.
-	 */
     protected $_id;
-    public $name;
+
     public $email;
 
-    const ERROR_EMAIL_INVALID = 'Неправильный email';
+    public $name;
 
+    const ERROR_EMAIL_INVALID = 10;
+
+
+
+    /**
+     * Constructor.
+     * @param string $username username
+     * @param string $password password
+     */
     public function __construct($email,$password)
     {
         $this->email=$email;
         $this->password=$password;
     }
 
+    /**
+     * @return boolean whether authentication succeeds.
+     */
     public function authenticate()
     {
-        $record=User::model()->findByAttributes(array('email'=>$this->email));
-        if($record===null)
-            $this->errorCode=self::ERROR_EMAIL_INVALID;
-        else if($record->password!==crypt($this->password,$record->password))
+        $record = User::model()->findByAttributes(array('email'=>$this->email));
+
+        if ( null === $record ) {
+            $this->errorCode = self::ERROR_EMAIL_INVALID;
+        } elseif ( crypt($this->password, $record->password) !== $record->password ) {
             $this->errorCode=self::ERROR_PASSWORD_INVALID;
-        else
-        {
+        } else {
             $this->_id = $record->id;
             $this->setState('id', $record->id);
-            $this->setState('name', $record->name);
             $this->setState('email', $record->email);
+            $this->setState('name', $record->name);
             $this->setState('role', $record->role->name);
             $this->errorCode=self::ERROR_NONE;
         }
-        return !$this->errorCode;
+
+        return $this->errorCode == self::ERROR_NONE;
+
     }
 
-    public function getId()
-    {
+    public function getId() {
         return $this->_id;
     }
 
@@ -59,4 +64,5 @@ class UserIdentity extends CUserIdentity
     {
         return $this->name;
     }
+
 }

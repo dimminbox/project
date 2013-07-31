@@ -27,10 +27,10 @@ class SiteController extends Controller
 	 */
 	public function actionIndex($ref = null)
 	{
-		if ( Yii::app()->user->getState('ref') == null && $ref != null ) {
+		/*if ( Yii::app()->user->getState('ref') == null && $ref != null ) {
             Yii::app()->user->setState('ref', $ref);
             $this->redirect('/');
-        }
+        }*/
 
 		$this->render('index');
 	}
@@ -79,7 +79,7 @@ class SiteController extends Controller
 	 * Displays the login page
      * @param string $email
 	 */
-    public function actionRegister() {
+   /* public function actionRegister() {
 
         $register = new Register();
 
@@ -94,7 +94,7 @@ class SiteController extends Controller
 
 
         $this->render('register',array('model'=>$register));
-    }
+    }*/
 
 	public function actionLogin()
 	{
