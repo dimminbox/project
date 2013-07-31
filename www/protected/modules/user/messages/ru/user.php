@@ -2,6 +2,7 @@
 
 return array(
     'Referral' => 'Партнерская программа',
+    'Deposit' => 'Пополнить счет',
 	'Registration' => 'Регистрация',
 	'Register' => 'Зарегистрироваться',
 	'Login' => 'Вход',

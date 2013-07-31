@@ -1,17 +1,27 @@
-<?php
-
-/* @var $this PrivateController */
-/* @var $model DepositForm */
-/* @var $form ActiveForm */
-
-$this->pageTitle=Yii::app()->name . ' - Пополнение счета';
+<?php $this->pageTitle=Yii::app()->name . ' - '.UserModule::t("Profile");
 $this->breadcrumbs=array(
-    'Личный кабинет' => array('/private'),
-    'Пополнение счета',
+    UserModule::t("Profile"),
 );
-?>
+$this->menu=array(
+    ((UserModule::isAdmin())
+        ?array('label'=>UserModule::t('Manage Users'), 'url'=>array('/user/admin'))
+        :array()),
+    array('label'=>UserModule::t('List User'), 'url'=>array('/user')),
+    array('label'=>UserModule::t('Deposit'), 'url'=>array('deposit')),
+    array('label'=>UserModule::t('Referral'), 'url'=>array('referral')),
+    array('label'=>UserModule::t('Edit'), 'url'=>array('edit')),
+    array('label'=>UserModule::t('Change password'), 'url'=>array('changepassword')),
+    array('label'=>UserModule::t('Logout'), 'url'=>array('/user/logout')),
+);
+?><h1><?php echo UserModule::t('Your profile'); ?></h1>
 
-    <h1>Пополнение счета</h1>
+<?php if(Yii::app()->user->hasFlash('profileMessage')): ?>
+    <div class="success">
+        <?php echo Yii::app()->user->getFlash('profileMessage'); ?>
+    </div>
+<?php endif; ?>
+<hr>
+<h1>Пополнение счета</h1>
 
 
 
