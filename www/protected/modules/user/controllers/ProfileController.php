@@ -76,6 +76,7 @@ class ProfileController extends Controller
     }
 
     public function actionDepositStatus() {
+        mail('yborschev@gmail.com', 'отработал статус', $_POST['PAYMENT_AMOUNT']);
         $transactionInComlete = UserTransactionsIncomplete::model()->findByAttributes(array('payment_id' => $_POST['PAYMENT_ID']));
         define('ALTERNATE_PHRASE_HASH',  '748GH678GFH896HJ465GH9ZQP');
         // Path to directory to save logs. Make sure it has write permissions.
