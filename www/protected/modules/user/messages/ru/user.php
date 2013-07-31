@@ -1,6 +1,7 @@
 <?php
 
 return array(
+    'Referral' => 'Партнерская программа',
 	'Registration' => 'Регистрация',
 	'Register' => 'Зарегистрироваться',
 	'Login' => 'Вход',

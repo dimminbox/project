@@ -21,6 +21,13 @@ class ProfileController extends Controller
 	    ));
 	}
 
+    //Партнерская программа
+    public function actionReferral() {
+        $user = User::model()->findByPk(Yii::app()->user->id);
+        $this->render('referral', array(
+            'user' => $user,
+        ));
+    }
 
 	/**
 	 * Updates a particular model.

@@ -35,6 +35,7 @@ class RegistrationController extends Controller
 		    	$this->redirect(Yii::app()->controller->module->profileUrl);
 		    } else {
 		    	if(isset($_POST['RegistrationForm'])) {
+
 					$model->attributes=$_POST['RegistrationForm'];
 					$profile->attributes=((isset($_POST['Profile'])?$_POST['Profile']:array()));
 					if($model->validate()&&$profile->validate())
@@ -45,8 +46,14 @@ class RegistrationController extends Controller
 						$model->verifyPassword=UserModule::encrypting($model->verifyPassword);
 						$model->superuser=0;
 						$model->status=((Yii::app()->controller->module->activeAfterRegister)?User::STATUS_ACTIVE:User::STATUS_NOACTIVE);
-						
+
 						if ($model->save()) {
+
+                            $referral = new Referral();
+                            $referral->user_id = $_POST['RegistrationForm']['referrer_id'];
+                            $referral->ref_id = $model->id;
+                            $referral->save();
+
 							$profile->user_id=$model->id;
 							$profile->save();
 							if (Yii::app()->controller->module->sendActivationMail) {

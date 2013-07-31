@@ -7,7 +7,9 @@
 class RegistrationForm extends User {
 	public $verifyPassword;
 	public $verifyCode;
-	
+	public $referrer;
+    public $referrer_id;
+
 	public function rules() {
 		$rules = array(
 			array('username, password, verifyPassword, email', 'required'),
@@ -26,5 +28,13 @@ class RegistrationForm extends User {
 		array_push($rules,array('verifyPassword', 'compare', 'compareAttribute'=>'password', 'message' => UserModule::t("Retype Password is incorrect.")));
 		return $rules;
 	}
-	
+
+    public function attributeLabels()
+    {
+        return array(
+            'referrer' => 'Вас пригласил:',
+        );
+    }
+
+
 }

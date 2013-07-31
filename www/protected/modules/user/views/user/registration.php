@@ -53,7 +53,20 @@ $this->breadcrumbs=array(
 	<?php echo $form->textField($model,'email'); ?>
 	<?php echo $form->error($model,'email'); ?>
 	</div>
-	
+    <?php if ( Yii::app()->user->getState('ref') != null &&
+        $user = User::model()->referralUser(Yii::app()->user->getState('ref')) ) : ?>
+
+        <div class="row">
+            <?php echo $form->labelEx($model,'referrer'); ?>
+            <?php echo $form->textField($model,'referrer',array('value' => $user->username,
+                'disabled' => 'disabled'
+            )); ?>
+            <?php echo $form->error($model,'referrer'); ?>
+            <p class="hint">
+            </p>
+        </div>
+        <?php echo $form->hiddenField($model,'referrer_id',array('value' => $user->id,)); ?>
+    <?php endif; ?>
 <?php 
 		$profileFields=$profile->getFields();
 		if ($profileFields) {

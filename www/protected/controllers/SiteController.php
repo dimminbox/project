@@ -27,10 +27,10 @@ class SiteController extends Controller
 	 */
 	public function actionIndex($ref = null)
 	{
-		/*if ( Yii::app()->user->getState('ref') == null && $ref != null ) {
+		if ( Yii::app()->user->getState('ref') == null && $ref != null ) {
             Yii::app()->user->setState('ref', $ref);
             $this->redirect('/');
-        }*/
+        }
 
 		$this->render('index');
 	}

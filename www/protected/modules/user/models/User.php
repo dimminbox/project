@@ -80,6 +80,7 @@ class User extends CActiveRecord
         $relations = Yii::app()->getModule('user')->relations;
         if (!isset($relations['profile']))
             $relations['profile'] = array(self::HAS_ONE, 'Profile', 'user_id');
+            $relations['refs'] = array(self::HAS_MANY, 'Referral', 'user_id');
         return $relations;
 	}
 
@@ -195,5 +196,15 @@ class User extends CActiveRecord
 
     public function setLastvisit($value) {
         $this->lastvisit_at=date('Y-m-d H:i:s',$value);
+    }
+    //проверяем есть ли реферер
+    public function referralUser($user_name) {
+        $user = User::model()->findByAttributes(array('username' => $user_name));
+        if ( $user != null ) {
+            return $user;
+        } else {
+            Yii::app()->user->setState('ref',null);
+            return false;
+        }
     }
 }
