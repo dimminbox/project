@@ -26,6 +26,7 @@ $this->menu=array(
     </div>
 <?php endif;?>
 
-<string>Ваш баланс:</string>
-<?php echo sprintf("%0.0f", $model->amount); ?> бубликов.
-
+<strong>Ваш баланс:</strong>
+<?php echo sprintf("%0.0f", $model->amount); ?> бубликов.<br />
+<?php $this->renderPartial('_recharge_amount', array('deposit' => $deposit)) ?>
+<?php echo CHtml::link('Пополнить баланс', '#', array('onclick' => '$("#recharge_amount").dialog("open"); return false;',)); ?>

@@ -16,8 +16,23 @@ class ProfileController extends Controller
 	public function actionProfile()
 	{
 		$model = $this->loadUser();
-	    $this->render('profile',array(
+
+
+        $deposit = new DepositForm();
+        $deposit->PAYEE_ACCOUNT = self::PAYEE_ACCOUNT;
+        $deposit->PAYEE_NAME = 'project';
+        $deposit->PAYMENT_ID = uniqid(Yii::app()->user->id + time());
+        $deposit->PAYMENT_UNITS = self::PAYMENT_UNITS;
+        $deposit->PAYMENT_AMOUNT = 100;
+        $deposit->STATUS_URL = $this->createAbsoluteUrl('/user/profile/depositStatus');
+        $deposit->PAYMENT_URL = $this->createAbsoluteUrl('/user/profile/depositSuccess');
+        $deposit->PAYMENT_URL_METHOD = 'POST';
+        $deposit->NOPAYMENT_URL = $this->createAbsoluteUrl('/user/profile/depositFail');
+        $deposit->PAYMENT_URL_METHOD = 'POST';
+
+        $this->render('profile',array(
 	    	'model'=>$model,
+            'deposit' => $deposit,
 			'profile'=>$model->profile,
 	    ));
 	}
@@ -32,6 +47,7 @@ class ProfileController extends Controller
     //Пополнение счета
     public function actionDeposit() {
         $user = User::model()->findByPk(Yii::app()->user->id);
+
         $deposit = new DepositForm();
         $deposit->PAYEE_ACCOUNT = self::PAYEE_ACCOUNT;
         $deposit->PAYEE_NAME = 'project';
