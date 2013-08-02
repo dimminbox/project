@@ -82,4 +82,16 @@ class RWebUser extends CWebUser
 		
 		return $returnUrl!==null ? CHtml::normalizeUrl($returnUrl) : CHtml::normalizeUrl($defaultUrl);
 	}
+    public function updateSession() {
+        $user = Yii::app()->getModule('user')->user($this->id);
+        $userAttributes = CMap::mergeArray(array(
+            'email'=>$user->email,
+            'username'=>$user->username,
+            'create_at'=>$user->create_at,
+            'lastvisit_at'=>$user->lastvisit_at,
+        ),$user->profile->getAttributes());
+        foreach ($userAttributes as $attrName=>$attrValue) {
+            $this->setState($attrName,$attrValue);
+        }
+    }
 }
