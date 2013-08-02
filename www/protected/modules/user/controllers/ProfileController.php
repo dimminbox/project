@@ -76,17 +76,17 @@ class ProfileController extends Controller
     }
 
     public function actionDepositStatus() {
-        mail('yborschev@gmail.com', 'отработал статус', $_POST['PAYMENT_AMOUNT']);
         $transactionInComlete = UserTransactionsIncomplete::model()->findByAttributes(array('payment_id' => $_POST['PAYMENT_ID']));
+
         define('ALTERNATE_PHRASE_HASH',  '748GH678GFH896HJ465GH9ZQP');
         // Path to directory to save logs. Make sure it has write permissions.
-        define('PATH_TO_LOG',  Yii::app()->request->hostInfo.'/protected/runtime/deposit/');
-
+        define('PATH_TO_LOG',  'protected/runtime/deposit/');
+        $alternate = strtoupper(md5(ALTERNATE_PHRASE_HASH));
         $string=
             $_POST['PAYMENT_ID'].':'.$_POST['PAYEE_ACCOUNT'].':'.
             $_POST['PAYMENT_AMOUNT'].':'.$_POST['PAYMENT_UNITS'].':'.
             $_POST['PAYMENT_BATCH_NUM'].':'.
-            $_POST['PAYER_ACCOUNT'].':'.ALTERNATE_PHRASE_HASH.':'.
+            $_POST['PAYER_ACCOUNT'].':'. $alternate .':'.
             $_POST['TIMESTAMPGMT'];
 
         $hash=strtoupper(md5($string));
@@ -101,6 +101,7 @@ class ProfileController extends Controller
                 $transaction->amount = $_POST['PAYMENT_AMOUNT'];
                 $transaction->user_id = $transactionInComlete->user_id;
                 $transaction->payment_id = $transactionInComlete->payment_id;
+                $transaction->reason = 'Пополнение счета';
                 $transaction->save();
 
                 $f=fopen(PATH_TO_LOG."good.log", "ab+");
@@ -111,22 +112,13 @@ class ProfileController extends Controller
 
             }else{ // you can also save invalid payments for debug purposes
 
-                $f=fopen(PATH_TO_LOG."bad.log", "ab+");
+                $f=fopen(PATH_TO_LOG."bad.log", "a");
                 fwrite($f, date("d.m.Y H:i")."; REASON: fake data; POST: ".serialize($_POST)."; STRING: $string; HASH: $hash\n");
                 fclose($f);
 
             }
 
-
-        }else{ // you can also save invalid payments for debug purposes
-
-            $f=fopen(PATH_TO_LOG."bad.log", "ab+");
-            fwrite($f, date("d.m.Y H:i")."; REASON: bad hash; POST: ".serialize($_POST)."; STRING: $string; HASH: $hash\n");
-            fclose($f);
-
         }
-
-
     }
 	/**
 	 * Updates a particular model.

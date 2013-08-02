@@ -182,6 +182,21 @@ class User extends CActiveRecord
         ));
     }
 
+    public function getAmount() {
+        if ( !$this->isNewRecord ) {
+            $result = Yii::app()->db->createCommand("
+                SELECT amount_after
+                FROM " . UserTransaction::model()->tableName() . "
+                WHERE user_id=" . Yii::app()->user->id . "
+                ORDER BY id DESC
+                LIMIT 1
+                ")->queryScalar();
+            return $result;
+        } else {
+            return 0;
+        }
+    }
+
     public function getCreatetime() {
         return strtotime($this->create_at);
     }

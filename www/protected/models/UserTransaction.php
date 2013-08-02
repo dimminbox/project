@@ -66,6 +66,19 @@ class UserTransaction extends CActiveRecord
 			'amount_before' => 'Amount Before',
 		);
 	}
+
+    public function behaviors(){
+        return array(
+            'CTimestampBehavior' => array(
+                'class' => 'zii.behaviors.CTimestampBehavior',
+                'createAttribute' => 'time',
+                'updateAttribute' => 'time',
+                'setUpdateOnCreate' => true,
+                'timestampExpression' => new CDbExpression('NOW()'),
+            )
+        );
+    }
+
     public function afterSave()
     {
         $prev = self::model()->findBySql('
