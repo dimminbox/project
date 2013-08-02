@@ -6,7 +6,7 @@ $this->beginWidget(
             'title'    => 'Пополнить счет',
             'autoOpen' => false,
             'modal'    => 'true',
-            'width'    => '350',
+            'width'    => '200',
             'height'   => 'auto',
             'resizable'=> false,
         ),

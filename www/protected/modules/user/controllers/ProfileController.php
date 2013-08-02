@@ -44,27 +44,6 @@ class ProfileController extends Controller
             'user' => $user,
         ));
     }
-    //Пополнение счета
-    public function actionDeposit() {
-        $user = User::model()->findByPk(Yii::app()->user->id);
-
-        $deposit = new DepositForm();
-        $deposit->PAYEE_ACCOUNT = self::PAYEE_ACCOUNT;
-        $deposit->PAYEE_NAME = 'project';
-        $deposit->PAYMENT_ID = uniqid(Yii::app()->user->id + time());
-        $deposit->PAYMENT_UNITS = self::PAYMENT_UNITS;
-        $deposit->PAYMENT_AMOUNT = 100;
-        $deposit->STATUS_URL = $this->createAbsoluteUrl('/user/profile/depositStatus');
-        $deposit->PAYMENT_URL = $this->createAbsoluteUrl('/user/profile/depositSuccess');
-        $deposit->PAYMENT_URL_METHOD = 'POST';
-        $deposit->NOPAYMENT_URL = $this->createAbsoluteUrl('/user/profile/depositFail');
-        $deposit->PAYMENT_URL_METHOD = 'POST';
-
-        $this->render('deposit', array(
-            'user' => $user,
-            'deposit' => $deposit,
-        ));
-    }
 
     public function actionDepositFail() {
         Yii::app()->user->setFlash('profileMessageFail', 'Платеж не был завершен или возникла ошибка в процессе оплаты.');
