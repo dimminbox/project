@@ -49,3 +49,9 @@ $this->menu=array(
     <br />
     <?php $this->renderPartial('_investment', array('investment' => $investment)) ?>
 </p>
+
+<p>
+    <?php echo CHtml::link('Перевести средства', '#', array('onclick' => '$("#transfer").dialog("open"); return false;',)); ?>
+    <br />
+    <?php $this->renderPartial('_transfer', array('transfer' => $transfer,'model' => $model)) ?>
+</p>

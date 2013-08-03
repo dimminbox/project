@@ -31,12 +31,14 @@ class ProfileController extends Controller
         $deposit->PAYMENT_URL_METHOD = 'POST';
 
         $investment = new Deposit();
+        $transfer = new UserTransaction();
 
         $this->render('profile',array(
 	    	'model'=>$model,
             'deposit' => $deposit,
             'investment' => $investment,
 			'profile'=>$model->profile,
+            'transfer'=>$transfer,
 	    ));
 	}
 
@@ -78,6 +80,44 @@ class ProfileController extends Controller
             }
         }
 
+        $this->redirect($this->createUrl('/user/profile'));
+    }
+
+    public function actionTransfer(){
+        $amount = (float)User::model()->getAmount();
+
+        if ( isset($_POST['UserTransaction']) && isset($_POST['User'])) {
+
+            $user = User::model()->findByAttributes(array('internal_purse'=>$_POST['User']['internal_purse']));
+            if ( $user != null) {
+                if ( $amount < $_POST['UserTransaction']['amount']) {
+                    Yii::app()->user->setFlash('profileMessageFail', 'На вашем счете недостаточно средств');
+                } else {
+
+                    $transaction = new UserTransaction();
+                    $transaction->user_id = Yii::app()->user->id;
+                    $transaction->amount = -$_POST['UserTransaction']['amount'];
+                    $transaction->amount_type = UserTransaction::AMOUNT_TYPE_TRANSFER;
+                    $transaction->reason = 'Певедод средств на кошелек ' . $_POST['User']['internal_purse']
+                        . ' пользователю ' . $user->username;
+
+                        if ( $transaction->save() ) {
+                            $transactionTo = new UserTransaction();
+                            $transactionTo->user_id = $user->id;
+                            $transactionTo->amount = $_POST['UserTransaction']['amount'];
+                            $transactionTo->amount_type = UserTransaction::AMOUNT_TYPE_RECHARGE;
+
+                            $transactionTo->reason = 'Певедод средств от пользователя ' . User::model()->findByPk(Yii::app()->user->id)->username;
+                            $transactionTo->save();
+                                Yii::app()->user->setFlash('profileMessage', 'Перевод произошел успешно');
+                        } else {
+                            Yii::app()->user->setFlash('profileMessageFail', 'Произошла ошибка');
+                        }
+                }
+            } else {
+                Yii::app()->user->setFlash('profileMessageFail', 'Такого кошелька не существует');
+            }
+        }
         $this->redirect($this->createUrl('/user/profile'));
     }
 
