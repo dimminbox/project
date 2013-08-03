@@ -13,8 +13,7 @@ $this->menu=array(
     array('label'=>UserModule::t('Change password'), 'url'=>array('changepassword')),
     array('label'=>UserModule::t('Logout'), 'url'=>array('/user/logout')),
 );
-?><h1><?php echo UserModule::t('Your profile'); ?></h1>
-
+?>
 <?php if(Yii::app()->user->hasFlash('profileMessage')): ?>
 <div class="success" style="text-align:center;padding:10px;color:green;font-weight:bold;border:1px solid green">
 	<?php echo Yii::app()->user->getFlash('profileMessage'); ?>
@@ -44,11 +43,11 @@ if ($model->amount) {
 <?php echo CHtml::link('Пополнить счет', '#', array('onclick' => '$("#recharge_amount").dialog("open"); return false;',)); ?>
 <?php $this->renderPartial('_recharge_amount', array('deposit' => $deposit)) ?><br />
 <strong>Внутренний кошелек:</strong> <?php echo $model->internal_purse; ?><br />
-<strong>Всего пополнено:</strong> <br />
-<strong>Всего инвестировано:</strong> <br />
-<strong>Всего заработано:</strong> <br />
-<strong>Всего выведено:</strong> <br />
-<strong>Партнерская программа:</strong> <br />
+<strong>Всего пополнено:</strong> #<br />
+<strong>Всего инвестировано:</strong> #<br />
+<strong>Всего заработано:</strong> #<br />
+<strong>Всего выведено:</strong> #<br />
+<strong>Партнерская программа:</strong> #<br />
 </p>
 
 <p>

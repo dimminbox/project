@@ -203,7 +203,13 @@ class User extends CActiveRecord
             return 0;
         }
     }
+    public function getPayment() {
+        if ( !$this->isNewRecord ) {
 
+        } else {
+            return 0;
+        }
+    }
     public function getCreatetime() {
         return strtotime($this->create_at);
     }
