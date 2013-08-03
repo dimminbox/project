@@ -1,6 +1,7 @@
 <?php
 
 return array(
+    'Investment' => 'Список инвестиций',
     'Referral' => 'Партнерская программа',
     'Deposit' => 'Пополнить счет',
 	'Registration' => 'Регистрация',
