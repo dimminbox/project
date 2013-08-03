@@ -81,6 +81,7 @@ class User extends CActiveRecord
         if (!isset($relations['profile']))
             $relations['profile'] = array(self::HAS_ONE, 'Profile', 'user_id');
             $relations['refs'] = array(self::HAS_MANY, 'Referral', 'user_id');
+            $relations['deposit'] = array(self::HAS_MANY, 'Deposit', 'user_id');
         return $relations;
 	}
 

@@ -24,8 +24,13 @@ $this->menu=array(
         <?php echo Yii::app()->user->getFlash('profileMessageFail'); ?>
     </div>
 <?php endif;?>
-
+<p>
 <strong>Ваш баланс:</strong>
 <?php echo sprintf("%0.0f", $model->amount); ?> бубликов.<br />
-<?php $this->renderPartial('_recharge_amount', array('deposit' => $deposit)) ?>
-<?php echo CHtml::link('Пополнить баланс', '#', array('onclick' => '$("#recharge_amount").dialog("open"); return false;',)); ?>
+<?php echo CHtml::link('Пополнить счет', '#', array('onclick' => '$("#recharge_amount").dialog("open"); return false;',)); ?>
+    <?php $this->renderPartial('_recharge_amount', array('deposit' => $deposit)) ?>
+</p>
+<p>
+<?php echo CHtml::link('Инвестировать', '#', array()); ?><br />
+    <?php $this->renderPartial('_investment', array('investment' => $investment)) ?>
+</p>

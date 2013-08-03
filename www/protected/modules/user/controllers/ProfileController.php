@@ -30,9 +30,12 @@ class ProfileController extends Controller
         $deposit->NOPAYMENT_URL = $this->createAbsoluteUrl('/user/profile/depositFail');
         $deposit->PAYMENT_URL_METHOD = 'POST';
 
+        $investment = new Deposit();
+
         $this->render('profile',array(
 	    	'model'=>$model,
             'deposit' => $deposit,
+            'investment' => $investment,
 			'profile'=>$model->profile,
 	    ));
 	}
@@ -43,6 +46,10 @@ class ProfileController extends Controller
         $this->render('referral', array(
             'user' => $user,
         ));
+    }
+
+    public function actionDeposit() {
+
     }
 
     public function actionDepositFail() {
