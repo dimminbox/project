@@ -104,6 +104,7 @@ class ProfileController extends Controller
                 $transaction->user_id = $transactionInComlete->user_id;
                 $transaction->payment_id = $transactionInComlete->payment_id;
                 $transaction->reason = 'Пополнение счета';
+                $transaction->amount_type = UserTransaction::AMOUNT_TYPE;
                 $transaction->save();
 
                 $f=fopen(PATH_TO_LOG."good.log", "ab+");

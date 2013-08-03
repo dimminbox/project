@@ -11,6 +11,8 @@
  * @property string $time
  * @property string $amount_after
  * @property string $amount_before
+ * @property string $payment_id
+ *  * @property string $amount_type
  */
 class UserTransaction extends CActiveRecord
 {
@@ -30,7 +32,7 @@ class UserTransaction extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('user_id', 'numerical', 'integerOnly'=>true),
+			array('user_id, amount_type', 'numerical', 'integerOnly'=>true),
 			array('amount, amount_after, amount_before', 'length', 'max'=>19),
 			array('reason', 'length', 'max'=>255),
 			array('time', 'safe'),
@@ -60,6 +62,8 @@ class UserTransaction extends CActiveRecord
 			'id' => 'ID',
 			'user_id' => 'User',
 			'amount' => 'Amount',
+            'amount_type' => 'Amount type',
+            'payment_id' => 'Payment id',
 			'reason' => 'Reason',
 			'time' => 'Time',
 			'amount_after' => 'Amount After',
@@ -121,6 +125,8 @@ class UserTransaction extends CActiveRecord
 		$criteria->compare('id',$this->id);
 		$criteria->compare('user_id',$this->user_id);
 		$criteria->compare('amount',$this->amount,true);
+        $criteria->compare('amount_type',$this->amount_type,true);
+        $criteria->compare('payment_id',$this->payment_id,true);
 		$criteria->compare('reason',$this->reason,true);
 		$criteria->compare('time',$this->time,true);
 		$criteria->compare('amount_after',$this->amount_after,true);
