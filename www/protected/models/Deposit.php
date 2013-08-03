@@ -60,13 +60,23 @@ class Deposit extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'user_id' => 'User',
-			'deposit_type_id' => 'Deposit Type',
+			'deposit_type_id' => 'Время депозита',
 			'deposit_amount' => 'Сумма депозита',
 			'status' => 'Status',
 			'date' => 'Date',
 		);
 	}
-
+    public function behaviors(){
+        return array(
+            'CTimestampBehavior' => array(
+                'class' => 'zii.behaviors.CTimestampBehavior',
+                'createAttribute' => 'date',
+                'updateAttribute' => 'date',
+                'setUpdateOnCreate' => true,
+                'timestampExpression' => new CDbExpression('NOW()'),
+            )
+        );
+    }
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
 	 *

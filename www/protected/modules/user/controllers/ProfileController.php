@@ -47,9 +47,38 @@ class ProfileController extends Controller
             'user' => $user,
         ));
     }
+    //Инвестирование
+    public function actionInvestment() {
 
-    public function actionDeposit() {
+        $amount = (float)User::model()->getAmount();
 
+        if ( isset($_POST['Deposit']) ) {
+
+            if ( $amount < $_POST['Deposit']['deposit_amount']) {
+                Yii::app()->user->setFlash('profileMessageFail', 'На вашем счете недостаточно средств');
+            } else {
+
+                $transaction = new UserTransaction();
+                $transaction->user_id = Yii::app()->user->id;
+                $transaction->amount = -$_POST['Deposit']['deposit_amount'];
+                $transaction->amount_type = UserTransaction::AMOUNT_TYPE_INVESTMENT;
+                $transaction->reason = 'Инвестирование в депозит';
+
+                if ( $transaction->save() ) {
+                    $deposit = new Deposit();
+                    $deposit->attributes = $_POST['Deposit'];
+                    $deposit->user_id = Yii::app()->user->id;
+                    $deposit->status = 1;
+                    $deposit->save();
+
+                    Yii::app()->user->setFlash('profileMessage', 'Покупка депозита успешно завершена');
+                } else {
+                    Yii::app()->user->setFlash('profileMessageFail', 'Произошла ошибка');
+                }
+            }
+        }
+
+        $this->redirect($this->createUrl('/user/profile'));
     }
 
     public function actionDepositFail() {
@@ -104,7 +133,7 @@ class ProfileController extends Controller
                 $transaction->user_id = $transactionInComlete->user_id;
                 $transaction->payment_id = $transactionInComlete->payment_id;
                 $transaction->reason = 'Пополнение счета';
-                $transaction->amount_type = UserTransaction::AMOUNT_TYPE;
+                $transaction->amount_type = UserTransaction::AMOUNT_TYPE_RECHARGE;
                 $transaction->save();
 
                 $f=fopen(PATH_TO_LOG."good.log", "ab+");

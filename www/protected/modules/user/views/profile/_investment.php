@@ -14,10 +14,9 @@ $this->beginWidget(
 ); ?>
 <div class="form">
 <?php $form=$this->beginWidget('CActiveForm', array(
-    'id'=>'investment',
-    'action' => '/user/profile/investment',
+    'id'=>'investment-form',
+    'action' => $this->createAbsoluteUrl('/user/profile/investment'),
     'enableClientValidation'=>true,
-    'enableAjaxValidation' => true,
     'clientOptions'=>array(
         'validateOnSubmit'=>true,
     ),
@@ -28,9 +27,9 @@ $this->beginWidget(
         <?php echo $form->error($investment,'deposit_amount'); ?>
     </div>
     <div class="row">
-        <?php echo $form->labelEx($investment,'deposit_type'); ?>
-        <?php echo $form->dropDownList($investment,'deposit_type', CHtml::listData( DepositType::model()->findAll(), 'id', 'type') ); ?>
-        <?php echo $form->error($investment,'deposit_type'); ?>
+        <?php echo $form->labelEx($investment,'deposit_type_id'); ?>
+        <?php echo $form->dropDownList($investment,'deposit_type_id', CHtml::listData( DepositType::model()->findAll(), 'id', 'type') ); ?>
+        <?php echo $form->error($investment,'deposit_type_id'); ?>
     </div>
 <div class="row buttons">
     <?php echo CHtml::submitButton('Инвестировать'); ?>

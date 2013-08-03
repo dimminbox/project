@@ -16,6 +16,8 @@
  */
 class UserTransaction extends CActiveRecord
 {
+    const AMOUNT_TYPE_RECHARGE = 1; //Пополнение счета
+    const AMOUNT_TYPE_INVESTMENT = 2; //Инвестирование
 	/**
 	 * @return string the associated database table name
 	 */
