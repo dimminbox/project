@@ -22,6 +22,8 @@ class User extends CActiveRecord
 	 * @var integer $status
      * @var timestamp $create_at
      * @var timestamp $lastvisit_at
+     * @var integer $internal_purse
+     * @var string $perfect_purse
 	 */
 
 	/**
@@ -52,6 +54,7 @@ class User extends CActiveRecord
 			array('username', 'length', 'max'=>20, 'min' => 3,'message' => UserModule::t("Incorrect username (length between 3 and 20 characters).")),
 			array('password', 'length', 'max'=>128, 'min' => 4,'message' => UserModule::t("Incorrect password (minimal length 4 symbols).")),
 			array('email', 'email'),
+            array('internal_purse', 'unique'),
 			array('username', 'unique', 'message' => UserModule::t("This user's name already exists.")),
 			array('email', 'unique', 'message' => UserModule::t("This user's email address already exists.")),
 			array('username', 'match', 'pattern' => '/^[A-Za-z0-9_]+$/u','message' => UserModule::t("Incorrect symbols (A-z0-9).")),
@@ -100,7 +103,8 @@ class User extends CActiveRecord
 			'activkey' => UserModule::t("activation key"),
 			'createtime' => UserModule::t("Registration date"),
 			'create_at' => UserModule::t("Registration date"),
-			
+            'internal_purse' => UserModule::t("Internal purse"),
+            'perfect_purse' => UserModule::t("Perfect purse"),
 			'lastvisit_at' => UserModule::t("Last visit"),
 			'superuser' => UserModule::t("Superuser"),
 			'status' => UserModule::t("Status"),
@@ -123,7 +127,7 @@ class User extends CActiveRecord
                 'condition'=>'superuser=1',
             ),
             'notsafe'=>array(
-            	'select' => 'id, username, password, email, activkey, create_at, lastvisit_at, superuser, status',
+            	'select' => 'id, username, password, email, activkey, create_at, lastvisit_at, internal_purse, perfect_purse, superuser, status',
             ),
         );
     }
@@ -132,7 +136,7 @@ class User extends CActiveRecord
     {
         return CMap::mergeArray(Yii::app()->getModule('user')->defaultScope,array(
             'alias'=>'user',
-            'select' => 'user.id, user.username, user.email, user.create_at, user.lastvisit_at, user.superuser, user.status',
+            'select' => 'user.id, user.username, user.email, user.create_at, user.lastvisit_at, user.internal_purse, user.perfect_purse, user.superuser, user.status',
         ));
     }
 	
@@ -172,6 +176,7 @@ class User extends CActiveRecord
         $criteria->compare('activkey',$this->activkey);
         $criteria->compare('create_at',$this->create_at);
         $criteria->compare('lastvisit_at',$this->lastvisit_at);
+        $criteria->compare('internal_purse',$this->internal_purse);
         $criteria->compare('superuser',$this->superuser);
         $criteria->compare('status',$this->status);
 
@@ -192,7 +197,8 @@ class User extends CActiveRecord
                 ORDER BY id DESC
                 LIMIT 1
                 ")->queryScalar();
-            return $result;
+
+            return $result ?: 0;
         } else {
             return 0;
         }

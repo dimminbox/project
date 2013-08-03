@@ -26,15 +26,24 @@ $this->menu=array(
     </div>
 <?php endif;?>
 <h2><?php echo $model->username; ?></h2>
+
+<?php if ( $model->lastvisit_at != '0000-00-00 00:00:00' ) : ?>
 <p>
-Ваш последний визит: <?php echo $model->lastvisit_at; ?><br />
+    Ваш последний визит: <?php echo $model->lastvisit_at; ?><br />
 </p>
+<?php endif; ?>
 <p>
 <strong>Ваш баланс:</strong>
-<?php echo rtrim($model->amount,"0"); ?> бубликов.<br />
+<?php
+if ($model->amount) {
+    echo rtrim($model->amount,"0");
+} else {
+    echo 0;
+}
+ ?> бубликов.<br />
 <?php echo CHtml::link('Пополнить счет', '#', array('onclick' => '$("#recharge_amount").dialog("open"); return false;',)); ?>
 <?php $this->renderPartial('_recharge_amount', array('deposit' => $deposit)) ?><br />
-<strong>Внутренний кошелек:</strong> <br />
+<strong>Внутренний кошелек:</strong> <?php echo $model->internal_purse; ?><br />
 <strong>Всего пополнено:</strong> <br />
 <strong>Всего инвестировано:</strong> <br />
 <strong>Всего заработано:</strong> <br />
