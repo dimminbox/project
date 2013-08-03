@@ -29,7 +29,7 @@ $this->beginWidget(
     </div>
     <div class="row">
         <?php echo $form->labelEx($investment,'deposit_type'); ?>
-        <?php echo $form->radioButtonList($investment,'deposit_type', $investment->deposit_type); ?>
+        <?php echo $form->dropDownList($investment,'deposit_type', CHtml::listData( DepositType::model()->findAll(), 'id', 'type') ); ?>
         <?php echo $form->error($investment,'deposit_type'); ?>
     </div>
 <div class="row buttons">
