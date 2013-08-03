@@ -23,7 +23,7 @@ $this->beginWidget(
         )); ?>
         <div class="row">
             <?php echo $form->labelEx($model,'Кошелек'); ?>
-            <?php echo $form->textField($model,'internal_purse'); ?>
+            <?php echo $form->textField($model,'internal_purse', array('value' => '')); ?>
             <?php echo $form->error($model,'internal_purse'); ?>
         </div>
         <div class="row">

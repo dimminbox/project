@@ -154,4 +154,5 @@ class UserTransaction extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+
 }
