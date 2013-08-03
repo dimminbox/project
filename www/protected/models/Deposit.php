@@ -13,6 +13,7 @@
  */
 class Deposit extends CActiveRecord
 {
+    const MIN_AMOUNT = 200;
 	/**
 	 * @return string the associated database table name
 	 */
@@ -31,6 +32,7 @@ class Deposit extends CActiveRecord
 		return array(
 			array('user_id, deposit_type_id, deposit_amount, status', 'numerical', 'integerOnly'=>true),
 			array('date', 'safe'),
+            array('deposit_amount', 'numerical', 'min' => self::MIN_AMOUNT, 'tooSmall' => 'Минимальная сумма ' . self::MIN_AMOUNT),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, user_id, deposit_type_id, deposit_amount, status, date', 'safe', 'on'=>'search'),
@@ -45,6 +47,8 @@ class Deposit extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+            'user' => array(self::BELONGS_TO, 'User', 'user_id'),
+            'deposit_type' => array(self::BELONGS_TO, 'DepositType', 'deposit_type_id'),
 		);
 	}
 
@@ -56,13 +60,23 @@ class Deposit extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'user_id' => 'User',
-			'deposit_type_id' => 'Deposit Type',
-			'deposit_amount' => 'Deposit Amount',
+			'deposit_type_id' => 'Время депозита',
+			'deposit_amount' => 'Сумма депозита',
 			'status' => 'Status',
 			'date' => 'Date',
 		);
 	}
-
+    public function behaviors(){
+        return array(
+            'CTimestampBehavior' => array(
+                'class' => 'zii.behaviors.CTimestampBehavior',
+                'createAttribute' => 'date',
+                'updateAttribute' => 'date',
+                'setUpdateOnCreate' => true,
+                'timestampExpression' => new CDbExpression('NOW()'),
+            )
+        );
+    }
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
 	 *

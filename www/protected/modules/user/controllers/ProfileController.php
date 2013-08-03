@@ -16,22 +16,8 @@ class ProfileController extends Controller
 	public function actionProfile()
 	{
 		$model = $this->loadUser();
-	    $this->render('profile',array(
-	    	'model'=>$model,
-			'profile'=>$model->profile,
-	    ));
-	}
 
-    //Партнерская программа
-    public function actionReferral() {
-        $user = User::model()->findByPk(Yii::app()->user->id);
-        $this->render('referral', array(
-            'user' => $user,
-        ));
-    }
-    //Пополнение счета
-    public function actionDeposit() {
-        $user = User::model()->findByPk(Yii::app()->user->id);
+
         $deposit = new DepositForm();
         $deposit->PAYEE_ACCOUNT = self::PAYEE_ACCOUNT;
         $deposit->PAYEE_NAME = 'project';
@@ -44,10 +30,55 @@ class ProfileController extends Controller
         $deposit->NOPAYMENT_URL = $this->createAbsoluteUrl('/user/profile/depositFail');
         $deposit->PAYMENT_URL_METHOD = 'POST';
 
-        $this->render('deposit', array(
-            'user' => $user,
+        $investment = new Deposit();
+
+        $this->render('profile',array(
+	    	'model'=>$model,
             'deposit' => $deposit,
+            'investment' => $investment,
+			'profile'=>$model->profile,
+	    ));
+	}
+
+    //Партнерская программа
+    public function actionReferral() {
+        $user = User::model()->findByPk(Yii::app()->user->id);
+        $this->render('referral', array(
+            'user' => $user,
         ));
+    }
+    //Инвестирование
+    public function actionInvestment() {
+
+        $amount = (float)User::model()->getAmount();
+
+        if ( isset($_POST['Deposit']) ) {
+
+            if ( $amount < $_POST['Deposit']['deposit_amount']) {
+                Yii::app()->user->setFlash('profileMessageFail', 'На вашем счете недостаточно средств');
+            } else {
+
+                $transaction = new UserTransaction();
+                $transaction->user_id = Yii::app()->user->id;
+                $transaction->amount = -$_POST['Deposit']['deposit_amount'];
+                $transaction->amount_type = UserTransaction::AMOUNT_TYPE_INVESTMENT;
+                $transaction->reason = 'Инвестирование в депозит';
+
+                if ( $transaction->save() ) {
+                    $deposit = new Deposit();
+                    $deposit->attributes = $_POST['Deposit'];
+                    $deposit->user_id = Yii::app()->user->id;
+                    $deposit->status = 1;
+                    $deposit->save();
+
+                    Yii::app()->user->setFlash('profileMessage', 'Покупка депозита успешно завершена');
+                } else {
+                    Yii::app()->user->setFlash('profileMessageFail', 'Произошла ошибка');
+                }
+            }
+        }
+
+        $this->redirect($this->createUrl('/user/profile'));
     }
 
     public function actionDepositFail() {
@@ -76,17 +107,17 @@ class ProfileController extends Controller
     }
 
     public function actionDepositStatus() {
-        mail('yborschev@gmail.com', 'отработал статус', $_POST['PAYMENT_AMOUNT']);
         $transactionInComlete = UserTransactionsIncomplete::model()->findByAttributes(array('payment_id' => $_POST['PAYMENT_ID']));
+
         define('ALTERNATE_PHRASE_HASH',  '748GH678GFH896HJ465GH9ZQP');
         // Path to directory to save logs. Make sure it has write permissions.
-        define('PATH_TO_LOG',  Yii::app()->request->hostInfo.'/protected/runtime/deposit/');
-
+        define('PATH_TO_LOG',  'protected/runtime/deposit/');
+        $alternate = strtoupper(md5(ALTERNATE_PHRASE_HASH));
         $string=
             $_POST['PAYMENT_ID'].':'.$_POST['PAYEE_ACCOUNT'].':'.
             $_POST['PAYMENT_AMOUNT'].':'.$_POST['PAYMENT_UNITS'].':'.
             $_POST['PAYMENT_BATCH_NUM'].':'.
-            $_POST['PAYER_ACCOUNT'].':'.ALTERNATE_PHRASE_HASH.':'.
+            $_POST['PAYER_ACCOUNT'].':'. $alternate .':'.
             $_POST['TIMESTAMPGMT'];
 
         $hash=strtoupper(md5($string));
@@ -101,6 +132,8 @@ class ProfileController extends Controller
                 $transaction->amount = $_POST['PAYMENT_AMOUNT'];
                 $transaction->user_id = $transactionInComlete->user_id;
                 $transaction->payment_id = $transactionInComlete->payment_id;
+                $transaction->reason = 'Пополнение счета';
+                $transaction->amount_type = UserTransaction::AMOUNT_TYPE_RECHARGE;
                 $transaction->save();
 
                 $f=fopen(PATH_TO_LOG."good.log", "ab+");
@@ -111,22 +144,13 @@ class ProfileController extends Controller
 
             }else{ // you can also save invalid payments for debug purposes
 
-                $f=fopen(PATH_TO_LOG."bad.log", "ab+");
+                $f=fopen(PATH_TO_LOG."bad.log", "a");
                 fwrite($f, date("d.m.Y H:i")."; REASON: fake data; POST: ".serialize($_POST)."; STRING: $string; HASH: $hash\n");
                 fclose($f);
 
             }
 
-
-        }else{ // you can also save invalid payments for debug purposes
-
-            $f=fopen(PATH_TO_LOG."bad.log", "ab+");
-            fwrite($f, date("d.m.Y H:i")."; REASON: bad hash; POST: ".serialize($_POST)."; STRING: $string; HASH: $hash\n");
-            fclose($f);
-
         }
-
-
     }
 	/**
 	 * Updates a particular model.

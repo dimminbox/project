@@ -1,6 +1,7 @@
 <?php
 
 return array(
+    'Investment' => 'Список инвестиций',
     'Referral' => 'Партнерская программа',
     'Deposit' => 'Пополнить счет',
 	'Registration' => 'Регистрация',
@@ -35,7 +36,7 @@ return array(
 	'Letters are not case-sensitive.' => 'Регистр значение не имеет.',
 	'Minimal password length 4 symbols.' => 'Минимальная длина пароля 4 символа.',
 	'Lost Password?' => 'Забыли пароль?',
-	'Profile' => 'Профиль',
+	'Profile' => 'Личный кабинет',
 	'activation key' => 'Ключ активации',
 	'User activation' => 'Активация пользователя',
 	'You account is active.' => 'Ваша учетная запись уже активирована.',
