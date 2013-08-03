@@ -32,7 +32,7 @@ class Deposit extends CActiveRecord
 		return array(
 			array('user_id, deposit_type_id, deposit_amount, status', 'numerical', 'integerOnly'=>true),
 			array('date', 'safe'),
-            array('deposit_amount', 'numerical', 'min' => self::MIN_AMOUNT, 'message' => 'Минимальная сумма ' . self::MIN_AMOUNT),
+            array('deposit_amount', 'numerical', 'min' => self::MIN_AMOUNT, 'tooSmall' => 'Минимальная сумма ' . self::MIN_AMOUNT),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, user_id, deposit_type_id, deposit_amount, status, date', 'safe', 'on'=>'search'),

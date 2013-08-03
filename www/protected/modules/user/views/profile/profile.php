@@ -26,11 +26,12 @@ $this->menu=array(
 <?php endif;?>
 <p>
 <strong>Ваш баланс:</strong>
-<?php echo sprintf("%0.0f", $model->amount); ?> бубликов.<br />
+<?php echo rtrim($model->amount,"0"); ?> бубликов.<br />
 <?php echo CHtml::link('Пополнить счет', '#', array('onclick' => '$("#recharge_amount").dialog("open"); return false;',)); ?>
     <?php $this->renderPartial('_recharge_amount', array('deposit' => $deposit)) ?>
 </p>
 <p>
-<?php echo CHtml::link('Инвестировать', '#', array()); ?><br />
+    <?php echo CHtml::link('Инвестировать', '#', array('onclick' => '$("#investment").dialog("open"); return false;',)); ?>
+<br />
     <?php $this->renderPartial('_investment', array('investment' => $investment)) ?>
 </p>
