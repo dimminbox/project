@@ -49,14 +49,16 @@ class RegistrationController extends Controller
                         $model->status=((Yii::app()->controller->module->activeAfterRegister)?User::STATUS_ACTIVE:User::STATUS_NOACTIVE);
 
 						if ($model->save()) {
+                            if ( isset($_POST['RegistrationForm']['referrer_id']) ) {
 
-                            $referral = new Referral();
-                            $referral->user_id = $_POST['RegistrationForm']['referrer_id'];
-                            $referral->ref_id = $model->id;
-                            $referral->save();
+                                $referral = new Referral();
+                                $referral->user_id = $_POST['RegistrationForm']['referrer_id'];
+                                $referral->ref_id = $model->id;
+                                $referral->save();
 
-							$profile->user_id=$model->id;
-							$profile->save();
+                                $profile->user_id=$model->id;
+                                $profile->save();
+                            }
 							if (Yii::app()->controller->module->sendActivationMail) {
 								$activation_url = $this->createAbsoluteUrl('/user/activation/activation',array("activkey" => $model->activkey, "email" => $model->email));
 								UserModule::sendMail($model->email,UserModule::t("You registered from {site_name}",array('{site_name}'=>Yii::app()->name)),UserModule::t("Please activate you account go to {activation_url}",array('{activation_url}'=>$activation_url)));
