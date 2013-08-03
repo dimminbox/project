@@ -18,6 +18,10 @@ class UserTransaction extends CActiveRecord
 {
     const AMOUNT_TYPE_RECHARGE = 1; //Пополнение счета
     const AMOUNT_TYPE_INVESTMENT = 2; //Инвестирование
+    const AMOUNT_TYPE_EARNINGS = 3; //Проценты от инвестиций
+    const AMOUNT_TYPE_OUTPUT = 4; //Вывод
+    const AMOUNT_TYPE_REFERRAL = 5; //Реферальные проценты
+
 	/**
 	 * @return string the associated database table name
 	 */
