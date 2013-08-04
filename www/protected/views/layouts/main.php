@@ -34,7 +34,6 @@
                 array('label'=>Yii::t('app','About'), 'url'=>array('/site/page', 'view'=>'about')),
                 array('label'=>Yii::t('app','Contact'), 'url'=>array('/site/contact')),
                 array('label'=>Yii::t('app','Login'), 'url'=>array('/user/login'),'visible'=>Yii::app()->user->isGuest),
-                array('label'=>Yii::t('app','Rights'), 'url'=>array('/rights')),
                 array('label'=>Yii::t('app','Logout').' ('.Yii::app()->user->name.')', 'url'=>array('/user/logout'), 'visible'=>!Yii::app()->user->isGuest),
                 array('url'=>Yii::app()->getModule('user')->registrationUrl, 'label'=>Yii::app()->getModule('user')->t("Register"), 'visible'=>Yii::app()->user->isGuest),
                 array('url'=>Yii::app()->getModule('user')->profileUrl, 'label'=>Yii::app()->getModule('user')->t("Profile"), 'visible'=>!Yii::app()->user->isGuest),
