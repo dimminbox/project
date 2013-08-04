@@ -37,7 +37,7 @@ $this->menu=array(
 <strong>Внутренний кошелек:</strong> <?php echo $model->internal_purse; ?><br />
 <strong>Всего пополнено:</strong> <?php echo (float)$model->paymentAmount; ?><br />
 <strong>Всего инвестировано:</strong> <?php echo (float)$model->investmentAmount; ?><br />
-<strong>Всего заработано:</strong> #<br />
+<strong>Всего заработано:</strong> <?php echo (float)$model->earningsAmount; ?><br />
 <strong>Всего выведено:</strong> <?php echo (float)$model->outputAmount; ?><br />
 <strong>Партнерская программа:</strong> <?php echo (float)$model->ReferralAmount; ?><br />
 </p>

@@ -267,6 +267,22 @@ class User extends CActiveRecord
         }
     }
 
+    public function getEarningsAmount() {
+        if ( !$this->isNewRecord ) {
+            $result = Yii::app()->db->createCommand("
+                SELECT SUM(amount)
+                AS amount
+                FROM " . UserTransaction::model()->tableName() . "
+                WHERE user_id=" . Yii::app()->user->id . "
+                AND amount_type=" . UserTransaction::AMOUNT_TYPE_EARNINGS . "
+                ")->queryScalar();
+
+            return $result ?: 0;
+        } else {
+            return 0;
+        }
+    }
+
     public function getCreatetime() {
         return strtotime($this->create_at);
     }
