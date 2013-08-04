@@ -56,6 +56,8 @@ class ProfileController extends Controller
 
         if ( isset($_POST['Deposit']) ) {
 
+            $depositType = DepositType::model()->findByPk($_POST['Deposit']['deposit_type_id']);
+
             if ( $amount < $_POST['Deposit']['deposit_amount']) {
                 Yii::app()->user->setFlash('profileMessageFail', 'На вашем счете недостаточно средств');
             } else {
@@ -69,6 +71,7 @@ class ProfileController extends Controller
                 if ( $transaction->save() ) {
                     $deposit = new Deposit();
                     $deposit->attributes = $_POST['Deposit'];
+                    $deposit->expire = date('Y-m-d H:i:s', $depositType->days * 86400 + time());
                     $deposit->user_id = Yii::app()->user->id;
                     $deposit->status = 1;
                     $deposit->save();

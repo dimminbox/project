@@ -22,6 +22,7 @@ class UserTransaction extends CActiveRecord
     const AMOUNT_TYPE_OUTPUT = 4; //Вывод
     const AMOUNT_TYPE_REFERRAL = 5; //Реферальные проценты
     const AMOUNT_TYPE_TRANSFER = 6; //Перевод средств
+    const AMOUNT_TYPE_BACK_INVESTMENT = 7; // Возврат с депозита
 
 	/**
 	 * @return string the associated database table name

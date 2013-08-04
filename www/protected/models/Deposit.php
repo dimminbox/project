@@ -10,6 +10,7 @@
  * @property integer $deposit_amount
  * @property integer $status
  * @property string $date
+ * @property integer $expire
  */
 class Deposit extends CActiveRecord
 {
@@ -31,11 +32,11 @@ class Deposit extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('user_id, deposit_type_id, deposit_amount, status', 'numerical', 'integerOnly'=>true),
-			array('date', 'safe'),
+			array('date, expire', 'safe'),
             array('deposit_amount', 'numerical', 'min' => self::MIN_AMOUNT, 'tooSmall' => 'Минимальная сумма ' . self::MIN_AMOUNT),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, user_id, deposit_type_id, deposit_amount, status, date', 'safe', 'on'=>'search'),
+			array('id, user_id, deposit_type_id, deposit_amount, status, date, expire', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -62,6 +63,7 @@ class Deposit extends CActiveRecord
 			'user_id' => 'User',
 			'deposit_type_id' => 'Время депозита',
 			'deposit_amount' => 'Сумма депозита',
+            'expire' => 'Дата окончания депозита',
 			'status' => 'Status',
 			'date' => 'Date',
 		);
@@ -99,6 +101,7 @@ class Deposit extends CActiveRecord
 		$criteria->compare('user_id',$this->user_id);
 		$criteria->compare('deposit_type_id',$this->deposit_type_id);
 		$criteria->compare('deposit_amount',$this->deposit_amount);
+        $criteria->compare('expire',$this->expire);
 		$criteria->compare('status',$this->status);
 		$criteria->compare('date',$this->date,true);
 

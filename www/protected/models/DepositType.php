@@ -7,6 +7,7 @@
  * @property integer $id
  * @property string $type
  * @property integer $percent
+ * @property integer $days
  */
 class DepositType extends CActiveRecord
 {
@@ -28,6 +29,7 @@ class DepositType extends CActiveRecord
 		return array(
 			array('percent', 'numerical'),
 			array('type', 'length', 'max'=>255),
+            array('days', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, type, percent', 'safe', 'on'=>'search'),
@@ -53,8 +55,10 @@ class DepositType extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'type' => 'Type',
+			'type' => 'Название депозита',
+            'days' => 'Количество дней',
 			'percent' => 'Percent',
+
 		);
 	}
 
@@ -78,6 +82,7 @@ class DepositType extends CActiveRecord
 
 		$criteria->compare('id',$this->id);
 		$criteria->compare('type',$this->type,true);
+        $criteria->compare('days',$this->days);
 		$criteria->compare('percent',$this->percent);
 
 		return new CActiveDataProvider($this, array(
