@@ -1,14 +1,13 @@
 <?php $this->pageTitle=Yii::app()->name . ' - '.UserModule::t("Profile");
 $this->breadcrumbs=array(
-    UserModule::t("Profile"),
+    UserModule::t("Profile") => array('/user/profile'),
+    UserModule::t("Партнерская программа"),
 );
 $this->menu=array(
-    ((UserModule::isAdmin())
-        ?array('label'=>UserModule::t('Manage Users'), 'url'=>array('/user/admin'))
-        :array()),
-    array('label'=>UserModule::t('List User'), 'url'=>array('/user')),
-    array('label'=>UserModule::t('Investment'), 'url'=>array('/user/deposit')),
+#array('label'=>UserModule::t('List User'), 'url'=>array('/user')),
+#array('label'=>UserModule::t('Investment'), 'url'=>array('/user/deposit')),
     array('label'=>UserModule::t('Referral'), 'url'=>array('referral')),
+    array('label'=>UserModule::t('Operations'),'url'=>array('/user/profile/operations')),
     array('label'=>UserModule::t('Edit'), 'url'=>array('edit')),
     array('label'=>UserModule::t('Change password'), 'url'=>array('changepassword')),
     array('label'=>UserModule::t('Logout'), 'url'=>array('/user/logout')),

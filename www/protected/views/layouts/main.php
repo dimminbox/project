@@ -38,7 +38,9 @@
                 array('label'=>Yii::t('app','Logout').' ('.Yii::app()->user->name.')', 'url'=>array('/user/logout'), 'visible'=>!Yii::app()->user->isGuest),
                 array('url'=>Yii::app()->getModule('user')->registrationUrl, 'label'=>Yii::app()->getModule('user')->t("Register"), 'visible'=>Yii::app()->user->isGuest),
                 array('url'=>Yii::app()->getModule('user')->profileUrl, 'label'=>Yii::app()->getModule('user')->t("Profile"), 'visible'=>!Yii::app()->user->isGuest),
-                array('label'=>'Админпанель', 'url'=>array('/admin')),
+                ((UserModule::isAdmin())
+                    ?array('label'=>'Админпанель', 'url'=>array('/admin'))
+                    :array()),
             )));
         ?>
 	</div><!-- mainmenu -->

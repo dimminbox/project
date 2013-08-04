@@ -273,4 +273,20 @@ class ProfileController extends Controller
 		}
 		return $this->_model;
 	}
+
+    public function actionOperations() {
+        $criteria = new CDbCriteria();
+        $criteria->addColumnCondition(array('user_id' => Yii::app()->user->id));
+        $count=UserTransaction::model()->count($criteria);
+        $pages=new CPagination($count);
+        // элементов на страницу
+        $pages->pageSize=10;
+        $pages->applyLimit($criteria);
+        $criteria->order = 'id DESC';
+        $models = UserTransaction::model()->findAll($criteria);
+        $this->render('operations', array(
+            'models' => $models,
+            'pages' => $pages
+        ));
+    }
 }
