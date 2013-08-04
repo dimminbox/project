@@ -14,6 +14,7 @@
  */
 class Deposit extends CActiveRecord
 {
+    const GLOBAL_PERCENT = 0.01;
     const MIN_AMOUNT = 200;
 	/**
 	 * @return string the associated database table name

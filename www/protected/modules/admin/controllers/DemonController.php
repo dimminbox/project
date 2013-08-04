@@ -2,7 +2,7 @@
 
 class DemonController extends AdminController
 {
-    const GLOBAL_PERCENT = 0.01;
+
     const DEPOSIT_START_TIME = 172800;
     public function actionIndex()
     {
@@ -24,7 +24,7 @@ class DemonController extends AdminController
                         if ( $deposit->status == 1 && $deposit->date < date('Y-m-d H:i:s', time() - self::DEPOSIT_START_TIME)) {
                             $depositType = DepositType::model()->findByPk($deposit->deposit_type_id);
 
-                            $percentAmount = ( $deposit->deposit_amount * self::GLOBAL_PERCENT ) * $depositType->percent;
+                            $percentAmount = ( $deposit->deposit_amount * Deposit::GLOBAL_PERCENT ) * $depositType->percent;
 
                             $transaction = new UserTransaction();
                             $transaction->user_id = $user->id;
@@ -59,7 +59,41 @@ class DemonController extends AdminController
         $users = User::model()->findAll();
 
         foreach( $users as $user ) {
-            
+            if ( isset($user->refs) ) {
+
+                foreach( $user->refs as $referral ) {
+                    $referral = User::model()->findByPk($referral->user->id);
+                    $summ = 0;
+                    if ( isset($referral->deposit) ) {
+                        $result = Yii::app()->db->createCommand("
+                        SELECT SUM(amount)
+                        AS amount
+                        FROM " . UserTransaction::model()->tableName() . "
+                        WHERE user_id=". $referral->id ."
+                        AND amount_type=" . UserTransaction::AMOUNT_TYPE_EARNINGS . "
+                        AND time >= CURDATE()
+                        ")->queryScalar();
+                    $summ += $result;
+                    }
+
+                    if ( $summ > 0 ) {
+
+                        $transaction = new UserTransaction();
+                        $transaction->amount = $summ * Referral::REFERRAL_PERCENT;
+                        $transaction->amount_type = UserTransaction::AMOUNT_TYPE_REFERRAL;
+                        $transaction->user_id = $user->id;
+                        $transaction->reason = 'Начисление реферального процента от ' . $referral->username;
+                        $transaction->save();
+
+                    } else {
+                        continue;
+                    }
+                }
+
+
+            } else {
+                continue;
+            }
         }
     }
 }
