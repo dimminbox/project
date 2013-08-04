@@ -78,6 +78,7 @@ return array(
             'install'=>false,  // Whether to enable installer.
             'debug'=>false,
         ),
+        'admin'=>array(),
 
     ),
 
