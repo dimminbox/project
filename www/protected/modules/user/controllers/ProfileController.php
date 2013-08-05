@@ -292,4 +292,20 @@ class ProfileController extends Controller
             'pages' => $pages
         ));
     }
+
+    public function actionDeposits() {
+        $criteria = new CDbCriteria();
+        $criteria->addColumnCondition(array('user_id' => Yii::app()->user->id));
+        $count=Deposit::model()->count($criteria);
+        $pages=new CPagination($count);
+        // элементов на страницу
+        $pages->pageSize=10;
+        $pages->applyLimit($criteria);
+        $criteria->order = 'id DESC';
+        $models = Deposit::model()->findAll($criteria);
+        $this->render('deposits', array(
+            'models' => $models,
+            'pages' => $pages
+        ));
+    }
 }

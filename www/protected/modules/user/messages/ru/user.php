@@ -3,6 +3,8 @@
 return array(
     'Investment' => 'Список инвестиций',
     'Referral' => 'Партнерская программа',
+    'All operations' => 'Все операции',
+    'All deposits' => 'Все депозиты',
     'Deposit' => 'Пополнить счет',
 	'Registration' => 'Регистрация',
 	'Register' => 'Зарегистрироваться',
