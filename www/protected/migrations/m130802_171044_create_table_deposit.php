@@ -15,7 +15,23 @@ class m130802_171044_create_table_deposit extends CDbMigration
         $this->createTable('{{deposit_type}}',array(
             'id'=>'pk',
             'type'=>'string',
-            'percent'=>'integer',
+            'percent'=>'float',
+            'days'=>'integer',
+        ));
+        $this->insert('{{deposit_type}}', array(
+            'type' =>'3 месяца',
+            'percent'=>'0.6',
+            'days'=>'90',
+        ));
+        $this->insert('{{deposit_type}}', array(
+            'type' =>'6 месяцев',
+            'percent'=>'0.7',
+            'days'=>'180',
+        ));
+        $this->insert('{{deposit_type}}', array(
+            'type' =>'12 месяцев',
+            'percent'=>'0.8',
+            'days'=>'365',
         ));
 	}
 
