@@ -24,7 +24,7 @@ $this->menu=array(
 
             <tr>
                 <td><?php echo $user->id; ?></td>
-                <td><?php echo strstr($user->time,'.',true); ?></td>
+                <td><?php echo $user->time ?></td>
                 <td><?php echo sprintf("%0.0f", $user->amount_before); ?></td>
 
                 <td><?php

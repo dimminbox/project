@@ -23,3 +23,6 @@ $this->menu=array(
 <h1>Админпанель</h1>
 
 <p>тут мы будем выводить некую статистику по сайту</p>
+
+<?php echo CHtml::link('Начислить проценты по депозитам', $this->createAbsoluteUrl('/admin/demon/deposit')); ?><br />
+<?php echo CHtml::link('Начислить реферальные проценты', $this->createAbsoluteUrl('/admin/demon/deposit')); ?>
