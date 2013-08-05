@@ -23,7 +23,7 @@ $this->menu=array(
 <hr>
 <h1>Партнерская программа</h1>
 <p>
-    <strong>Ваша реферальная ссылка:</strong> <?php  echo  CHtml::link(Yii::app()->request->hostInfo . '/?ref=' . $user->username, Yii::app()->request->hostInfo . '/?ref=' . $user->username) ?><br />
+    <strong>Ваша реферальная ссылка:</strong> <?php  echo  CHtml::textField('referral_link', Yii::app()->request->hostInfo . '/?ref=' . $user->username) ?><br />
     <strong>Процентная ставка: <?php echo Referral::REFERRAL_PERCENT * 100 . ' %'; ?></strong><br />
 </p>
 </p>
