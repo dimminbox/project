@@ -24,17 +24,28 @@ $this->menu=array(
 <h1>Партнерская программа</h1>
 <p>
     <strong>Ваша реферальная ссылка:</strong> <?php  echo  CHtml::link(Yii::app()->request->hostInfo . '/?ref=' . $user->username, Yii::app()->request->hostInfo . '/?ref=' . $user->username) ?><br />
-    <strong>Процентная ставка: 8%</strong><br />
+    <strong>Процентная ставка: <?php echo Referral::REFERRAL_PERCENT * 100 . ' %'; ?></strong><br />
+</p>
 </p>
 <p>
 <h2>Список рефералов:</h2>
 </p>
 <?php if ( !empty($user->refs) ) :?>
-    <ol>
-        <?php foreach ( $user->refs as $referral ): ?>
-            <li><?php echo $referral->user->username?></li>
-        <?php endforeach; ?>
-    </ol>
+    <table>
+        <thead>
+        <tr><td>№</td><td>Имя реферрала</td><td>Сумма депозитов</td><td>Заработанная сумма</td></tr>
+        </thead>
+
+            <?php foreach ( $user->refs as $referral ): ?>
+        <tr>
+                <td><?php echo $referral->id ?></td>
+                <td><?php echo $referral->user->username ?></td>
+                <td><?php echo User::model()->referralDeposit($referral->ref_id)  ?></td>
+                <td><?php echo User::model()->referralInvestment($referral->ref_id)  ?></td>
+        </tr>
+            <?php endforeach; ?>
+
+    </table>
 <?php else : ?>
     У Вас нет приглашенных инвесторов
 <?php endif ?>

@@ -235,6 +235,22 @@ class User extends CActiveRecord
         }
     }
 
+    public function referralInvestment($referral_id) {
+        if ( !$this->isNewRecord ) {
+            $result = Yii::app()->db->createCommand("
+                SELECT SUM(amount)
+                AS amount
+                FROM " . UserTransaction::model()->tableName() . "
+                WHERE user_id=" . $referral_id . "
+               AND amount_type=" . UserTransaction::AMOUNT_TYPE_EARNINGS . "
+                ")->queryScalar();
+
+            return $result ?: 0;
+        } else {
+            return 0;
+        }
+    }
+
     public function getOutputAmount() {
         if ( !$this->isNewRecord ) {
             $result = Yii::app()->db->createCommand("
@@ -259,6 +275,22 @@ class User extends CActiveRecord
                 FROM " . UserTransaction::model()->tableName() . "
                 WHERE user_id=" . Yii::app()->user->id . "
                 AND amount_type=" . UserTransaction::AMOUNT_TYPE_REFERRAL . "
+                ")->queryScalar();
+
+            return $result ?: 0;
+        } else {
+            return 0;
+        }
+    }
+
+    public function referralDeposit($referral_id) {
+        if ( !$this->isNewRecord ) {
+            $result = Yii::app()->db->createCommand("
+                SELECT SUM(deposit_amount)
+                AS deposit_amount
+                FROM " . Deposit::model()->tableName() . "
+                WHERE user_id=" . $referral_id . "
+                AND status=1
                 ")->queryScalar();
 
             return $result ?: 0;
