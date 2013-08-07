@@ -53,7 +53,7 @@ class ProfileController extends Controller
     public function actionInvestment() {
 
         $amount = (float)User::model()->getAmount();
-
+        var_dump($_POST);
         if ( isset($_POST['Deposit']) ) {
 
             $depositType = DepositType::model()->findByPk($_POST['Deposit']['deposit_type_id']);
