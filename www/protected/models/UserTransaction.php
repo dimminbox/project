@@ -155,5 +155,11 @@ class UserTransaction extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+    //переписываем запятую на точку
+    public function replaceComma($amount) {
 
+        $amount = str_replace(',','.',$amount);
+
+        return (float)$amount;
+    }
 }

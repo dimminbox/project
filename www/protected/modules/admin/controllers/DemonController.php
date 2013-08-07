@@ -19,7 +19,7 @@ class DemonController extends AdminController
 
                 foreach( $deposits as $deposit ) {
 
-                    if ( $deposit->expire > date('Y-m-d H:i:s', time()) ) {
+                    if ( $deposit->status == 1 && $deposit->expire > date('Y-m-d H:i:s', time()) ) {
 
                         if ( $deposit->status == 1 && $deposit->date < date('Y-m-d H:i:s', time() - self::DEPOSIT_START_TIME)) {
                             $depositType = DepositType::model()->findByPk($deposit->deposit_type_id);
@@ -38,15 +38,17 @@ class DemonController extends AdminController
                             continue;
                         }
                     } else {
-                        $deposit->status = 0;
-                        $deposit->save();
+                        if ( $deposit->status == 1 ) {
+                            $deposit->status = 0;
+                            $deposit->save();
 
-                        $transaction = new UserTransaction();
-                        $transaction->user_id = $user->id;
-                        $transaction->amount = $deposit->deposit_amount;
-                        $transaction->amount_type = UserTransaction::AMOUNT_TYPE_BACK_INVESTMENT;
-                        $transaction->reason = 'Возврат депозита по окончании срока действия';
-                        $transaction->save();
+                            $transaction = new UserTransaction();
+                            $transaction->user_id = $user->id;
+                            $transaction->amount = $deposit->deposit_amount;
+                            $transaction->amount_type = UserTransaction::AMOUNT_TYPE_BACK_INVESTMENT;
+                            $transaction->reason = 'Возврат депозита №' . $deposit->id . ' по окончании срока действия';
+                            $transaction->save();
+                        }
                     }
                 }
             } else {

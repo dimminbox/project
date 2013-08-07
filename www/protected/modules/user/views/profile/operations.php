@@ -25,10 +25,10 @@ $this->menu=array(
             <tr>
                 <td><?php echo $user->id; ?></td>
                 <td><?php echo $user->time ?></td>
-                <td><?php echo sprintf("%0.0f", $user->amount_before); ?></td>
+                <td><?php echo (float)$user->amount_before ?></td>
 
                 <td><?php
-                    $formatted = sprintf("%0.0f", $user->amount);
+                    $formatted = (float)$user->amount;
                     if($formatted >0){
                         echo $formatted;
                     }?></td>
@@ -36,7 +36,7 @@ $this->menu=array(
                         echo $formatted;
                     }?></td>
                 <td><?php echo $user->reason; ?></td>
-                <td><?php echo sprintf("%0.0f", $user->amount_after) ?></td>
+                <td><?php echo (float)$user->amount_after ?></td>
             </tr>
 
         <?php endforeach; ?>
