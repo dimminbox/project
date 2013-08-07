@@ -183,7 +183,7 @@ class ProfileController extends Controller
                 fwrite($f, date("d.m.Y H:i")."; POST: ".serialize($_POST)."; STRING: $string; HASH: $hash\n");
                 fclose($f);
 
-                mail('yborschev@gmail.com', 'Поступил новый платеж', $_POST['PAYMENT_AMOUNT']);
+                mail(Yii::app()->params->adminEmail, 'Поступил новый платеж', $_POST['PAYMENT_AMOUNT']);
 
             }else{ // you can also save invalid payments for debug purposes
 
@@ -237,8 +237,30 @@ class ProfileController extends Controller
 
                     if ( isset($reply['ERROR']) ) {
 
-                        Yii::app()->user->setFlash('profileMessageFail', 'Произошла неожиданная ошибка<br />Попробуйте повторить операцию позже');
+                        $outputTransaction = new UsersOutputTransaction();
+                        $outputTransaction->user_id = Yii::app()->user->id;
+                        $outputTransaction->error = $reply['ERROR'];
+                        $outputTransaction->status = UsersOutputTransaction::STATUS_ERROR;
+                        $outputTransaction->payment_amount = $amount;
+                        $outputTransaction->payment_id = $payment_id;
+                        $outputTransaction->payee_account = $user->perfect_purse;
+                        $outputTransaction->save();
+
+                        $message = "Ошибка: ". $reply['ERROR'] ."\r\n
+                                    ID Пользователя: ". Yii::app()->user->id ."\r\n
+                                    Сумма вывода: ". $amount ."\r\n
+                                    ID Транзакции: ". $payment_id ."\r\n
+                                    Кошелек PerfectMoney: ". $user->perfect_purse ."\r\n
+                                    ";
+
+                        mail(Yii::app()->params->adminEmail, 'Ошибка вывода на PerfectMoney', $message);
+
+                        Yii::app()->user->setFlash('profileMessageFail', 'Произошла неожиданная ошибка<br />
+                                                    Информация об ошибке отправлена администратору сайта<br />
+                                                    Администратор свяжется с Вами в ближайшее время');
+
                         $this->redirect($this->createUrl('/user/profile'));
+
                     } else {
 
                         $transaction = new UserTransaction();
@@ -249,15 +271,15 @@ class ProfileController extends Controller
                         $transaction->payment_id = $payment_id;
                         $transaction->save();
 
-                        /*
-                            &isset($reply['Payee_Account_Name']
-                            isset($reply['Payee_Account']) &&
-                            isset($reply['Payer_Account']) &&
-                            isset($reply['PAYMENT_AMOUNT']) &&
-                            isset($reply['PAYMENT_BATCH_NUM']) &&
-                            isset($reply['PAYMENT_ID'])
-
-                         */
+                        $outputTransaction = new UsersOutputTransaction();
+                        $outputTransaction->user_id = Yii::app()->user->id;
+                        $outputTransaction->payee_account_name = $reply['Payee_Account_Name'];
+                        $outputTransaction->payment_batch_num = $reply['PAYMENT_BATCH_NUM'];
+                        $outputTransaction->status = UsersOutputTransaction::STATUS_OK;
+                        $outputTransaction->payment_amount = $amount;
+                        $outputTransaction->payment_id = $payment_id;
+                        $outputTransaction->payee_account = $user->perfect_purse;
+                        $outputTransaction->save();
 
                         Yii::app()->user->setFlash('profileMessage', 'Вывод успешно завершен');
                     }

@@ -17,6 +17,8 @@
  */
 class UsersOutputTransaction extends CActiveRecord
 {
+    const STATUS_ERROR = 0;
+    const STATUS_OK = 1;
 	/**
 	 * @return string the associated database table name
 	 */
@@ -107,6 +109,17 @@ class UsersOutputTransaction extends CActiveRecord
 		));
 	}
 
+    public function behaviors(){
+        return array(
+            'CTimestampBehavior' => array(
+                'class' => 'zii.behaviors.CTimestampBehavior',
+                'createAttribute' => 'created_time',
+                'updateAttribute' => 'created_time',
+                'setUpdateOnCreate' => true,
+                'timestampExpression' => new CDbExpression('NOW()'),
+            )
+        );
+    }
 	/**
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
