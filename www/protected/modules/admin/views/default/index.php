@@ -22,7 +22,30 @@ $this->menu=array(
 
 <h1>Админпанель</h1>
 
-<p>тут мы будем выводить некую статистику по сайту</p>
+<?php
+    if ( $messages != null ) {
+        $high = 0;
+        $normal = 0;
+        $low = 0;
+        foreach( $messages  as $message ) {
 
-<?php echo CHtml::link('Начислить проценты по депозитам', $this->createAbsoluteUrl('/admin/demon/deposit')); ?><br />
-<?php echo CHtml::link('Начислить реферальные проценты', $this->createAbsoluteUrl('/admin/demon/deposit')); ?>
+            if ( $message->status == 1 ) {
+                switch( $message->importance ) {
+                    case Message::IMPORTANCE_1:
+                        $high++;break;
+                    case Message::IMPORTANCE_2:
+                        $normal++;break;
+                    case Message::IMPORTANCE_3;
+                        $low; break;
+                }
+            }
+
+        }
+        if ( $high > 0 ) {
+            $this->renderPartial('_high_messages', array('messages' => $high));
+        }
+        $messages = $high + $normal + $low;
+        echo CHtml::link('У Вас ' . $messages . ' новых сообщений', $this->createAbsoluteUrl('/admin/messages/'));
+    }
+
+?>

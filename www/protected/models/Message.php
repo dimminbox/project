@@ -1,30 +1,32 @@
 <?php
 
 /**
- * This is the model class for table "{{users_output_transactions}}".
+ * This is the model class for table "{{messages}}".
  *
- * The followings are the available columns in table '{{users_output_transactions}}':
+ * The followings are the available columns in table '{{messages}}':
  * @property integer $id
  * @property integer $user_id
- * @property string $payee_account_name
- * @property string $payee_account
- * @property string $payment_amount
- * @property string $payment_batch_num
- * @property string $payment_id
- * @property string $created_time
+ * @property integer $sender
+ * @property string $subject
+ * @property string $message
+ * @property string $time
  * @property integer $status
- * @property string $error
+ * @property integer $importance
  */
-class UsersOutputTransaction extends CActiveRecord
+class Message extends CActiveRecord
 {
-    const STATUS_ERROR = 0;
-    const STATUS_OK = 1;
+    const IMPORTANCE_1 = 1; //Очень важно
+    const IMPORTANCE_2 = 2; //средне
+    const IMPORTANCE_3 = 3; //не очень важное
+
+    const MESSAGE_STATUS_NEW = 1; //Непрочитанное сообщение
+    const MESSAGE_STATUS_READ = 0; //Прочитанное сообщение
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return '{{users_output_transactions}}';
+		return '{{messages}}';
 	}
 
 	/**
@@ -35,13 +37,11 @@ class UsersOutputTransaction extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('user_id, status', 'numerical', 'integerOnly'=>true),
-			array('payee_account_name, payee_account, payment_batch_num, payment_id, error', 'length', 'max'=>255),
-			array('payment_amount', 'length', 'max'=>19),
-			array('created_time', 'safe'),
+			array('user_id, sender, status, importance', 'numerical', 'integerOnly'=>true),
+			array('subject, message, time', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, user_id, payee_account_name, payee_account, payment_amount, payment_batch_num, payment_id, created_time, status, error', 'safe', 'on'=>'search'),
+			array('id, user_id, sender, message, time, status, importance', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -64,14 +64,12 @@ class UsersOutputTransaction extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'user_id' => 'User',
-			'payee_account_name' => 'Payee Account Name',
-			'payee_account' => 'Payee Account',
-			'payment_amount' => 'Payment Amount',
-			'payment_batch_num' => 'Payment Batch Num',
-			'payment_id' => 'Payment',
-			'created_time' => 'Created Time',
+			'sender' => 'Sender',
+            'subject' => 'Subject',
+			'message' => 'Message',
+			'time' => 'Time',
 			'status' => 'Status',
-			'error' => 'Error',
+			'importance' => 'Importance',
 		);
 	}
 
@@ -95,14 +93,12 @@ class UsersOutputTransaction extends CActiveRecord
 
 		$criteria->compare('id',$this->id);
 		$criteria->compare('user_id',$this->user_id);
-		$criteria->compare('payee_account_name',$this->payee_account_name,true);
-		$criteria->compare('payee_account',$this->payee_account,true);
-		$criteria->compare('payment_amount',$this->payment_amount,true);
-		$criteria->compare('payment_batch_num',$this->payment_batch_num,true);
-		$criteria->compare('payment_id',$this->payment_id,true);
-		$criteria->compare('created_time',$this->created_time,true);
+		$criteria->compare('sender',$this->sender);
+        $criteria->compare('subject',$this->subject,true);
+		$criteria->compare('message',$this->message,true);
+		$criteria->compare('time',$this->time,true);
 		$criteria->compare('status',$this->status);
-		$criteria->compare('error',$this->error,true);
+		$criteria->compare('importance',$this->importance);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -113,18 +109,19 @@ class UsersOutputTransaction extends CActiveRecord
         return array(
             'CTimestampBehavior' => array(
                 'class' => 'zii.behaviors.CTimestampBehavior',
-                'createAttribute' => 'created_time',
-                'updateAttribute' => 'created_time',
+                'createAttribute' => 'time',
+                'updateAttribute' => 'time',
                 'setUpdateOnCreate' => true,
                 'timestampExpression' => new CDbExpression('NOW()'),
             )
         );
     }
+
 	/**
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return UsersOutputTransaction the static model class
+	 * @return Message the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
