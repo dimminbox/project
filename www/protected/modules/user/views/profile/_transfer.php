@@ -27,6 +27,11 @@ $this->beginWidget(
             <?php echo $form->error($model,'internal_purse'); ?>
         </div>
         <div class="row">
+            <?php echo $form->labelEx($model,'secret'); ?>
+            <?php echo $form->textField($model,'secret', array('value' => '')); ?>
+            <?php echo $form->error($model,'secret'); ?>
+        </div>
+        <div class="row">
             <?php echo $form->labelEx($transfer,'Сумма'); ?>
             <?php echo $form->textField($transfer,'amount'); ?>
             <?php echo $form->error($transfer,'amount'); ?>

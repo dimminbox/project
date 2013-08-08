@@ -25,6 +25,11 @@ $this->beginWidget(
 
         <?php echo 'Сумма' ?>
         <?php echo CHtml::textField('output_money', (float)$model->amount); ?>
+        <div class="row">
+            <?php echo $form->labelEx($model,'secret'); ?>
+            <?php echo $form->textField($model,'secret', array('value' => '')); ?>
+            <?php echo $form->error($model,'secret'); ?>
+        </div>
 
         <div class="row buttons">
             <?php echo CHtml::submitButton('Вывести'); ?>

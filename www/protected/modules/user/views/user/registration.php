@@ -53,6 +53,12 @@ $this->breadcrumbs=array(
 	<?php echo $form->textField($model,'email'); ?>
 	<?php echo $form->error($model,'email'); ?>
 	</div>
+
+    <div class="row">
+        <?php echo $form->labelEx($model,'secret'); ?>
+        <?php echo $form->textField($model,'secret'); ?>
+        <?php echo $form->error($model,'secret'); ?>
+    </div>
     <?php if ( Yii::app()->user->getState('ref') != null &&
         $user = User::model()->referralUser(Yii::app()->user->getState('ref')) ) : ?>
 

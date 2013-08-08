@@ -28,12 +28,6 @@ $this->beginWidget(
     </div>
 
     <div class="row">
-        <?php echo $form->labelEx($model->profile,'secret'); ?>
-        <?php echo $form->textField($model->profile,'secret', array('value' => '')); ?>
-        <?php echo $form->error($model->profile,'secret'); ?>
-    </div>
-
-    <div class="row">
         <?php echo $form->labelEx($investment,'deposit_type_id'); ?>
         <?php echo $form->dropDownList($investment,'deposit_type_id', CHtml::listData( DepositType::model()->findAll(), 'id', 'type') ); ?>
         <?php echo $form->error($investment,'deposit_type_id'); ?>
