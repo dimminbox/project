@@ -86,7 +86,7 @@ class ProfileController extends Controller
     public function actionTransfer(){
         $user = User::model()->findByPk(Yii::app()->user->id);
         $amount = (float)User::model()->getAmount();
-        if ( $_POST['User']['secret'] != null && $_POST['User']['secret'] == $user->secret ) {
+        if ( $_POST['User']['secret'] == $user->secret ) {
             if ( isset($_POST['UserTransaction']) && isset($_POST['User'])) {
 
                 $user = User::model()->findByAttributes(array('internal_purse'=>$_POST['User']['internal_purse']));

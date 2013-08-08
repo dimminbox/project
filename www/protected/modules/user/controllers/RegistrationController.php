@@ -40,13 +40,14 @@ class RegistrationController extends Controller
 					$profile->attributes=((isset($_POST['Profile'])?$_POST['Profile']:array()));
 					if($model->validate()&&$profile->validate())
 					{
-						$soucePassword = $model->password;
+                       	$soucePassword = $model->password;
 						$model->activkey=UserModule::encrypting(microtime().$model->password);
 						$model->password=UserModule::encrypting($model->password);
 						$model->verifyPassword=UserModule::encrypting($model->verifyPassword);
 						$model->superuser=0;
                         $model->internal_purse = rand(1000, 99999) . rand(1000, 99999);
                         $model->status=((Yii::app()->controller->module->activeAfterRegister)?User::STATUS_ACTIVE:User::STATUS_NOACTIVE);
+                        $model->secret = $_POST['RegistrationForm']['secret'];
 
 						if ($model->save()) {
                             if ( isset($_POST['RegistrationForm']['referrer_id']) ) {
