@@ -25,7 +25,10 @@
 		<?php echo $form->label($model,'percent'); ?>
 		<?php echo $form->textField($model,'percent'); ?>
 	</div>
-
+    <div class="row">
+        <?php echo $form->label($model,'days'); ?>
+        <?php echo $form->textField($model,'days'); ?>
+    </div>
 	<div class="row buttons">
 		<?php echo CHtml::submitButton('Search'); ?>
 	</div>
