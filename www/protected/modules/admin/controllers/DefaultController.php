@@ -10,9 +10,4 @@ class DefaultController extends AdminController
             'messages' => $messages,
         ));
 	}
-
-<<<<<<< HEAD
-
-=======
->>>>>>> e2ef7e8fe7f4ac050bad8d85f326c88640561cc7
 }

@@ -21,16 +21,25 @@ $this->menu=array(
 );
 ?>
 
-<h1><?php echo $message->subject ?></h1>
+<h1>Баланс PerfectMoney</h1>
+<table>
+    <thead>
+    <tr>
+        <td>
+            Номер кошелька
+        </td>
+        <td>
+            Сумма
+        </td>
+    </tr>
+    </thead>
 
-От кого:
-<?php
-if( $message->sender == null ) {
-    echo 'Системное сообщение';
-} else {
-    echo $message->sender;
-}
-?>
-<br />
-Время отправления: <?php echo $message->time; ?><br />
-Сообщение: <?php echo $message->message; ?>
+<?php foreach( $balances as $purse=>$balance ) : ?>
+
+    <tr>
+        <td><?php echo $purse ?></td>
+        <td><?php echo $balance ?></td>
+    </tr>
+
+<?php endforeach ?>
+</table>

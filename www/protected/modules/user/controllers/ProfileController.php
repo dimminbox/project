@@ -19,10 +19,10 @@ class ProfileController extends Controller
 
 
         $deposit = new DepositForm();
-        $deposit->PAYEE_ACCOUNT = self::PAYEE_ACCOUNT;
+        $deposit->PAYEE_ACCOUNT = Yii::app()->params['payee_account'];
         $deposit->PAYEE_NAME = 'project';
         $deposit->PAYMENT_ID = uniqid(Yii::app()->user->id + time());
-        $deposit->PAYMENT_UNITS = self::PAYMENT_UNITS;
+        $deposit->PAYMENT_UNITS = Yii::app()->params['payment_units'];
         $deposit->PAYMENT_AMOUNT = 100;
         $deposit->STATUS_URL = $this->createAbsoluteUrl('/user/profile/depositStatus');
         $deposit->PAYMENT_URL = $this->createAbsoluteUrl('/user/profile/depositSuccess');
@@ -168,7 +168,7 @@ class ProfileController extends Controller
             /* In section below you must implement comparing of data you recieved
             with data you sent. This means to check if $_POST['PAYMENT_AMOUNT'] is
             particular amount you billed to client and so on. */
-            if($_POST['PAYMENT_AMOUNT']==$transactionInComlete->amount && $_POST['PAYEE_ACCOUNT']==self::PAYEE_ACCOUNT && $_POST['PAYMENT_UNITS']==self::PAYMENT_UNITS){
+            if($_POST['PAYMENT_AMOUNT']==$transactionInComlete->amount && $_POST['PAYEE_ACCOUNT']==Yii::app()->params['payee_account'] && $_POST['PAYMENT_UNITS']==Yii::app()->params['payment_units']){
 
                 $transaction = new UserTransaction();
                 $transaction->amount = $_POST['PAYMENT_AMOUNT'];
@@ -212,7 +212,7 @@ class ProfileController extends Controller
                         $amount = UserTransaction::model()->replaceComma($_POST['output_money']);
 
 
-                        $f=fopen('https://perfectmoney.is/acct/confirm.asp?AccountID=3140075&PassPhrase=Cecfybyj915&Payer_Account=' . self::PAYEE_ACCOUNT . '&Payee_Account=' . $user->perfect_purse . '&Amount=' . $amount . '&PAY_IN=' . $amount . ' &PAYMENT_ID=' . $payment_id, 'rb');
+                        $f=fopen('https://perfectmoney.is/acct/confirm.asp?AccountID=' . Yii::app()->params['AccountID'] . '&PassPhrase=' . Yii::app()->params['PassPhrase'] . '&Payer_Account=' . Yii::app()->params['payee_account'] . '&Payee_Account=' . $user->perfect_purse . '&Amount=' . $amount . '&PAY_IN=' . $amount . ' &PAYMENT_ID=' . $payment_id, 'rb');
 
                         if($f===false){
                             echo 'ошибка открытия файла';

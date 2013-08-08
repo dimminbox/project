@@ -16,7 +16,8 @@ $this->menu=array(
     array('label'=>'Транзакции', 'url'=>array('/admin/userTransaction')),
     array('label'=>'Депозиты', 'url'=>array('/admin/deposit')),
     array('label'=>'Типы депозитов', 'url'=>array('/admin/depositType')),
-
+    array('label'=>'Сообщения', 'url'=>array('/admin/messages')),
+    array('label'=>'PerfectMoney', 'url'=>array('/admin/money')),
 );
 ?>
 

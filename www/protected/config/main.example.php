@@ -154,6 +154,9 @@ return array(
     // using Yii::app()->params['paramName']
     'params'=>array(
         // this is used in contact page
-        'adminEmail'=>'webmaster@example.com',
+        'adminEmail'=>'yborschev@gmail.com',
+        'payee_account' => 'U4330448',
+        'PassPhrase' => 'Cecfybyj915',
+        'payment_units' => 'USD',
     ),
 );
