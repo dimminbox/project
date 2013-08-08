@@ -6,4 +6,6 @@ class DefaultController extends AdminController
 	{
 		$this->render('index');
 	}
+
+
 }
