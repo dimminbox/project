@@ -13,6 +13,10 @@
 	<?php echo CHtml::encode($data->type); ?>
 	<br />
 
+    <b><?php echo CHtml::encode($data->getAttributeLabel('days')); ?>:</b>
+    <?php echo CHtml::encode($data->days); ?>
+    <br />
+
 	<b><?php echo CHtml::encode($data->getAttributeLabel('percent')); ?>:</b>
 	<?php echo CHtml::encode($data->percent); ?>
 	<br />

@@ -10,6 +10,7 @@
  * @property string $subject
  * @property string $message
  * @property string $time
+ * @property string $update_time
  * @property integer $status
  * @property integer $importance
  */
@@ -38,7 +39,7 @@ class Message extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('user_id, sender, status, importance', 'numerical', 'integerOnly'=>true),
-			array('subject, message, time', 'safe'),
+			array('subject, message, time, update_time', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, user_id, sender, message, time, status, importance', 'safe', 'on'=>'search'),
@@ -68,6 +69,7 @@ class Message extends CActiveRecord
             'subject' => 'Subject',
 			'message' => 'Message',
 			'time' => 'Time',
+            'update_time' => 'Update time',
 			'status' => 'Status',
 			'importance' => 'Importance',
 		);
@@ -97,6 +99,7 @@ class Message extends CActiveRecord
         $criteria->compare('subject',$this->subject,true);
 		$criteria->compare('message',$this->message,true);
 		$criteria->compare('time',$this->time,true);
+        $criteria->compare('update_time',$this->update_time,true);
 		$criteria->compare('status',$this->status);
 		$criteria->compare('importance',$this->importance);
 
@@ -110,7 +113,7 @@ class Message extends CActiveRecord
             'CTimestampBehavior' => array(
                 'class' => 'zii.behaviors.CTimestampBehavior',
                 'createAttribute' => 'time',
-                'updateAttribute' => 'time',
+                'updateAttribute' => 'update_time',
                 'setUpdateOnCreate' => true,
                 'timestampExpression' => new CDbExpression('NOW()'),
             )
