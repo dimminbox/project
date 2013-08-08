@@ -73,14 +73,15 @@ $this->breadcrumbs=array(
         </div>
         <?php echo $form->hiddenField($model,'referrer_id',array('value' => $user->id,)); ?>
     <?php endif; ?>
-<?php 
+    <h1>Данные необходимые для восстановления аккаунта</h1>
+<?php
 		$profileFields=$profile->getFields();
 		if ($profileFields) {
 			foreach($profileFields as $field) {
 			?>
 	<div class="row">
 		<?php echo $form->labelEx($profile,$field->varname); ?>
-		<?php 
+		<?php
 		if ($widgetEdit = $field->widgetEdit($profile)) {
 			echo $widgetEdit;
 		} elseif ($field->range) {
@@ -92,7 +93,7 @@ $this->breadcrumbs=array(
 		}
 		 ?>
 		<?php echo $form->error($profile,$field->varname); ?>
-	</div>	
+	</div>
 			<?php
 			}
 		}
