@@ -340,4 +340,26 @@ class User extends CActiveRecord
             return false;
         }
     }
+    // Отправка сообщений
+    public function sendMessage($user_id, $subject, $msg, $importance,  $methods = array(), $sender = null) {
+
+        if ( empty($methods) )
+            $methods = array('system');
+
+       if (in_array('system', $methods)) {
+            $message = new Message();
+            $message->subject = $subject;
+            $message->message = $msg;
+            $message->user_id = $user_id;
+            $message->sender = $sender;
+            $message->importance = $importance;
+            $message->status = Message::MESSAGE_STATUS_NEW;
+            if ( $message->save() ) {
+                return false;
+            }
+        }
+
+        return true;
+
+    }
 }

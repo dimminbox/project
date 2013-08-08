@@ -195,7 +195,7 @@ class ProfileController extends Controller
 
         }
     }
-
+    // Вывод на перфект мани
     public function actionOutputMoney() {
 
         if ( !empty($_POST['output_money'])) {
@@ -246,6 +246,7 @@ class ProfileController extends Controller
                         $outputTransaction->payee_account = $user->perfect_purse;
                         $outputTransaction->save();
 
+                        $subject = 'Ошибка! Вывод PerfectMoney';
                         $message = "Ошибка: ". $reply['ERROR'] ."\r\n
                                     ID Пользователя: ". Yii::app()->user->id ."\r\n
                                     Сумма вывода: ". $amount ."\r\n
@@ -254,6 +255,8 @@ class ProfileController extends Controller
                                     ";
 
                         mail(Yii::app()->params->adminEmail, 'Ошибка вывода на PerfectMoney', $message);
+
+                        User::model()->sendMessage(1, $subject, $message, Message::IMPORTANCE_1 );
 
                         Yii::app()->user->setFlash('profileMessageFail', 'Произошла неожиданная ошибка<br />
                                                     Информация об ошибке отправлена администратору сайта<br />

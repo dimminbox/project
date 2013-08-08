@@ -8,6 +8,7 @@ class m130807_174718_create_messages_table extends CDbMigration
            'id' => 'pk',
             'user_id' => 'integer',
             'sender' => 'integer',
+            'subject' => 'string',
             'message' => 'text',
             'time' => 'datetime',
             'status' => 'integer',
