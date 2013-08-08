@@ -3,6 +3,7 @@ class AdminController extends RController
 {
 
     public $layout='//layouts/column2';
+
     public function filters()
     {
         return array(
