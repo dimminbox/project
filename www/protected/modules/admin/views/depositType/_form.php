@@ -31,6 +31,12 @@
 		<?php echo $form->error($model,'percent'); ?>
 	</div>
 
+    <div class="row">
+        <?php echo $form->labelEx($model,'days'); ?>
+        <?php echo $form->textField($model,'days'); ?>
+        <?php echo $form->error($model,'days'); ?>
+    </div>
+
 	<div class="row buttons">
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
 	</div>
