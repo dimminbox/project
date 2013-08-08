@@ -48,7 +48,7 @@ $this->menu=array(
 <p>
     <?php echo CHtml::link('Инвестировать', '#', array('onclick' => '$("#investment").dialog("open"); return false;',)); ?>
     <br />
-    <?php $this->renderPartial('_investment', array('investment' => $investment)) ?>
+    <?php $this->renderPartial('_investment', array('investment' => $investment, 'model' => $model)) ?>
 </p>
 
 <p>

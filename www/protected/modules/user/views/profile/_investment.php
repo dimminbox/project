@@ -26,6 +26,7 @@ $this->beginWidget(
         <?php echo $form->textField($investment,'deposit_amount', array('value' => Deposit::MIN_AMOUNT)); ?>
         <?php echo $form->error($investment,'deposit_amount'); ?>
     </div>
+
     <div class="row">
         <?php echo $form->labelEx($investment,'deposit_type_id'); ?>
         <?php echo $form->dropDownList($investment,'deposit_type_id', CHtml::listData( DepositType::model()->findAll(), 'id', 'type') ); ?>

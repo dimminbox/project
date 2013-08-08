@@ -22,7 +22,7 @@ $this->menu=array(
 
 <h1>Админпанель</h1>
 
-<?php 
+<?php
     if ( $messages != null ) {
         $high = 0;
         $normal = 0;

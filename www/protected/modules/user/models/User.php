@@ -24,6 +24,7 @@ class User extends CActiveRecord
      * @var timestamp $lastvisit_at
      * @var integer $internal_purse
      * @var string $perfect_purse
+     * @var string $secret
 	 */
 
 	/**
@@ -53,6 +54,7 @@ class User extends CActiveRecord
 		return ((get_class(Yii::app())=='CConsoleApplication' || (get_class(Yii::app())!='CConsoleApplication' && Yii::app()->getModule('user')->isAdmin()))?array(
 			array('username', 'length', 'max'=>20, 'min' => 3,'message' => UserModule::t("Incorrect username (length between 3 and 20 characters).")),
 			array('password', 'length', 'max'=>128, 'min' => 4,'message' => UserModule::t("Incorrect password (minimal length 4 symbols).")),
+            array('secret', 'length', 'max'=>128, 'min' => 3 ),
 			array('email', 'email'),
             array('internal_purse', 'unique'),
 			array('username', 'unique', 'message' => UserModule::t("This user's name already exists.")),
@@ -108,6 +110,7 @@ class User extends CActiveRecord
 			'lastvisit_at' => UserModule::t("Last visit"),
 			'superuser' => UserModule::t("Superuser"),
 			'status' => UserModule::t("Status"),
+            'secret' => UserModule::t("Secret"),
 		);
 	}
 	
@@ -136,7 +139,7 @@ class User extends CActiveRecord
     {
         return CMap::mergeArray(Yii::app()->getModule('user')->defaultScope,array(
             'alias'=>'user',
-            'select' => 'user.id, user.username, user.email, user.create_at, user.lastvisit_at, user.internal_purse, user.perfect_purse, user.superuser, user.status',
+            'select' => 'user.id, user.username, user.email, user.create_at, user.lastvisit_at, user.internal_purse, user.perfect_purse, user.superuser, user.status, secret',
         ));
     }
 	
@@ -179,6 +182,7 @@ class User extends CActiveRecord
         $criteria->compare('internal_purse',$this->internal_purse);
         $criteria->compare('superuser',$this->superuser);
         $criteria->compare('status',$this->status);
+        $criteria->compare('secret',$this->secret);
 
         return new CActiveDataProvider(get_class($this), array(
             'criteria'=>$criteria,
