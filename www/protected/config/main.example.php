@@ -155,6 +155,8 @@ return array(
     'params'=>array(
         // this is used in contact page
         'adminEmail'=>'yborschev@gmail.com',
+        'CronSecretPhrase' => '7g65dwrh78wc6r7wgxr637TY6xhYUGYTYf9867HGVhghj',
+        'AccountID' => '3140075',
         'payee_account' => 'U4330448',
         'PassPhrase' => 'Cecfybyj915',
         'payment_units' => 'USD',
