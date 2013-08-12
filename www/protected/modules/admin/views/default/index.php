@@ -23,7 +23,6 @@ $this->menu=array(
 ?>
 
 <h1>Админпанель</h1>
-
 <?php
     if ( $messages != null ) {
         $high = 0;
@@ -49,5 +48,4 @@ $this->menu=array(
         $messages = $high + $normal + $low;
         echo CHtml::link('У Вас ' . $messages . ' новых сообщений', $this->createAbsoluteUrl('/admin/messages/'));
     }
-
 ?>
