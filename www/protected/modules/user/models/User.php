@@ -87,6 +87,7 @@ class User extends CActiveRecord
             $relations['profile'] = array(self::HAS_ONE, 'Profile', 'user_id');
             $relations['refs'] = array(self::HAS_MANY, 'Referral', 'user_id');
             $relations['deposit'] = array(self::HAS_MANY, 'Deposit', 'user_id');
+            $relations['transaction'] = array(self::HAS_MANY, 'UserTransaction', 'user_id');
         return $relations;
 	}
 
@@ -207,6 +208,38 @@ class User extends CActiveRecord
             return 0;
         }
     }
+
+    public function userAmount($user_id) {
+        if ( !$this->isNewRecord ) {
+            $result = Yii::app()->db->createCommand("
+                SELECT amount_after
+                FROM " . UserTransaction::model()->tableName() . "
+                WHERE user_id=" . $user_id . "
+                ORDER BY id DESC
+                LIMIT 1
+                ")->queryScalar();
+
+            return $result ?: 0;
+        } else {
+            return 0;
+        }
+    }
+
+    public function getAllAmount(){
+        if ( !$this->isNewRecord ) {
+            $result = Yii::app()->db->createCommand("
+                SELECT SUM(amount)
+                AS amount
+                FROM " . UserTransaction::model()->tableName() . "
+
+                ")->queryScalar();
+
+            return $result ?: 0;
+        } else {
+            return 0;
+        }
+    }
+
     public function getPaymentAmount() {
         if ( !$this->isNewRecord ) {
             $result = Yii::app()->db->createCommand("

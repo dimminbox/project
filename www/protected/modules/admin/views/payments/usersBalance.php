@@ -21,27 +21,29 @@ $this->menu=array(
 );
 
 ?>
-<h1>График потенциальных выплат</h1>
+<h1>Баланс пользователей</h1>
 <br />
-<p>Общий баланс пользователей: <strong><?php echo (float)User::model()->allAmount; ?></strong><br />
-<?php echo CHtml::link('Подробнее...', $this->createAbsoluteUrl('/admin/payments/usersBalance')) ?></p>
-
-
 
 <?php
-$this->widget('zii.widgets.grid.CGridView', array(
-    'dataProvider'=>$deposits,
-     'columns'=>array(
-         array(
-             'name'=>'expire',
-             'value'=>'$data->expire',
-         ),
-         array(
-             'name'=>'deposit_amount',
-             'value'=>'$data->deposit_amount',
-         ),
 
-     ),
- ));
+    $this->widget('zii.widgets.grid.CGridView', array(
+    'dataProvider'=>$users,
+    'columns'=>array(
+        array(
+            'name'=>'username',
+            'value'=>'$data->username',
+        ),
+        array(
+            'name'=>'amount',
+            'value'=>'$data->userAmount($data->id)',
+        ),
 
+    ),
+));
+
+/*
+foreach( $users as $user ) {
+    echo $user->username . ' - ' . (float)$user->userAmount($user->id) . '<br />';
+}
+*/
 ?>

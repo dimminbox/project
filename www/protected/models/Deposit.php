@@ -121,4 +121,20 @@ class Deposit extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+
+    public function depositsAmount($date) {
+        if ( !$this->isNewRecord ) {
+            $result = Yii::app()->db->createCommand("
+                SELECT SUM(deposit_amount)
+                AS deposit_amount
+                FROM " . $this->tableName() . "
+                WHERE expire>=DATE('2013-08-12 00:00:00') AND expire<=DATE('2013-08-12 23:59:59')
+                AND status=1
+                ")->queryScalar();
+
+            return $result ?: 0;
+        } else {
+            return 0;
+        }
+    }
 }
