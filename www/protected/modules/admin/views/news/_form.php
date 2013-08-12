@@ -27,16 +27,25 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'description'); ?>
-		<?php echo $form->textField($model,'description',array('size'=>60,'maxlength'=>255)); ?>
+		<?php echo $form->textArea($model,'description', array('class' => 'redactor')); ?>
 		<?php echo $form->error($model,'description'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'text'); ?>
-		<?php echo $form->textArea($model,'text',array('rows'=>6, 'cols'=>50)); ?>
+		<?php echo $form->textArea($model,'text', array('class' => 'redactor')); ?>
 		<?php echo $form->error($model,'text'); ?>
 	</div>
-
+    <?php
+    $this->widget('ImperaviRedactorWidget', array(
+    // Селектор для textarea
+    'selector' => '.redactor',
+    // Немного опций, см. http://imperavi.com/redactor/docs/
+    'options' => array(
+        'lang' => 'ru',
+        'toolbar' => true,
+    ),
+    )); ?>
 	<div class="row">
 		<?php echo $form->labelEx($model,'image'); ?>
 		<?php echo $form->textField($model,'image',array('size'=>60,'maxlength'=>255)); ?>
