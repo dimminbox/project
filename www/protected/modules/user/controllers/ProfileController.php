@@ -71,6 +71,7 @@ class ProfileController extends Controller
                         $deposit->expire = date('Y-m-d H:i:s', $depositType->days * 86400 + time());
                         $deposit->user_id = Yii::app()->user->id;
                         $deposit->status = 1;
+                        $deposit->reinvest = 0;
                         $deposit->save();
 
                         Yii::app()->user->setFlash('profileMessage', 'Покупка депозита успешно завершена');

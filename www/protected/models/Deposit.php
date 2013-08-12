@@ -16,6 +16,10 @@ class Deposit extends CActiveRecord
 {
     const GLOBAL_PERCENT = 0.01;
     const MIN_AMOUNT = 200;
+
+    const REINVEST_YES = 1;
+    const REINVEST_NO = 2;
+
 	/**
 	 * @return string the associated database table name
 	 */

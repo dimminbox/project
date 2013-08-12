@@ -11,6 +11,7 @@ class PaymentsController extends AdminController
             ->group('DATE(expire)')
             ->order('expire ASC')
             ->where('status=1')
+            ->where('reinvest<>1')
             ->limit('30')
             ->queryAll();
 
