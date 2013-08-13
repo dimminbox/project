@@ -15,7 +15,7 @@ class ProfileController extends Controller
      */
     public function actionProfile()
     {
-        $model = $this->loadUser();
+        $user = $this->loadUser();
 
 
         $deposit = new DepositForm();
@@ -31,9 +31,11 @@ class ProfileController extends Controller
         $deposit->PAYMENT_URL_METHOD = 'POST';
 
         $investment = new Deposit();
+
         $transfer = new UserTransaction();
+
         $this->render('profile',array(
-            'model'=>$model,
+            'user'=>$user,
             'deposit' => $deposit,
             'investment' => $investment,
             'transfer'=>$transfer,
@@ -71,6 +73,7 @@ class ProfileController extends Controller
                         $deposit->expire = date('Y-m-d H:i:s', $depositType->days * 86400 + time());
                         $deposit->user_id = Yii::app()->user->id;
                         $deposit->status = 1;
+                        $deposit->reinvest = 0;
                         $deposit->save();
 
                         Yii::app()->user->setFlash('profileMessage', 'Покупка депозита успешно завершена');

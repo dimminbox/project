@@ -12,7 +12,22 @@ $this->menu=array(
     array('label'=>UserModule::t('Change password'), 'url'=>array('changepassword')),
     array('label'=>UserModule::t('Logout'), 'url'=>array('/user/logout')),
 );
+if ( $user->deposit != null ) {
+
+    foreach( $user->deposit as $dep ) {
+        if ( $dep->expire <= date('Y-m-d H:i:s', time() + 2592000) ) {
+            Yii::app()->user->setState('reinvest', 'Реинвестирование депозита');
+        }
+    }
+}
+
+
 ?>
+<?php if(Yii::app()->user->hasState('reinvest')): ?>
+    <div class="success" style="text-align:center;padding:10px;color:green;font-weight:bold;border:1px solid green">
+        <?php echo Yii::app()->user->getState('reinvest'); ?>
+    </div>
+<?php endif; ?>
 <?php if(Yii::app()->user->hasFlash('profileMessage')): ?>
 <div class="success" style="text-align:center;padding:10px;color:green;font-weight:bold;border:1px solid green">
 	<?php echo Yii::app()->user->getFlash('profileMessage'); ?>
@@ -23,36 +38,36 @@ $this->menu=array(
         <?php echo Yii::app()->user->getFlash('profileMessageFail'); ?>
     </div>
 <?php endif;?>
-<h2><?php echo $model->username; ?></h2>
+<h2><?php echo $user->username; ?></h2>
 
-<?php if ( $model->lastvisit_at != '0000-00-00 00:00:00' ) : ?>
+<?php if ( $user->lastvisit_at != '0000-00-00 00:00:00' ) : ?>
 <p>
-    Ваш последний визит: <?php echo $model->lastvisit_at; ?><br />
+    Ваш последний визит: <?php echo $user->lastvisit_at; ?><br />
 </p>
 <?php endif; ?>
 <p>
 <strong>Ваш баланс:</strong>
-<?php echo (float)$model->amount; ?> бубликов.<br />
+<?php echo (float)$user->amount; ?> бубликов.<br />
 <?php echo CHtml::link('Пополнить счет', '#', array('onclick' => '$("#recharge_amount").dialog("open"); return false;',)); ?><br />
 <?php echo CHtml::link('Вывести', '#', array('onclick' => '$("#output_money").dialog("open"); return false;',)); ?>
 <?php $this->renderPartial('_recharge_amount', array('deposit' => $deposit)) ?>
-<?php $this->renderPartial('_outputmoney', array('model' => $model)) ?>
-<strong>Внутренний кошелек:</strong> <?php echo $model->internal_purse; ?><br />
-<strong>Всего пополнено:</strong> <?php echo (float)$model->paymentAmount; ?><br />
-<strong>Всего инвестировано:</strong> <?php echo (float)$model->investmentAmount; ?><br />
-<strong>Всего заработано:</strong> <?php echo (float)$model->earningsAmount; ?><br />
-<strong>Всего выведено:</strong> <?php echo (float)abs($model->outputAmount); ?><br />
-<strong>Партнерская программа:</strong> <?php echo (float)$model->ReferralAmount; ?><br />
+<?php $this->renderPartial('_outputmoney', array('model' => $user)) ?>
+<strong>Внутренний кошелек:</strong> <?php echo $user->internal_purse; ?><br />
+<strong>Всего пополнено:</strong> <?php echo (float)$user->paymentAmount; ?><br />
+<strong>Всего инвестировано:</strong> <?php echo (float)$user->investmentAmount; ?><br />
+<strong>Всего заработано:</strong> <?php echo (float)$user->earningsAmount; ?><br />
+<strong>Всего выведено:</strong> <?php echo (float)abs($user->outputAmount); ?><br />
+<strong>Партнерская программа:</strong> <?php echo (float)$user->ReferralAmount; ?><br />
 </p>
 
 <p>
     <?php echo CHtml::link('Инвестировать', '#', array('onclick' => '$("#investment").dialog("open"); return false;',)); ?>
     <br />
-    <?php $this->renderPartial('_investment', array('investment' => $investment, 'model' => $model)) ?>
+    <?php $this->renderPartial('_investment', array('investment' => $investment, 'model' => $user)) ?>
 </p>
 
 <p>
     <?php echo CHtml::link('Перевести средства', '#', array('onclick' => '$("#transfer").dialog("open"); return false;',)); ?>
     <br />
-    <?php $this->renderPartial('_transfer', array('transfer' => $transfer,'model' => $model)) ?>
+    <?php $this->renderPartial('_transfer', array('transfer' => $transfer,'model' => $user)) ?>
 </p>

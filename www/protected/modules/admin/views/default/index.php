@@ -16,7 +16,7 @@ $this->menu=array(
     array('label'=>Yii::t('app','Права доступа'), 'url'=>array('/rights')),
     array('label'=>'Транзакции', 'url'=>array('/admin/userTransaction')),
     array('label'=>'Депозиты', 'url'=>array('/admin/deposit')),
-    array('label'=>'Типы депозитов', 'url'=>array('/admin/depositType')),
+    array('label'=>'Новости', 'url'=>array('/admin/news')),
     array('label'=>'Сообщения', 'url'=>array('/admin/messages')),
     array('label'=>'PerfectMoney', 'url'=>array('/admin/money')),
 );
