@@ -10,6 +10,7 @@ $this->breadcrumbs=array(
 $this->menu=array(
 	array('label'=>'List Deposit', 'url'=>array('index')),
 	array('label'=>'Manage Deposit', 'url'=>array('admin')),
+    array('label'=>'Типы депозитов', 'url'=>array('/admin/depositType')),
 );
 ?>
 
