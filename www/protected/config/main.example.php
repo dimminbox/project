@@ -16,7 +16,7 @@ return array(
 
     // autoloading model and component classes
     'import'=>array(
-
+        'ext.imperavi-redactor-widget.*',
         'application.models.*',
         'application.components.*',
         'application.modules.user.models.*',
@@ -24,6 +24,7 @@ return array(
         'application.modules.rights.*',
         'application.modules.rights.models.*',
         'application.modules.rights.components.*',
+        'application.modules.admin.models.*',
     ),
 
     'modules'=>array(
@@ -124,7 +125,7 @@ return array(
             'connectionString' => 'mysql:host=localhost;dbname=project',
             'emulatePrepare' => true,
             'username' => 'root',
-            'password' => '654321',
+            'password' => '',
             'charset' => 'utf8',
             'tablePrefix' => 'hyip_',
         ),
