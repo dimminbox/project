@@ -12,22 +12,9 @@ $this->menu=array(
     array('label'=>UserModule::t('Change password'), 'url'=>array('changepassword')),
     array('label'=>UserModule::t('Logout'), 'url'=>array('/user/logout')),
 );
-if ( $user->deposit != null ) {
-
-    foreach( $user->deposit as $dep ) {
-        if ( $dep->expire <= date('Y-m-d H:i:s', time() + 2592000) ) {
-            Yii::app()->user->setState('reinvest', 'Реинвестирование депозита');
-        }
-    }
-}
-
 
 ?>
-<?php if(Yii::app()->user->hasState('reinvest')): ?>
-    <div class="success" style="text-align:center;padding:10px;color:green;font-weight:bold;border:1px solid green">
-        <?php echo Yii::app()->user->getState('reinvest'); ?>
-    </div>
-<?php endif; ?>
+
 <?php if(Yii::app()->user->hasFlash('profileMessage')): ?>
 <div class="success" style="text-align:center;padding:10px;color:green;font-weight:bold;border:1px solid green">
 	<?php echo Yii::app()->user->getFlash('profileMessage'); ?>
@@ -40,11 +27,49 @@ if ( $user->deposit != null ) {
 <?php endif;?>
 <h2><?php echo $user->username; ?></h2>
 
-<?php if ( $user->lastvisit_at != '0000-00-00 00:00:00' ) : ?>
-<p>
-    Ваш последний визит: <?php echo $user->lastvisit_at; ?><br />
-</p>
-<?php endif; ?>
+<?php
+
+
+if ( $user->deposit != null ) {
+
+    foreach( $user->deposit as $dep ) {
+
+        $cookie = Yii::app()->request->cookies['deposit_message' . $dep->id]->value;
+
+        if ( $dep->expire <= date('Y-m-d H:i:s', time() + 2592000) && $cookie != 1) {
+
+            ?>
+
+            <div id='deposit_message<?php echo $dep->id; ?>' style='position:relative;border:1px solid green;padding: 15px;margin-bottom: 10px;'>
+                <div style='position:absolute;top:3px;right:5px;'>
+                    <a id='deposit_message_close<?php echo $dep->id; ?>' href="#" style='text-decoration:none; color:black'>X</a></div>
+
+                До срока окончания депозита #<strong><?php echo $dep->id; ?></strong> осталось менее 1го месяца.<br />
+                Реинвестировать его еще на <?php echo $dep->deposit_type->type ?> ? <br />
+
+                <?php echo CHtml::link('Да', '#') ?> <?php echo CHtml::link('нет', '#') ?>
+
+            </div>
+
+            <script type="text/javascript">
+
+                $(document).ready(function(){
+                    $('#deposit_message_close<?php echo $dep->id; ?>').click(function () {
+                        $('#deposit_message<?php echo $dep->id; ?>').hide(200);
+                        $.cookie('deposit_message<?php echo $dep->id; ?>', 1,{
+                            expires: 1,
+                            path: '/'
+                         });
+                    });
+                });
+
+            </script>
+<?php
+        }
+    }
+}
+?>
+
 <p>
 <strong>Ваш баланс:</strong>
 <?php echo (float)$user->amount; ?> бубликов.<br />
