@@ -17,7 +17,7 @@ $this->menu=array(
 ?>
 <table>
         <thead>
-        <tr><td>№</td><td>Сумма депозита</td><td>Тип депозита</td><td>Процент</td><td>Дата создания</td><td>Дата окончания</td><<td>Состояние</td></tr>
+        <tr><td>№</td><td>Сумма</td><td>Срок</td><td>Процент</td><td>Дата создания</td><td>Дата окончания</td><td>Реинвест</td><td>Состояние</td></tr>
         </thead>
         <?php
         foreach ($models as $deposit): ?>
@@ -29,9 +29,18 @@ $this->menu=array(
                 <td><?php echo $deposit->deposit_type->percent; ?></td>
                 <td><?php echo $deposit->date; ?></td>
                 <td><?php echo $deposit->expire; ?></td>
+                <td><?php
+                    if ( $deposit->reinvest == Deposit::REINVEST_YES ) {
+                        echo 'Да';
+                    } elseif ( $deposit->reinvest == Deposit::REINVEST_NO ) {
+                        echo 'Нет';
+                    } else {
+                        echo '';
+                    }
+                    ?></td>
                 <td><?php if ( $deposit->status == 1 )
                             { echo 'Действует'; }
-                        else { echo 'Выведен'; }
+                        else { echo 'Закрыт'; }
                 ?></td>
             </tr>
 

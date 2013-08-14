@@ -435,7 +435,7 @@ class ProfileController extends Controller
             'pages' => $pages
         ));
     }
-
+    //Список депозитов пользователя
     public function actionDeposits() {
         $criteria = new CDbCriteria();
         $criteria->addColumnCondition(array('user_id' => Yii::app()->user->id));
@@ -446,6 +446,7 @@ class ProfileController extends Controller
         $pages->applyLimit($criteria);
         $criteria->order = 'id DESC';
         $models = Deposit::model()->findAll($criteria);
+
         $this->render('deposits', array(
             'models' => $models,
             'pages' => $pages
