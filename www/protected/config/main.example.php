@@ -10,6 +10,7 @@ return array(
     'name'=>'Доверительное управление',
     'theme' => 'default',
     'language' => 'ru',
+    //'homeUrl'=>array('site/index'),
 
     // preloading 'log' component
     'preload'=>array('log'),
@@ -100,11 +101,8 @@ return array(
 
         'urlManager'=>array(
             'urlFormat'=>'path',
-            'rules'=>array(
-                '<controller:\w+>/<id:\d+>'=>'<controller>/view',
-                '<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',
-                '<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
-            ),
+            'showScriptName' => false,
+            'rules'=> include(__DIR__ . DIRECTORY_SEPARATOR . 'route.php'),
         ),
 
         /* 'user'=>array(
@@ -161,5 +159,6 @@ return array(
         'payee_account' => 'U4330448',
         'PassPhrase' => 'Cecfybyj915',
         'payment_units' => 'USD',
+        'max_amount_output' => '300',//максимальная сумма для вывода
     ),
 );

@@ -1,7 +1,7 @@
 <?php
 $this->pageTitle=Yii::app()->name . ' - Полный список операций';
 $this->breadcrumbs=array(
-    'Личный кабинет'=>array('profile'),
+    UserModule::t("Profile") => array('/profile'),
     'Полный список операций',
 );
 $this->menu=array(

@@ -40,14 +40,14 @@
         <?php
         $this->widget('zii.widgets.CMenu',array(
             'items'=>array(
-                array('label'=>Yii::t('app','Home'), 'url'=>array('/site/index')),
+                array('label'=>Yii::t('app','Home'), 'url'=>$this->createAbsoluteUrl('/')),
                 array('label'=>Yii::t('app','News'), 'url'=>array('/news')),
-                array('label'=>Yii::t('app','About'), 'url'=>array('/site/page', 'view'=>'about')),
-                array('label'=>Yii::t('app','Contact'), 'url'=>array('/site/contact')),
-                array('label'=>Yii::t('app','Login'), 'url'=>array('/user/login'),'visible'=>Yii::app()->user->isGuest),
-                array('label'=>Yii::t('app','Logout').' ('.Yii::app()->user->name.')', 'url'=>array('/user/logout'), 'visible'=>!Yii::app()->user->isGuest),
-                array('url'=>Yii::app()->getModule('user')->registrationUrl, 'label'=>Yii::app()->getModule('user')->t("Register"), 'visible'=>Yii::app()->user->isGuest),
-                array('url'=>Yii::app()->getModule('user')->profileUrl, 'label'=>Yii::app()->getModule('user')->t("Profile"), 'visible'=>!Yii::app()->user->isGuest),
+                array('label'=>Yii::t('app','About'), 'url'=>array('/about')),
+                array('label'=>Yii::t('app','Contact'), 'url'=>array('/contact')),
+                array('label'=>Yii::t('app','Login'), 'url'=>array('/login'),'visible'=>Yii::app()->user->isGuest),
+                array('label'=>Yii::t('app','Logout').' ('.Yii::app()->user->name.')', 'url'=>array('/logout'), 'visible'=>!Yii::app()->user->isGuest),
+                array('url'=>array('/signup'), 'label'=>Yii::app()->getModule('user')->t("Register"), 'visible'=>Yii::app()->user->isGuest),
+                array('url'=>array('/profile'), 'label'=>Yii::app()->getModule('user')->t("Profile"), 'visible'=>!Yii::app()->user->isGuest),
                 ((UserModule::isAdmin())
                     ?array('label'=>'Админпанель', 'url'=>array('/admin'))
                     :array()),

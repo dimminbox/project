@@ -49,10 +49,16 @@ class SiteController extends Controller
 		}
 	}
 
+    public function actionAbout() {
+        $this->render('pages/about');
+    }
+
 	/**
 	 * Displays the contact page
 	 */
-	public function actionContact()
+
+
+    public function actionContact()
 	{
 		$model=new ContactForm;
 		if(isset($_POST['ContactForm']))
