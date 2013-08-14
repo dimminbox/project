@@ -209,6 +209,7 @@ class User extends CActiveRecord
         }
     }
 
+    //Вывод баланса пользователя по ID
     public function userAmount($user_id) {
         if ( !$this->isNewRecord ) {
             $result = Yii::app()->db->createCommand("
@@ -224,6 +225,7 @@ class User extends CActiveRecord
             return 0;
         }
     }
+
 
     public function getAllAmount(){
         if ( !$this->isNewRecord ) {
@@ -272,6 +274,7 @@ class User extends CActiveRecord
         }
     }
 
+    //Вывод суммы депозитов пользователя по ID
     public function adminInvestmentAmount($user_id) {
         if ( !$this->isNewRecord ) {
             $result = Yii::app()->db->createCommand("

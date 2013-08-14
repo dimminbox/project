@@ -64,30 +64,18 @@ class AdminController extends Controller
     public function actionView()
     {
         $model = $this->loadModel();
-        $this->render('view',array(
-            'model'=>$model,
-        ));
-    }
 
-    public function actionDeposits(){
-        $model = $this->loadModel();
         $deposits = Deposit::model()->findAllByAttributes(array('user_id' => $model->id));
-        $this->render('deposits',array(
-            'deposits'=>$deposits,
-        ));
-    }
 
-    public function actionOperations(){
-        $model = $this->loadModel();
-        die('test');
         $criteria = new CDbCriteria();
         $criteria->addColumnCondition(array('user_id' => $model->id));
         $criteria->limit = 10;
         $criteria->order = 'id DESC';
         $userTransaction = UserTransaction::model()->findAll($criteria);
 
-        $this->render('operations',array(
+        $this->render('view',array(
             'model'=>$model,
+            'deposits'=>$deposits,
             'userTransaction'=>$userTransaction,
         ));
     }
