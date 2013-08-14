@@ -11,6 +11,9 @@ return array(
     'profile/operations' => '/user/profile/operations',
     'profile/deposits' => '/user/profile/deposits',
     'profile/referrals' => '/user/profile/referral',
+    'profile/edit' => '/user/profile/edit',
+    'profile/edit/changepassword' => '/user/profile/changepassword',
+
 
     '<controller:\w+>/<id:\d+>'=>'<controller>/view',
     '<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',
