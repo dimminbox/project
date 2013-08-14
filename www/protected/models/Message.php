@@ -16,6 +16,7 @@
  */
 class Message extends CActiveRecord
 {
+    //Важность сообщений
     const IMPORTANCE_1 = 1; //Очень важно
     const IMPORTANCE_2 = 2; //средне
     const IMPORTANCE_3 = 3; //не очень важное

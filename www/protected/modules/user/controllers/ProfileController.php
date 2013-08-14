@@ -204,94 +204,113 @@ class ProfileController extends Controller
 
             $user = User::model()->findByPk(Yii::app()->user->id);
             $amount = User::model()->amount;
-
+            //проверка секретного кодового слова
             if ( $_POST['User']['secret'] == $user->secret ) {
-
+                //проверка существования кошелька perfect money
                 if ( $user->perfect_purse != null ) {
-
+                    //сумма вывода не больше суммы на кошельке
                     if ( $_POST['output_money'] <= $amount ) {
+                        //ограничиваем сумму максимального вывода
+                        if (  $_POST['output_money'] > Yii::app()->params['max_amount_output'] ) {
 
-                        $payment_id = uniqid(Yii::app()->user->id + time());
-                        $amount = UserTransaction::model()->replaceComma($_POST['output_money']);
+                            $subject = 'Новая заявка на вывод!';
+                            $message = 'От пользователя <strong>' . CHtml::link($user->username, $this->createAbsoluteUrl('/user/admin/view/', array('id' => $user->id))) .
+                                        '</strong> Поступила заявка на вывод Perfect Money<br />
+                                        <strong>Сумма вывода:</strong> ' . $_POST['output_money'] . '$<br />
+                                        <strong>Кошелек Perfect Money:</strong> ' . $user->perfect_purse;
+
+                            mail(Yii::app()->params->adminEmail, $subject, $message);
+
+                            User::model()->sendMessage(1, $subject, $message, Message::IMPORTANCE_1 );
+
+                            Yii::app()->user->setFlash('profileMessage', 'В связи с безопасностью, вывод более ' . Yii::app()->params['max_amount_output'] . '$ производится вручную<br /><br />
+                                                            Заявка на вывод успешно принята<br />
+                                                            Деньги поступят на Ваш счет в течении трех часов');
+
+                            $this->redirect($this->createUrl('/user/profile'));
+                        } else {
+
+                            $payment_id = uniqid(Yii::app()->user->id + time());
+                            $amount = UserTransaction::model()->replaceComma($_POST['output_money']);
 
 
-                        $f=fopen('https://perfectmoney.is/acct/confirm.asp?AccountID=' . Yii::app()->params['AccountID'] . '&PassPhrase=' . Yii::app()->params['PassPhrase'] . '&Payer_Account=' . Yii::app()->params['payee_account'] . '&Payee_Account=' . $user->perfect_purse . '&Amount=' . $amount . '&PAY_IN=' . $amount . ' &PAYMENT_ID=' . $payment_id, 'rb');
+                            $f=fopen('https://perfectmoney.is/acct/confirm.asp?AccountID=' . Yii::app()->params['AccountID'] . '&PassPhrase=' . Yii::app()->params['PassPhrase'] . '&Payer_Account=' . Yii::app()->params['payee_account'] . '&Payee_Account=' . $user->perfect_purse . '&Amount=' . $amount . '&PAY_IN=' . $amount . ' &PAYMENT_ID=' . $payment_id, 'rb');
 
-                        if($f===false){
-                            echo 'ошибка открытия файла';
+                            if($f===false){
+                                echo 'ошибка открытия файла';
+                            }
+
+                            // getting data
+                            $out=array(); $out="";
+                            while(!feof($f)) $out.=fgets($f);
+
+                            fclose($f);
+
+                            // searching for hidden fields
+                            if(!preg_match_all("/<input name='(.*)' type='hidden' value='(.*)'>/", $out, $result, PREG_SET_ORDER)){
+                                echo 'Неправильный вывод';
+                                exit;
+                            }
+
+                            $reply="";
+                            foreach($result as $item){
+                                $key=$item[1];
+                                $reply[$key]=$item[2];
+                            }
+
+                            if ( isset($reply['ERROR']) ) {
+
+                                $outputTransaction = new UsersOutputTransaction();
+                                $outputTransaction->user_id = Yii::app()->user->id;
+                                $outputTransaction->error = $reply['ERROR'];
+                                $outputTransaction->status = UsersOutputTransaction::STATUS_ERROR;
+                                $outputTransaction->payment_amount = $amount;
+                                $outputTransaction->payment_id = $payment_id;
+                                $outputTransaction->payee_account = $user->perfect_purse;
+                                $outputTransaction->save();
+
+                                $subject = 'Ошибка! Вывод PerfectMoney';
+                                $message = "Ошибка: ". $reply['ERROR'] ."\r\n
+                                            ID Пользователя: ". Yii::app()->user->id ."\r\n
+                                            Сумма вывода: ". $amount ."\r\n
+                                            ID Транзакции: ". $payment_id ."\r\n
+                                            Кошелек PerfectMoney: ". $user->perfect_purse ."\r\n
+                                            ";
+
+                                mail(Yii::app()->params->adminEmail, 'Ошибка вывода на PerfectMoney', $message);
+
+                                User::model()->sendMessage(1, $subject, $message, Message::IMPORTANCE_1 );
+
+                                Yii::app()->user->setFlash('profileMessageFail', 'Произошла неожиданная ошибка<br />
+                                                            Информация об ошибке отправлена администратору сайта<br />
+                                                            Администратор свяжется с Вами в ближайшее время');
+
+                                $this->redirect($this->createUrl('/user/profile'));
+
+                            } else {
+
+                                $transaction = new UserTransaction();
+                                $transaction->amount = -UserTransaction::model()->replaceComma($_POST['output_money']);
+                                $transaction->user_id = $user->id;
+                                $transaction->reason = 'Вывод средств на кошелек Perfect Money';
+                                $transaction->amount_type = UserTransaction::AMOUNT_TYPE_OUTPUT;
+                                $transaction->payment_id = $payment_id;
+                                $transaction->save();
+
+                                $outputTransaction = new UsersOutputTransaction();
+                                $outputTransaction->user_id = Yii::app()->user->id;
+                                $outputTransaction->payee_account_name = $reply['Payee_Account_Name'];
+                                $outputTransaction->payment_batch_num = $reply['PAYMENT_BATCH_NUM'];
+                                $outputTransaction->status = UsersOutputTransaction::STATUS_OK;
+                                $outputTransaction->payment_amount = $amount;
+                                $outputTransaction->payment_id = $payment_id;
+                                $outputTransaction->payee_account = $user->perfect_purse;
+                                $outputTransaction->save();
+
+
+                                    Yii::app()->user->setFlash('profileMessage', 'Вывод успешно завершен');
+                            }
                         }
-
-                        // getting data
-                        $out=array(); $out="";
-                        while(!feof($f)) $out.=fgets($f);
-
-                        fclose($f);
-
-                        // searching for hidden fields
-                        if(!preg_match_all("/<input name='(.*)' type='hidden' value='(.*)'>/", $out, $result, PREG_SET_ORDER)){
-                            echo 'Неправильный вывод';
-                            exit;
-                        }
-
-                        $reply="";
-                        foreach($result as $item){
-                            $key=$item[1];
-                            $reply[$key]=$item[2];
-                        }
-
-                        if ( isset($reply['ERROR']) ) {
-
-                        $outputTransaction = new UsersOutputTransaction();
-                        $outputTransaction->user_id = Yii::app()->user->id;
-                        $outputTransaction->error = $reply['ERROR'];
-                        $outputTransaction->status = UsersOutputTransaction::STATUS_ERROR;
-                        $outputTransaction->payment_amount = $amount;
-                        $outputTransaction->payment_id = $payment_id;
-                        $outputTransaction->payee_account = $user->perfect_purse;
-                        $outputTransaction->save();
-
-                        $subject = 'Ошибка! Вывод PerfectMoney';
-                        $message = "Ошибка: ". $reply['ERROR'] ."\r\n
-                                    ID Пользователя: ". Yii::app()->user->id ."\r\n
-                                    Сумма вывода: ". $amount ."\r\n
-                                    ID Транзакции: ". $payment_id ."\r\n
-                                    Кошелек PerfectMoney: ". $user->perfect_purse ."\r\n
-                                    ";
-
-                        mail(Yii::app()->params->adminEmail, 'Ошибка вывода на PerfectMoney', $message);
-
-                        User::model()->sendMessage(1, $subject, $message, Message::IMPORTANCE_1 );
-
-                        Yii::app()->user->setFlash('profileMessageFail', 'Произошла неожиданная ошибка<br />
-                                                    Информация об ошибке отправлена администратору сайта<br />
-                                                    Администратор свяжется с Вами в ближайшее время');
-
-                        $this->redirect($this->createUrl('/user/profile'));
-
-                    } else {
-
-                        $transaction = new UserTransaction();
-                        $transaction->amount = -UserTransaction::model()->replaceComma($_POST['output_money']);
-                        $transaction->user_id = $user->id;
-                        $transaction->reason = 'Вывод средств на кошелек Perfect Money';
-                        $transaction->amount_type = UserTransaction::AMOUNT_TYPE_OUTPUT;
-                        $transaction->payment_id = $payment_id;
-                        $transaction->save();
-
-                        $outputTransaction = new UsersOutputTransaction();
-                        $outputTransaction->user_id = Yii::app()->user->id;
-                        $outputTransaction->payee_account_name = $reply['Payee_Account_Name'];
-                        $outputTransaction->payment_batch_num = $reply['PAYMENT_BATCH_NUM'];
-                        $outputTransaction->status = UsersOutputTransaction::STATUS_OK;
-                        $outputTransaction->payment_amount = $amount;
-                        $outputTransaction->payment_id = $payment_id;
-                        $outputTransaction->payee_account = $user->perfect_purse;
-                        $outputTransaction->save();
-
-
-                            Yii::app()->user->setFlash('profileMessage', 'Вывод успешно завершен');
-                        }
-
 
                     } else {
                         Yii::app()->user->setFlash('profileMessageFail', 'Неверно указана сумма');
