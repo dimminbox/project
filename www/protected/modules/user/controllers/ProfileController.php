@@ -85,7 +85,7 @@ class ProfileController extends Controller
 
         $this->redirect($this->createUrl('/user/profile'));
     }
-
+    //Перевод средств пользователей друг другу
     public function actionTransfer(){
         $user = User::model()->findByPk(Yii::app()->user->id);
         $amount = (float)User::model()->getAmount();
@@ -125,12 +125,12 @@ class ProfileController extends Controller
         } else {Yii::app()->user->setFlash('profileMessageFail', 'Не верный секретный код');}
         $this->redirect($this->createUrl('/user/profile'));
     }
-
+    //экшн неудачночной оплаты perfect money
     public function actionDepositFail() {
         Yii::app()->user->setFlash('profileMessageFail', 'Платеж не был завершен или возникла ошибка в процессе оплаты.');
         $this->redirect($this->createUrl('/user/profile'));
     }
-
+    //экшн удачной оплаты perfect money
     public function actionDepositSuccess() {
         $transaction = new UserTransactionsIncomplete();
         if ( isset($_POST) ) {
@@ -150,7 +150,7 @@ class ProfileController extends Controller
         }
         $this->redirect($this->createUrl('/user/profile'));
     }
-
+    //экшн подтверждения зачисления средств на наш кошелек perfect money
     public function actionDepositStatus() {
         $transactionInComlete = UserTransactionsIncomplete::model()->findByAttributes(array('payment_id' => $_POST['PAYMENT_ID']));
 
@@ -305,6 +305,34 @@ class ProfileController extends Controller
             }
 
 
+        }
+
+        $this->redirect($this->createUrl('/user/profile'));
+    }
+
+    public function actionDepositReinvest($deposit_id, $reinvest) {
+        $deposit = Deposit::model()->findByPk($deposit_id);
+
+        if ( $reinvest == Deposit::REINVEST_YES ) {
+            $deposit->reinvest = Deposit::REINVEST_YES;
+
+            if ( $deposit->save() ) {
+                Yii::app()->user->setFlash('profileMessage', 'Депозит успешно реинвестирован');
+            } else {
+                Yii::app()->user->setFlash('profileMessageFail', 'При реинвестировании произошла ошибка');
+            }
+
+        } elseif ( $reinvest == Deposit::REINVEST_NO ) {
+            $deposit->reinvest = Deposit::REINVEST_NO;
+
+            if ( $deposit->save() ) {
+                Yii::app()->user->setFlash('profileMessage', 'Успешно сохранено');
+            } else {
+                Yii::app()->user->setFlash('profileMessageFail', 'Произошла ошибка');
+            }
+
+        } else {
+            Yii::app()->user->setFlash('profileMessageFail', 'Произошла непредвиденная ошибка');
         }
 
         $this->redirect($this->createUrl('/user/profile'));

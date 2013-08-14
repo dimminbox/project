@@ -36,7 +36,10 @@ if ( $user->deposit != null ) {
 
         $cookie = Yii::app()->request->cookies['deposit_message' . $dep->id]->value;
 
-        if ( $dep->expire <= date('Y-m-d H:i:s', time() + 2592000) && $cookie != 1) {
+        if ( $dep->expire <= date('Y-m-d H:i:s', time() + 2592000) &&
+            $cookie != 1 &&
+            $dep->reinvest == 0
+        ) {
 
             ?>
 
@@ -47,7 +50,12 @@ if ( $user->deposit != null ) {
                 До срока окончания депозита #<strong><?php echo $dep->id; ?></strong> осталось менее 1го месяца.<br />
                 Реинвестировать его еще на <?php echo $dep->deposit_type->type ?> ? <br />
 
-                <?php echo CHtml::link('Да', '#') ?> <?php echo CHtml::link('нет', '#') ?>
+                <?php echo CHtml::link('Да', $this->createAbsoluteUrl('/user/profile/depositReinvest', array(
+                                                                        'deposit_id' => $dep->id,
+                                                                        'reinvest' => Deposit::REINVEST_YES))) ?>
+                <?php echo CHtml::link('нет', $this->createAbsoluteUrl('/user/profile/depositReinvest', array(
+                    'deposit_id' => $dep->id,
+                    'reinvest' => Deposit::REINVEST_NO))) ?>
 
             </div>
 
