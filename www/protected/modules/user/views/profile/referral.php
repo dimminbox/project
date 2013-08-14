@@ -6,11 +6,10 @@ $this->breadcrumbs=array(
 $this->menu=array(
 #array('label'=>UserModule::t('List User'), 'url'=>array('/user')),
 #array('label'=>UserModule::t('Investment'), 'url'=>array('/user/deposit')),
-    array('label'=>UserModule::t('Referral'), 'url'=>array('referral')),
     array('label'=>UserModule::t('All operations'),'url'=>array('/user/profile/operations')),
     array('label'=>UserModule::t('All deposits'),'url'=>array('/user/profile/deposits')),
-    array('label'=>UserModule::t('Edit'), 'url'=>array('edit')),
-    array('label'=>UserModule::t('Change password'), 'url'=>array('changepassword')),
+    array('label'=>UserModule::t('Referral'), 'url'=>array('referral')),
+    array('label'=>UserModule::t('EditProfile'), 'url'=>array('edit')),
     array('label'=>UserModule::t('Logout'), 'url'=>array('/user/logout')),
 );
 ?><h1><?php echo UserModule::t('Your profile'); ?></h1>

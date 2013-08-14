@@ -6,11 +6,10 @@ $this->breadcrumbs=array(
 $this->menu=array(
 #array('label'=>UserModule::t('List User'), 'url'=>array('/user')),
 #array('label'=>UserModule::t('Investment'), 'url'=>array('/user/deposit')),
-    array('label'=>UserModule::t('Referral'), 'url'=>array('referral')),
     array('label'=>UserModule::t('All operations'),'url'=>array('/user/profile/operations')),
     array('label'=>UserModule::t('All deposits'),'url'=>array('/user/profile/deposits')),
-    array('label'=>UserModule::t('Edit'), 'url'=>array('edit')),
-    array('label'=>UserModule::t('Change password'), 'url'=>array('changepassword')),
+    array('label'=>UserModule::t('Referral'), 'url'=>array('referral')),
+    array('label'=>UserModule::t('EditProfile'), 'url'=>array('edit')),
     array('label'=>UserModule::t('Logout'), 'url'=>array('/user/logout')),
 );
 ?><h1><?php echo UserModule::t('Edit profile'); ?></h1>
@@ -65,7 +64,7 @@ $this->menu=array(
 		<?php echo $form->textField($model,'email',array('size'=>60,'maxlength'=>128)); ?>
 		<?php echo $form->error($model,'email'); ?>
 	</div>
-
+    <?php echo CHtml::link('Изменить пароль', $this->createAbsoluteUrl('/user/profile/changepassword')); ?><br />
 	<div class="row buttons">
 		<?php echo CHtml::submitButton($model->isNewRecord ? UserModule::t('Create') : UserModule::t('Save')); ?>
 	</div>
