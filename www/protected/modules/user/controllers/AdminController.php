@@ -69,29 +69,6 @@ class AdminController extends Controller
         ));
     }
 
-    public function actionDeposits(){
-        $model = $this->loadModel();
-        $deposits = Deposit::model()->findAllByAttributes(array('user_id' => $model->id));
-        $this->render('deposits',array(
-            'deposits'=>$deposits,
-        ));
-    }
-
-    public function actionOperations(){
-        $model = $this->loadModel();
-        die('test');
-        $criteria = new CDbCriteria();
-        $criteria->addColumnCondition(array('user_id' => $model->id));
-        $criteria->limit = 10;
-        $criteria->order = 'id DESC';
-        $userTransaction = UserTransaction::model()->findAll($criteria);
-
-        $this->render('operations',array(
-            'model'=>$model,
-            'userTransaction'=>$userTransaction,
-        ));
-    }
-
 
     /**
      * Creates a new model.
