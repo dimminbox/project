@@ -11,7 +11,7 @@ class MessagesController extends AdminController
         // элементов на страницу
         $pages->pageSize=10;
         $pages->applyLimit($criteria);
-        $criteria->order = 'status DESC, importance';
+        $criteria->order = 'status DESC, importance, ';
         $messages = Message::model()->findAll($criteria);
         $this->render('messages', array(
             'messages' => $messages,
