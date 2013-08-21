@@ -1,128 +1,191 @@
 <?php /* @var $this Controller */ ?>
 <!DOCTYPE html>
-<html lang="ru">
-<head>
-    <title></title>
+<!-- saved from url=(0049)http://jumpstartuidemo.com/themes/base/index.html -->
+<html lang="ru"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
-    <link rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/public/css/reset.css" type="text/css" media="screen">
-    <link rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/public/css/style.css" type="text/css" media="screen">
-    <link rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/public/css/grid.css" type="text/css" media="screen">
+
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->theme->baseUrl; ?>/css/styles.css" />
+    <?php Yii::app()->bootstrap->register(); ?>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600" rel="stylesheet">
+    <link href="<?php echo Yii::app()->request->baseUrl; ?>/public/tm/profile/css/font-awesome.min.css" rel="stylesheet">
+    <link href="<?php echo Yii::app()->request->baseUrl; ?>/public/tm/profile/css/ui-lightness/jquery-ui-1.10.0.custom.min.css" rel="stylesheet">
+    <link href="<?php echo Yii::app()->request->baseUrl; ?>/public/tm/profile/css/base-admin-2.css" rel="stylesheet">
+    <link href="<?php echo Yii::app()->request->baseUrl; ?>/public/tm/profile/css/base-admin-2-responsive.css" rel="stylesheet">
+    <link href="<?php echo Yii::app()->request->baseUrl; ?>/public/tm/profile/css/pages/dashboard.css" rel="stylesheet">
+
     <?php Yii::app()->clientScript->registerCoreScript('cookie'); ?>
-
-    <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/public/js/jquery.easing.1.3.js"></script>
-    <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/public/js/tms-0.3.js"></script>
-    <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/public/js/tms_presets.js"></script>
-    <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/public/js/easyTooltip.js"></script>
-    <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/public/js/script.js"></script>
-    <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/form.css" />
-    <!--[if lt IE 7]>
-    <div style=' clear: both; text-align:center; position: relative;'>
-        <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
-            <img src="http://storage.ie6countdown.com/assets/100/images/banners/warning_bar_0000_us.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today." />
-        </a>
-    </div>
-    <![endif]-->
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
-    <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/public/js/html5.js"></script>
-    <link rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/public/css/ie.css" type="text/css" media="screen">
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-</head>
-<body id="page1">
-<!--==============================header=================================-->
-<header>
-    <div class="main">
-        <div class="prev-indent-bot2">
-            <h1><?php echo CHtml::link('Главная', $this->createAbsoluteUrl('/')) ?></h1>
-            <nav>
-                <?php
-                $this->widget('zii.widgets.CMenu', array(
-                    'items'=>$this->menu,
-                    'htmlOptions'=>array('class'=>'menu'),
-                ));
-                ?>
-            </nav>
-            <div class="clear"></div>
-        </div>
-    </div>
+    <style type="text/css"></style></head>
 
-</header>
+    <body>
 
-<!--==============================content================================-->
-<section id="content"><div class="ic"></div>
-    <div class="main">
-        <div class="container_12">
-            <div class="wrapper">
+    <!-- Верхний блок -->
+<div class="navbar navbar-inverse navbar-fixed-top">
 
-                <?php if(isset($this->breadcrumbs)):?>
-                    <?php $this->widget('zii.widgets.CBreadcrumbs', array(
-			'links'=>$this->breadcrumbs,
-		)); ?><!-- breadcrumbs -->
-                <?php endif?>
+    <div class="navbar-inner">
 
-                <?php echo $content; ?>
+        <div class="container">
 
-            </div>
-        </div>
-    </div>
-</section>
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <i class="icon-cog"></i>
+            </a>
 
-<!--==============================footer=================================-->
-<footer>
-    <div class="main">
-        <div class="container_12">
-            <div class="wrapper">
-                <article class="grid_3">
-                    <ul class="list-services">
-                        <li class="item-1"><a class="tooltips" title="facebook" href="#"></a></li>
-                        <li class="item-2"><a class="tooltips" title="twiiter" href="#"></a></li>
-                        <li class="item-3"><a class="tooltips" title="delicious" href="#"></a></li>
-                        <li class="item-4"><a class="tooltips" title="youtube" href="#"></a></li>
-                    </ul>
-                </article>
-                <article class="grid_3">
-                    <div class="indent-left2">
-                        <h5>Navigation</h5>
-                        <ul class="list-1">
-                            <li><a href="index.html">Home</a></li>
-                            <li><a href="company.html">Company</a></li>
-                            <li><a href="services.html">Services</a></li>
-                            <li><a href="clients.html">Clients</a></li>
-                            <li><a href="contacts.html">Contacts</a></li>
+            <a class="brand" href="index.html">
+                Логотип
+            </a>
+
+
+
+        </div> <!-- /container -->
+
+    </div> <!-- /navbar-inner -->
+
+</div> <!-- /navbar -->
+
+    <!-- Конец верхний блок -->
+
+    <!-- Менюшка -->
+
+<div class="subnavbar">
+
+    <div class="subnavbar-inner">
+
+        <div class="container">
+
+            <a class="btn-subnavbar collapsed" data-toggle="collapse" data-target=".subnav-collapse">
+                <i class="icon-reorder"></i>
+            </a>
+
+            <div class="subnav-collapse collapse">
+                <ul class="mainnav">
+
+                    <li class="active">
+                        <a href="index.html">
+                            <i class="icon-home"></i>
+                            <span>Home</span>
+                        </a>
+                    </li>
+
+                    <li class="dropdown">
+                        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="icon-th"></i>
+                            <span>Components</span>
+                            <b class="caret"></b>
+                        </a>
+
+                        <ul class="dropdown-menu">
+                            <li><a href="http://jumpstartuidemo.com/themes/base/elements.html">Elements</a></li>
+                            <li><a href="http://jumpstartuidemo.com/themes/base/validation.html">Validation</a></li>
+                            <li><a href="http://jumpstartuidemo.com/themes/base/jqueryui.html">jQuery UI</a></li>
+                            <li><a href="http://jumpstartuidemo.com/themes/base/charts.html">Charts</a></li>
+                            <li><a href="http://jumpstartuidemo.com/themes/base/popups.html">Popups/Notifications</a></li>
                         </ul>
-                    </div>
-                </article>
-                <article class="grid_3">
-                    <h5>Contact</h5>
-                    <dl class="contact">
-                        <dt>2256 S Norfolk Street<br>Seattle, WA<br>98118-5648</dt>
-                        <dd><span>Phone:</span>  217-764-7449</dd>
-                        <dd><span>Fax:</span>  217-763-7912</dd>
-                    </dl>
-                </article>
-                <article class="grid_3">
-                    <h5>Legal</h5>
-                    <p class="prev-indent-bot3 color-1">Wise Solutions &copy; 2011</p>
-                    <p class="prev-indent-bot3">Website Template by </p>
-                    <p class="color-1 p0"><a class="link" href="http://www.templatemonster.com/" target="_blank" rel="nofollow">TemplateMonster.com</a></p>
-                </article>
-            </div>
-        </div>
-    </div>
-</footer>
-<script type="text/javascript"> Cufon.now(); </script>
-<script type="text/javascript">
-    $(window).load(function(){
-        $('.slider')._TMS({
-            duration:800,
-            easing:'easeOutQuad',
-            preset:'simpleFade',
-            pagination:true,//'.pagination',true,'<ul></ul>'
-            pagNums:false,
-            slideshow:7000,
-            banners:'fade',// fromLeft, fromRight, fromTop, fromBottom
-            waitBannerAnimation:false
-        })
-    })
-</script>
-</body>
-</html>
+                    </li>
+
+                    <li class="dropdown">
+                        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="icon-copy"></i>
+                            <span>Sample Pages</span>
+                            <b class="caret"></b>
+                        </a>
+
+                        <ul class="dropdown-menu">
+                            <li><a href="http://jumpstartuidemo.com/themes/base/pricing.html">Pricing Plans</a></li>
+                            <li><a href="http://jumpstartuidemo.com/themes/base/faq.html">FAQ's</a></li>
+                            <li><a href="http://jumpstartuidemo.com/themes/base/gallery.html">Gallery</a></li>
+                            <li><a href="http://jumpstartuidemo.com/themes/base/reports.html">Reports</a></li>
+                            <li><a href="http://jumpstartuidemo.com/themes/base/account.html">User Account</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="dropdown">
+                        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="icon-external-link"></i>
+                            <span>Extra Pages</span>
+                            <b class="caret"></b>
+                        </a>
+
+                        <ul class="dropdown-menu">
+                            <li><a href="http://jumpstartuidemo.com/themes/base/login.html">Login</a></li>
+                            <li><a href="http://jumpstartuidemo.com/themes/base/signup.html">Signup</a></li>
+                            <li><a href="http://jumpstartuidemo.com/themes/base/error.html">Error</a></li>
+                            <li class="dropdown-submenu">
+                                <a tabindex="-1" href="http://jumpstartuidemo.com/themes/base/index.html#">Dropdown menu</a>
+                                <ul class="dropdown-menu">
+                                    <li><a tabindex="-1" href="http://jumpstartuidemo.com/themes/base/index.html#">Second level link</a></li>
+                                    <li><a tabindex="-1" href="http://jumpstartuidemo.com/themes/base/index.html#">Second level link</a></li>
+                                    <li><a tabindex="-1" href="http://jumpstartuidemo.com/themes/base/index.html#">Second level link</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+
+                </ul>
+            </div> <!-- /.subnav-collapse -->
+
+        </div> <!-- /container -->
+
+    </div> <!-- /subnavbar-inner -->
+
+</div> <!-- /subnavbar -->
+
+    <!-- Конец Менюшка -->
+
+<div class="main">
+
+<div class="container">
+
+    <?php echo $content; ?>
+
+</div> <!-- /container -->
+
+</div> <!-- /main -->
+
+
+<div class="footer">
+
+    <div class="container">
+
+        <div class="row">
+
+            <div id="footer-copyright" class="span6">
+                © 2012-13 Jumpstart UI.
+            </div> <!-- /span6 -->
+
+            <div id="footer-terms" class="span6">
+                Theme by <a href="http://jumpstartui.com/" target="_blank">Jumpstart UI</a>
+            </div> <!-- /.span6 -->
+
+        </div> <!-- /row -->
+
+    </div> <!-- /container -->
+
+</div> <!-- /footer -->
+
+
+
+
+
+<!-- Le javascript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="jquery-1.8.3.min.js"></script>
+<script src="jquery-ui-1.10.0.custom.min.js"></script>
+<script src="bootstrap.min.js"></script>
+
+<script src="jquery.flot.js"></script>
+<script src="jquery.flot.pie.js"></script>
+<script src="jquery.flot.resize.js"></script>
+
+<script src="Application.js"></script>
+
+<script src="area.js"></script>
+<script src="donut.js"></script>
+
+</body></html>
