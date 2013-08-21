@@ -14,7 +14,7 @@
     <link href="<?php echo Yii::app()->request->baseUrl; ?>/public/tm/profile/css/ui-lightness/jquery-ui-1.10.0.custom.min.css" rel="stylesheet">
     <link href="<?php echo Yii::app()->request->baseUrl; ?>/public/tm/profile/css/base-admin-2.css" rel="stylesheet">
     <link href="<?php echo Yii::app()->request->baseUrl; ?>/public/tm/profile/css/base-admin-2-responsive.css" rel="stylesheet">
-    <link href="<?php echo Yii::app()->request->baseUrl; ?>/public/tm/profile/css/pages/dashboard.css" rel="stylesheet">
+    <link href="<?php echo Yii::app()->request->baseUrl; ?>/public/tm/profile/css/dashboard.css" rel="stylesheet">
 
     <?php Yii::app()->clientScript->registerCoreScript('cookie'); ?>
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
