@@ -3,6 +3,8 @@ return array(
     'contact' => '/site/contact',
     'about' => '/site/about',
     'signup' => '/user/registration',
+    'faq' => '/site/faq',
+    'referral' => '/site/referral',
     'login' => '/user/login',
     'logout' => '/user/logout',
 
