@@ -451,7 +451,7 @@ class ProfileController extends Controller
         $models = UserTransaction::model()->findAll($criteria);
         $this->render('operations', array(
             'models' => $models,
-            'pages' => $pages
+            'pages' => $pages,
         ));
     }
     //Список депозитов пользователя

@@ -14,7 +14,8 @@ $this->menu=array(
     array('label'=>UserModule::t('Logout'), 'url'=>array('/user/logout')),
 );
 ?>
-    <table>
+
+    <table class="table table-bordered table-striped">
         <thead>
         <tr><td>№</td><td>Дата</td><td>Сумма операции</td><td>Тип операции</td><td>Остаток</td></tr>
         </thead>

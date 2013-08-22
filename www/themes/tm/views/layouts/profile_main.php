@@ -66,7 +66,7 @@
                 <ul class="mainnav">
 
                     <li class="active">
-                        <a href="index.html">
+                        <a href="/profile">
                             <i class="icon-home"></i>
                             <span>Home</span>
                         </a>
@@ -85,6 +85,8 @@
                             <li><a href="http://jumpstartuidemo.com/themes/base/jqueryui.html">jQuery UI</a></li>
                             <li><a href="http://jumpstartuidemo.com/themes/base/charts.html">Charts</a></li>
                             <li><a href="http://jumpstartuidemo.com/themes/base/popups.html">Popups/Notifications</a></li>
+                            <li><a href="/user/profile/operations">Все операции</a></li>
+                            <li><a href="/user/profile/deposits">Все депозиты</a></li>
                         </ul>
                     </li>
 
