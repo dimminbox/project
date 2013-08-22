@@ -10,13 +10,14 @@ return array(
     'name'=>'Доверительное управление',
     'theme' => 'default',
     'language' => 'ru',
+    //'homeUrl'=>array('site/index'),
 
     // preloading 'log' component
     'preload'=>array('log'),
 
     // autoloading model and component classes
     'import'=>array(
-
+        'ext.imperavi-redactor-widget.*',
         'application.models.*',
         'application.components.*',
         'application.modules.user.models.*',
@@ -24,6 +25,7 @@ return array(
         'application.modules.rights.*',
         'application.modules.rights.models.*',
         'application.modules.rights.components.*',
+        'application.modules.admin.models.*',
     ),
 
     'modules'=>array(
@@ -99,11 +101,8 @@ return array(
 
         'urlManager'=>array(
             'urlFormat'=>'path',
-            'rules'=>array(
-                '<controller:\w+>/<id:\d+>'=>'<controller>/view',
-                '<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',
-                '<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
-            ),
+            'showScriptName' => false,
+            'rules'=> include(__DIR__ . DIRECTORY_SEPARATOR . 'route.php'),
         ),
 
         /* 'user'=>array(
@@ -124,7 +123,7 @@ return array(
             'connectionString' => 'mysql:host=localhost;dbname=project',
             'emulatePrepare' => true,
             'username' => 'root',
-            'password' => '654321',
+            'password' => '',
             'charset' => 'utf8',
             'tablePrefix' => 'hyip_',
         ),
@@ -160,5 +159,6 @@ return array(
         'payee_account' => 'U4330448',
         'PassPhrase' => 'Cecfybyj915',
         'payment_units' => 'USD',
+        'max_amount_output' => '300',//максимальная сумма для вывода
     ),
 );

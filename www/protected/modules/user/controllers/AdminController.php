@@ -64,8 +64,19 @@ class AdminController extends Controller
     public function actionView()
     {
         $model = $this->loadModel();
+
+        $deposits = Deposit::model()->findAllByAttributes(array('user_id' => $model->id));
+
+        $criteria = new CDbCriteria();
+        $criteria->addColumnCondition(array('user_id' => $model->id));
+        $criteria->limit = 10;
+        $criteria->order = 'id DESC';
+        $userTransaction = UserTransaction::model()->findAll($criteria);
+
         $this->render('view',array(
             'model'=>$model,
+            'deposits'=>$deposits,
+            'userTransaction'=>$userTransaction,
         ));
     }
 
