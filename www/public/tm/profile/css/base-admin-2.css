@@ -95,6 +95,9 @@ h6 {
 .clear {
   clear: both;
 }
+.modal-window {
+    text-align: center;
+}
 /*------------------------------------------------------------------
 [ Navbar / .navbar ]
 */

@@ -6,20 +6,22 @@ $this->beginWidget(
             'title'    => 'Пополнить счет',
             'autoOpen' => false,
             'modal'    => 'true',
-            'width'    => '200',
+            'width'    => '300',
             'height'   => 'auto',
             'resizable'=> false,
         ),
     )
 ); ?>
 
-    <div class="form">
         <?php $form=$this->beginWidget('CActiveForm', array(
             'id'=>'deposit-form',
             'action' => 'https://perfectmoney.is/api/step1.asp',
             'enableClientValidation'=>true,
             'clientOptions'=>array(
                 'validateOnSubmit'=>true,
+            ),
+            'htmlOptions' => array(
+                'class' => 'modal-window'
             ),
         )); ?>
 
@@ -34,10 +36,10 @@ $this->beginWidget(
         <?php echo $form->hiddenField($deposit,'PAYMENT_URL_METHOD', array('name' => 'PAYMENT_URL_METHOD')); ?>
         <?php echo $form->hiddenField($deposit,'NOPAYMENT_URL', array('name' => 'NOPAYMENT_URL')); ?>
 
-        <div class="row buttons">
-            <?php echo CHtml::submitButton('Пополнить счет', array('name', 'PAYMENT_METHOD')); ?>
-        </div>
+        <br />
+        <?php echo CHtml::submitButton('Пополнить счет', array('class'=>'btn btn-large btn-primary','name' => 'PAYMENT_METHOD')); ?>
+
 
         <?php $this->endWidget(); ?>
-    </div>
+
 <?php $this->endWidget('zii.widgets.jui.CJuiDialog');?>
