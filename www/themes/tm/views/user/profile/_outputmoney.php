@@ -13,7 +13,7 @@ $this->beginWidget(
     )
 ); ?>
 
-    <div class="form">
+
         <?php $form=$this->beginWidget('CActiveForm', array(
             'id'=>'output-form',
             'action' => $this->createAbsoluteUrl('/user/profile/outputmoney'),
@@ -21,20 +21,20 @@ $this->beginWidget(
             'clientOptions'=>array(
                 'validateOnSubmit'=>true,
             ),
+            'htmlOptions' => array(
+                'class' => 'modal-window'
+            ),
         )); ?>
 
         <?php echo 'Сумма' ?>
         <?php echo CHtml::textField('output_money', (float)$model->amount); ?>
-        <div class="row">
-            <?php echo $form->labelEx($model,'secret'); ?>
-            <?php echo $form->textField($model,'secret', array('value' => '')); ?>
-            <?php echo $form->error($model,'secret'); ?>
-        </div>
+        <?php echo $form->labelEx($model,'secret'); ?>
+        <?php echo $form->textField($model,'secret', array('value' => '')); ?>
+        <?php echo $form->error($model,'secret'); ?>
 
-        <div class="row buttons">
-            <?php echo CHtml::submitButton('Вывести'); ?>
-        </div>
+        <br />
+        <?php echo CHtml::submitButton('Вывести',array('class'=>'btn btn-large btn-primary')); ?>
 
         <?php $this->endWidget(); ?>
-    </div>
+
 <?php $this->endWidget('zii.widgets.jui.CJuiDialog');?>
