@@ -82,6 +82,15 @@ class SiteController extends Controller
 		$this->render('contact',array('model'=>$model));
 	}
 
+    public function actionFaq()
+    {
+        $this->render('pages/faq');
+    }
+
+    public function actionReferral()
+    {
+        $this->render('pages/referral');
+    }
 	/**
 	 * Displays the login page
      * @param string $email

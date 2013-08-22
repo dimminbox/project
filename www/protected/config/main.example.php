@@ -5,10 +5,11 @@
 
 // This is the main Web application configuration. Any writable
 // CWebApplication properties can be configured here.
+Yii::setPathOfAlias('bootstrap', dirname(__FILE__).'/../extensions/bootstrap');
 return array(
     'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
     'name'=>'Доверительное управление',
-    'theme' => 'default',
+    'theme' => 'tm',
     'language' => 'ru',
     //'homeUrl'=>array('site/index'),
 
@@ -18,6 +19,7 @@ return array(
     // autoloading model and component classes
     'import'=>array(
         'ext.imperavi-redactor-widget.*',
+        'ext.bootstrap.*',
         'application.models.*',
         'application.components.*',
         'application.modules.user.models.*',
@@ -35,6 +37,9 @@ return array(
             'password'=>'gii',
             // If removed, Gii defaults to localhost only. Edit carefully to taste.
             'ipFilters'=>array('127.0.0.1','::1'),
+            'generatorPaths'=>array(
+                'bootstrap.gii',
+            )
         ),
 
         'user'=>array(
@@ -44,7 +49,7 @@ return array(
             # encrypting method (php hash function)
             'hash' => 'md5',
             # send activation email
-            'sendActivationMail' => false,
+            'sendActivationMail' => true,
             # allow access for non-activated users
             'loginNotActiv' => false,
             # activate user on registration (only sendActivationMail = false)
@@ -56,11 +61,11 @@ return array(
             # recovery password path
             'recoveryUrl' => array('/user/recovery'),
             # login form path
-            'loginUrl' => array('/user/login'),
+            'loginUrl' => array('/login'),
             # page after login
-            'returnUrl' => array('/user/profile'),
+            'returnUrl' => array('/profile'),
             # page after logout
-            'returnLogoutUrl' => array('/user/login'),
+            'returnLogoutUrl' => array('/login'),
         ),
         'rights'=>array(
             'superuserName'=>'Admin', // Name of the role with super user privileges.
@@ -104,7 +109,9 @@ return array(
             'showScriptName' => false,
             'rules'=> include(__DIR__ . DIRECTORY_SEPARATOR . 'route.php'),
         ),
-
+        'bootstrap'=>array(
+            'class'=>'bootstrap.components.Bootstrap',
+        ),
         /* 'user'=>array(
              // enable cookie-based authentication
              'class' => 'WebUser',
@@ -123,7 +130,7 @@ return array(
             'connectionString' => 'mysql:host=localhost;dbname=project',
             'emulatePrepare' => true,
             'username' => 'root',
-            'password' => '',
+            'password' => '82zczrnhw',
             'charset' => 'utf8',
             'tablePrefix' => 'hyip_',
         ),
