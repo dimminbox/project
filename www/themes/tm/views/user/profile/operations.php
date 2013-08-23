@@ -32,6 +32,9 @@ $this->menu=array(
 
         <?php endforeach; ?>
     </table>
+<div class="pagination">
 <?php $this->widget('CLinkPager', array(
     'pages' => $pages,
+    'cssFile'=>false
 ))?>
+</div>
