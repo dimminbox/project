@@ -36,9 +36,12 @@
                 <i class="icon-cog"></i>
             </a>
 
-            <a class="brand" href="index.html">
+            <a class="brand" href="<?php echo Yii::app()->createAbsoluteUrl('/site/index') ?>">
                 Логотип
             </a>
+            <div class="stat stat-time">
+                <span class="stat-value"><?php echo date('H:i:s')?></span>
+            </div>
 
 
 
@@ -66,7 +69,7 @@
                 <ul class="mainnav">
 
                     <li class="active">
-                        <a href="index.html">
+                        <a href="/profile">
                             <i class="icon-home"></i>
                             <span>Home</span>
                         </a>
@@ -85,6 +88,8 @@
                             <li><a href="http://jumpstartuidemo.com/themes/base/jqueryui.html">jQuery UI</a></li>
                             <li><a href="http://jumpstartuidemo.com/themes/base/charts.html">Charts</a></li>
                             <li><a href="http://jumpstartuidemo.com/themes/base/popups.html">Popups/Notifications</a></li>
+                            <li><a href="/user/profile/operations">Все операции</a></li>
+                            <li><a href="/user/profile/deposits">Все депозиты</a></li>
                         </ul>
                     </li>
 

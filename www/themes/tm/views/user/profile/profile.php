@@ -25,7 +25,6 @@ $this->menu=array(
         <?php echo Yii::app()->user->getFlash('profileMessageFail'); ?>
     </div>
 <?php endif;?>
-<h2><?php echo $user->username; ?></h2>
 
 <?php
 
@@ -78,7 +77,7 @@ if ( $user->deposit != null ) {
 }
 ?>
 
-<p>
+<!--p>
 <strong>Ваш баланс:</strong>
 <?php echo (float)$user->amount; ?> бубликов.<br />
 <?php echo CHtml::link('Пополнить счет', '#', array('onclick' => '$("#recharge_amount").dialog("open"); return false;',)); ?><br />
@@ -91,20 +90,21 @@ if ( $user->deposit != null ) {
 <strong>Всего заработано:</strong> <?php echo (float)$user->earningsAmount; ?><br />
 <strong>Всего выведено:</strong> <?php echo (float)abs($user->outputAmount); ?><br />
 <strong>Партнерская программа:</strong> <?php echo (float)$user->ReferralAmount; ?><br />
-</p>
+</p-->
 
-<p>
+<!--p>
     <?php echo CHtml::link('Инвестировать', '#', array('onclick' => '$("#investment").dialog("open"); return false;',)); ?>
     <br />
-    <?php $this->renderPartial('_investment', array('investment' => $investment, 'model' => $user)) ?>
+
 </p>
 
 <p>
     <?php echo CHtml::link('Перевести средства', '#', array('onclick' => '$("#transfer").dialog("open"); return false;',)); ?>
     <br />
-    <?php $this->renderPartial('_transfer', array('transfer' => $transfer,'model' => $user)) ?>
-</p>
 
+</p-->
+<?php $this->renderPartial('_investment', array('investment' => $investment, 'model' => $user)) ?>
+<?php $this->renderPartial('_transfer', array('transfer' => $transfer,'model' => $user)) ?>
 <!-- Левый блок -->
 <div class="span6">
     <!-- 1 виджет -->
@@ -226,6 +226,61 @@ if ( $user->deposit != null ) {
 <!-- Правый блок -->
 <div class="span6">
 
+<?php if ( $chart != null ) :?>
+<div class="widget stacked">
+
+    <div class="widget-header">
+        <i class="icon-signal"></i>
+        <h3>График прибыли за <?php echo  User::model()->declension(count($chart['days']), count($chart['days']) . ' день', 'последние ' . count($chart['days']) . ' дня', 'последние ' . count($chart['days']) . ' дней')?> </h3>
+    </div> <!-- /widget-header -->
+
+    <div class="widget-content">
+        <?php
+        $datasets = array();
+        $chartsTitle ='';
+
+        if ( isset($chart['deposits']) ){
+            $strokeColor = 'green';
+            $datasets[] = array(
+                "fillColor" => "transparent",
+                "strokeColor" => $strokeColor,
+                "pointColor" => "rgba(220,220,220,1)",
+                "pointStrokeColor" => $strokeColor,
+                "data" => $chart['deposits'],
+            );
+            $chartsTitle .= '<span style="color:' . $strokeColor .'">Депозиты</span><br />';
+        }
+        if ( isset($chart['referral']) ){
+            $strokeColor = 'blue';
+            $datasets[] = array(
+                "fillColor" => "transparent",
+                "strokeColor" => $strokeColor,
+                "pointColor" => "rgba(220,220,220,1)",
+                "pointStrokeColor" => $strokeColor,
+                "data" => $chart['referral'],
+            );
+            $chartsTitle .= '<span style="color:' . $strokeColor .'">Реферальная программа</span><br />';
+        }
+
+        $this->widget(
+            'chartjs.widgets.ChLine',
+            array(
+                'width' => 540,
+                'height' => 300,
+                'htmlOptions' => array(),
+                'labels' => $chart['days'],
+                'datasets' => $datasets,
+                'options' => array()
+            )
+        );
+
+        echo $chartsTitle;
+        ?>
+
+    </div>
+
+</div>
+<?php endif; ?>
 
     <div class="widget stacked">
 
@@ -284,48 +339,6 @@ if ( $user->deposit != null ) {
 
 
 
-
-    <div class="widget stacked">
-
-        <div class="widget-header">
-            <i class="icon-signal"></i>
-            <h3>Chart</h3>
-        </div> <!-- /widget-header -->
-        <?php
-        $this->widget(
-            'chartjs.widgets.ChPie',
-            array(
-                'width' => 600,
-                'height' => 300,
-                'htmlOptions' => array(),
-                'drawLabels' => true,
-                'datasets' => array(
-                    array(
-                        "value" => 50,
-                        "color" => "rgba(220,30, 70,1)",
-                        "label" => "Hunde"
-                    ),
-                    array(
-                        "value" => 25,
-                        "color" => "rgba(66,66,66,1)",
-                        "label" => "Katzen"
-                    ),
-                    array(
-                        "value" => 40,
-                        "color" => "rgba(100,100,220,1)",
-                        "label" => "Vögel"
-                    ),
-                    array(
-                        "value" => 15,
-                        "color" => "rgba(20,120,120,1)",
-                        "label" => "Mäuse"
-                    )
-                ),
-                'options' => array()
-            )
-        );
-        ?>
-    </div> <!-- /widget -->
 
 
 

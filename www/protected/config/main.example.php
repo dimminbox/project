@@ -5,7 +5,9 @@
 
 // This is the main Web application configuration. Any writable
 // CWebApplication properties can be configured here.
+Yii::setPathOfAlias('chartjs', dirname(__FILE__).'/../extensions/yii-chartjs');
 Yii::setPathOfAlias('bootstrap', dirname(__FILE__).'/../extensions/bootstrap');
+
 return array(
     'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
     'name'=>'Доверительное управление',
@@ -14,12 +16,19 @@ return array(
     //'homeUrl'=>array('site/index'),
 
     // preloading 'log' component
-    'preload'=>array('log'),
-
+    'preload' => array(
+        'log',
+        'chartjs'
+    ),
+    /*
+    'aliases' => array(
+        'chartjs' => 'ext.chartjs'
+    ),*/
     // autoloading model and component classes
     'import'=>array(
         'ext.imperavi-redactor-widget.*',
         'ext.bootstrap.*',
+        'ext.yii-chartjs.*',
         'application.models.*',
         'application.components.*',
         'application.modules.user.models.*',
@@ -112,6 +121,7 @@ return array(
         'bootstrap'=>array(
             'class'=>'bootstrap.components.Bootstrap',
         ),
+        'chartjs' => array('class' => 'chartjs.components.ChartJs'),
         /* 'user'=>array(
              // enable cookie-based authentication
              'class' => 'WebUser',

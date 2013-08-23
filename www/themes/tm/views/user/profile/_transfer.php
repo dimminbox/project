@@ -12,7 +12,7 @@ $this->beginWidget(
         ),
     )
 ); ?>
-    <div class="form">
+
         <?php $form=$this->beginWidget('CActiveForm', array(
             'id'=>'transfer-form',
             'action' => $this->createAbsoluteUrl('/user/profile/transfer'),
@@ -20,26 +20,27 @@ $this->beginWidget(
             'clientOptions'=>array(
                 'validateOnSubmit'=>true,
             ),
+            'htmlOptions' => array(
+                'class' => 'modal-window'
+            ),
         )); ?>
-        <div class="row">
+
             <?php echo $form->labelEx($model,'Кошелек'); ?>
             <?php echo $form->textField($model,'internal_purse', array('value' => '')); ?>
             <?php echo $form->error($model,'internal_purse'); ?>
-        </div>
-        <div class="row">
+
             <?php echo $form->labelEx($model,'secret'); ?>
             <?php echo $form->textField($model,'secret', array('value' => '')); ?>
             <?php echo $form->error($model,'secret'); ?>
-        </div>
-        <div class="row">
+
             <?php echo $form->labelEx($transfer,'Сумма'); ?>
             <?php echo $form->textField($transfer,'amount'); ?>
             <?php echo $form->error($transfer,'amount'); ?>
-        </div>
-        <div class="row buttons">
-            <?php echo CHtml::submitButton('Перевести'); ?>
-        </div>
+
+             <br />
+            <?php echo CHtml::submitButton('Перевести',array('class'=>'btn btn-large btn-primary')); ?>
+
 
         <?php $this->endWidget(); ?>
-    </div>
+
 <?php $this->endWidget('zii.widgets.jui.CJuiDialog');?>

@@ -17,8 +17,73 @@ class ProfileController extends Controller
     {
         $user = $this->loadUser();
 
+        //Формирование массива данных для графика
+        $chart = null;
+
+        if ( isset($user->deposit) || isset($user->refs) ) {
+
+            $chartDepositData = Yii::app()->db->createCommand()
+                ->select('time, SUM(amount) as amount, amount_after')
+                ->from(UserTransaction::model()->tableName())
+                ->group('DATE(time)')
+                ->order('time ASC')
+                ->where('user_id=' . Yii::app()->user->id)
+                ->where('amount_type=' . UserTransaction::AMOUNT_TYPE_EARNINGS)
+                ->limit('30')
+                ->queryAll();
+
+
+            $chartReferralData = Yii::app()->db->createCommand()
+                ->select('time, SUM(amount) as amount, amount_after')
+                ->from(UserTransaction::model()->tableName())
+                ->group('DATE(time)')
+                ->order('time ASC')
+                ->where('user_id=' . Yii::app()->user->id)
+                ->where('amount_type=' . UserTransaction::AMOUNT_TYPE_REFERRAL)
+                ->limit('30')
+                ->queryAll();
+
+            $countDeposit = count($chartDepositData);
+            $countReferral = count($chartReferralData);
+
+            if ( $countDeposit >= $countReferral) {
+
+                $chart = array();
+                $amount = 0;
+                foreach( $chartDepositData as $data ) {
+
+                    $chart['days'][] = date('d.m', strtotime($data['time']));
+                    $amount += (float)$data['amount'];
+                    $chart['deposits'][] = $amount;
+                }
+
+                if ( $countReferral != 0 ) {
+                    $i = 0;
+
+                    foreach( $chartReferralData as $data ) {
+                        $i++;
+                        $amount += (float)$data['amount'];
+                        $chart['referral'][] = $amount;
+
+                    }
+
+                    if ( $countDeposit > $i ) {
+
+                        while ( $i < $countDeposit ) {
+                            $i++;
+                            array_unshift($chart['referral'],0);
+                        }
+                    }
+                }
+
+            } else {
+
+            }
+
+        }
 
         $deposit = new DepositForm();
+
         $deposit->PAYEE_ACCOUNT = Yii::app()->params['payee_account'];
         $deposit->PAYEE_NAME = 'project';
         $deposit->PAYMENT_ID = uniqid(Yii::app()->user->id + time());
@@ -39,6 +104,7 @@ class ProfileController extends Controller
             'deposit' => $deposit,
             'investment' => $investment,
             'transfer'=>$transfer,
+            'chart' => $chart,
         ));
     }
 
@@ -451,7 +517,7 @@ class ProfileController extends Controller
         $models = UserTransaction::model()->findAll($criteria);
         $this->render('operations', array(
             'models' => $models,
-            'pages' => $pages
+            'pages' => $pages,
         ));
     }
     //Список депозитов пользователя
