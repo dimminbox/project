@@ -291,11 +291,40 @@ if ( $user->deposit != null ) {
             <i class="icon-signal"></i>
             <h3>Chart</h3>
         </div> <!-- /widget-header -->
-
-        <div class="widget-content">
-            <div id="area-chart" class="chart-holder" style="padding: 0px; position: relative;"><canvas class="base" width="538" height="250"></canvas><canvas class="overlay" width="538" height="250" style="position: absolute; left: 0px; top: 0px;"></canvas><div class="tickLabels" style="font-size:smaller"><div class="xAxis x1Axis" style="color:#545454"><div class="tickLabel" style="position:absolute;text-align:center;left:1px;top:228px;width:48px">0</div><div class="tickLabel" style="position:absolute;text-align:center;left:52px;top:228px;width:48px">10</div><div class="tickLabel" style="position:absolute;text-align:center;left:103px;top:228px;width:48px">20</div><div class="tickLabel" style="position:absolute;text-align:center;left:154px;top:228px;width:48px">30</div><div class="tickLabel" style="position:absolute;text-align:center;left:205px;top:228px;width:48px">40</div><div class="tickLabel" style="position:absolute;text-align:center;left:256px;top:228px;width:48px">50</div><div class="tickLabel" style="position:absolute;text-align:center;left:306px;top:228px;width:48px">60</div><div class="tickLabel" style="position:absolute;text-align:center;left:357px;top:228px;width:48px">70</div><div class="tickLabel" style="position:absolute;text-align:center;left:408px;top:228px;width:48px">80</div><div class="tickLabel" style="position:absolute;text-align:center;left:459px;top:228px;width:48px">90</div><div class="tickLabel" style="position:absolute;text-align:center;left:510px;top:228px;width:48px">100</div></div><div class="yAxis y1Axis" style="color:#545454"><div class="tickLabel" style="position:absolute;text-align:right;top:210px;right:520px;width:18px">0</div><div class="tickLabel" style="position:absolute;text-align:right;top:167px;right:520px;width:18px">20</div><div class="tickLabel" style="position:absolute;text-align:right;top:123px;right:520px;width:18px">40</div><div class="tickLabel" style="position:absolute;text-align:right;top:80px;right:520px;width:18px">60</div><div class="tickLabel" style="position:absolute;text-align:right;top:36px;right:520px;width:18px">80</div><div class="tickLabel" style="position:absolute;text-align:right;top:-7px;right:520px;width:18px">100</div></div></div></div>
-        </div> <!-- /widget-content -->
-
+        <?php
+        $this->widget(
+            'chartjs.widgets.ChPie',
+            array(
+                'width' => 600,
+                'height' => 300,
+                'htmlOptions' => array(),
+                'drawLabels' => true,
+                'datasets' => array(
+                    array(
+                        "value" => 50,
+                        "color" => "rgba(220,30, 70,1)",
+                        "label" => "Hunde"
+                    ),
+                    array(
+                        "value" => 25,
+                        "color" => "rgba(66,66,66,1)",
+                        "label" => "Katzen"
+                    ),
+                    array(
+                        "value" => 40,
+                        "color" => "rgba(100,100,220,1)",
+                        "label" => "Vögel"
+                    ),
+                    array(
+                        "value" => 15,
+                        "color" => "rgba(20,120,120,1)",
+                        "label" => "Mäuse"
+                    )
+                ),
+                'options' => array()
+            )
+        );
+        ?>
     </div> <!-- /widget -->
 
 
