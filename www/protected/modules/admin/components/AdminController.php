@@ -1,6 +1,7 @@
 <?php
 class AdminController extends RController
 {
+    public $active;
 
     public $layout='//layouts/admin';
 

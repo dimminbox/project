@@ -4,9 +4,12 @@ class DefaultController extends AdminController
 {
     private $_model;
 
+    public $active = 'index';
+
 	public function actionIndex()
 	{
         $messages = Message::model()->findAllByAttributes(array('user_id' => Yii::app()->user->id));
+
 
 		$this->render('index', array(
             'messages' => $messages,

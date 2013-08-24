@@ -11,6 +11,8 @@ class DepositController extends AdminController
 	/**
 	 * @return array action filters
 	 */
+    public $active = 'deposit';
+
 	public function filters()
 	{
 		return array(

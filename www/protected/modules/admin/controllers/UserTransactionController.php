@@ -16,6 +16,8 @@ class UserTransactionController extends AdminController
 	 * Displays a particular model.
 	 * @param integer $id the ID of the model to be displayed
 	 */
+    public $active = 'userTransaction';
+
 	public function actionView($id)
 	{
 		$this->render('view',array(

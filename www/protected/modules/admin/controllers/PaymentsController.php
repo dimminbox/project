@@ -2,6 +2,8 @@
 
 class PaymentsController extends AdminController
 {
+    public $active = 'payments';
+
     public function actionIndex()
     {
 

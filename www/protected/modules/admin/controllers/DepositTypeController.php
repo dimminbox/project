@@ -3,6 +3,8 @@
 class DepositTypeController extends AdminController
 {
 
+    public $active = 'deposit';
+
 	public function actionView($id)
 	{
 		$this->render('view',array(

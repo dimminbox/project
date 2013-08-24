@@ -6,6 +6,7 @@ class ProfileFieldController extends Controller
 	/**
 	 * @var CActiveRecord the currently loaded data model instance.
 	 */
+    public $active = 'setup';
 	private $_model;
 	private static $_widgets = array();
 	public $defaultAction = 'admin';

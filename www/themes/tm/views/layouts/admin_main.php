@@ -67,20 +67,20 @@
             <div class="subnav-collapse collapse">
                 <ul class="mainnav">
 
-                    <li class="active">
+                    <li <?php echo ( $this->active == 'index') ? 'class="active"' : ''?>>
                         <a href="/admin">
                             <i class="icon-home"></i>
                             <span>Главная</span>
                         </a>
                     </li>
-                    <li>
+                    <li <?php echo ( $this->active == 'payments') ? 'class="active"' : ''?>>
                         <a href="/admin/payments">
                             <i class="icon-spinner"></i>
                             <span>Выплаты</span>
                         </a>
                     </li>
 
-                    <li class="dropdown">
+                    <li class="dropdown <?php echo ( $this->active == 'deposit') ? 'active' : ''?>">
                         <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
                             <i class="icon-signal"></i>
                             <span>Депозиты</span>
@@ -90,7 +90,7 @@
                         <ul class="dropdown-menu">
 
                             <li class="dropdown-submenu">
-                                <a tabindex="-1" href="javascript:;">Типы депозитов</a>
+                                <a tabindex="-1" href="/admin/depositType">Типы депозитов</a>
                                 <ul class="dropdown-menu">
                                     <li><a tabindex="-1" href="/admin/depositType">Список депозитов</a></li>
                                     <li><a tabindex="-1" href="/admin/depositType/create">Добавить</a></li>
@@ -105,7 +105,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="dropdown">
+                    <li class="dropdown <?php echo ( $this->active == 'user') ? 'active' : ''?>">
                         <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
                             <i class="icon-user"></i>
                             <span>Пользователи</span>
@@ -117,14 +117,14 @@
                             <li><a href="/user/admin/admin">Управление пользователями</a></li>
                         </ul>
                     </li>
-                    <li>
+                    <li  <?php echo ( $this->active == 'userTransaction') ? 'class="active"' : ''?>>
                         <a href="/admin/userTransaction">
                             <i class="icon-exchange"></i>
                             <span>Транзакции</span>
                         </a>
                     </li>
 
-                    <li class="dropdown">
+                    <li class="dropdown <?php echo ( $this->active == 'setup') ? 'active' : ''?>">
                         <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
                             <i class="icon-cog"></i>
                             <span>Настройки</span>
@@ -132,17 +132,17 @@
                         </a>
 
                         <ul class="dropdown-menu">
-                            <li><a href="/rights">Права доступа</a></li>
                             <li class="dropdown-submenu">
                                 <a tabindex="-1" href="javascript:;">Пользователи</a>
                                 <ul class="dropdown-menu">
                                     <li><a tabindex="-1" href="/user/profileField/admin">Настройка полей</a></li>
                                 </ul>
                             </li>
+                            <li><a href="/rights">Права доступа</a></li>
                         </ul>
                     </li>
 
-                    <li class="dropdown">
+                    <li class="dropdown <?php echo ( $this->active == 'pages') ? 'active' : ''?>">
                         <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
                             <i class="icon-copy"></i>
                             <span>Страницы</span>

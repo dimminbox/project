@@ -2,6 +2,7 @@
 
 class AdminController extends Controller
 {
+    public $active = 'user';
     public $defaultAction = 'admin';
     public $layout='//layouts/admin';
 
