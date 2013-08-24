@@ -27,7 +27,7 @@ a.color-1:hover {text-decoration:underline;}
 .color-3 { color:#a83715; font-size:30px; line-height:36px; letter-spacing:-1px;}
 
 h2 { font-size:40px; line-height:48px; color:#1e1e1e; font-weight:normal; letter-spacing:-2px;}
-h3 { font-size:53px; line-height:65px; color:#1e1e1e; font-weight:normal; letter-spacing:-2px;}
+h3 { font-size:24px; line-height:32px; color:#1e1e1e; font-weight:normal; letter-spacing:-2px;}
 
 ul {margin:0; padding:0;list-style-image:none;}
 ul.list-1 li {padding:5px 0 5px 11px; line-height:25px; background:url(../images/marker-1.gif) 0 16px no-repeat;}

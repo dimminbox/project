@@ -3,12 +3,12 @@
 /* @var $dataProvider CActiveDataProvider */
 
 $this->breadcrumbs=array(
-	'News',
+	'Новости',
 );
 
 ?>
 
-<h1>News</h1>
+<h2 class='h2'>Все новости</h2>
 
 <?php $this->widget('zii.widgets.CListView', array(
 	'dataProvider'=>$dataProvider,
