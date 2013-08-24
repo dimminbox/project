@@ -75,14 +75,14 @@
                     </li>
                     <li>
                         <a href="/admin/payments">
-                            <i class=""></i>
+                            <i class="icon-download-alt"></i>
                             <span>Выплаты</span>
                         </a>
                     </li>
 
                     <li class="dropdown">
                         <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
-                            <i class=""></i>
+                            <i class="icon-signal"></i>
                             <span>Депозиты</span>
                             <b class="caret"></b>
                         </a>
@@ -107,7 +107,7 @@
                     </li>
                     <li class="dropdown">
                         <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
-                            <i class=""></i>
+                            <i class="icon-user"></i>
                             <span>Пользователи</span>
                             <b class="caret"></b>
                         </a>
@@ -119,14 +119,14 @@
                     </li>
                     <li>
                         <a href="/admin/userTransaction">
-                            <i class=""></i>
+                            <i class="icon-refresh"></i>
                             <span>Транзакции</span>
                         </a>
                     </li>
 
                     <li class="dropdown">
                         <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="icon-th"></i>
+                            <i class="icon-cog"></i>
                             <span>Настройки</span>
                             <b class="caret"></b>
                         </a>
