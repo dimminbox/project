@@ -80,17 +80,43 @@
                             <span>Выплаты</span>
                         </a>
                     </li>
-                    <li>
-                        <a href="/admin/deposit">
+
+                    <li class="dropdown">
+                        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
                             <i class=""></i>
                             <span>Депозиты</span>
+                            <b class="caret"></b>
                         </a>
+
+                        <ul class="dropdown-menu">
+
+                            <li class="dropdown-submenu">
+                                <a tabindex="-1" href="javascript:;">Типы депозитов</a>
+                                <ul class="dropdown-menu">
+                                    <li><a tabindex="-1" href="/admin/depositType">Список депозитов</a></li>
+                                    <li><a tabindex="-1" href="/admin/depositType/create">Добавить</a></li>
+                                    <li><a tabindex="-1" href="/admin/depositType/admin">Редактировать</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown-submenu">
+                                <a tabindex="-1" href="/admin/deposit">Депозиты польз.</a>
+                                <ul class="dropdown-menu">
+                                    <li><a tabindex="-1" href="/admin/deposit/admin">Редактировать депозиты</a></li>
+                                </ul>
+                            </li>
+                        </ul>
                     </li>
-                    <li>
-                        <a href="/user/admin">
+                    <li class="dropdown">
+                        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
                             <i class=""></i>
                             <span>Пользователи</span>
+                            <b class="caret"></b>
                         </a>
+
+                        <ul class="dropdown-menu">
+                            <li><a href="/user/admin/create">Добавить пользователя</a></li>
+                            <li><a href="/user/admin/admin">Управление пользователями</a></li>
+                        </ul>
                     </li>
                     <li>
                         <a href="/admin/userTransaction">
@@ -108,7 +134,12 @@
 
                         <ul class="dropdown-menu">
                             <li><a href="/rights">Права доступа</a></li>
-
+                            <li class="dropdown-submenu">
+                                <a tabindex="-1" href="javascript:;">Пользователи</a>
+                                <ul class="dropdown-menu">
+                                    <li><a tabindex="-1" href="/user/profileField/admin">Настройка полей</a></li>
+                                </ul>
+                            </li>
                         </ul>
                     </li>
 
@@ -120,32 +151,21 @@
                         </a>
 
                         <ul class="dropdown-menu">
-                            <li><a href="/admin/news">Новости</a></li>
-                        </ul>
-                    </li>
-
-                    <li class="dropdown">
-                        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="icon-external-link"></i>
-                            <span>Выход</span>
-                            <b class="caret"></b>
-                        </a>
-
-                        <ul class="dropdown-menu">
-                            <li><a href="/logout">Выход</a></li>
-                            <li><a href="http://jumpstartuidemo.com/themes/base/signup.html">Signup</a></li>
-                            <li><a href="http://jumpstartuidemo.com/themes/base/error.html">Error</a></li>
                             <li class="dropdown-submenu">
-                                <a tabindex="-1" href="http://jumpstartuidemo.com/themes/base/index.html#">Dropdown menu</a>
+                                <a tabindex="-1" href="/admin/news">Новости</a>
                                 <ul class="dropdown-menu">
-                                    <li><a tabindex="-1" href="http://jumpstartuidemo.com/themes/base/index.html#">Second level link</a></li>
-                                    <li><a tabindex="-1" href="http://jumpstartuidemo.com/themes/base/index.html#">Second level link</a></li>
-                                    <li><a tabindex="-1" href="http://jumpstartuidemo.com/themes/base/index.html#">Second level link</a></li>
+                                    <li><a tabindex="-1" href="/admin/news/create">Добавить</a></li>
+                                    <li><a tabindex="-1" href="/admin/news/admin">Редактировать</a></li>
                                 </ul>
                             </li>
                         </ul>
                     </li>
-
+                    <li>
+                        <a href="/logout" onclick="javascript: return confirm('Выйти?');">
+                            <i class="icon-external-link"></i>
+                            <span>Выход</span>
+                        </a>
+                    </li>
                 </ul>
             </div> <!-- /.subnav-collapse -->
 
