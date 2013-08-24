@@ -75,7 +75,7 @@
                     </li>
                     <li>
                         <a href="/admin/payments">
-                            <i class="icon-download-alt"></i>
+                            <i class="icon-spinner"></i>
                             <span>Выплаты</span>
                         </a>
                     </li>
@@ -119,7 +119,7 @@
                     </li>
                     <li>
                         <a href="/admin/userTransaction">
-                            <i class="icon-refresh"></i>
+                            <i class="icon-exchange"></i>
                             <span>Транзакции</span>
                         </a>
                     </li>
