@@ -83,40 +83,39 @@
                         </li>
                     <?php endif; ?>
                     <li class="dropdown">
-                        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
+                        <a href="/user/profile/operations">
                             <i class="icon-th"></i>
-                            <span>Components</span>
-                            <b class="caret"></b>
+                            <span>Операции</span>
                         </a>
-
-                        <ul class="dropdown-menu">
-                            <li><a href="http://jumpstartuidemo.com/themes/base/elements.html">Elements</a></li>
-                            <li><a href="http://jumpstartuidemo.com/themes/base/validation.html">Validation</a></li>
-                            <li><a href="http://jumpstartuidemo.com/themes/base/jqueryui.html">jQuery UI</a></li>
-                            <li><a href="http://jumpstartuidemo.com/themes/base/charts.html">Charts</a></li>
-                            <li><a href="http://jumpstartuidemo.com/themes/base/popups.html">Popups/Notifications</a></li>
-                            <li><a href="/user/profile/operations">Все операции</a></li>
-                            <li><a href="/user/profile/deposits">Все депозиты</a></li>
-                        </ul>
                     </li>
 
                     <li class="dropdown">
-                        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
+                        <a href="/user/profile/deposits" >
                             <i class="icon-copy"></i>
-                            <span>Sample Pages</span>
-                            <b class="caret"></b>
+                            <span>Депозиты</span>
                         </a>
-
-                        <ul class="dropdown-menu">
-                            <li><a href="http://jumpstartuidemo.com/themes/base/pricing.html">Pricing Plans</a></li>
-                            <li><a href="http://jumpstartuidemo.com/themes/base/faq.html">FAQ's</a></li>
-                            <li><a href="http://jumpstartuidemo.com/themes/base/gallery.html">Gallery</a></li>
-                            <li><a href="http://jumpstartuidemo.com/themes/base/reports.html">Reports</a></li>
-                            <li><a href="http://jumpstartuidemo.com/themes/base/account.html">User Account</a></li>
-                        </ul>
                     </li>
 
                     <li class="dropdown">
+                        <a href="/user/profile/referral" >
+                            <i class="icon-external-link"></i>
+                            <span>Реферралы</span>
+                        </a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="/user/profile/edit" >
+                            <i class="icon-external-link"></i>
+                            <span>Редактировать профиль</span>
+                        </a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="/user/logout" >
+                            <i class="icon-external-link"></i>
+                            <span>Выход</span>
+                        </a>
+                    </li>
+
+                   <!-- <li class="dropdown">
                         <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
                             <i class="icon-external-link"></i>
                             <span>Extra Pages</span>
@@ -136,7 +135,7 @@
                                 </ul>
                             </li>
                         </ul>
-                    </li>
+                    </li>-->
 
                 </ul>
             </div> <!-- /.subnav-collapse -->
