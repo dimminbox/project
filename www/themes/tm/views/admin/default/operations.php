@@ -1,4 +1,13 @@
-<h1><?php echo "Последние 10 операций профиля " .$model->username ?></h1>
+
+<div class="widget-header">
+    <i class="icon-pencil"></i>
+    <h3><?php echo "Последние 10 операций профиля " .$model->username ?></h3>
+</div> <!-- /widget-header -->
+
+<div class="widget-content">
+
+    <br />
+
 <table>
     <thead>
     <tr><td>№</td><td>Дата</td><td>Сумма до операции</td><td>Приход</td><td>Расход</td><td>Тип операции</td><td>Остаток</td></tr>
@@ -25,3 +34,5 @@
 
     <?php endforeach; ?>
 </table>
+
+</div> <!-- /widget-content -->

@@ -74,7 +74,14 @@
                             <span>Home</span>
                         </a>
                     </li>
-
+                    <?php if ( UserModule::isAdmin() ) :?>
+                        <li>
+                            <a href="/admin">
+                                <i class="icon-star"></i>
+                                <span>Админпанель</span>
+                            </a>
+                        </li>
+                    <?php endif; ?>
                     <li class="dropdown">
                         <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
                             <i class="icon-th"></i>

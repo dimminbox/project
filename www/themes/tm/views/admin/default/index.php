@@ -3,26 +3,19 @@
 /* @var $model User */
 ?>
 
-<?php
-$this->breadcrumbs=array(
-    'Админпанель'
-);
-?>
+<div class="widget-header">
+    <i class="icon-pencil"></i>
+    <h3>Админпанель</h3>
+</div> <!-- /widget-header -->
 
-<?php
-$this->menu=array(
-   // array('label'=>('Потенциальные выплаты'), 'url'=>array('/admin/payments')),
-   // array('label'=>('Управление пользователями'), 'url'=>array('/user/admin')),
-    array('label'=>Yii::t('app','Права доступа'), 'url'=>array('/rights')),
-   // array('label'=>'Транзакции', 'url'=>array('/admin/userTransaction')),
-   // array('label'=>'Депозиты', 'url'=>array('/admin/deposit')),
-    array('label'=>'Новости', 'url'=>array('/admin/news')),
-    //array('label'=>'Сообщения', 'url'=>array('/admin/messages')),
-    //array('label'=>'PerfectMoney', 'url'=>array('/admin/money')),
-);
-?>
+<div class="widget-content">
 
-<h1>Админпанель</h1>
+    <br />
+
+
+</div> <!-- /widget-content -->
+
+
 <?php /*
     if ( $messages != null ) {
         $high = 0;
