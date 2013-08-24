@@ -27,8 +27,8 @@ class ProfileController extends Controller
                 ->from(UserTransaction::model()->tableName())
                 ->group('DATE(time)')
                 ->order('time ASC')
-                ->where('user_id=' . Yii::app()->user->id)
-                ->where('amount_type=' . UserTransaction::AMOUNT_TYPE_EARNINGS)
+                ->where('user_id=' . $user->id . ' AND ' . 'amount_type=' . UserTransaction::AMOUNT_TYPE_EARNINGS)
+                //->where('amount_type=' . UserTransaction::AMOUNT_TYPE_EARNINGS)
                 ->limit('30')
                 ->queryAll();
 
@@ -38,8 +38,8 @@ class ProfileController extends Controller
                 ->from(UserTransaction::model()->tableName())
                 ->group('DATE(time)')
                 ->order('time ASC')
-                ->where('user_id=' . Yii::app()->user->id)
-                ->where('amount_type=' . UserTransaction::AMOUNT_TYPE_REFERRAL)
+                ->where('user_id=' . $user->id . ' AND ' . 'amount_type=' . UserTransaction::AMOUNT_TYPE_REFERRAL)
+                //->where('amount_type=' . UserTransaction::AMOUNT_TYPE_REFERRAL)
                 ->limit('30')
                 ->queryAll();
 
