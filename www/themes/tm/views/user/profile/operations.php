@@ -1,9 +1,10 @@
 <?php
 $this->pageTitle=Yii::app()->name . ' - Полный список операций';
-$this->breadcrumbs=array(
+/*$this->breadcrumbs=array(
     UserModule::t("Profile") => array('/profile'),
     'Полный список операций',
-);
+);*/
+
 $this->menu=array(
 #array('label'=>UserModule::t('List User'), 'url'=>array('/user')),
 #array('label'=>UserModule::t('Investment'), 'url'=>array('/user/deposit')),
@@ -14,6 +15,7 @@ $this->menu=array(
     array('label'=>UserModule::t('Logout'), 'url'=>array('/user/logout')),
 );
 ?>
+<h1>Ваши операции</h1>
 
     <table class="table table-bordered table-striped">
         <thead>

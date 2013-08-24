@@ -1,8 +1,8 @@
 <?php $this->pageTitle=Yii::app()->name . ' - '.UserModule::t("Profile");
-$this->breadcrumbs=array(
+/*$this->breadcrumbs=array(
     UserModule::t("Profile") => array('/profile'),
     UserModule::t("Партнерская программа"),
-);
+);*/
 $this->menu=array(
 #array('label'=>UserModule::t('List User'), 'url'=>array('/user')),
 #array('label'=>UserModule::t('Investment'), 'url'=>array('/user/deposit')),
@@ -12,7 +12,7 @@ $this->menu=array(
     array('label'=>UserModule::t('EditProfile'), 'url'=>array('edit')),
     array('label'=>UserModule::t('Logout'), 'url'=>array('/user/logout')),
 );
-?><h1><?php echo UserModule::t('Your profile'); ?></h1>
+?>
 
 <?php if(Yii::app()->user->hasFlash('profileMessage')): ?>
     <div class="success">
@@ -30,7 +30,7 @@ $this->menu=array(
 <h2>Список рефералов:</h2>
 </p>
 <?php if ( !empty($user->refs) ) :?>
-    <table>
+    <table class="table table-bordered table-striped">
         <thead>
         <tr><td>№</td><td>Имя реферрала</td><td>Сумма депозитов</td><td>Заработанная сумма</td></tr>
         </thead>

@@ -14,6 +14,7 @@ $this->menu=array(
     array('label'=>UserModule::t('Logout'), 'url'=>array('/user/logout')),
 );
 ?>
+<h1>Ваши депозиты</h1>
 <table class="table table-bordered table-striped">
         <thead>
         <tr><td>№</td><td>Сумма</td><td>Срок</td><td>Процент</td><td>Дата создания</td><td>Дата окончания</td><td>Реинвест</td><td>Состояние</td></tr>
