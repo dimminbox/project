@@ -2,6 +2,8 @@
 
 class User extends CActiveRecord
 {
+    public $messageCount;
+
     const STATUS_NOACTIVE=0;
     const STATUS_ACTIVE=1;
     const STATUS_BANNED=-1;
@@ -88,6 +90,7 @@ class User extends CActiveRecord
         $relations['refs'] = array(self::HAS_MANY, 'Referral', 'user_id');
         $relations['deposit'] = array(self::HAS_MANY, 'Deposit', 'user_id');
         $relations['transaction'] = array(self::HAS_MANY, 'UserTransaction', 'user_id');
+        $relations['messages'] = array(self::STAT, 'Message', 'user_id', 'condition'=>'status=' . Message::MESSAGE_STATUS_NEW );
         return $relations;
     }
 
@@ -443,5 +446,18 @@ class User extends CActiveRecord
         if ($n1 > 1 && $n1 < 5) return $form2;
         if ($n1 == 1) return $form1;
         return $form5;
+    }
+    //счетчик сообщений
+    public function countMessages() {
+
+        if ( $this->messageCount != null ) {
+            return $this->messageCount;
+        }
+
+        $messages = Message::model()->findAllByAttributes(array('user_id' => Yii::app()->user->id, 'status'=>Message::MESSAGE_STATUS_NEW));
+
+        $this->messageCount = count($messages);
+
+        return $this->messageCount;
     }
 }

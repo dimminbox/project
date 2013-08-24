@@ -73,6 +73,7 @@
                             <span>Главная</span>
                         </a>
                     </li>
+
                     <li <?php echo ( $this->active == 'payments') ? 'class="active"' : ''?>>
                         <a href="/admin/payments">
                             <i class="icon-spinner"></i>
@@ -124,6 +125,36 @@
                         </a>
                     </li>
 
+                    <li class="dropdown <?php echo ( $this->active == 'pages') ? 'active' : ''?>">
+                        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="icon-copy"></i>
+                            <span>Страницы</span>
+                            <b class="caret"></b>
+                        </a>
+
+                        <ul class="dropdown-menu">
+                            <li class="dropdown-submenu">
+                                <a tabindex="-1" href="/admin/news">Новости</a>
+                                <ul class="dropdown-menu">
+                                    <li><a tabindex="-1" href="/admin/news/create">Добавить</a></li>
+                                    <li><a tabindex="-1" href="/admin/news/admin">Редактировать</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li <?php echo ( $this->active == 'message') ? 'class="active"' : ''?>>
+                        <?php if ( User::model()->countMessages() > 0 ) : ?>
+                        <a href="/admin/messages" style="color:red">
+                            <i class="icon-envelope"></i>
+                            <span>Сообщения(<?php echo User::model()->countMessages(); ?>)</span>
+                        </a>
+                        <?php else :?>
+                            <a href="/admin/messages">
+                                <i class="icon-envelope"></i>
+                                <span>Сообщения(<?php echo User::model()->countMessages(); ?>)</span>
+                            </a>
+                        <?php endif; ?>
+                    </li>
                     <li class="dropdown <?php echo ( $this->active == 'setup') ? 'active' : ''?>">
                         <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
                             <i class="icon-cog"></i>
@@ -142,23 +173,6 @@
                         </ul>
                     </li>
 
-                    <li class="dropdown <?php echo ( $this->active == 'pages') ? 'active' : ''?>">
-                        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="icon-copy"></i>
-                            <span>Страницы</span>
-                            <b class="caret"></b>
-                        </a>
-
-                        <ul class="dropdown-menu">
-                            <li class="dropdown-submenu">
-                                <a tabindex="-1" href="/admin/news">Новости</a>
-                                <ul class="dropdown-menu">
-                                    <li><a tabindex="-1" href="/admin/news/create">Добавить</a></li>
-                                    <li><a tabindex="-1" href="/admin/news/admin">Редактировать</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
                     <li>
                         <a href="/logout" onclick="javascript: return confirm('Выйти?');">
                             <i class="icon-external-link"></i>
