@@ -23,7 +23,7 @@ class ProfileController extends Controller
         if ( isset($user->deposit) || isset($user->refs) ) {
 
             $chartDepositData = Yii::app()->db->createCommand()
-                ->select('time, SUM(amount) as amount, amount_after')
+                ->select('time, SUM(amount) as amount')
                 ->from(UserTransaction::model()->tableName())
                 ->group('DATE(time)')
                 ->order('time ASC')
@@ -34,7 +34,7 @@ class ProfileController extends Controller
 
 
             $chartReferralData = Yii::app()->db->createCommand()
-                ->select('time, SUM(amount) as amount, amount_after')
+                ->select('time, SUM(amount) as amount')
                 ->from(UserTransaction::model()->tableName())
                 ->group('DATE(time)')
                 ->order('time ASC')
@@ -59,7 +59,7 @@ class ProfileController extends Controller
 
                 if ( $countReferral != 0 ) {
                     $i = 0;
-
+                    $amount = 0;
                     foreach( $chartReferralData as $data ) {
                         $i++;
                         $amount += (float)$data['amount'];
@@ -77,7 +77,34 @@ class ProfileController extends Controller
                 }
 
             } else {
+                $chart = array();
+                $amount = 0;
+                foreach( $chartReferralData as $data ) {
 
+                    $chart['days'][] = date('d.m', strtotime($data['time']));
+                    $amount += (float)$data['amount'];
+                    $chart['referral'][] = $amount;
+
+                }
+
+                if ( $countDeposit != 0 ) {
+                    $i = 0;
+                    $amount = 0;
+                    foreach( $chartDepositData as $data ) {
+                        $i++;
+                        $amount += (float)$data['amount'];
+                        $chart['deposits'][] = $amount;
+                    }
+
+
+                    if ( $countReferral > $i ) {
+
+                        while ( $i < $countReferral ) {
+                            $i++;
+                            array_unshift($chart['deposits'],0);
+                        }
+                    }
+                }
             }
 
         }
@@ -119,35 +146,35 @@ class ProfileController extends Controller
     public function actionInvestment() {
         $amount = (float)User::model()->getAmount();
 
-            if ( isset($_POST['Deposit']) ) {
+        if ( isset($_POST['Deposit']) ) {
 
-                $depositType = DepositType::model()->findByPk($_POST['Deposit']['deposit_type_id']);
+            $depositType = DepositType::model()->findByPk($_POST['Deposit']['deposit_type_id']);
 
-                if ( $amount < $_POST['Deposit']['deposit_amount']) {
-                    Yii::app()->user->setFlash('profileMessageFail', 'На вашем счете недостаточно средств');
+            if ( $amount < $_POST['Deposit']['deposit_amount']) {
+                Yii::app()->user->setFlash('profileMessageFail', 'На вашем счете недостаточно средств');
+            } else {
+
+                $transaction = new UserTransaction();
+                $transaction->user_id = Yii::app()->user->id;
+                $transaction->amount = -$_POST['Deposit']['deposit_amount'];
+                $transaction->amount_type = UserTransaction::AMOUNT_TYPE_INVESTMENT;
+                $transaction->reason = 'Инвестирование в депозит';
+
+                if ( $transaction->save() ) {
+                    $deposit = new Deposit();
+                    $deposit->attributes = $_POST['Deposit'];
+                    $deposit->expire = date('Y-m-d H:i:s', $depositType->days * 86400 + time());
+                    $deposit->user_id = Yii::app()->user->id;
+                    $deposit->status = 1;
+                    $deposit->reinvest = 0;
+                    $deposit->save();
+
+                    Yii::app()->user->setFlash('profileMessage', 'Покупка депозита успешно завершена');
                 } else {
-
-                    $transaction = new UserTransaction();
-                    $transaction->user_id = Yii::app()->user->id;
-                    $transaction->amount = -$_POST['Deposit']['deposit_amount'];
-                    $transaction->amount_type = UserTransaction::AMOUNT_TYPE_INVESTMENT;
-                    $transaction->reason = 'Инвестирование в депозит';
-
-                    if ( $transaction->save() ) {
-                        $deposit = new Deposit();
-                        $deposit->attributes = $_POST['Deposit'];
-                        $deposit->expire = date('Y-m-d H:i:s', $depositType->days * 86400 + time());
-                        $deposit->user_id = Yii::app()->user->id;
-                        $deposit->status = 1;
-                        $deposit->reinvest = 0;
-                        $deposit->save();
-
-                        Yii::app()->user->setFlash('profileMessage', 'Покупка депозита успешно завершена');
-                    } else {
-                        Yii::app()->user->setFlash('profileMessageFail', 'Произошла ошибка');
-                    }
+                    Yii::app()->user->setFlash('profileMessageFail', 'Произошла ошибка');
                 }
             }
+        }
 
         $this->redirect($this->createUrl('/user/profile'));
     }
@@ -281,8 +308,8 @@ class ProfileController extends Controller
 
                             $subject = 'Новая заявка на вывод!';
                             $message = 'От пользователя <strong>' . CHtml::link($user->username, $this->createAbsoluteUrl('/user/admin/view/', array('id' => $user->id))) .
-                                        '</strong> Поступила заявка на вывод Perfect Money<br />
-                                        <strong>Сумма вывода:</strong> ' . $_POST['output_money'] . '$<br />
+                                '</strong> Поступила заявка на вывод Perfect Money<br />
+                                <strong>Сумма вывода:</strong> ' . $_POST['output_money'] . '$<br />
                                         <strong>Кошелек Perfect Money:</strong> ' . $user->perfect_purse;
 
                             mail(Yii::app()->params->adminEmail, $subject, $message);
@@ -374,7 +401,7 @@ class ProfileController extends Controller
                                 $outputTransaction->save();
 
 
-                                    Yii::app()->user->setFlash('profileMessage', 'Вывод успешно завершен');
+                                Yii::app()->user->setFlash('profileMessage', 'Вывод успешно завершен');
                             }
                         }
 

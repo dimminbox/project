@@ -6,18 +6,9 @@
     </div>
 </div>
 <div class="grid_4">
-    <div class="pad-1">
-        <?php
-        $this->beginWidget('zii.widgets.CPortlet', array(
-            'title'=>'Operations',
-        ));
-        $this->widget('zii.widgets.CMenu', array(
-            'items'=>$this->menu,
-            'htmlOptions'=>array('class'=>'operations'),
-        ));
-        $this->endWidget();
-        ?>
-    </div>
+
+    <?php $this->widget('newsWidget'); ?>
+
 </div>
 <div class="clear"></div>
 <?php $this->endContent(); ?>

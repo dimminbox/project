@@ -82,8 +82,7 @@ if ( $user->deposit != null ) {
 <?php echo (float)$user->amount; ?> бубликов.<br />
 <?php echo CHtml::link('Пополнить счет', '#', array('onclick' => '$("#recharge_amount").dialog("open"); return false;',)); ?><br />
 <?php echo CHtml::link('Вывести', '#', array('onclick' => '$("#output_money").dialog("open"); return false;',)); ?>
-<?php $this->renderPartial('_recharge_amount', array('deposit' => $deposit)) ?>
-<?php $this->renderPartial('_outputmoney', array('model' => $user)) ?>
+
 <strong>Внутренний кошелек:</strong> <?php echo $user->internal_purse; ?><br />
 <strong>Всего пополнено:</strong> <?php echo (float)$user->paymentAmount; ?><br />
 <strong>Всего инвестировано:</strong> <?php echo (float)$user->investmentAmount; ?><br />
@@ -103,6 +102,8 @@ if ( $user->deposit != null ) {
     <br />
 
 </p-->
+<?php $this->renderPartial('_recharge_amount', array('deposit' => $deposit)) ?>
+<?php $this->renderPartial('_outputmoney', array('model' => $user)) ?>
 <?php $this->renderPartial('_investment', array('investment' => $investment, 'model' => $user)) ?>
 <?php $this->renderPartial('_transfer', array('transfer' => $transfer,'model' => $user)) ?>
 <!-- Левый блок -->

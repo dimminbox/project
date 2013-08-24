@@ -16,7 +16,7 @@ class DefaultController extends AdminController
 
     public function actionOperations(){
         $model = $this->loadModel();
-        die('test');
+
         $criteria = new CDbCriteria();
         $criteria->addColumnCondition(array('user_id' => $model->id));
         $criteria->limit = 10;
