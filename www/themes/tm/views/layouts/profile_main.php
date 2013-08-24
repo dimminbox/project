@@ -1,6 +1,6 @@
 <?php /* @var $this Controller */ ?>
 <!DOCTYPE html>
-<!-- saved from url=(0049)http://jumpstartuidemo.com/themes/base/index.html -->
+
 <html lang="ru"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
 
