@@ -176,7 +176,7 @@
 
                     <li>
                         <a href="/logout" onclick="javascript: return confirm('Выйти?');">
-                            <i class="icon-external-link"></i>
+                            <i class="icon-off"></i>
                             <span>Выход</span>
                         </a>
                     </li>

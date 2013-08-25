@@ -36,6 +36,13 @@ $this->menu=array(
     </table>
 <div class="pagination">
 <?php $this->widget('CLinkPager', array(
+    'firstPageLabel' => '<<',
+    'prevPageLabel' => '<',
+    'nextPageLabel' => '>',
+    'lastPageLabel' => '>>',
+    'selectedPageCssClass' => 'active',
+    'header' => '',
     'pages' => $pages,
+    'cssFile' => false,
 ))?>
 </div>
