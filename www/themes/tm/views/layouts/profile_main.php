@@ -84,27 +84,27 @@
                     <?php endif; ?>
                     <li <?php echo ( $this->active == 'operations') ? 'class="active"' : ''?>>
                         <a href="/user/profile/operations">
-                            <i class="icon-th"></i>
+                            <i class="icon-exchange"></i>
                             <span>Операции</span>
                         </a>
                     </li>
 
                     <li <?php echo ( $this->active == 'deposits') ? 'class="active"' : ''?>>
                         <a href="/user/profile/deposits" >
-                            <i class="icon-copy"></i>
+                            <i class="icon-money"></i>
                             <span>Депозиты</span>
                         </a>
                     </li>
 
                     <li <?php echo ( $this->active == 'referral') ? 'class="active"' : ''?>">
                         <a href="/user/profile/referral" >
-                            <i class="icon-external-link"></i>
+                            <i class="icon-group"></i>
                             <span>Реферралы</span>
                         </a>
                     </li>
                     <li <?php echo ( $this->active == 'edit') ? 'class="active"' : ''?>>
                         <a href="/user/profile/edit" >
-                            <i class="icon-external-link"></i>
+                            <i class="icon-wrench"></i>
                             <span>Редактировать профиль</span>
                         </a>
                     </li>
