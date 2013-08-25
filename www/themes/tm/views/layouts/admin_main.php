@@ -194,10 +194,10 @@
 
     <div class="container">
         <div class="span12">
-            <div class="widget stacked ">
+
 
             <?php echo $content; ?>
-            </div>
+
         </div>
     </div> <!-- /container -->
 

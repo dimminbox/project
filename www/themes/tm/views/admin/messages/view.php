@@ -20,8 +20,14 @@ $this->menu=array(
     array('label'=>'PerfectMoney', 'url'=>array('/admin/money')),
 );
 ?>
+<div class="widget stacked ">
+    <div class="widget-header">
+        <i class="icon-envelope"></i>
+        <h3><?php echo $message->subject ?></h3>
+    </div> <!-- /widget-header -->
 
-<h1><?php echo $message->subject ?></h1>
+    <div class="widget-content">
+
 
 От кого:
 <?php
@@ -34,3 +40,5 @@ if( $message->sender == null ) {
 <br />
 Время отправления: <?php echo $message->time; ?><br />
 Сообщение: <?php echo $message->message; ?>
+    </div> <!-- /widget-content -->
+</div>

@@ -20,10 +20,16 @@ $this->menu=array(
     array('label'=>'PerfectMoney', 'url'=>array('/admin/money')),
 );
 ?>
+<div class="widget stacked ">
+    <div class="widget-header">
+        <i class="icon-envelope"></i>
+        <h3>Сообщения</h3>
+    </div> <!-- /widget-header -->
 
-<h1>Сообщения</h1>
+    <div class="widget-content">
+
 <?php if ( $messages != null ) {?>
-<table>
+<table class="table table-bordered table-striped">
     <thead>
     <tr><td>Статус</td><td>Тема сообщения</td><td>От кого</td><td>Важность</td><td>Дата отправки</td></tr>
     </thead>
@@ -54,5 +60,6 @@ $this->menu=array(
     echo 'У вас нет входящих сообщений';
 }
 
-
 ?>
+    </div> <!-- /widget-content -->
+</div>

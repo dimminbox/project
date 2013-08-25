@@ -58,13 +58,13 @@ class News extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'title' => 'Title',
-			'description' => 'Description',
-			'text' => 'Text',
-			'image' => 'Image',
-			'status' => 'Status',
-			'created_time' => 'Created Time',
-			'update_time' => 'Update Time',
+			'title' => 'Название',
+			'description' => 'описание',
+			'text' => 'Тект',
+			'image' => 'Изображение',
+			'status' => 'Статус',
+			'created_time' => 'Время создания',
+			'update_time' => 'Время посл.ред.',
 		);
 	}
 

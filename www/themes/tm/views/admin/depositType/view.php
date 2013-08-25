@@ -1,25 +1,18 @@
 <?php
 /* @var $this DepositTypeController */
 /* @var $model DepositType */
-
-$this->breadcrumbs=array(
-	'Deposit Types'=>array('index'),
-	$model->id,
-);
-
-$this->menu=array(
-	array('label'=>'List DepositType', 'url'=>array('index')),
-	array('label'=>'Create DepositType', 'url'=>array('create')),
-	array('label'=>'Update DepositType', 'url'=>array('update', 'id'=>$model->id)),
-	array('label'=>'Delete DepositType', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
-	array('label'=>'Manage DepositType', 'url'=>array('admin')),
-);
 ?>
+<div class="widget stacked ">
+    <div class="widget-header">
+        <i class="icon-signal"></i>
+        <h3>Депозит #<?php echo $model->id; ?></h3>
+    </div> <!-- /widget-header -->
 
-<h1>View DepositType #<?php echo $model->id; ?></h1>
+    <div class="widget-content">
 
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
+
 	'attributes'=>array(
 		'id',
 		'type',
@@ -27,3 +20,5 @@ $this->menu=array(
         'days',
 	),
 )); ?>
+    </div> <!-- /widget-content -->
+</div>

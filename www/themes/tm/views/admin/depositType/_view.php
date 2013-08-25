@@ -2,12 +2,13 @@
 /* @var $this DepositTypeController */
 /* @var $data DepositType */
 ?>
+<div class="widget stacked ">
+    <div class="widget-header">
+        <i class="icon-signal"></i>
+        <h3><?php echo CHtml::encode($data->type); ?></h3>
+    </div> <!-- /widget-header -->
 
-<div class="view">
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('id')); ?>:</b>
-	<?php echo CHtml::link(CHtml::encode($data->id), array('view', 'id'=>$data->id)); ?>
-	<br />
+    <div class="widget-content">
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('type')); ?>:</b>
 	<?php echo CHtml::encode($data->type); ?>
@@ -21,5 +22,7 @@
 	<?php echo CHtml::encode($data->percent); ?>
 	<br />
 
+    <?php echo CHtml::link('Редактировать', array('update', 'id'=>$data->id)); ?>
 
+    </div> <!-- /widget-content -->
 </div>

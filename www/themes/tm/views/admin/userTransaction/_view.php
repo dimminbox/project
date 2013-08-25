@@ -3,14 +3,20 @@
 /* @var $data UserTransaction */
 ?>
 
-<div class="view">
+<div class="widget stacked ">
+    <div class="widget-header">
+        <i class="icon-signal"></i>
+        <h3>Транзакция #<?php echo CHtml::encode($data->id) ?></h3>
+    </div> <!-- /widget-header -->
+
+    <div class="widget-content">
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('id')); ?>:</b>
-	<?php echo CHtml::link(CHtml::encode($data->id), array('view', 'id'=>$data->id)); ?>
+	<?php echo CHtml::encode($data->id); ?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('user_id')); ?>:</b>
-	<?php echo CHtml::encode($data->user_id); ?>
+        <?php echo CHtml::link(CHtml::encode($data->user->username), array('/user/admin/view/', 'id'=>$data->user->id)); ?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('amount')); ?>:</b>
@@ -24,14 +30,5 @@
 	<b><?php echo CHtml::encode($data->getAttributeLabel('time')); ?>:</b>
 	<?php echo CHtml::encode($data->time); ?>
 	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('amount_after')); ?>:</b>
-	<?php echo CHtml::encode($data->amount_after); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('amount_before')); ?>:</b>
-	<?php echo CHtml::encode($data->amount_before); ?>
-	<br />
-
-
+    </div> <!-- /widget-content -->
 </div>

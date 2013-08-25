@@ -2,19 +2,19 @@
 /* @var $this AdminController */
 /* @var $model User */
 ?>
+<div class="widget stacked ">
+    <div class="widget-header">
+        <i class="icon-home"></i>
+        <h3>Админпанель</h3>
+    </div> <!-- /widget-header -->
 
-<div class="widget-header">
-    <i class="icon-pencil"></i>
-    <h3>Админпанель</h3>
-</div> <!-- /widget-header -->
+    <div class="widget-content">
 
-<div class="widget-content">
-
-    <br />
+        <br />
 
 
-</div> <!-- /widget-content -->
-
+    </div> <!-- /widget-content -->
+</div>
 
 <?php /*
     if ( $messages != null ) {

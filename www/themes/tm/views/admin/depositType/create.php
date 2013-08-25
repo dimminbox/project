@@ -1,18 +1,16 @@
 <?php
 /* @var $this DepositTypeController */
 /* @var $model DepositType */
-
-$this->breadcrumbs=array(
-	'Deposit Types'=>array('index'),
-	'Create',
-);
-
-$this->menu=array(
-	array('label'=>'List DepositType', 'url'=>array('index')),
-	array('label'=>'Manage DepositType', 'url'=>array('admin')),
-);
 ?>
+<div class="widget stacked ">
+    <div class="widget-header">
+        <i class="icon-signal"></i>
+        <h3>Создать депозит</h3>
+    </div> <!-- /widget-header -->
 
-<h1>Create DepositType</h1>
+    <div class="widget-content">
+
 
 <?php $this->renderPartial('_form', array('model'=>$model)); ?>
+    </div> <!-- /widget-content -->
+</div>

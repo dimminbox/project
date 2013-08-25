@@ -16,7 +16,13 @@ $this->menu=array(
 );
 ?>
 
-<h1>View News #<?php echo $model->id; ?></h1>
+<div class="widget stacked ">
+    <div class="widget-header">
+        <i class="icon-copy"></i>
+        <h3><?php echo CHtml::encode($model->title); ?></h3>
+    </div> <!-- /widget-header -->
+
+    <div class="widget-content">
 
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
@@ -31,3 +37,5 @@ $this->menu=array(
 		'update_time',
 	),
 )); ?>
+    </div> <!-- /widget-content -->
+</div>
