@@ -21,7 +21,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
  ));
 */
 ?>
-
+<div class="widget stacked ">
 
 <div class="widget-header">
     <i class="icon-spinner"></i>
@@ -55,3 +55,4 @@ $this->widget('zii.widgets.grid.CGridView', array(
 </div> <!-- /widget-content -->
 
 
+</div>

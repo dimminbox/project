@@ -1,22 +1,16 @@
 <?php
 /* @var $this DepositController */
 /* @var $model Deposit */
-
-$this->breadcrumbs=array(
-	'Deposits'=>array('index'),
-	$model->id=>array('view','id'=>$model->id),
-	'Update',
-);
-
-$this->menu=array(
-	array('label'=>'List Deposit', 'url'=>array('index')),
-	array('label'=>'Create Deposit', 'url'=>array('create')),
-	array('label'=>'View Deposit', 'url'=>array('view', 'id'=>$model->id)),
-	array('label'=>'Manage Deposit', 'url'=>array('admin')),
-    array('label'=>'Типы депозитов', 'url'=>array('/admin/depositType')),
-);
 ?>
+<div class="widget stacked ">
+    <div class="widget-header">
+        <i class="icon-signal"></i>
+        <h3>Редактирование депозита #<?php echo $model->id; ?></h3>
+    </div> <!-- /widget-header -->
 
-<h1>Update Deposit <?php echo $model->id; ?></h1>
+    <div class="widget-content">
 
 <?php $this->renderPartial('_form', array('model'=>$model)); ?>
+
+    </div> <!-- /widget-content -->
+</div>

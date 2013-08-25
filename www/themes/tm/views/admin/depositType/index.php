@@ -3,7 +3,7 @@
 /* @var $dataProvider CActiveDataProvider */
 ?>
 
-<h1>Deposit Types</h1>
+<h3>Типы депозитов</h3>
 
 <?php $this->widget('zii.widgets.CListView', array(
 	'dataProvider'=>$dataProvider,

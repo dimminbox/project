@@ -66,13 +66,13 @@ class Deposit extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'user_id' => 'User',
+			'user_id' => 'Пользователь',
 			'deposit_type_id' => 'Время депозита',
 			'deposit_amount' => 'Сумма депозита',
             'expire' => 'Дата окончания депозита',
             'reinvest' => 'Реинвестирование',
-			'status' => 'Status',
-			'date' => 'Date',
+			'status' => 'Статус',
+			'date' => 'Дата окончания',
 		);
 	}
     public function behaviors(){

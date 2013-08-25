@@ -4,7 +4,7 @@
 /* @var $form CActiveForm */
 ?>
 
-<div class="form">
+
 
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'deposit-type-form',
@@ -15,32 +15,30 @@
 	'enableAjaxValidation'=>false,
 )); ?>
 
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
+	<p class="note">Поля отмеченные <span class="required">*</span> обязательны для заполнения.</p>
 
 	<?php echo $form->errorSummary($model); ?>
 
-	<div class="row">
+	<div>
 		<?php echo $form->labelEx($model,'type'); ?>
 		<?php echo $form->textField($model,'type',array('size'=>60,'maxlength'=>255)); ?>
 		<?php echo $form->error($model,'type'); ?>
 	</div>
 
-	<div class="row">
+	<div>
 		<?php echo $form->labelEx($model,'percent'); ?>
 		<?php echo $form->textField($model,'percent'); ?>
 		<?php echo $form->error($model,'percent'); ?>
 	</div>
 
-    <div class="row">
+    <div>
         <?php echo $form->labelEx($model,'days'); ?>
         <?php echo $form->textField($model,'days'); ?>
         <?php echo $form->error($model,'days'); ?>
     </div>
 
-	<div class="row buttons">
+	<div>
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
 	</div>
 
 <?php $this->endWidget(); ?>
-
-</div><!-- form -->

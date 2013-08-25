@@ -2,7 +2,7 @@
 /* @var $this AdminController */
 /* @var $model User */
 ?>
-
+<div class="widget stacked ">
 <div class="widget-header">
     <i class="icon-spinner"></i>
     <h3>Потенциальные выплаты :: Баланс пользователей</h3>
@@ -31,6 +31,7 @@
 ));
 ?>
 </div> <!-- /widget-content -->
+    </div>
 <?php
 /*
 foreach( $users as $user ) {
