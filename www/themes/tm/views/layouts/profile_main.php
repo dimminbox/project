@@ -109,7 +109,7 @@
                         </a>
                     </li>
                     <li class="dropdown">
-                        <a href="/user/logout" >
+                        <a href="/logout" onclick="javascript: return confirm('Выйти?');" >
                             <i class="icon-off"></i>
                             <span>Выход</span>
                         </a>
