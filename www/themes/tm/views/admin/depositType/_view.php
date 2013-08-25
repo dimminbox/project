@@ -2,7 +2,6 @@
 /* @var $this DepositTypeController */
 /* @var $data DepositType */
 ?>
-
 <div class="widget stacked ">
     <div class="widget-header">
         <i class="icon-signal"></i>
