@@ -68,14 +68,14 @@
             <div class="subnav-collapse collapse">
                 <ul class="mainnav">
 
-                    <li class="active">
+                    <li >
                         <a href="/profile">
                             <i class="icon-home"></i>
                             <span>Home</span>
                         </a>
                     </li>
 
-                    <li class="dropdown">
+                    <li >
                         <a href="/user/profile/operations">
                             <i class="icon-th"></i>
                             <span>Операции</span>

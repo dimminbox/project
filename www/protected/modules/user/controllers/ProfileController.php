@@ -2,6 +2,7 @@
 
 class ProfileController extends Controller
 {
+
     public $defaultAction = 'profile';
     public $layout='//layouts/profile';
     const PAYEE_ACCOUNT = 'U4330448'; //* номернашего кошелька
