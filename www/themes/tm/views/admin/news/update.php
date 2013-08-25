@@ -16,6 +16,14 @@ $this->menu=array(
 );
 ?>
 
-<h1>Update News <?php echo $model->id; ?></h1>
+<div class="widget stacked ">
+    <div class="widget-header">
+        <i class="icon-copy"></i>
+        <h3>Редактирование новости <?php echo $model->title; ?></h3>
+    </div> <!-- /widget-header -->
+
+    <div class="widget-content">
 
 <?php $this->renderPartial('_form', array('model'=>$model)); ?>
+    </div> <!-- /widget-content -->
+</div>
