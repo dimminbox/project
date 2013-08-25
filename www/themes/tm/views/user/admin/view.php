@@ -62,7 +62,7 @@
         <div class="widget-content">
             <table class="table table-bordered table-striped">
                 <thead>
-                <tr><td>№</td><td>Дата</td><td>Сумма до операции</td><td>Приход</td><td>Расход</td><td>Тип операции</td><td>Остаток</td></tr>
+                <tr><td>№</td><td>Дата</td><td>Сумма</td><td>Тип операции</td><td>Остаток</td></tr>
                 </thead>
                 <?php
                 foreach ($userTransaction as $user): ?>
@@ -70,16 +70,11 @@
                     <tr>
                         <td><?php echo $user->id; ?></td>
                         <td><?php echo $user->time ?></td>
-                        <td><?php echo (float)$user->amount_before ?></td>
 
-                        <td><?php
-                            $formatted = (float)$user->amount;
-                            if($formatted >0){
-                                echo $formatted;
-                            }?></td>
-                        <td><?php if($formatted <0){
-                                echo $formatted;
-                            }?></td>
+                        <td><?php echo ($user->amount > 0) ?
+                                '<span style="color:green">' . (float)$user->amount . '</span>':
+                                '<span style="color:red">' . (float)$user->amount . '</span>'
+                            ?></td>
                         <td><?php echo $user->reason; ?></td>
                         <td><?php echo (float)$user->amount_after ?></td>
                     </tr>
