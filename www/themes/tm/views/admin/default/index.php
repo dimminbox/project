@@ -4,7 +4,7 @@
 ?>
 
 <div class="widget-header">
-    <i class="icon-pencil"></i>
+    <i class="icon-home"></i>
     <h3>Админпанель</h3>
 </div> <!-- /widget-header -->
 

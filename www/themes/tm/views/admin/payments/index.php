@@ -24,21 +24,20 @@ $this->widget('zii.widgets.grid.CGridView', array(
 
 
 <div class="widget-header">
-    <i class="icon-pencil"></i>
+    <i class="icon-spinner"></i>
     <h3>Потенциальные выплаты</h3>
 </div> <!-- /widget-header -->
 
 <div class="widget-content">
 
+    <p>
+        <?php echo CHtml::link('Общий баланс пользователей:', $this->createAbsoluteUrl('/admin/payments/usersBalance')) ?>
+         <span class='stat-value'><?php echo (float)User::model()->allAmount; ?>$</span>
+        </p>
 
-<br />
 
-    <p>Общий баланс пользователей: <strong><?php echo (float)User::model()->allAmount; ?></strong><br />
-        <?php echo CHtml::link('Подробнее...', $this->createAbsoluteUrl('/admin/payments/usersBalance')) ?></p>
-
-
-    <h3>График окончания депозитов (30дней):</h3>
-    <table>
+    <h3>Список окончания депозитов (30дней):</h3>
+    <table class='table table-bordered table-striped'>
         <thead>
         <tr>
             <td>Дата</td><td>Сумма</td>
@@ -46,7 +45,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
         </thead>
         <?php foreach( $deps as $deposit ) : ?>
             <tr>
-                <td><?php echo date("d-m-Y", strtotime($deposit['expire'])) ?></td>
+                <td><?php echo date("d.m.Y", strtotime($deposit['expire'])) ?></td>
                 <td><?php echo $deposit['amount'] ?></td>
             </tr>
         <?php endforeach; ?>
