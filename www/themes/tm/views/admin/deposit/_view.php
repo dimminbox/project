@@ -12,7 +12,6 @@
     <div class="widget-content">
 
 	<b>№ депозита:</b> <?php echo CHtml::encode($data->id); ?>
-	<?php echo CHtml::link(CHtml::encode($data->id), array('view', 'id'=>$data->id)); ?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('user_id')); ?>:</b>

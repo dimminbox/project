@@ -36,7 +36,16 @@ $this->widget('zii.widgets.grid.CGridView', array(
         </p>
 
 
-    <h3>Список окончания депозитов (30дней):</h3>
+    <h3>Список окончания депозитов на <a href='javascript:;' onclick="$('#form').show(300);" id='day' title='Нажмите, чтобы изменить'><?php echo $this->expirationDate; ?></a> <?php echo User::model()->declension($this->expirationDate, 'день', 'дня', ' дней')?>:</h3>
+    <div id='form' style='display:none'>
+        <?php $form=$this->beginWidget('CActiveForm', array(
+            'id'=>'day-form',
+            'enableAjaxValidation'=>false,
+        )); ?>
+        <?php echo CHtml::textField('day',''); ?>
+        <?php echo CHtml::submitButton('Изменить', array('class' => 'btn btn-large')); ?>
+        <?php $this->endWidget(); ?>
+    </div>
     <table class='table table-bordered table-striped'>
         <thead>
         <tr>

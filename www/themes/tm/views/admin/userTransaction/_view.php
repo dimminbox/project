@@ -5,7 +5,7 @@
 
 <div class="widget stacked ">
     <div class="widget-header">
-        <i class="icon-signal"></i>
+        <i class="icon-exchange"></i>
         <h3>Транзакция #<?php echo CHtml::encode($data->id) ?></h3>
     </div> <!-- /widget-header -->
 
