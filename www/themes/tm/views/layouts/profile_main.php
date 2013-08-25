@@ -110,7 +110,7 @@
                     </li>
                     <li class="dropdown">
                         <a href="/user/logout" >
-                            <i class="icon-external-link"></i>
+                            <i class="icon-off"></i>
                             <span>Выход</span>
                         </a>
                     </li>
