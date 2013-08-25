@@ -166,6 +166,7 @@
                             <li class="dropdown-submenu">
                                 <a tabindex="-1" href="javascript:;">Пользователи</a>
                                 <ul class="dropdown-menu">
+                                    <li><a tabindex="-1" href="/user/profileField/create">Добавить поле</a></li>
                                     <li><a tabindex="-1" href="/user/profileField/admin">Настройка полей</a></li>
                                 </ul>
                             </li>
