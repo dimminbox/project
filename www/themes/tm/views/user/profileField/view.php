@@ -11,7 +11,13 @@ $this->menu=array(
     array('label'=>UserModule::t('Manage Users'), 'url'=>array('/user/admin')),
 );
 ?>
-<h1><?php echo UserModule::t('View Profile Field #').$model->varname; ?></h1>
+<div class="widget stacked ">
+    <div class="widget-header">
+        <i class="icon-cog"></i>
+        <h3><?php echo UserModule::t('View Profile Field #').$model->varname; ?></h3>
+    </div> <!-- /widget-header -->
+
+    <div class="widget-content">
 
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
@@ -34,3 +40,5 @@ $this->menu=array(
 		'visible',
 	),
 )); ?>
+    </div> <!-- /widget-content -->
+</div>

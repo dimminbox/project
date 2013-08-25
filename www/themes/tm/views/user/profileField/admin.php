@@ -23,18 +23,16 @@ $('.search-form form').submit(function(){
 ");
 
 ?>
-<h1><?php echo UserModule::t('Manage Profile Fields'); ?></h1>
+<div class="widget stacked ">
+    <div class="widget-header">
+        <i class="icon-cog"></i>
+        <h3><?php echo UserModule::t('Manage Profile Fields'); ?></h3>
+    </div> <!-- /widget-header -->
 
-<p><?php echo UserModule::t("You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b> or <b>=</b>) at the beginning of each of your search values to specify how the comparison should be done."); ?></p>
-
-<?php echo CHtml::link(UserModule::t('Advanced Search'),'#',array('class'=>'search-button')); ?>
-<div class="search-form" style="display:none">
-<?php $this->renderPartial('_search',array(
-    'model'=>$model,
-)); ?>
-</div><!-- search-form -->
+    <div class="widget-content">
 
 <?php $this->widget('zii.widgets.grid.CGridView', array(
+    'itemsCssClass' => 'table table-bordered table-striped',
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
 	'columns'=>array(
@@ -77,3 +75,5 @@ $('.search-form form').submit(function(){
 		),
 	),
 )); ?>
+    </div> <!-- /widget-content -->
+</div>

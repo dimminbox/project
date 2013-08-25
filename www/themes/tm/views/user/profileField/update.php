@@ -11,6 +11,14 @@ $this->menu=array(
     array('label'=>UserModule::t('Manage Users'), 'url'=>array('/user/admin')),
 );
 ?>
+<div class="widget stacked ">
+    <div class="widget-header">
+        <i class="icon-cog"></i>
+        <h3><?php echo UserModule::t('Update Profile Field ').$model->id; ?></h3>
+    </div> <!-- /widget-header -->
 
-<h1><?php echo UserModule::t('Update Profile Field ').$model->id; ?></h1>
+    <div class="widget-content">
+
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
+    </div> <!-- /widget-content -->
+</div>
