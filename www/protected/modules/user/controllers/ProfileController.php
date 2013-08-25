@@ -2,7 +2,7 @@
 
 class ProfileController extends Controller
 {
-
+    public $active = 'index';
     public $defaultAction = 'profile';
     public $layout='//layouts/profile';
     const PAYEE_ACCOUNT = 'U4330448'; //* номернашего кошелька
@@ -17,7 +17,7 @@ class ProfileController extends Controller
     public function actionProfile()
     {
         $user = $this->loadUser();
-
+        $this->active = 'profile';
         //Формирование массива данных для графика
         $chart = null;
 
@@ -138,6 +138,7 @@ class ProfileController extends Controller
 
     //Партнерская программа
     public function actionReferral() {
+        $this->active = 'referral';
         $user = User::model()->findByPk(Yii::app()->user->id);
         $this->render('referral', array(
             'user' => $user,
@@ -457,6 +458,7 @@ class ProfileController extends Controller
      */
     public function actionEdit()
     {
+        $this->active = 'edit';
         $model = $this->loadUser();
         $profile=$model->profile;
 
@@ -534,6 +536,7 @@ class ProfileController extends Controller
     }
 
     public function actionOperations() {
+        $this->active = 'operations';
         $criteria = new CDbCriteria();
         $criteria->addColumnCondition(array('user_id' => Yii::app()->user->id));
         $count=UserTransaction::model()->count($criteria);
@@ -550,6 +553,7 @@ class ProfileController extends Controller
     }
     //Список депозитов пользователя
     public function actionDeposits() {
+        $this->active = 'deposits';
         $criteria = new CDbCriteria();
         $criteria->addColumnCondition(array('user_id' => Yii::app()->user->id));
         $count=Deposit::model()->count($criteria);

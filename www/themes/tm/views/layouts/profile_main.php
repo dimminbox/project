@@ -68,34 +68,41 @@
             <div class="subnav-collapse collapse">
                 <ul class="mainnav">
 
-                    <li >
+                    <li <?php echo ( $this->active == 'profile') ? 'class="active"' : ''?>>
                         <a href="/profile">
                             <i class="icon-home"></i>
                             <span>Home</span>
                         </a>
-                    </li>
-
-                    <li >
+                    </li >
+                    <?php if ( UserModule::isAdmin() ) :?>
+                        <li>
+                            <a href="/admin">
+                                <i class="icon-star"></i>
+                                <span>Админпанель</span>
+                            </a>
+                        </li>
+                    <?php endif; ?>
+                    <li <?php echo ( $this->active == 'operations') ? 'class="active"' : ''?>>
                         <a href="/user/profile/operations">
                             <i class="icon-th"></i>
                             <span>Операции</span>
                         </a>
                     </li>
 
-                    <li class="dropdown">
+                    <li <?php echo ( $this->active == 'deposits') ? 'class="active"' : ''?>>
                         <a href="/user/profile/deposits" >
                             <i class="icon-copy"></i>
                             <span>Депозиты</span>
                         </a>
                     </li>
 
-                    <li class="dropdown">
+                    <li <?php echo ( $this->active == 'referral') ? 'class="active"' : ''?>">
                         <a href="/user/profile/referral" >
                             <i class="icon-external-link"></i>
                             <span>Реферралы</span>
                         </a>
                     </li>
-                    <li class="dropdown">
+                    <li <?php echo ( $this->active == 'edit') ? 'class="active"' : ''?>>
                         <a href="/user/profile/edit" >
                             <i class="icon-external-link"></i>
                             <span>Редактировать профиль</span>

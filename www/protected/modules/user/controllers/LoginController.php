@@ -18,8 +18,11 @@ class LoginController extends Controller
 				// validate user input and redirect to previous page if valid
 				if($model->validate()) {
 					$this->lastViset();
-
-					$this->redirect(Yii::app()->controller->module->returnUrl);
+                    if (UserModule::isAdmin()) {
+                        $this->redirect('/admin');
+                    } else {
+                        $this->redirect(Yii::app()->controller->module->returnUrl);
+                    }
 				}
 			}
 			// display the login form
