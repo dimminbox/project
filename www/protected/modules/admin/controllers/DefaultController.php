@@ -14,6 +14,14 @@ class DefaultController extends AdminController
         ));
 	}
 
+    public function actionGeneralPercent() {
+
+
+
+        $this->render('general_percent', array(
+
+        ));
+    }
 
     public function actionOperations(){
         $model = $this->loadModel();

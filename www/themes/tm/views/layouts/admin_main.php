@@ -164,6 +164,12 @@
 
                         <ul class="dropdown-menu">
                             <li class="dropdown-submenu">
+                                <a href="/admin/generalPercent">Общий процент</a>
+                                <ul class="dropdown-menu">
+                                    <li><a tabindex="-1" href="/admin/generalPercent/create">Добавить месяц</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown-submenu">
                                 <a tabindex="-1" href="javascript:;">Пользователи</a>
                                 <ul class="dropdown-menu">
                                     <li><a tabindex="-1" href="/user/profileField/create">Добавить поле</a></li>

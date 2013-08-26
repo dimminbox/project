@@ -7,7 +7,7 @@ class PaymentsController extends AdminController
 
     public function actionIndex()
     {
-        if ( isset($_POST['day']) ) {
+        if ( isset($_POST['day']) && !empty($_POST['day'])) {
             $this->expirationDate = $_POST['day'];
         }
 
