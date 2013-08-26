@@ -58,6 +58,7 @@ class UserTransaction extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+            'user' => array(self::BELONGS_TO, 'User', 'user_id')
 		);
 	}
 
@@ -67,13 +68,13 @@ class UserTransaction extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id' => 'ID',
-			'user_id' => 'User',
-			'amount' => 'Amount',
+			'id' => '№ транзакции',
+			'user_id' => 'Пользователь',
+			'amount' => 'Сумма',
             'amount_type' => 'Amount type',
             'payment_id' => 'Payment id',
-			'reason' => 'Reason',
-			'time' => 'Time',
+			'reason' => 'Описание',
+			'time' => 'Время транзакции',
 			'amount_after' => 'Amount After',
 			'amount_before' => 'Amount Before',
 		);

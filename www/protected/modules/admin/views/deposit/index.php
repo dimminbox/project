@@ -9,6 +9,7 @@ $this->breadcrumbs=array(
 $this->menu=array(
 	array('label'=>'Create Deposit', 'url'=>array('create')),
 	array('label'=>'Manage Deposit', 'url'=>array('admin')),
+    array('label'=>'Типы депозитов', 'url'=>array('/admin/depositType')),
 );
 ?>
 

@@ -2,6 +2,7 @@
 
 class MessagesController extends AdminController
 {
+    public $active = 'message';
 
      public function actionIndex() {
         $criteria = new CDbCriteria();
@@ -11,7 +12,7 @@ class MessagesController extends AdminController
         // элементов на страницу
         $pages->pageSize=10;
         $pages->applyLimit($criteria);
-        $criteria->order = 'status DESC, importance';
+        $criteria->order = 'status DESC ';
         $messages = Message::model()->findAll($criteria);
         $this->render('messages', array(
             'messages' => $messages,

@@ -2,6 +2,7 @@
 
 class SiteController extends Controller
 {
+    public $layout='//layouts/column2';
 	/**
 	 * Declares class-based actions.
 	 */
@@ -31,7 +32,7 @@ class SiteController extends Controller
             Yii::app()->user->setState('ref', $ref);
             $this->redirect('/');
         }
-
+        $this->layout = '//layouts/home_column2';
 		$this->render('index');
 	}
 
@@ -49,10 +50,16 @@ class SiteController extends Controller
 		}
 	}
 
+    public function actionAbout() {
+        $this->render('pages/about');
+    }
+
 	/**
 	 * Displays the contact page
 	 */
-	public function actionContact()
+
+
+    public function actionContact()
 	{
 		$model=new ContactForm;
 		if(isset($_POST['ContactForm']))
@@ -75,6 +82,15 @@ class SiteController extends Controller
 		$this->render('contact',array('model'=>$model));
 	}
 
+    public function actionFaq()
+    {
+        $this->render('pages/faq');
+    }
+
+    public function actionReferral()
+    {
+        $this->render('pages/referral');
+    }
 	/**
 	 * Displays the login page
      * @param string $email

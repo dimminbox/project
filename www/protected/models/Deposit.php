@@ -11,11 +11,16 @@
  * @property integer $status
  * @property string $date
  * @property integer $expire
+ * @property integer $reinvest
  */
 class Deposit extends CActiveRecord
 {
     const GLOBAL_PERCENT = 0.01;
     const MIN_AMOUNT = 200;
+
+    const REINVEST_YES = 1;
+    const REINVEST_NO = 2;
+
 	/**
 	 * @return string the associated database table name
 	 */
@@ -32,12 +37,12 @@ class Deposit extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('user_id, deposit_type_id, deposit_amount, status', 'numerical', 'integerOnly'=>true),
-			array('date, expire', 'safe'),
+			array('user_id, deposit_type_id, deposit_amount, status, reinvest', 'numerical', 'integerOnly'=>true),
+			array('date, expire, reinvest', 'safe'),
             array('deposit_amount', 'numerical', 'min' => self::MIN_AMOUNT, 'tooSmall' => 'Минимальная сумма ' . self::MIN_AMOUNT),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, user_id, deposit_type_id, deposit_amount, status, date, expire', 'safe', 'on'=>'search'),
+			array('id, user_id, deposit_type_id, deposit_amount, status, date, expire, reinvest', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -61,12 +66,13 @@ class Deposit extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'user_id' => 'User',
+			'user_id' => 'Пользователь',
 			'deposit_type_id' => 'Время депозита',
 			'deposit_amount' => 'Сумма депозита',
             'expire' => 'Дата окончания депозита',
-			'status' => 'Status',
-			'date' => 'Date',
+            'reinvest' => 'Реинвестирование',
+			'status' => 'Статус',
+			'date' => 'Дата окончания',
 		);
 	}
     public function behaviors(){
@@ -104,6 +110,7 @@ class Deposit extends CActiveRecord
 		$criteria->compare('deposit_type_id',$this->deposit_type_id);
 		$criteria->compare('deposit_amount',$this->deposit_amount);
         $criteria->compare('expire',$this->expire);
+        $criteria->compare('reinvest',$this->reinvest);
 		$criteria->compare('status',$this->status);
 		$criteria->compare('date',$this->date,true);
 

@@ -1,8 +1,9 @@
 <?php
 class AdminController extends RController
 {
+    public $active;
 
-    public $layout='//layouts/column2';
+    public $layout='//layouts/admin';
 
     public function filters()
     {
