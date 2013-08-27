@@ -102,6 +102,7 @@ if ( $user->deposit != null ) {
     <br />
 
 </p-->
+
 <?php $this->renderPartial('_recharge_amount', array('deposit' => $deposit)) ?>
 <?php $this->renderPartial('_outputmoney', array('model' => $user)) ?>
 <?php $this->renderPartial('_investment', array('investment' => $investment, 'model' => $user)) ?>
@@ -153,8 +154,8 @@ if ( $user->deposit != null ) {
     <div class="widget widget-nopad stacked">
 
         <div class="widget-header">
-            <i class="icon-list-alt"></i>
-            <h3>Recent News</h3>
+            <i class="icon-money"></i>
+            <h3>Планы инвестирования</h3>
         </div> <!-- /widget-header -->
 
         <div class="widget-content">

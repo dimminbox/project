@@ -10,10 +10,13 @@
  * @property integer $days
  * @property integer $min_amount
  * @property integer $max_amount
- * @property integer $description
+ * @property string $description
+ * @property integer $status
  */
 class DepositType extends CActiveRecord
 {
+    const DEPOSIT_TYPE_STATUS_ACT = 1;
+    const DEPOSIT_TYPE_STATUS_NOT = 0;
 	/**
 	 * @return string the associated database table name
 	 */
@@ -32,7 +35,7 @@ class DepositType extends CActiveRecord
 		return array(
 			array('percent, min_amount, max_amount', 'numerical'),
 			array('type', 'length', 'max'=>255),
-            array('days, description', 'safe'),
+            array('days, description, status', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, type, percent', 'safe', 'on'=>'search'),
@@ -64,6 +67,7 @@ class DepositType extends CActiveRecord
 			'percent' => 'Percent',
             'min_amount' => 'Минимальная сумма',
             'max_amount' => 'Максимальная сумма',
+            'status' => 'Статус',
 
 		);
 	}
@@ -93,6 +97,7 @@ class DepositType extends CActiveRecord
         $criteria->compare('max_amount',$this->max_amount);
         $criteria->compare('days',$this->days);
 		$criteria->compare('percent',$this->percent);
+        $criteria->compare('status',$this->status);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
