@@ -145,4 +145,29 @@ class Deposit extends CActiveRecord
             return 0;
         }
     }
+    //вычисляем общий процент на сегодняшний день
+    public function findTodayGeneralPercent() {
+
+        $criteria = new CDbCriteria();
+        $criteria->condition = "date_format(date, '%Y%m') = date_format(now(), '%Y%m');";
+
+        $dataMonths = GeneralPercent::model()->findAll($criteria);
+
+        foreach( $dataMonths as $dataDays ) {
+
+            $data = CJSON::decode($dataDays->json_days);
+
+            foreach( $data  as $key=>$val ) {
+
+                if ( $key == date('d', time()) ) {
+
+                    return $val;
+
+                }
+
+            }
+        }
+
+        return Yii::app()->params['defaultGeneralPercent'];
+    }
 }
