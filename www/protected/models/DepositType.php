@@ -8,6 +8,9 @@
  * @property string $type
  * @property integer $percent
  * @property integer $days
+ * @property integer $min_amount
+ * @property integer $max_amount
+ * @property integer $description
  */
 class DepositType extends CActiveRecord
 {
@@ -27,9 +30,9 @@ class DepositType extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('percent', 'numerical'),
+			array('percent, min_amount, max_amount', 'numerical'),
 			array('type', 'length', 'max'=>255),
-            array('days', 'safe'),
+            array('days, description', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, type, percent', 'safe', 'on'=>'search'),
@@ -56,8 +59,11 @@ class DepositType extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'type' => 'Название депозита',
+            'description' => 'Описание',
             'days' => 'Количество дней',
 			'percent' => 'Percent',
+            'min_amount' => 'Минимальная сумма',
+            'max_amount' => 'Максимальная сумма',
 
 		);
 	}
@@ -82,6 +88,9 @@ class DepositType extends CActiveRecord
 
 		$criteria->compare('id',$this->id);
 		$criteria->compare('type',$this->type,true);
+        $criteria->compare('description',$this->description,true);
+        $criteria->compare('min_amount',$this->min_amount);
+        $criteria->compare('max_amount',$this->max_amount);
         $criteria->compare('days',$this->days);
 		$criteria->compare('percent',$this->percent);
 

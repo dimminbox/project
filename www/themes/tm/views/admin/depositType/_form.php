@@ -25,6 +25,12 @@
 		<?php echo $form->error($model,'type'); ?>
 	</div>
 
+    <div>
+        <?php echo $form->labelEx($model,'description'); ?>
+        <?php echo $form->textArea($model,'description',array()); ?>
+        <?php echo $form->error($model,'description'); ?>
+    </div>
+
 	<div>
 		<?php echo $form->labelEx($model,'percent'); ?>
 		<?php echo $form->textField($model,'percent'); ?>
@@ -35,6 +41,18 @@
         <?php echo $form->labelEx($model,'days'); ?>
         <?php echo $form->textField($model,'days'); ?>
         <?php echo $form->error($model,'days'); ?>
+    </div>
+
+    <div>
+        <?php echo $form->labelEx($model,'min_amount'); ?>
+        <?php echo $form->textField($model,'min_amount'); ?>
+        <?php echo $form->error($model,'min_amount'); ?>
+    </div>
+
+    <div>
+        <?php echo $form->labelEx($model,'max_amount'); ?>
+        <?php echo $form->textField($model,'max_amount'); ?>
+        <?php echo $form->error($model,'max_amount'); ?>
     </div>
 
 	<div>
