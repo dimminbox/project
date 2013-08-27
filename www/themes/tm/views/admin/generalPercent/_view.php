@@ -9,6 +9,7 @@
 	<b><?php echo CHtml::encode($data->getAttributeLabel('date')); ?>:</b>
 	<h3><?php echo date('M.Y', strtotime($data->date)); ?></h3>
 	<br />
-        <?php echo CHtml::link('Редактировать',array('update','id'=>$data->id)); ?>
+        <?php echo CHtml::link('Редактировать',array('update','id'=>$data->id)); ?><br />
+        <?php echo CHtml::link('Удалить',array('delete','id'=>$data->id)); ?>
     </div> <!-- /widget-content -->
 </div>

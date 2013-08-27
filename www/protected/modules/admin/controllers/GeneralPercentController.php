@@ -3,6 +3,8 @@
 class GeneralPercentController extends AdminController
 {
     public $active = 'setup';
+
+    public $date;
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
 	 * using two-column layout. See 'protected/views/layouts/column2.php'.
@@ -62,30 +64,50 @@ class GeneralPercentController extends AdminController
 	public function actionCreate()
 	{
 		$model=new GeneralPercent;
+        $months = GeneralPercent::model()->findAll();
 
-		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
+        foreach ( $months as $month ) {
+            $this->date = $month->date;
+        }
 
+        if ( $this->date == null ) {
+            $this->date = date('Y-m-d');
 
+        } else {
 
-		if(isset($_POST))
+            // Uncomment the following line if AJAX validation is needed
+            // $this->performAjaxValidation($model);
+            if ( date('m', strtotime($this->date)) == 12 ) {
+                $this->date = (date("Y-", strtotime($this->date)) + 1) .
+                    date('m', strtotime($this->date)) .
+                    date("-d", strtotime($this->date));
+            }
+            $this->date =  date("Y-", strtotime($this->date)) .
+                (date('m', strtotime($this->date))+1) .
+                date("-d", strtotime($this->date));
+        }
+        $date = $this->date;
+
+		if( isset($_POST) && !empty($_POST) )
 		{
+            unset($_POST['yt0']);
+
             $json = CJSON::encode($_POST);
-            echo $json;
-            /*
-			$model->attributes=$_POST['GeneralPercent'];
+
+            $model->date = $date;
+			$model->json_days = $json;
+
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
-            */
+                Yii::app()->user->setFlash('adminSuccessMessage', 'Создано!');
+				$this->redirect(array('index','id'=>$model->id));
+
 		}
 
-        $date = '2013-08-12';
-// Вычисляем число дней в текущем месяце
-        $dayofmonth = date('t', strtotime($date));
-// Счётчик для дней месяца
-        $day_count = 1;
 
-// 1. Первая неделя
+        $dayofmonth = date('t', strtotime($date));
+
+        $day_count = 1;
+        //первая неделя
         $num = 0;
         for($i = 0; $i < 7; $i++)
         {
@@ -110,7 +132,7 @@ class GeneralPercentController extends AdminController
             }
         }
 
-// 2. Последующие недели месяца
+        // 2. Последующие недели месяца
         while(true)
         {
             $num++;
@@ -144,17 +166,95 @@ class GeneralPercentController extends AdminController
 	{
 		$model=$this->loadModel($id);
 
-		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
+        $json = CJSON::decode($model['json_days']);
 
-		if(isset($_POST['GeneralPercent']))
-		{
-			$model->attributes=$_POST['GeneralPercent'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
-		}
+
+        $date = date('Y-m-d', strtotime($model->date));
+
+        if( isset($_POST) && !empty($_POST) )
+        {
+            unset($_POST['yt0']);
+
+            $json = CJSON::encode($_POST);
+
+            $model->date = $date;
+            $model->json_days = $json;
+
+            if($model->save())
+                Yii::app()->user->setFlash('adminSuccessMessage', 'Создано!');
+            $this->redirect(array('index','id'=>$model->id));
+
+        }
+
+
+        $dayofmonth = date('t', strtotime($date));
+
+        $day_count = 1;
+        //первая неделя
+        $num = 0;
+        for($i = 0; $i < 7; $i++)
+        {
+            // Вычисляем номер дня недели для числа
+            $dayofweek = date('w',
+                mktime(0, 0, 0, date('m'), $day_count, date('Y')));
+            // Приводим к числа к формату 1 - понедельник, ..., 6 - суббота
+            $dayofweek = $dayofweek - 1;
+            if($dayofweek == -1) $dayofweek = 6;
+
+            if($dayofweek == $i)
+            {
+                // Если дни недели совпадают,
+                // заполняем массив $week
+                // числами месяца
+                $week[$num][$i] = $day_count;
+                $day_count++;
+            }
+            else
+            {
+                $week[$num][$i] = "";
+            }
+        }
+
+        // 2. Последующие недели месяца
+        while(true)
+        {
+            $num++;
+            for($i = 0; $i < 7; $i++)
+            {
+                $week[$num][$i] = $day_count;
+                $day_count++;
+                // Если достигли конца месяца - выходим
+                // из цикла
+                if($day_count > $dayofmonth) break;
+            }
+            // Если достигли конца месяца - выходим
+            // из цикла
+            if($day_count > $dayofmonth) break;
+        }
+
+
+
+        // Uncomment the following line if AJAX validation is needed
+		// $this->performAjaxValidation($model);
+        if( isset($_POST) && !empty($_POST) )
+        {
+            unset($_POST['yt0']);
+
+            $json = CJSON::encode($_POST);
+
+            $model->json_days = $json;
+
+            if($model->save())
+                Yii::app()->user->setFlash('adminSuccessMessage', 'Успешно обновлено!');
+            $this->redirect(array('index','id'=>$model->id));
+
+        }
+
+
 
 		$this->render('update',array(
+            'week' => $week,
+            'json' => $json,
 			'model'=>$model,
 		));
 	}
@@ -230,4 +330,5 @@ class GeneralPercentController extends AdminController
 			Yii::app()->end();
 		}
 	}
+
 }

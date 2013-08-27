@@ -22,20 +22,14 @@ $('.search-form form').submit(function(){
 });
 ");
 ?>
+<div class="widget stacked ">
+    <div class="widget-header">
+        <i class="icon-signal"></i>
+        <h3>Общий процент</h3>
+    </div> <!-- /widget-header -->
 
-<h1>Manage General Percents</h1>
+    <div class="widget-content">
 
-<p>
-You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
-or <b>=</b>) at the beginning of each of your search values to specify how the comparison should be done.
-</p>
-
-<?php echo CHtml::link('Advanced Search','#',array('class'=>'search-button btn')); ?>
-<div class="search-form" style="display:none">
-<?php $this->renderPartial('_search',array(
-	'model'=>$model,
-)); ?>
-</div><!-- search-form -->
 
 <?php $this->widget('bootstrap.widgets.TbGridView',array(
 	'id'=>'general-percent-grid',
@@ -43,10 +37,15 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 	'filter'=>$model,
 	'columns'=>array(
 		'id',
-		'date',
-		'json_days',
+        array(
+            'name'=>'date',
+            'value'=>'date("M Y", strtotime($data->date))',
+        ),
 		array(
 			'class'=>'bootstrap.widgets.TbButtonColumn',
+            'template' => '{update} {delete}',
 		),
 	),
 )); ?>
+    </div> <!-- /widget-content -->
+</div>

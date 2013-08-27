@@ -4,6 +4,7 @@
 ));
 
 echo "<table class='table table-bordered table-striped'>";
+
     for($j = 0; $j < 7; $j++)
     {
     echo "<tr>";
@@ -15,7 +16,7 @@ echo "<table class='table table-bordered table-striped'>";
         // подсвечиваем их
         if($j == 5 || $j == 6)
         echo "<td><font color=red>".$week[$i][$j]."</font></td>";
-        else echo "<td>".$week[$i][$j]."<input type='text' name='". $week[$i][$j] . "' value=''></td>";
+        else echo "<td>".$week[$i][$j]."<input type='text' name='". $week[$i][$j] . "' value='" . $json[$week[$i][$j]] . "'></td>";
         }
         else echo "<td>&nbsp;</td>";
         }

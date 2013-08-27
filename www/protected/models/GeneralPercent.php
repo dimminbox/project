@@ -52,8 +52,8 @@ class GeneralPercent extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'date' => 'Date',
-			'json_days' => 'Json Days',
+			'date' => 'Дата',
+			'json_days' => 'Данные в формате JSON',
 		);
 	}
 

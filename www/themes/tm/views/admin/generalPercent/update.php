@@ -11,8 +11,16 @@ $this->menu=array(
 	array('label'=>'View GeneralPercent','url'=>array('view','id'=>$model->id)),
 	array('label'=>'Manage GeneralPercent','url'=>array('admin')),
 );
+
 ?>
+<div class="widget stacked widget-table action-table">
+    <div class="widget-header">
+        <i class="icon-signal"></i>
+        <h3>Редактирование общего процента на <?php echo date('M.Y', strtotime($model->date)) ?></h3>
+    </div> <!-- /widget-header -->
 
-<h1>Update GeneralPercent <?php echo $model->id; ?></h1>
+    <div class="widget-content">
 
-<?php echo $this->renderPartial('_form',array('model'=>$model)); ?>
+<?php echo $this->renderPartial('_updateForm',array('model'=>$model, 'week' => $week, 'json' => $json,)); ?>
+    </div> <!-- /widget-content -->
+</div>
