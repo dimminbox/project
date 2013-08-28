@@ -40,7 +40,7 @@
 <section id="header-content">
     <div class="main">
         <div class="sub-page-banner page2-banner">
-            <p><strong class="font-1">Use</strong><strong class="font-2">our time</strong><strong class="font-1">to save your</strong><strong class="font-2">money!</strong></p>
+
         </div>
     </div>
 </section>

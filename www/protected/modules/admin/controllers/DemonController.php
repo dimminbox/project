@@ -27,7 +27,7 @@ class DemonController extends AdminController
                             if ( $deposit->status == 1 && $deposit->date < date('Y-m-d H:i:s', time() - self::DEPOSIT_START_TIME)) {
                                 $depositType = DepositType::model()->findByPk($deposit->deposit_type_id);
 
-                                $percentAmount = ( $deposit->deposit_amount * Deposit::GLOBAL_PERCENT ) * $depositType->percent;
+                                $percentAmount = ( $deposit->deposit_amount * Deposit::model()->findTodayGeneralPercent() ) * $depositType->percent;
 
                                 $transaction = new UserTransaction();
                                 $transaction->user_id = $user->id;

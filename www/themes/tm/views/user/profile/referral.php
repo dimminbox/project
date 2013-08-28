@@ -19,7 +19,6 @@ $this->menu=array(
         <?php echo Yii::app()->user->getFlash('profileMessage'); ?>
     </div>
 <?php endif; ?>
-<hr>
 <h1>Партнерская программа</h1>
 <p>
     <strong>Ваша реферальная ссылка:</strong> <?php  echo  CHtml::textField('referral_link', Yii::app()->request->hostInfo . '/?ref=' . $user->username) ?><br />

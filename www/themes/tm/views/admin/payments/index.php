@@ -31,9 +31,11 @@ $this->widget('zii.widgets.grid.CGridView', array(
 <div class="widget-content">
 
     <p>
-        <?php echo CHtml::link('Общий баланс пользователей:', $this->createAbsoluteUrl('/admin/payments/usersBalance')) ?>
-         <span class='stat-value'><?php echo (float)User::model()->allAmount; ?>$</span>
-        </p>
+        Общий баланс пользователей:
+         <span class='stat-value'><?php echo (float)User::model()->allAmount; ?>$</span><br />
+        <strong>Подробности:</strong><br />
+        <?php echo CHtml::link('Баланс пользователей', $this->createAbsoluteUrl('/admin/payments/usersBalance')) ?>
+    </p>
 
 
     <h3>Список окончания депозитов на <a href='javascript:;' onclick="$('#form').show(300);" id='day' title='Нажмите, чтобы изменить'><?php echo $this->expirationDate; ?></a> <?php echo User::model()->declension($this->expirationDate, 'день', 'дня', ' дней')?>:</h3>
