@@ -90,6 +90,7 @@ class GeneralPercentController extends AdminController
 
 		if( isset($_POST) && !empty($_POST) )
 		{
+
             unset($_POST['yt0']);
 
             $json = CJSON::encode($_POST);
@@ -112,8 +113,7 @@ class GeneralPercentController extends AdminController
         for($i = 0; $i < 7; $i++)
         {
             // Вычисляем номер дня недели для числа
-            $dayofweek = date('w',
-                mktime(0, 0, 0, date('m'), $day_count, date('Y')));
+            $dayofweek = date('w', mktime(0, 0, 0, date('m', strtotime($date)), $day_count, date('Y', strtotime($date))));
             // Приводим к числа к формату 1 - понедельник, ..., 6 - суббота
             $dayofweek = $dayofweek - 1;
             if($dayofweek == -1) $dayofweek = 6;
@@ -195,8 +195,7 @@ class GeneralPercentController extends AdminController
         for($i = 0; $i < 7; $i++)
         {
             // Вычисляем номер дня недели для числа
-            $dayofweek = date('w',
-                mktime(0, 0, 0, date('m'), $day_count, date('Y')));
+            $dayofweek = date('w', mktime(0, 0, 0, date('m', strtotime($date)), $day_count, date('Y', strtotime($date))));
             // Приводим к числа к формату 1 - понедельник, ..., 6 - суббота
             $dayofweek = $dayofweek - 1;
             if($dayofweek == -1) $dayofweek = 6;

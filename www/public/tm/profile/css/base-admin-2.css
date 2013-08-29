@@ -98,6 +98,12 @@ h6 {
 .modal-window {
     text-align: center;
 }
+.errorMessage {
+    color: red;
+}
+.modal_form_button {
+    margin-top: 10px;
+}
 /*------------------------------------------------------------------
 [ Navbar / .navbar ]
 */

@@ -91,7 +91,7 @@ $this->layout = '//layouts/login';
                             } elseif ($field->field_type == "TEXT") {
                                 echo $form->textArea($profile, $field->varname, array('rows' => 6, 'cols' => 50));
                             } else {
-                                echo $form->textField($profile, $field->varname, array('placeholder' => $field->varname, 'size' => 60, 'maxlength' => (($field->field_size) ? $field->field_size : 255)));
+                                echo $form->textField($profile, $field->varname, array('size' => 60, 'maxlength' => (($field->field_size) ? $field->field_size : 255)));
                             }
                             ?>
                             <?php echo $form->error($profile, $field->varname); ?>
@@ -100,6 +100,9 @@ $this->layout = '//layouts/login';
                     }
                 }
                 ?>
+                </div>
+            <div style='clear:both'></div>
+            <div style='padding-left: 120px;'>
                 <?php if (UserModule::doCaptcha('registration')): ?>
                     <div>
                         <?php echo $form->labelEx($model, 'verifyCode'); ?>
@@ -119,7 +122,7 @@ $this->layout = '//layouts/login';
                 </div>
             <?php endif; ?>
             <?php $this->endWidget(); ?>
-        </div>
+            </div>
 
 
     </div>

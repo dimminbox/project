@@ -29,7 +29,7 @@ $this->menu = array(
 <?php
 
 
-if ($user->deposit != null) {
+if ( Yii::app()->params['reinvest'] == true && $user->deposit != null ) {
 
     foreach ($user->deposit as $dep) {
 
@@ -94,7 +94,7 @@ if ($user->deposit != null) {
 </p-->
 
 <!--p>
-    <?php echo CHtml::link('Инвестировать', '#', array('onclick' => '$("#investment").dialog("open"); return false;',)); ?>
+
     <br />
 
 </p>
@@ -107,8 +107,8 @@ if ($user->deposit != null) {
 
 <?php $this->renderPartial('_recharge_amount', array('deposit' => $deposit)) ?>
 <?php $this->renderPartial('_outputmoney', array('model' => $user)) ?>
-<?php $this->renderPartial('_investment', array('investment' => $investment, 'model' => $user)) ?>
-<?php $this->renderPartial('_transfer', array('transfer' => $transfer, 'model' => $user)) ?>
+
+<?php $this->renderPartial('_transfer', array('transfer' => $transfer,'model' => $user)) ?>
 <!-- Левый блок -->
 <div class="span6">
     <!-- 1 виджет -->
@@ -175,46 +175,68 @@ if ($user->deposit != null) {
         <div class="widget-content">
 
             <ul class="news-items">
-                <li>
+                <?php foreach ( $listDeposits as $depositPlan ) : ?>
+                    <li>
 
-                    <div class="news-item-detail">
-                        <a href="javascript:;" class="news-item-title">Duis aute irure dolor in reprehenderit</a>
+                        <div class="news-item-detail">
 
-                        <p class="news-item-preview">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                            eiusmod tempor incididunt ut labore et dolore.</p>
-                    </div>
+                            Срок депозита: <?php echo $depositPlan->type; ?><br />
+                            Процент: <?php echo $depositPlan->percent; ?>%<br />
+                            Мин.сумма: <?php echo $depositPlan->min_amount; ?>$<br />
+                            <p class="news-item-preview">
+                                <?php echo $depositPlan->description; ?>
+                            </p>
+                        </div>
 
-                    <div class="news-item-date">
-                        <span class="news-item-day">08</span>
-                        <span class="news-item-month">Mar</span>
-                    </div>
-                </li>
-                <li>
-                    <div class="news-item-detail">
-                        <a href="javascript:;" class="news-item-title">Duis aute irure dolor in reprehenderit</a>
+                        <div class="news-item-date">
+                            <?php echo CHtml::link('Инвестировать', '#', array('onclick' => '$("#investment' . $depositPlan->id . '").dialog("open"); return false;',)); ?>
 
-                        <p class="news-item-preview">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                            eiusmod tempor incididunt ut labore et dolore.</p>
-                    </div>
 
-                    <div class="news-item-date">
-                        <span class="news-item-day">08</span>
-                        <span class="news-item-month">Mar</span>
-                    </div>
-                </li>
-                <li>
-                    <div class="news-item-detail">
-                        <a href="javascript:;" class="news-item-title">Duis aute irure dolor in reprehenderit</a>
+                            <?php
+                            $this->beginWidget(
+                                'zii.widgets.jui.CJuiDialog', array(
+                                    'id'      => 'investment' . $depositPlan->id,
+                                    'options' => array(
+                                        'title'    => 'Депозит: ' . $depositPlan->type . ' - ' . $depositPlan->percent . '%',
+                                        'autoOpen' => false,
+                                        'modal'    => 'true',
+                                        'width'    => '250',
+                                        'height'   => 'auto',
+                                        'resizable'=> false,
+                                    ),
+                                )
+                            ); ?>
+                            <div class="form">
+                                <?php $form=$this->beginWidget('CActiveForm', array(
+                                    'id'=>'investment-form' . $depositPlan->id,
+                                    'action' => $this->createAbsoluteUrl('/user/profile/investment'),
+                                    'enableClientValidation'=>true,
+                                    'clientOptions'=>array(
+                                        'validateOnSubmit'=>true,
+                                    ),
+                                    'htmlOptions' => array(
+                                        'class' => 'modal-window'
+                                    ),
+                                )); ?>
 
-                        <p class="news-item-preview">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                            eiusmod tempor incididunt ut labore et dolore.</p>
-                    </div>
+                                <?php echo $form->labelEx($investment,'deposit_amount'); ?>
+                                <?php echo $form->textField($investment,'deposit_amount', array('value' => $depositPlan->min_amount)); ?>
+                                <?php echo $form->error($investment,'deposit_amount'); ?>
 
-                    <div class="news-item-date">
-                        <span class="news-item-day">08</span>
-                        <span class="news-item-month">Mar</span>
-                    </div>
-                </li>
+                                <?php echo $form->hiddenField($investment,'deposit_type_id', array('value' => $depositPlan->id) ); ?>
+                                <div class='modal_form_button'>
+                                    <?php echo CHtml::submitButton('Инвестировать',array('class'=>'btn btn-large btn-primary')); ?>
+                                </div>
+
+                                <?php $this->endWidget(); ?>
+                            </div>
+                            <?php $this->endWidget('zii.widgets.jui.CJuiDialog');?>
+
+
+                        </div>
+                    </li>
+                <?php endforeach; ?>
+
             </ul>
 
         </div>
@@ -319,187 +341,179 @@ if ($user->deposit != null) {
         </div>
 
     </div>
+
+</div>
 <?php endif; ?>
 
-<div class="widget stacked">
+    <div class="widget stacked">
 
-    <div class="widget-header">
-        <i class="icon-bookmark"></i>
+        <div class="widget-header">
+            <i class="icon-bookmark"></i>
+            <h3>Quick Shortcuts</h3>
+        </div> <!-- /widget-header -->
 
-        <h3>Quick Shortcuts</h3>
-    </div>
-    <!-- /widget-header -->
+        <div class="widget-content">
 
-    <div class="widget-content">
+            <div class="shortcuts">
+                <a href="javascript:;" class="shortcut">
+                    <i class="shortcut-icon icon-list-alt"></i>
+                    <span class="shortcut-label">Apps</span>
+                </a>
 
-        <div class="shortcuts">
-            <a href="javascript:;" class="shortcut">
-                <i class="shortcut-icon icon-list-alt"></i>
-                <span class="shortcut-label">Apps</span>
-            </a>
+                <a href="javascript:;" class="shortcut">
+                    <i class="shortcut-icon icon-bookmark"></i>
+                    <span class="shortcut-label">Bookmarks</span>
+                </a>
 
-            <a href="javascript:;" class="shortcut">
-                <i class="shortcut-icon icon-bookmark"></i>
-                <span class="shortcut-label">Bookmarks</span>
-            </a>
+                <a href="javascript:;" class="shortcut">
+                    <i class="shortcut-icon icon-signal"></i>
+                    <span class="shortcut-label">Reports</span>
+                </a>
 
-            <a href="javascript:;" class="shortcut">
-                <i class="shortcut-icon icon-signal"></i>
-                <span class="shortcut-label">Reports</span>
-            </a>
+                <a href="javascript:;" class="shortcut">
+                    <i class="shortcut-icon icon-comment"></i>
+                    <span class="shortcut-label">Comments</span>
+                </a>
 
-            <a href="javascript:;" class="shortcut">
-                <i class="shortcut-icon icon-comment"></i>
-                <span class="shortcut-label">Comments</span>
-            </a>
+                <a href="javascript:;" class="shortcut">
+                    <i class="shortcut-icon icon-user"></i>
+                    <span class="shortcut-label">Users</span>
+                </a>
 
-            <a href="javascript:;" class="shortcut">
-                <i class="shortcut-icon icon-user"></i>
-                <span class="shortcut-label">Users</span>
-            </a>
+                <a href="javascript:;" class="shortcut">
+                    <i class="shortcut-icon icon-file"></i>
+                    <span class="shortcut-label">Notes</span>
+                </a>
 
-            <a href="javascript:;" class="shortcut">
-                <i class="shortcut-icon icon-file"></i>
-                <span class="shortcut-label">Notes</span>
-            </a>
+                <a href="javascript:;" class="shortcut">
+                    <i class="shortcut-icon icon-picture"></i>
+                    <span class="shortcut-label">Photos</span>
+                </a>
 
-            <a href="javascript:;" class="shortcut">
-                <i class="shortcut-icon icon-picture"></i>
-                <span class="shortcut-label">Photos</span>
-            </a>
+                <a href="javascript:;" class="shortcut">
+                    <i class="shortcut-icon icon-tag"></i>
+                    <span class="shortcut-label">Tags</span>
+                </a>
+            </div> <!-- /shortcuts -->
 
-            <a href="javascript:;" class="shortcut">
-                <i class="shortcut-icon icon-tag"></i>
-                <span class="shortcut-label">Tags</span>
-            </a>
-        </div>
-        <!-- /shortcuts -->
+        </div> <!-- /widget-content -->
 
-    </div>
-    <!-- /widget-content -->
-
-</div>
-<!-- /widget -->
+    </div> <!-- /widget -->
 
 
-<div class="widget stacked widget-table action-table">
 
-    <div class="widget-header">
-        <i class="icon-th-list"></i>
 
-        <h3>Table</h3>
-    </div>
-    <!-- /widget-header -->
 
-    <div class="widget-content">
 
-        <table class="table table-striped table-bordered">
-            <thead>
-            <tr>
-                <th>Engine</th>
-                <th>Browser</th>
-                <th class="td-actions"></th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td>Trident</td>
-                <td>Internet
-                    Explorer 4.0
-                </td>
-                <td class="td-actions">
-                    <a href="javascript:;" class="btn btn-small btn-warning">
-                        <i class="btn-icon-only icon-ok"></i>
-                    </a>
 
-                    <a href="javascript:;" class="btn btn-small">
-                        <i class="btn-icon-only icon-remove"></i>
-                    </a>
-                </td>
-            </tr>
-            <tr>
-                <td>Trident</td>
-                <td>Internet
-                    Explorer 5.0
-                </td>
-                <td class="td-actions">
-                    <a href="javascript:;" class="btn btn-small btn-warning">
-                        <i class="btn-icon-only icon-ok"></i>
-                    </a>
+    <div class="widget stacked widget-table action-table">
 
-                    <a href="javascript:;" class="btn btn-small">
-                        <i class="btn-icon-only icon-remove"></i>
-                    </a>
-                </td>
-            </tr>
-            <tr>
-                <td>Trident</td>
-                <td>Internet
-                    Explorer 5.5
-                </td>
-                <td class="td-actions">
-                    <a href="javascript:;" class="btn btn-small btn-warning">
-                        <i class="btn-icon-only icon-ok"></i>
-                    </a>
+        <div class="widget-header">
+            <i class="icon-th-list"></i>
+            <h3>Table</h3>
+        </div> <!-- /widget-header -->
 
-                    <a href="javascript:;" class="btn btn-small">
-                        <i class="btn-icon-only icon-remove"></i>
-                    </a>
-                </td>
-            </tr>
-            <tr>
-                <td>Trident</td>
-                <td>Internet
-                    Explorer 5.5
-                </td>
-                <td class="td-actions">
-                    <a href="javascript:;" class="btn btn-small btn-warning">
-                        <i class="btn-icon-only icon-ok"></i>
-                    </a>
+        <div class="widget-content">
 
-                    <a href="javascript:;" class="btn btn-small">
-                        <i class="btn-icon-only icon-remove"></i>
-                    </a>
-                </td>
-            </tr>
-            <tr>
-                <td>Trident</td>
-                <td>Internet
-                    Explorer 5.5
-                </td>
-                <td class="td-actions">
-                    <a href="javascript:;" class="btn btn-small btn-warning">
-                        <i class="btn-icon-only icon-ok"></i>
-                    </a>
+            <table class="table table-striped table-bordered">
+                <thead>
+                <tr>
+                    <th>Engine</th>
+                    <th>Browser</th>
+                    <th class="td-actions"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>Trident</td>
+                    <td>Internet
+                        Explorer 4.0</td>
+                    <td class="td-actions">
+                        <a href="javascript:;" class="btn btn-small btn-warning">
+                            <i class="btn-icon-only icon-ok"></i>
+                        </a>
 
-                    <a href="javascript:;" class="btn btn-small">
-                        <i class="btn-icon-only icon-remove"></i>
-                    </a>
-                </td>
-            </tr>
-            <tr>
-                <td>Trident</td>
-                <td>Internet
-                    Explorer 5.5
-                </td>
-                <td class="td-actions">
-                    <a href="javascript:;" class="btn btn-small btn-warning">
-                        <i class="btn-icon-only icon-ok"></i>
-                    </a>
+                        <a href="javascript:;" class="btn btn-small">
+                            <i class="btn-icon-only icon-remove"></i>
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Trident</td>
+                    <td>Internet
+                        Explorer 5.0</td>
+                    <td class="td-actions">
+                        <a href="javascript:;" class="btn btn-small btn-warning">
+                            <i class="btn-icon-only icon-ok"></i>
+                        </a>
 
-                    <a href="javascript:;" class="btn btn-small">
-                        <i class="btn-icon-only icon-remove"></i>
-                    </a>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+                        <a href="javascript:;" class="btn btn-small">
+                            <i class="btn-icon-only icon-remove"></i>
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Trident</td>
+                    <td>Internet
+                        Explorer 5.5</td>
+                    <td class="td-actions">
+                        <a href="javascript:;" class="btn btn-small btn-warning">
+                            <i class="btn-icon-only icon-ok"></i>
+                        </a>
 
-    </div>
-    <!-- /widget-content -->
+                        <a href="javascript:;" class="btn btn-small">
+                            <i class="btn-icon-only icon-remove"></i>
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Trident</td>
+                    <td>Internet
+                        Explorer 5.5</td>
+                    <td class="td-actions">
+                        <a href="javascript:;" class="btn btn-small btn-warning">
+                            <i class="btn-icon-only icon-ok"></i>
+                        </a>
 
-</div>
-<!-- /widget -->
+                        <a href="javascript:;" class="btn btn-small">
+                            <i class="btn-icon-only icon-remove"></i>
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Trident</td>
+                    <td>Internet
+                        Explorer 5.5</td>
+                    <td class="td-actions">
+                        <a href="javascript:;" class="btn btn-small btn-warning">
+                            <i class="btn-icon-only icon-ok"></i>
+                        </a>
+
+                        <a href="javascript:;" class="btn btn-small">
+                            <i class="btn-icon-only icon-remove"></i>
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Trident</td>
+                    <td>Internet
+                        Explorer 5.5</td>
+                    <td class="td-actions">
+                        <a href="javascript:;" class="btn btn-small btn-warning">
+                            <i class="btn-icon-only icon-ok"></i>
+                        </a>
+
+                        <a href="javascript:;" class="btn btn-small">
+                            <i class="btn-icon-only icon-remove"></i>
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+        </div> <!-- /widget-content -->
+
+    </div> <!-- /widget -->
 
 </div> <!-- /span6 -->
 <!-- Конец правого блока -->
