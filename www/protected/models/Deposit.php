@@ -178,4 +178,5 @@ class Deposit extends CActiveRecord
 
         return Yii::app()->params['defaultGeneralPercent'];
     }
+
 }

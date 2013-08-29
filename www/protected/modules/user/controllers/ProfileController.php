@@ -155,6 +155,7 @@ class ProfileController extends Controller
     }
     //Инвестирование
     public function actionInvestment() {
+
         $amount = (float)User::model()->getAmount();
 
         if ( isset($_POST['Deposit']) ) {
@@ -174,7 +175,7 @@ class ProfileController extends Controller
                 if ( $transaction->save() ) {
                     $deposit = new Deposit();
                     $deposit->attributes = $_POST['Deposit'];
-                    $deposit->expire = date('Y-m-d H:i:s', $depositType->days * 86400 + time());
+                    $deposit->expire = BankDay::getEndDate('now', $depositType->days, 'Y-m-d H:i:s');
                     $deposit->user_id = Yii::app()->user->id;
                     $deposit->status = 1;
                     $deposit->reinvest = 0;
