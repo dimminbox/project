@@ -24,7 +24,15 @@ $this->menu=array(
         <div class="widget-content">
 <table class="table table-bordered table-striped">
         <thead>
-        <tr><td>№</td><td>Сумма</td><td>Срок</td><td>Процент</td><td>Дата создания</td><td>Дата окончания</td><td>Реинвест</td><td>Состояние</td></tr>
+        <tr>
+            <td>№</td>
+            <td>Сумма</td>
+            <td>Срок</td>
+            <td>Процент</td>
+            <td>Дата создания</td>
+            <td>Дата окончания</td>
+            <?php echo ( Yii::app()->params['reinvest'] ) ? '<td>Реинвест</td>' : '' ?>
+            <td>Состояние</td></tr>
         </thead>
         <?php
         foreach ($models as $deposit): ?>
@@ -36,6 +44,8 @@ $this->menu=array(
                 <td><?php echo $deposit->deposit_type->percent; ?></td>
                 <td><?php echo $deposit->date; ?></td>
                 <td><?php echo $deposit->expire; ?></td>
+
+                <?php if ( Yii::app()->params['reinvest'] ) :?>
                 <td><?php
                     if ( $deposit->reinvest == Deposit::REINVEST_YES ) {
                         echo 'Да';
@@ -45,6 +55,8 @@ $this->menu=array(
                         echo '';
                     }
                     ?></td>
+                <?php endif; ?>
+
                 <td><?php if ( $deposit->status == 1 )
                             { echo 'Действует'; }
                         else { echo 'Закрыт'; }

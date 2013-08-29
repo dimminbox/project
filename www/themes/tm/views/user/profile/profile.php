@@ -29,7 +29,7 @@ $this->menu=array(
 <?php
 
 
-if ( $user->deposit != null ) {
+if ( Yii::app()->params['reinvest'] == true && $user->deposit != null ) {
 
     foreach( $user->deposit as $dep ) {
 

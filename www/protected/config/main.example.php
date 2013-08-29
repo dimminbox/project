@@ -179,5 +179,6 @@ return array(
         'payment_units' => 'USD',
         'max_amount_output' => '300',//максимальная сумма для вывода
         'defaultGeneralPercent' => 0.6, // Значение общего процента по-умолчанию
+        'reinvest' => false, //Реинвестирование
     ),
 );
