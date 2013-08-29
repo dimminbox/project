@@ -4,11 +4,11 @@ $this->breadcrumbs = array(
 );
 $this->layout = '//layouts/login';
 ?>
-
-<div class="container" >
+<div class="container">
     <div class="account-container-register stacked">
-        <div class="content clearfix" >
+        <div class="content clearfix">
             <h1><?php echo UserModule::t("Register"); ?></h1>
+            <div class="register-content">
             <?php $form = $this->beginWidget('UActiveForm', array(
                 'id' => 'registration-form',
                 'enableAjaxValidation' => true,
@@ -73,6 +73,8 @@ $this->layout = '//layouts/login';
                     </div>
                     <?php echo $form->hiddenField($model, 'referrer_id', array('value' => $user->id,)); ?>
                 <?php endif; ?>
+                </div>
+                <div float="left" width="300px">
                 <h5>Данные необходимые для восстановления аккаунта</h5>
                 <?php
                 $profileFields = $profile->getFields();
@@ -89,7 +91,7 @@ $this->layout = '//layouts/login';
                             } elseif ($field->field_type == "TEXT") {
                                 echo $form->textArea($profile, $field->varname, array('rows' => 6, 'cols' => 50));
                             } else {
-                                echo $form->textField($profile,$field->varname,array('placeholder' => $field->varname, 'size'=>60,'maxlength'=>(($field->field_size)?$field->field_size:255)));
+                                echo $form->textField($profile, $field->varname, array('placeholder' => $field->varname, 'size' => 60, 'maxlength' => (($field->field_size) ? $field->field_size : 255)));
                             }
                             ?>
                             <?php echo $form->error($profile, $field->varname); ?>
@@ -120,8 +122,8 @@ $this->layout = '//layouts/login';
         </div>
 
 
+    </div>
 </div>
-
 
 
 
