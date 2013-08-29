@@ -1,6 +1,7 @@
 <?php
 
 return array(
+    'Cancel' => 'Отмена',
     'Investment' => 'Список инвестиций',
     'Referral' => 'Партнерская программа',
     'All operations' => 'Все операции',

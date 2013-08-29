@@ -33,7 +33,7 @@ body{ color:#838383; font: 13px/1.7em 'Open Sans';}
 }
 
 .account-container-register {
-    width: 880px;
+    width: 900px;
     display: block;
     margin: 60px auto;
     font-weight:normal;color:#111:
@@ -53,7 +53,11 @@ body{ color:#838383; font: 13px/1.7em 'Open Sans';}
     padding: 16px 28px 23px;
     padding-bottom: 50px;
 }
-
+.register-content{
+    float: left;
+    width: 400px;
+    padding-left: 70px;
+}
 .login-fields {
 
 }

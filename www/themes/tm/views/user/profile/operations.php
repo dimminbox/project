@@ -19,46 +19,47 @@ $this->menu = array(
     <div class="widget stacked">
         <div class="widget-header">
             <i class="icon-check"></i>
+
             <h3>
                 Ваши операции
             </h3></div>
         <div class="widget-content">
 
-<table class="table table-bordered table-striped">
-    <thead>
-    <tr>
-        <td>№</td>
-        <td>Дата</td>
-        <td>Сумма операции</td>
-        <td>Тип операции</td>
-        <td>Остаток</td>
-    </tr>
-    </thead>
-    <?php
-    foreach ($models as $user): ?>
+            <table class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                    <td>№</td>
+                    <td>Дата</td>
+                    <td>Сумма операции</td>
+                    <td>Тип операции</td>
+                    <td>Остаток</td>
+                </tr>
+                </thead>
+                <?php
+                foreach ($models as $user): ?>
 
-        <tr>
-            <td><?php echo $user->id; ?></td>
-            <td><?php echo $user->time ?></td>
-            <td><?php echo $formatted = (float)$user->amount; ?></td>
-            <td><?php echo $user->reason; ?></td>
-            <td><?php echo (float)$user->amount_after ?></td>
-        </tr>
+                    <tr>
+                        <td><?php echo $user->id; ?></td>
+                        <td><?php echo $user->time ?></td>
+                        <td><?php echo $formatted = (float)$user->amount; ?></td>
+                        <td><?php echo $user->reason; ?></td>
+                        <td><?php echo (float)$user->amount_after ?></td>
+                    </tr>
 
-    <?php endforeach; ?>
-</table>
-<div class="pagination">
-    <?php $this->widget('CLinkPager', array(
-        'firstPageLabel' => '<<',
-        'prevPageLabel' => '<',
-        'nextPageLabel' => '>',
-        'lastPageLabel' => '>>',
-        'selectedPageCssClass' => 'active',
-        'header' => '',
-        'pages' => $pages,
-        'cssFile' => false,
-    ))?>
-</div>
+                <?php endforeach; ?>
+            </table>
+            <div class="pagination">
+                <?php $this->widget('CLinkPager', array(
+                    'firstPageLabel' => '<<',
+                    'prevPageLabel' => '<',
+                    'nextPageLabel' => '>',
+                    'lastPageLabel' => '>>',
+                    'selectedPageCssClass' => 'active',
+                    'header' => '',
+                    'pages' => $pages,
+                    'cssFile' => false,
+                ))?>
+            </div>
         </div>
     </div>
 </div>

@@ -20,6 +20,7 @@ $this->menu = array(
     <div class="widget stacked">
         <div class="widget-header">
             <i class="icon-check"></i>
+
             <h3>
                 Партнерская программа
             </h3></div>

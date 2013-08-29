@@ -43,6 +43,12 @@ $this->layout='//layouts/login';
                         <?php echo UserModule::t("Login"); ?>
                     </button>
                 </div>
+                <div>
+                    <button class="btn btn-large btn-tertiary" action="index">
+                        <?php echo UserModule::t("Cancel"); ?>
+                    </button>
+                </div>
+                
 
                 <?php echo CHtml::endForm(); ?>
             </div><!-- form -->
