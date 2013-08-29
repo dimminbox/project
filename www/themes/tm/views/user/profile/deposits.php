@@ -14,7 +14,14 @@ $this->menu=array(
     array('label'=>UserModule::t('Logout'), 'url'=>array('/user/logout')),
 );
 ?>
-<h1>Ваши депозиты</h1>
+<div class="span12">
+    <div class="widget stacked">
+        <div class="widget-header">
+            <i class="icon-check"></i>
+            <h3>
+                Ваши дерозиты
+            </h3></div>
+        <div class="widget-content">
 <table class="table table-bordered table-striped">
         <thead>
         <tr><td>№</td><td>Сумма</td><td>Срок</td><td>Процент</td><td>Дата создания</td><td>Дата окончания</td><td>Реинвест</td><td>Состояние</td></tr>
@@ -49,3 +56,5 @@ $this->menu=array(
 <?php $this->widget('CLinkPager', array(
     'pages' => $pages,
 ))?>
+            </div>
+        </div>

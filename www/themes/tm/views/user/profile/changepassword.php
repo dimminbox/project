@@ -14,8 +14,15 @@ $this->menu=array(
     array('label'=>UserModule::t('Logout'), 'url'=>array('/user/logout')),
 );
 ?>
+<div class="span12">
+    <div class="widget stacked">
+        <div class="widget-header">
+            <i class="icon-check"></i>
+            <h3>
+                <?php echo UserModule::t("Change password"); ?>
+            </h3></div>
+        <div class="widget-content">
 
-<h1><?php echo UserModule::t("Change password"); ?></h1>
 
 <div class="form">
 <?php $form=$this->beginWidget('CActiveForm', array(
@@ -29,13 +36,13 @@ $this->menu=array(
 	<p class="note"><?php echo UserModule::t('Fields with <span class="required">*</span> are required.'); ?></p>
 	<?php echo $form->errorSummary($model); ?>
 	
-	<div class="row">
+	<div>
 	<?php echo $form->labelEx($model,'oldPassword'); ?>
 	<?php echo $form->passwordField($model,'oldPassword'); ?>
 	<?php echo $form->error($model,'oldPassword'); ?>
 	</div>
 	
-	<div class="row">
+	<div>
 	<?php echo $form->labelEx($model,'password'); ?>
 	<?php echo $form->passwordField($model,'password'); ?>
 	<?php echo $form->error($model,'password'); ?>
@@ -44,16 +51,18 @@ $this->menu=array(
 	</p>
 	</div>
 	
-	<div class="row">
+	<div>
 	<?php echo $form->labelEx($model,'verifyPassword'); ?>
 	<?php echo $form->passwordField($model,'verifyPassword'); ?>
 	<?php echo $form->error($model,'verifyPassword'); ?>
 	</div>
 	
 	
-	<div class="row submit">
+	<div>
 	<?php echo CHtml::submitButton(UserModule::t("Save")); ?>
 	</div>
 
 <?php $this->endWidget(); ?>
 </div><!-- form -->
+        </div>
+    </div>

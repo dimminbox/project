@@ -15,7 +15,14 @@ $this->menu = array(
     array('label' => UserModule::t('Logout'), 'url' => array('/user/logout')),
 );
 ?>
-<h1>Ваши операции</h1>
+<div class="span12">
+    <div class="widget stacked">
+        <div class="widget-header">
+            <i class="icon-check"></i>
+            <h3>
+                Ваши операции
+            </h3></div>
+        <div class="widget-content">
 
 <table class="table table-bordered table-striped">
     <thead>
@@ -51,4 +58,7 @@ $this->menu = array(
         'pages' => $pages,
         'cssFile' => false,
     ))?>
+</div>
+        </div>
+    </div>
 </div>
