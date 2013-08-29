@@ -18,6 +18,7 @@ class ProfileController extends Controller
     {
         $user = $this->loadUser();
         $this->active = 'profile';
+
         //Формирование массива данных для графика
         $chart = null;
 
@@ -123,6 +124,13 @@ class ProfileController extends Controller
         $deposit->NOPAYMENT_URL = $this->createAbsoluteUrl('/user/profile/depositFail');
         $deposit->PAYMENT_URL_METHOD = 'POST';
 
+
+        $criteria = new CDbCriteria();
+        $criteria->condition = 'status = ' . DepositType::DEPOSIT_TYPE_STATUS_ACT . '';
+        $criteria->order = 'percent';
+
+        $listDeposits = DepositType::model()->findAll($criteria);
+
         $investment = new Deposit();
 
         $transfer = new UserTransaction();
@@ -131,6 +139,7 @@ class ProfileController extends Controller
             'user'=>$user,
             'deposit' => $deposit,
             'investment' => $investment,
+            'listDeposits' => $listDeposits,
             'transfer'=>$transfer,
             'chart' => $chart,
         ));

@@ -141,7 +141,7 @@ return array(
             'connectionString' => 'mysql:host=localhost;dbname=project',
             'emulatePrepare' => true,
             'username' => 'root',
-            'password' => '82zczrnhw',
+            'password' => 'root',
             'charset' => 'utf8',
             'tablePrefix' => 'hyip_',
         ),
@@ -178,5 +178,6 @@ return array(
         'PassPhrase' => 'Cecfybyj915',
         'payment_units' => 'USD',
         'max_amount_output' => '300',//максимальная сумма для вывода
+        'defaultGeneralPercent' => 0.6, // Значение общего процента по-умолчанию
     ),
 );

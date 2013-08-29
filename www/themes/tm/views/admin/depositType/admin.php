@@ -47,6 +47,8 @@ $('.search-form form').submit(function(){
         ),
 		'percent',
         'days',
+        'min_amount',
+        'max_amount',
 		array(
 			'class'=>'CButtonColumn',
 		),
