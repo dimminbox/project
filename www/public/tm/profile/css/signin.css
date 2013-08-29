@@ -36,12 +36,10 @@ body{ color:#838383; font: 13px/1.7em 'Open Sans';}
     width: 880px;
     display: block;
     margin: 60px auto;
-    font-weight:normal;color:#111:
-
+    font-weight:normal;
+    color:#111;
     background: #f9f9f9;
-
     border: 1px solid #d5d5d5;
-
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     border-radius: 5px;

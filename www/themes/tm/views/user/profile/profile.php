@@ -92,7 +92,7 @@ if ( $user->deposit != null ) {
 </p-->
 
 <!--p>
-    <?php echo CHtml::link('Инвестировать', '#', array('onclick' => '$("#investment").dialog("open"); return false;',)); ?>
+
     <br />
 
 </p>
@@ -105,7 +105,7 @@ if ( $user->deposit != null ) {
 
 <?php $this->renderPartial('_recharge_amount', array('deposit' => $deposit)) ?>
 <?php $this->renderPartial('_outputmoney', array('model' => $user)) ?>
-<?php $this->renderPartial('_investment', array('investment' => $investment, 'model' => $user)) ?>
+
 <?php $this->renderPartial('_transfer', array('transfer' => $transfer,'model' => $user)) ?>
 <!-- Левый блок -->
 <div class="span6">
@@ -161,40 +161,68 @@ if ( $user->deposit != null ) {
         <div class="widget-content">
 
             <ul class="news-items">
-                <li>
+                <?php foreach ( $listDeposits as $depositPlan ) : ?>
+                    <li>
 
-                    <div class="news-item-detail">
-                        <a href="javascript:;" class="news-item-title">Duis aute irure dolor in reprehenderit</a>
-                        <p class="news-item-preview">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore.</p>
-                    </div>
+                        <div class="news-item-detail">
 
-                    <div class="news-item-date">
-                        <span class="news-item-day">08</span>
-                        <span class="news-item-month">Mar</span>
-                    </div>
-                </li>
-                <li>
-                    <div class="news-item-detail">
-                        <a href="javascript:;" class="news-item-title">Duis aute irure dolor in reprehenderit</a>
-                        <p class="news-item-preview">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore.</p>
-                    </div>
+                            Срок депозита: <?php echo $depositPlan->type; ?><br />
+                            Процент: <?php echo $depositPlan->percent; ?>%<br />
+                            Мин.сумма: <?php echo $depositPlan->min_amount; ?>$<br />
+                            <p class="news-item-preview">
+                                <?php echo $depositPlan->description; ?>
+                            </p>
+                        </div>
 
-                    <div class="news-item-date">
-                        <span class="news-item-day">08</span>
-                        <span class="news-item-month">Mar</span>
-                    </div>
-                </li>
-                <li>
-                    <div class="news-item-detail">
-                        <a href="javascript:;" class="news-item-title">Duis aute irure dolor in reprehenderit</a>
-                        <p class="news-item-preview">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore.</p>
-                    </div>
+                        <div class="news-item-date">
+                            <?php echo CHtml::link('Инвестировать', '#', array('onclick' => '$("#investment' . $depositPlan->id . '").dialog("open"); return false;',)); ?>
 
-                    <div class="news-item-date">
-                        <span class="news-item-day">08</span>
-                        <span class="news-item-month">Mar</span>
-                    </div>
-                </li>
+
+                            <?php
+                            $this->beginWidget(
+                                'zii.widgets.jui.CJuiDialog', array(
+                                    'id'      => 'investment' . $depositPlan->id,
+                                    'options' => array(
+                                        'title'    => 'Депозит: ' . $depositPlan->type . ' - ' . $depositPlan->percent . '%',
+                                        'autoOpen' => false,
+                                        'modal'    => 'true',
+                                        'width'    => '250',
+                                        'height'   => 'auto',
+                                        'resizable'=> false,
+                                    ),
+                                )
+                            ); ?>
+                            <div class="form">
+                                <?php $form=$this->beginWidget('CActiveForm', array(
+                                    'id'=>'investment-form' . $depositPlan->id,
+                                    'action' => $this->createAbsoluteUrl('/user/profile/investment'),
+                                    'enableClientValidation'=>true,
+                                    'clientOptions'=>array(
+                                        'validateOnSubmit'=>true,
+                                    ),
+                                    'htmlOptions' => array(
+                                        'class' => 'modal-window'
+                                    ),
+                                )); ?>
+
+                                <?php echo $form->labelEx($investment,'deposit_amount'); ?>
+                                <?php echo $form->textField($investment,'deposit_amount', array('value' => $depositPlan->min_amount)); ?>
+                                <?php echo $form->error($investment,'deposit_amount'); ?>
+
+                                <?php echo $form->hiddenField($investment,'deposit_type_id', array('value' => $depositPlan->id) ); ?>
+                                <div class='modal_form_button'>
+                                    <?php echo CHtml::submitButton('Инвестировать',array('class'=>'btn btn-large btn-primary')); ?>
+                                </div>
+
+                                <?php $this->endWidget(); ?>
+                            </div>
+                            <?php $this->endWidget('zii.widgets.jui.CJuiDialog');?>
+
+
+                        </div>
+                    </li>
+                <?php endforeach; ?>
+
             </ul>
 
         </div> <!-- /widget-content -->

@@ -15,8 +15,7 @@
  */
 class Deposit extends CActiveRecord
 {
-    const GLOBAL_PERCENT = 0.01;
-    const MIN_AMOUNT = 200;
+    const MIN_AMOUNT = 10;
 
     const REINVEST_YES = 1;
     const REINVEST_NO = 2;
@@ -39,7 +38,7 @@ class Deposit extends CActiveRecord
 		return array(
 			array('user_id, deposit_type_id, deposit_amount, status, reinvest', 'numerical', 'integerOnly'=>true),
 			array('date, expire, reinvest', 'safe'),
-            array('deposit_amount', 'numerical', 'min' => self::MIN_AMOUNT, 'tooSmall' => 'Минимальная сумма ' . self::MIN_AMOUNT),
+            array('deposit_amount', 'numerical', 'min' => self::MIN_AMOUNT, 'tooSmall' => 'Минимальная сумма ' . self::MIN_AMOUNT . '$'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, user_id, deposit_type_id, deposit_amount, status, date, expire, reinvest', 'safe', 'on'=>'search'),
@@ -49,6 +48,15 @@ class Deposit extends CActiveRecord
 	/**
 	 * @return array relational rules.
 	 */
+    /*
+     *
+     * @TODO доделать функцию вычисления минимальной суммы депозита
+     */
+    public function minDepositAmount() {
+
+
+    }
+
 	public function relations()
 	{
 		// NOTE: you may need to adjust the relation name and the related
@@ -146,7 +154,7 @@ class Deposit extends CActiveRecord
         }
     }
     //вычисляем общий процент на сегодняшний день
-    public function findTodayGeneralPercent() {
+    static public function findTodayGeneralPercent() {
 
         $criteria = new CDbCriteria();
         $criteria->condition = "date_format(date, '%Y%m') = date_format(now(), '%Y%m');";
