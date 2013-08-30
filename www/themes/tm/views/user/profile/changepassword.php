@@ -17,7 +17,7 @@ $this->menu = array(
 <div class="span12">
     <div class="widget stacked">
         <div class="widget-header">
-            <i class="icon-check"></i>
+            <i class="icon-wrench"></i>
 
             <h3>
                 <?php echo UserModule::t("Change password"); ?>

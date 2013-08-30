@@ -14,6 +14,7 @@ return array(
 	'username' => 'Логин',
 	'username or email' => 'Логин или email',
 	'password' => 'Пароль',
+    'Perfect purse' => 'Кошелек Perfect money',
 	'Remember me next time' => 'Запомнить меня',
 	'Username is incorrect.' => 'Пользователь с таким именем не зарегистрирован.',
 	'Email is incorrect.' => 'Пользователь с таким электроным адресом не зарегистрирован.',

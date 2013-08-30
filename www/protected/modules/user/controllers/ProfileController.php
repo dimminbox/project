@@ -483,7 +483,6 @@ class ProfileController extends Controller
         {
             $model->attributes=$_POST['User'];
             $profile->attributes=$_POST['Profile'];
-
             if($model->validate()&&$profile->validate()) {
                 $model->save();
                 $profile->save();

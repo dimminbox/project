@@ -16,7 +16,7 @@ $this->menu = array(
 <div class="span12">
     <div class="widget stacked">
         <div class="widget-header">
-            <i class="icon-check"></i>
+            <i class="icon-wrench"></i>
 
             <h3>
                 <?php echo UserModule::t('Edit profile'); ?>
@@ -73,6 +73,12 @@ $this->menu = array(
                     <?php echo $form->textField($model, 'email', array('size' => 60, 'maxlength' => 128)); ?>
                     <?php echo $form->error($model, 'email'); ?>
                 </div>
+                <div>
+                    <?php echo $form->labelEx($model, 'perfect_purse'); ?>
+                    <?php echo $form->textField($model, 'perfect_purse', array('size' => 60, 'maxlength' => 128)); ?>
+                    <?php echo $form->error($model, 'perfect_purse'); ?>
+                </div>
+
                 <?php echo CHtml::link('Изменить пароль', $this->createAbsoluteUrl('/user/profile/changepassword')); ?>
                 <br/>
 

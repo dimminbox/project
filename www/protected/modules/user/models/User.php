@@ -59,6 +59,7 @@ class User extends CActiveRecord
             array('secret', 'length', 'max'=>128, 'min' => 3 ),
             array('email', 'email'),
             array('internal_purse', 'unique'),
+            array('perfect_purse','safe'),
             array('username', 'unique', 'message' => UserModule::t("This user's name already exists.")),
             array('email', 'unique', 'message' => UserModule::t("This user's email address already exists.")),
             array('username', 'match', 'pattern' => '/^[A-Za-z0-9_]+$/u','message' => UserModule::t("Incorrect symbols (A-z0-9).")),
