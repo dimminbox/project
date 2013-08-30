@@ -48,7 +48,7 @@ $this->menu = array(
 
                 <?php endforeach; ?>
             </table>
-            <div class="pagination">
+            <div class="pagination" align="center">
                 <?php $this->widget('CLinkPager', array(
                     'firstPageLabel' => '<<',
                     'prevPageLabel' => '<',

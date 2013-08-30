@@ -60,7 +60,9 @@ $this->menu = array(
 
 
                 <div>
-                    <?php echo CHtml::submitButton(UserModule::t("Save")); ?>
+                    <?php echo CHtml::submitButton(UserModule::t("Save"), array(
+                        'class' => 'button btn btn-warning btn-large',
+                    )); ?>
                 </div>
 
                 <?php $this->endWidget(); ?>

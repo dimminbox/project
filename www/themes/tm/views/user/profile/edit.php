@@ -83,7 +83,9 @@ $this->menu = array(
                 <br/>
 
                 <div>
-                    <?php echo CHtml::submitButton($model->isNewRecord ? UserModule::t('Create') : UserModule::t('Save')); ?>
+                    <?php echo CHtml::submitButton($model->isNewRecord ? UserModule::t('Create') : UserModule::t('Save'), array(
+                        'class' => 'button btn btn-warning btn-large',
+                    )); ?>
                 </div>
 
                 <?php $this->endWidget(); ?>
