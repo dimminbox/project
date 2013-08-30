@@ -31,7 +31,17 @@ $this->layout = '//layouts/login';
             <?php echo UserModule::t("Restore"); ?>
         </button>
     </div>
-
+    <div>
+        <?php echo CHtml::link(UserModule::t("Cancel"),
+            array(
+                '/index.php',
+            ),
+            array(
+                'class' => 'button btn btn-large btn-secondary',
+            )
+        );
+        ?>
+    </div>
 <?php echo CHtml::endForm(); ?>
 </div><!-- form -->
 <?php endif; ?>

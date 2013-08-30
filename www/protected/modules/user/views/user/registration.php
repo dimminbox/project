@@ -120,6 +120,17 @@ $this->layout = '//layouts/login';
                         <?php echo UserModule::t("Register"); ?>
                     </button>
                 </div>
+                <div>
+                    <?php echo CHtml::link(UserModule::t("Cancel"),
+                        array(
+                            '/index.php',
+                        ),
+                        array(
+                            'class' => 'button btn btn-large btn-secondary',
+                        )
+                    );
+                    ?>
+                </div>
             <?php endif; ?>
             <?php $this->endWidget(); ?>
             </div>
