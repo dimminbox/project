@@ -68,6 +68,7 @@ class News extends CActiveRecord
 		);
 	}
 
+
     public function behaviors(){
         return array(
             'CTimestampBehavior' => array(
@@ -76,7 +77,22 @@ class News extends CActiveRecord
                 'updateAttribute' => 'update_time',
                 'setUpdateOnCreate' => true,
                 'timestampExpression' => new CDbExpression('NOW()'),
-            )
+            ),
+            'ajaxCropBehavior'           => array(
+                'class'             => 'ext.AjaxCrop.AjaxCropBehavior',
+                'attribute'         => 'image',
+                'uploadDir'         => Yii::app()->params['newsPhotoPath'],
+                'allowedExtensions' => array('jpg', 'jpeg', 'gif', 'png'),
+                'action'            => '/public/upload/images/news/',
+                'sizeLimit'         => 20 * 1024 * 1024,
+                'minSize'           => array(180, 180),
+                'boxWidth'          => 305,
+                'aspectRatio'       => true,
+                'hashLength'        => 6,
+                //'imageSizes'        => $imageSizes,
+
+            ),
+
         );
     }
 

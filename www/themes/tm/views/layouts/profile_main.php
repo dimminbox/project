@@ -69,10 +69,11 @@
                 <ul class="mainnav">
 
                     <li <?php echo ( $this->active == 'profile') ? 'class="active"' : ''?>>
-                        <a href="/profile">
-                            <i class="icon-home"></i>
-                            <span>Home</span>
-                        </a>
+
+                        <?php echo CHtml::link(
+                            '<i class="icon-home"></i><span>' . UserModule::t('Home') . '</span>',
+                            $this->createUrl('/user/profile')) ?>
+
                     </li >
                     <?php if ( UserModule::isAdmin() ) :?>
                         <li>
@@ -83,36 +84,31 @@
                         </li>
                     <?php endif; ?>
                     <li <?php echo ( $this->active == 'operations') ? 'class="active"' : ''?>>
-                        <a href="/user/profile/operations">
-                            <i class="icon-exchange"></i>
-                            <span>Операции</span>
-                        </a>
+                        <?php echo CHtml::link(
+                            '<i class="icon-exchange"></i><span>' . UserModule::t('Operations') . '</span>',
+                            $this->createUrl('/user/profile/operations')) ?>
                     </li>
 
                     <li <?php echo ( $this->active == 'deposits') ? 'class="active"' : ''?>>
-                        <a href="/user/profile/deposits" >
-                            <i class="icon-money"></i>
-                            <span>Депозиты</span>
-                        </a>
+                        <?php echo CHtml::link(
+                            '<i class="icon-money"></i><span>' . UserModule::t('Deposits') . '</span>',
+                            $this->createUrl('/user/profile/deposits')) ?>
                     </li>
 
                     <li <?php echo ( $this->active == 'referral') ? 'class="active"' : ''?>">
-                        <a href="/user/profile/referral" >
-                            <i class="icon-group"></i>
-                            <span>Реферралы</span>
-                        </a>
+                        <?php echo CHtml::link(
+                            '<i class="icon-group"></i><span>' . UserModule::t('Referrals') . '</span>',
+                            $this->createUrl('/user/profile/referral')) ?>
                     </li>
                     <li <?php echo ( $this->active == 'edit') ? 'class="active"' : ''?>>
-                        <a href="/user/profile/edit" >
-                            <i class="icon-wrench"></i>
-                            <span>Редактировать профиль</span>
-                        </a>
+                        <?php echo CHtml::link(
+                            '<i class="icon-wrench"></i><span>' . UserModule::t('Edit profile') . '</span>',
+                            $this->createUrl('/user/profile/edit')) ?>
                     </li>
                     <li class="dropdown">
-                        <a href="/logout" onclick="javascript: return confirm('Выйти?');" >
-                            <i class="icon-off"></i>
-                            <span>Выход</span>
-                        </a>
+                        <?php echo CHtml::link(
+                            '<i class="icon-off"></i><span>' . UserModule::t('Exit') . '</span>',
+                            $this->createUrl('/user/logout'), array('onclick'=>'javascript: return confirm("Exit?");')) ?>
                     </li>
 
                    <!-- <li class="dropdown">

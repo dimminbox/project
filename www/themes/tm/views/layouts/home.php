@@ -25,14 +25,19 @@
 <header>
     <div class="main">
         <h1><a href="/"><img src="<?php echo Yii::app()->request->baseUrl; ?>/public/tm/images/logo.png" alt=""></a></h1>
+        <div  id="language-selector" style="float:right; margin:5px;">
+            <?php
+            $this->widget('application.components.widgets.LanguageSelector');
+            ?>
+        </div>
         <nav>
             <ul class="menu">
-                <li><?php echo CHtml::link('Главная', $this->createAbsoluteUrl('/')) ?></li>
-                <li><?php echo CHtml::link('О нас', $this->createAbsoluteUrl('/about')) ?></li>
-                <li><?php echo CHtml::link('Партнерам', $this->createAbsoluteUrl('/contact')) ?></li>
-                <li><?php echo CHtml::link('FAQ', $this->createAbsoluteUrl('/contact')) ?></li>
-                <li><?php echo CHtml::link('Контакты', $this->createAbsoluteUrl('/contact')) ?></li>
-                <li><?php echo CHtml::link('Личный кабинет', $this->createAbsoluteUrl('/profile')) ?></li>
+                <li><?php echo CHtml::link('Главная', Yii::app()->request->baseUrl)?></li>
+                <li><?php echo CHtml::link('О нас', $this->createUrl('about')) ?></li>
+                <li><?php echo CHtml::link('Партнерам', $this->createAbsoluteUrl('referral')) ?></li>
+                <li><?php echo CHtml::link('FAQ', $this->createAbsoluteUrl('faq')) ?></li>
+                <li><?php echo CHtml::link('Контакты', $this->createAbsoluteUrl('contact')) ?></li>
+                <li><?php echo CHtml::link('Личный кабинет', $this->createAbsoluteUrl('user/profile/')) ?></li>
             </ul>
         </nav>
     </div>

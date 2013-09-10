@@ -1,6 +1,7 @@
 <?php
 
 return array(
+    'Home' => 'Zuhause',
 	'Registration' => 'Registrierung',
 	'Register' => 'Registrieren',
 	'Login' => 'Login',
@@ -59,6 +60,7 @@ return array(
 	'Already exists.' => 'Existiert bereits.',
 	'First Name' => 'Vorname',
 	'Last Name' => 'Nachname',
+    'Birthday' => 'Geburtsdatum',
 	'No' => 'Nein',
 	'Yes' => 'Ja',
 	'Yes and show on registration form' => 'Ja, und zeigen auf Anmeldeformular',
@@ -67,7 +69,7 @@ return array(
 	'Active' => 'Aktiv',
 	'Banned' => 'Verbannt',
 	'Please fill out the following form with your login credentials:' => 'Bitte Ihren Login-Daten eingeben:',
-	'Fields with <span class="required">*</span> are required.' => 'Felder mit <span class="required"> * </ span> sind erforderlich.',
+	'Fields with <span class="required">*</span> are required.' => 'Felder mit <span class="required"> * </span> sind erforderlich.',
 	'List User' => 'Benutzer auflisten',
 	'Edit' => 'Bearbeiten',
 	'Edit profile' => 'Meine Daten bearbeiten',

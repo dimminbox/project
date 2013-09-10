@@ -10,9 +10,10 @@ Yii::setPathOfAlias('bootstrap', dirname(__FILE__).'/../extensions/bootstrap');
 
 return array(
     'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
-    'name'=>'Доверительное управление',
+    'name'=>'Cronofunds.com',
     'theme' => 'tm',
-    'language' => 'ru',
+    //'sourceLanguage'=>'de',
+    'language' => 'en',
     //'homeUrl'=>array('site/index'),
 
     // preloading 'log' component
@@ -71,11 +72,11 @@ return array(
             # recovery password path
             'recoveryUrl' => array('/user/recovery'),
             # login form path
-            'loginUrl' => array('/login'),
+            'loginUrl' => array('/user/login'),
             # page after login
-            'returnUrl' => array('/profile'),
+            'returnUrl' => array('/user/profile'),
             # page after logout
-            'returnLogoutUrl' => array('/login'),
+            'returnLogoutUrl' => array('/user/login'),
         ),
         'rights'=>array(
             'superuserName'=>'Admin', // Name of the role with super user privileges.
@@ -113,8 +114,12 @@ return array(
             'connectionID'=>'db',
             'defaultRoles'=>array('Authenticated', 'Guest'),
         ),
-
+        'request'=>array(
+            'enableCookieValidation'=>true,
+            'enableCsrfValidation'=>true,
+        ),
         'urlManager'=>array(
+            'class'=>'application.components.UrlManager',
             'urlFormat'=>'path',
             'showScriptName' => false,
             'rules'=> include(__DIR__ . DIRECTORY_SEPARATOR . 'route.php'),
@@ -180,5 +185,7 @@ return array(
         'max_amount_output' => '300',//максимальная сумма для вывода
         'defaultGeneralPercent' => 0.6, // Значение общего процента по-умолчанию
         'reinvest' => false, //Реинвестирование
+        'newsPhotoPath' => '/public/upload/images/news/',
+        'languages'=>array('en'=>'English'),
     ),
 );

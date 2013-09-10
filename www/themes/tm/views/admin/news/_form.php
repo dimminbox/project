@@ -44,13 +44,25 @@
         'toolbar' => true,
     ),
     )); ?>
-	<div>
+	<!--div>
 		<?php echo $form->labelEx($model,'image'); ?>
 		<?php echo $form->textField($model,'image',array('size'=>60,'maxlength'=>255)); ?>
 		<?php echo $form->error($model,'image'); ?>
-	</div>
+	</div-->
+    <div class="">
+        Загрузите Вашу фотографию, или мы присвоим Вам случайный юзерпик.<br /><br />
+        <?php
 
-	<div>
+        $this->widget(
+            'ext.AjaxCrop.AjaxCropWidget',
+            array(
+                'model' => $model,
+            )
+        ); ?>
+
+        <?php echo $form->error($model, 'image'); ?>
+    </div>
+	<!--div>
 		<?php echo $form->labelEx($model,'status'); ?>
 		<?php echo $form->textField($model,'status'); ?>
 		<?php echo $form->error($model,'status'); ?>
@@ -66,7 +78,7 @@
 		<?php echo $form->labelEx($model,'update_time'); ?>
 		<?php echo $form->textField($model,'update_time'); ?>
 		<?php echo $form->error($model,'update_time'); ?>
-	</div>
+	</div-->
 
 	<div>
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
