@@ -3,7 +3,7 @@ $this->beginWidget(
     'zii.widgets.jui.CJuiDialog', array(
         'id'      => 'output_money',
         'options' => array(
-            'title'    => 'Вывод средств',
+            'title'    => UserModule::t('Cash out'),
             'autoOpen' => false,
             'modal'    => 'true',
             'width'    => '250',
@@ -26,14 +26,14 @@ $this->beginWidget(
             ),
         )); ?>
 
-        <?php echo 'Сумма' ?>
-        <?php echo CHtml::textField('output_money', (float)$model->amount); ?>
+        <?php echo UserModule::t('Amount') ?>
+        <?php echo CHtml::textField(UserModule::t('Cash out'), (float)$model->amount); ?>
         <?php echo $form->labelEx($model,'secret'); ?>
         <?php echo $form->textField($model,'secret', array('value' => '')); ?>
         <?php echo $form->error($model,'secret'); ?>
 
         <br />
-        <?php echo CHtml::submitButton('Вывести',array('class'=>'btn btn-large btn-primary')); ?>
+        <?php echo CHtml::submitButton('Cash out',array('class'=>'btn btn-large btn-primary')); ?>
 
         <?php $this->endWidget(); ?>
 

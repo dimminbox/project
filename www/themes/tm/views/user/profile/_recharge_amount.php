@@ -3,7 +3,7 @@ $this->beginWidget(
     'zii.widgets.jui.CJuiDialog', array(
         'id'      => 'recharge_amount',
         'options' => array(
-            'title'    => 'Пополнить счет',
+            'title'    => UserModule::t('Cash in'),
             'autoOpen' => false,
             'modal'    => 'true',
             'width'    => '300',
@@ -37,7 +37,7 @@ $this->beginWidget(
         <?php echo $form->hiddenField($deposit,'NOPAYMENT_URL', array('name' => 'NOPAYMENT_URL')); ?>
 
         <br />
-        <?php echo CHtml::submitButton('Пополнить счет', array('class'=>'btn btn-large btn-primary','name' => 'PAYMENT_METHOD')); ?>
+        <?php echo CHtml::submitButton(UserModule::t('Cash in'), array('class'=>'btn btn-large btn-primary','name' => 'PAYMENT_METHOD')); ?>
 
 
         <?php $this->endWidget(); ?>
