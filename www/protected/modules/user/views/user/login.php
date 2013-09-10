@@ -51,7 +51,7 @@ $this->layout = '//layouts/login';
                         array(
                             '/index.php',
                         ),
-                        
+
                         array(
                             'class' => 'button btn btn-large btn-secondary',
                         )

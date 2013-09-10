@@ -48,13 +48,13 @@ if ( Yii::app()->params['reinvest'] == true && $user->deposit != null ) {
                     <a id='deposit_message_close<?php echo $dep->id; ?>' href="#"
                        style='text-decoration:none; color:black'>X</a></div>
 
-                До срока окончания депозита #<strong><?php echo $dep->id; ?></strong> осталось менее 1го месяца.<br/>
-                Реинвестировать его еще на <?php echo $dep->deposit_type->type ?> ? <br/>
+                Prior to the deadline for the deposit #<strong><?php echo $dep->id; ?></strong> remains less than the 1st of the month.<br/>
+                Reinvest it for another <?php echo $dep->deposit_type->type ?> ? <br/>
 
-                <?php echo CHtml::link('Да', $this->createAbsoluteUrl('/user/profile/depositReinvest', array(
+                <?php echo CHtml::link(UserModule::t('Yes'), $this->createAbsoluteUrl('/user/profile/depositReinvest', array(
                     'deposit_id' => $dep->id,
                     'reinvest' => Deposit::REINVEST_YES))) ?>
-                <?php echo CHtml::link('нет', $this->createAbsoluteUrl('/user/profile/depositReinvest', array(
+                <?php echo CHtml::link(UserModule::t('No'), $this->createAbsoluteUrl('/user/profile/depositReinvest', array(
                     'deposit_id' => $dep->id,
                     'reinvest' => Deposit::REINVEST_NO))) ?>
 
@@ -82,8 +82,8 @@ if ( Yii::app()->params['reinvest'] == true && $user->deposit != null ) {
 <!--p>
 <strong>Ваш баланс:</strong>
 <?php echo (float)$user->amount; ?> бубликов.<br />
-<?php echo CHtml::link('Пополнить счет', '#', array('onclick' => '$("#recharge_amount").dialog("open"); return false;',)); ?><br />
-<?php echo CHtml::link('Вывести', '#', array('onclick' => '$("#output_money").dialog("open"); return false;',)); ?>
+<?php echo CHtml::link(UserModule::t('Cash in'), '#', array('onclick' => '$("#recharge_amount").dialog("open"); return false;',)); ?><br />
+<?php echo CHtml::link(UserModule::t('Cash out'), '#', array('onclick' => '$("#output_money").dialog("open"); return false;',)); ?>
 
 <strong>Внутренний кошелек:</strong> <?php echo $user->internal_purse; ?><br />
 <strong>Всего пополнено:</strong> <?php echo (float)$user->paymentAmount; ?><br />
@@ -100,7 +100,7 @@ if ( Yii::app()->params['reinvest'] == true && $user->deposit != null ) {
 </p>
 
 <p>
-    <?php echo CHtml::link('Перевести средства', '#', array('onclick' => '$("#transfer").dialog("open"); return false;',)); ?>
+    <?php echo CHtml::link(UserModule::t('Transfer cash'), '#', array('onclick' => '$("#transfer").dialog("open"); return false;',)); ?>
     <br />
 
 </p-->
@@ -117,7 +117,7 @@ if ( Yii::app()->params['reinvest'] == true && $user->deposit != null ) {
         <div class="widget-header">
             <i class="icon-star"></i>
 
-            <h3>Общая информация</h3>
+            <h3><?php echo UserModule::t('Information')?></h3>
         </div>
         <!-- /widget-header -->
 
@@ -129,12 +129,12 @@ if ( Yii::app()->params['reinvest'] == true && $user->deposit != null ) {
                     <!--span class="stat-value">12,386</span-->
                     <h2><?php echo $user->profile->first_name; ?><br/>
                         <?php echo $user->profile->last_name; ?></h2>
-                    <strong>Логин:</strong> <?php echo $user->username; ?><br/>
-                    <strong>Внутренний кошелек:</strong> <?php echo $user->internal_purse; ?><br/>
+                    <strong><?php echo UserModule::t('Login')?>:</strong> <?php echo $user->username; ?><br/>
+                    <strong><?php echo UserModule::t('Internal purse')?>:</strong> <?php echo $user->internal_purse; ?><br/>
                 </div>
                 <!-- /stat -->
 
-                <div class="stat">Ваш баланс:
+                <div class="stat"><?php echo UserModule::t('Your cash')?>:
                     <span class="stat-value"><?php echo (float)$user->amount; ?>$</span>
 
                 </div>
@@ -142,11 +142,11 @@ if ( Yii::app()->params['reinvest'] == true && $user->deposit != null ) {
 
                 <div class="stat">
                     <!--span class="stat-value">70%</span-->
-                    <?php echo CHtml::link('Пополнить счет', '#', array('onclick' => '$("#recharge_amount").dialog("open"); return false;',)); ?>
+                    <?php echo CHtml::link(UserModule::t('Cash in'), '#', array('onclick' => '$("#recharge_amount").dialog("open"); return false;',)); ?>
                     <br/>
-                    <?php echo CHtml::link('Перевести', '#', array('onclick' => '$("#transfer").dialog("open"); return false;',)); ?>
+                    <?php echo CHtml::link(UserModule::t('Transfer cash'), '#', array('onclick' => '$("#transfer").dialog("open"); return false;',)); ?>
                     <br/>
-                    <?php echo CHtml::link('Вывести', '#', array('onclick' => '$("#output_money").dialog("open"); return false;',)); ?>
+                    <?php echo CHtml::link(UserModule::t('Cash out'), '#', array('onclick' => '$("#output_money").dialog("open"); return false;',)); ?>
 
                 </div>
                 <!-- /stat -->
@@ -168,7 +168,7 @@ if ( Yii::app()->params['reinvest'] == true && $user->deposit != null ) {
         <div class="widget-header">
             <i class="icon-money"></i>
 
-            <h3>Планы инвестирования</h3>
+            <h3><?php echo UserModule::t('Investment plans')?></h3>
         </div>
         <!-- /widget-header -->
 
@@ -189,7 +189,7 @@ if ( Yii::app()->params['reinvest'] == true && $user->deposit != null ) {
                         </div>
 
                         <div class="news-item-date">
-                            <?php echo CHtml::link('Инвестировать', '#', array('onclick' => '$("#investment' . $depositPlan->id . '").dialog("open"); return false;',)); ?>
+                            <?php echo CHtml::link(UserModule::t('Invest'), '#', array('onclick' => '$("#investment' . $depositPlan->id . '").dialog("open"); return false;',)); ?>
 
 
                             <?php
@@ -197,7 +197,7 @@ if ( Yii::app()->params['reinvest'] == true && $user->deposit != null ) {
                                 'zii.widgets.jui.CJuiDialog', array(
                                     'id'      => 'investment' . $depositPlan->id,
                                     'options' => array(
-                                        'title'    => 'Депозит: ' . $depositPlan->type . ' - ' . $depositPlan->percent . '%',
+                                        'title'    => 'Deposit: ' . $depositPlan->type . ' - ' . $depositPlan->percent . '%',
                                         'autoOpen' => false,
                                         'modal'    => 'true',
                                         'width'    => '250',
@@ -290,8 +290,8 @@ if ( Yii::app()->params['reinvest'] == true && $user->deposit != null ) {
         <div class="widget-header">
             <i class="icon-signal"></i>
 
-            <h3>График прибыли
-                за <?php echo User::model()->declension(count($chart['days']), count($chart['days']) . ' день', 'последние ' . count($chart['days']) . ' дня', 'последние ' . count($chart['days']) . ' дней') ?> </h3>
+            <h3><?php echo UserModule::t('Profit charts for')?>
+                <?php echo User::model()->declension(count($chart['days']), count($chart['days']) . ' ' . UserModule::t('day'), ' ' . UserModule::t('last') . count($chart['days']) . ' ' . UserModule::t('day'), ' ' . UserModule::t('last') . count($chart['days']) . ' ' .UserModule::t('days')) ?> </h3>
         </div>
         <!-- /widget-header -->
 
@@ -309,7 +309,7 @@ if ( Yii::app()->params['reinvest'] == true && $user->deposit != null ) {
                     "pointStrokeColor" => $strokeColor,
                     "data" => $chart['deposits'],
                 );
-                $chartsTitle .= '<span style="color:' . $strokeColor . '">Депозиты</span><br />';
+                $chartsTitle .= '<span style="color:' . $strokeColor . '">' . UserModule::t('Deposits') . '</span><br />';
             }
             if (isset($chart['referral'])) {
                 $strokeColor = 'blue';
@@ -320,7 +320,7 @@ if ( Yii::app()->params['reinvest'] == true && $user->deposit != null ) {
                     "pointStrokeColor" => $strokeColor,
                     "data" => $chart['referral'],
                 );
-                $chartsTitle .= '<span style="color:' . $strokeColor . '">Реферальная программа</span><br />';
+                $chartsTitle .= '<span style="color:' . $strokeColor . '">' . UserModule::t('Referral program') . '</span><br />';
             }
 
             $this->widget(
