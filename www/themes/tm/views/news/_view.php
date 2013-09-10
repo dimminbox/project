@@ -12,7 +12,7 @@
             <p class="color-1"><?php echo $data->title; ?></p>
             <p><?php echo $data->description; ?></p>
             <p class="color-2"><time datetime="2012-02-18"><?php echo date('d.m.Y', strtotime($data->created_time)); ?></time>
-                <?php echo CHtml::link('Подробнее...', array('/news/'. $data->id), array('class' => 'link')) ?></p>
+                <?php echo CHtml::link(Yii::t('news','read more...'), array('/news/'. $data->id), array('class' => 'link')) ?></p>
         </div>
     </div>
 

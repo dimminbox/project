@@ -3,13 +3,13 @@
 /* @var $model ContactForm */
 /* @var $form CActiveForm */
 
-$this->pageTitle=Yii::app()->name . ' - Контакты';
+$this->pageTitle=Yii::app()->name . ' ' . Yii::t('news','Contacts');
 $this->breadcrumbs=array(
-	'Контакты',
+    Yii::t('news','Contacts'),
 );
 ?>
 
-<h2 class='h2'>Контакты</h2>
+<h2 class='h2'><?php echo Yii::t('news','Contacts') ?></h2>
 
 <?php if(Yii::app()->user->hasFlash('contact')): ?>
 
@@ -34,7 +34,7 @@ $this->breadcrumbs=array(
 	),
 )); ?>
 
-	<p class="note">Поля отмеченные <span class="required">*</span> обязательны для заполнения.</p>
+	<p class="note"><span class="required">*</span> <?php echo Yii::t('site','required fields') ?> .</p>
 
 	<?php echo $form->errorSummary($model); ?>
 
@@ -72,8 +72,8 @@ $this->breadcrumbs=array(
 		<?php $this->widget('CCaptcha'); ?>
 		<?php echo $form->textField($model,'verifyCode'); ?>
 		</div>
-		<div class="hint">Пожалуйста введите код с картинки.
-		<br/>Буквы вводятся без учета регистра.</div>
+        <div class="hint"><?php echo Yii::t('news','Please enter the letters as they are shown in the image above') ?>.
+            <br/><?php echo Yii::t('news','Letters are not case-sensitive') ?>.</div>
 		<?php echo $form->error($model,'verifyCode'); ?>
 	</div>
 	<?php endif; ?>

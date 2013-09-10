@@ -1,12 +1,12 @@
 <?php
 /* @var $this SiteController */
 
-$this->pageTitle=Yii::app()->name . ' - Партнерская программа';
+$this->pageTitle=Yii::app()->name . ' ' . Yii::t('news','Referral');
 $this->breadcrumbs=array(
-    'Партнерская программа',
+    Yii::t('news','Referral'),
 );
 ?>
-<h2 class='h2'>Партнерская программа</h2>
+<h2 class='h2'><?php echo Yii::t('news','Referral') ?></h2>
 
 <p class='p1'>
 

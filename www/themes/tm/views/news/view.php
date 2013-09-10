@@ -3,7 +3,7 @@
 /* @var $model News */
 
 $this->breadcrumbs=array(
-	'Новости'=>array('index'),
+    Yii::t('news','News')=>array('index'),
 );
 
 ?>

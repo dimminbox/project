@@ -1,12 +1,13 @@
 <?php
 /* @var $this SiteController */
 
-$this->pageTitle=Yii::app()->name . ' - About';
+$this->pageTitle=Yii::app()->name . ' ' . Yii::t('news','About');
 $this->breadcrumbs=array(
-    'О нас',
+    Yii::t('news','About'),
 );
 ?>
-<h2 class='h2'>О нас</h2>
+<h2 class='h2'><?php echo Yii::t('news','About') ?></h2>
+
 <p class='p1'>
     <strong>Доверительное управление</strong> — универсальный инструмент получения прибыли от финансовых вложений.
     Передав свои средства в управление профессионалам, Вы можете быть уверены в стабильной доходности ваших инвестиций.

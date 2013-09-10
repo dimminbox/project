@@ -32,12 +32,12 @@
         </div>
         <nav>
             <ul class="menu">
-                <li><?php echo CHtml::link('Главная', Yii::app()->request->baseUrl)?></li>
-                <li><?php echo CHtml::link('О нас', $this->createUrl('about')) ?></li>
-                <li><?php echo CHtml::link('Партнерам', $this->createAbsoluteUrl('referral')) ?></li>
-                <li><?php echo CHtml::link('FAQ', $this->createAbsoluteUrl('faq')) ?></li>
-                <li><?php echo CHtml::link('Контакты', $this->createAbsoluteUrl('contact')) ?></li>
-                <li><?php echo CHtml::link('Личный кабинет', $this->createAbsoluteUrl('user/profile/')) ?></li>
+                <li><?php echo CHtml::link(Yii::t('site','Home'), Yii::app()->request->baseUrl)?></li>
+                <li><?php echo CHtml::link(Yii::t('site','About'), $this->createUrl('about')) ?></li>
+                <li><?php echo CHtml::link(Yii::t('site','Referral'), $this->createAbsoluteUrl('referral')) ?></li>
+                <li><?php echo CHtml::link(Yii::t('site','FAQ'), $this->createAbsoluteUrl('faq')) ?></li>
+                <li><?php echo CHtml::link(Yii::t('site','Contacts'), $this->createAbsoluteUrl('contact')) ?></li>
+                <li><?php echo CHtml::link(Yii::t('site','Sign in'), $this->createAbsoluteUrl('user/profile/')) ?></li>
             </ul>
         </nav>
     </div>

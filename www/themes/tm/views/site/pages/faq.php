@@ -1,10 +1,10 @@
 <?php
 /* @var $this SiteController */
 
-$this->pageTitle=Yii::app()->name . ' - FAQ';
+$this->pageTitle=Yii::app()->name . ' ' . Yii::t('news','FAQ');
 $this->breadcrumbs=array(
-    'FAQ',
+    Yii::t('news','FAQ'),
 );
 ?>
-<h1>FAQ</h1>
+<h1><?php echo Yii::t('news','FAQ') ?></h1>
 
