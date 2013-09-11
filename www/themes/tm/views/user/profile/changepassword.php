@@ -1,4 +1,4 @@
-<?php $this->pageTitle = Yii::app()->name . ' - ' . UserModule::t("Change Password");
+<?php $this->pageTitle = UserModule::t("Change Password");
 $this->breadcrumbs = array(
     UserModule::t("Profile") => array('/profile'),
     UserModule::t("Edit profile") => array('/user/profile/edit'),

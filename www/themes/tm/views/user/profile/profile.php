@@ -1,4 +1,4 @@
-<?php $this->pageTitle = Yii::app()->name . ' - ' . UserModule::t("Profile");
+<?php $this->pageTitle = UserModule::t("Home profile");
 $this->breadcrumbs = array(
     UserModule::t("Profile"),
 );
