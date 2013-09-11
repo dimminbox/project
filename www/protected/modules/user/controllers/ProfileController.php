@@ -163,14 +163,14 @@ class ProfileController extends Controller
             $depositType = DepositType::model()->findByPk($_POST['Deposit']['deposit_type_id']);
 
             if ( $amount < $_POST['Deposit']['deposit_amount']) {
-                Yii::app()->user->setFlash('profileMessageFail', 'На вашем счете недостаточно средств');
+                Yii::app()->user->setFlash('profileMessageFail', UserModule::t('On your balance is not enough money'));
             } else {
 
                 $transaction = new UserTransaction();
                 $transaction->user_id = Yii::app()->user->id;
                 $transaction->amount = -$_POST['Deposit']['deposit_amount'];
                 $transaction->amount_type = UserTransaction::AMOUNT_TYPE_INVESTMENT;
-                $transaction->reason = 'Инвестирование в депозит';
+                $transaction->reason = UserModule::t('Investment');
 
                 if ( $transaction->save() ) {
                     $deposit = new Deposit();
@@ -181,9 +181,9 @@ class ProfileController extends Controller
                     $deposit->reinvest = 0;
                     $deposit->save();
 
-                    Yii::app()->user->setFlash('profileMessage', 'Покупка депозита успешно завершена');
+                    Yii::app()->user->setFlash('profileMessage', UserModule::t('Investing successful'));
                 } else {
-                    Yii::app()->user->setFlash('profileMessageFail', 'Произошла ошибка');
+                    Yii::app()->user->setFlash('profileMessageFail', 'Error');
                 }
             }
         }
@@ -200,15 +200,15 @@ class ProfileController extends Controller
                 $user = User::model()->findByAttributes(array('internal_purse'=>$_POST['User']['internal_purse']));
                 if ( $user != null) {
                     if ( $amount < $_POST['UserTransaction']['amount']) {
-                        Yii::app()->user->setFlash('profileMessageFail', 'На вашем счете недостаточно средств');
+                        Yii::app()->user->setFlash('profileMessageFail', UserModule::t('On your balance is not enough money'));
                     } else {
 
                         $transaction = new UserTransaction();
                         $transaction->user_id = Yii::app()->user->id;
                         $transaction->amount = -$_POST['UserTransaction']['amount'];
                         $transaction->amount_type = UserTransaction::AMOUNT_TYPE_TRANSFER;
-                        $transaction->reason = 'Певедод средств на кошелек ' . $_POST['User']['internal_purse']
-                            . ' пользователю ' . $user->username;
+                        $transaction->reason = UserModule::t('Funds transfer') . ' ' . $_POST['User']['internal_purse']
+                            . ' user ' . $user->username;
 
                         if ( $transaction->save() ) {
                             $transactionTo = new UserTransaction();
@@ -216,23 +216,23 @@ class ProfileController extends Controller
                             $transactionTo->amount = $_POST['UserTransaction']['amount'];
                             $transactionTo->amount_type = UserTransaction::AMOUNT_TYPE_RECHARGE;
 
-                            $transactionTo->reason = 'Певедод средств от пользователя ' . User::model()->findByPk(Yii::app()->user->id)->username;
+                            $transactionTo->reason = UserModule::t('Funds transfer of user') . ' ' . User::model()->findByPk(Yii::app()->user->id)->username;
                             $transactionTo->save();
-                            Yii::app()->user->setFlash('profileMessage', 'Перевод произошел успешно');
+                            Yii::app()->user->setFlash('profileMessage', UserModule::t('Transfer of funds successfully'));
                         } else {
-                            Yii::app()->user->setFlash('profileMessageFail', 'Произошла ошибка');
+                            Yii::app()->user->setFlash('profileMessageFail', 'Error');
                         }
                     }
                 } else {
-                    Yii::app()->user->setFlash('profileMessageFail', 'Такого кошелька не существует');
+                    Yii::app()->user->setFlash('profileMessageFail', UserModule::t('This purse exists'));
                 }
             }
-        } else {Yii::app()->user->setFlash('profileMessageFail', 'Не верный секретный код');}
+        } else {Yii::app()->user->setFlash('profileMessageFail', UserModule::t('Invalid secret code'));}
         $this->redirect($this->createUrl('/user/profile'));
     }
     //экшн неудачночной оплаты perfect money
     public function actionDepositFail() {
-        Yii::app()->user->setFlash('profileMessageFail', 'Платеж не был завершен или возникла ошибка в процессе оплаты.');
+        Yii::app()->user->setFlash('profileMessageFail', UserModule::t('Payment has not been completed or an error in the payment process.'));
         $this->redirect($this->createUrl('/user/profile'));
     }
     //экшн удачной оплаты perfect money
@@ -246,10 +246,10 @@ class ProfileController extends Controller
             $transaction->payment_id = $_POST['PAYMENT_ID'];
 
             if ( $transaction->save() ) {
-                Yii::app()->user->setFlash('profileMessage', 'Платеж успешно завершен');
+                Yii::app()->user->setFlash('profileMessage', UserModule::t('The payment has been successfully completed'));
 
             } else {
-                Yii::app()->user->setFlash('profileMessageFail', 'Произошла ошибка');
+                Yii::app()->user->setFlash('profileMessageFail', 'Error');
             }
 
         }
@@ -282,7 +282,7 @@ class ProfileController extends Controller
                 $transaction->amount = $_POST['PAYMENT_AMOUNT'];
                 $transaction->user_id = $transactionInComlete->user_id;
                 $transaction->payment_id = $transactionInComlete->payment_id;
-                $transaction->reason = 'Пополнение счета';
+                $transaction->reason = UserModule::t('Add balance');
                 $transaction->amount_type = UserTransaction::AMOUNT_TYPE_RECHARGE;
                 $transaction->save();
 
@@ -328,9 +328,9 @@ class ProfileController extends Controller
 
                             User::model()->sendMessage(1, $subject, $message, Message::IMPORTANCE_1 );
 
-                            Yii::app()->user->setFlash('profileMessage', 'В связи с безопасностью, вывод более ' . Yii::app()->params['max_amount_output'] . '$ производится вручную<br /><br />
-                                                            Заявка на вывод успешно принята<br />
-                                                            Деньги поступят на Ваш счет в течении трех часов');
+                            Yii::app()->user->setFlash('profileMessage', 'To ensure safety, the withdrawal of more than ' . Yii::app()->params['max_amount_output'] . '$ is made by hand<br /><br />
+                                                            Application for withdrawal successfully adopted<br />
+                                                            Money will be transferred to your account within three hours');
 
                             $this->redirect($this->createUrl('/user/profile'));
                         } else {
@@ -342,7 +342,7 @@ class ProfileController extends Controller
                             $f=fopen('https://perfectmoney.is/acct/confirm.asp?AccountID=' . Yii::app()->params['AccountID'] . '&PassPhrase=' . Yii::app()->params['PassPhrase'] . '&Payer_Account=' . Yii::app()->params['payee_account'] . '&Payee_Account=' . $user->perfect_purse . '&Amount=' . $amount . '&PAY_IN=' . $amount . ' &PAYMENT_ID=' . $payment_id, 'rb');
 
                             if($f===false){
-                                echo 'ошибка открытия файла';
+                                echo 'Error reading file';
                             }
 
                             // getting data
@@ -353,7 +353,7 @@ class ProfileController extends Controller
 
                             // searching for hidden fields
                             if(!preg_match_all("/<input name='(.*)' type='hidden' value='(.*)'>/", $out, $result, PREG_SET_ORDER)){
-                                echo 'Неправильный вывод';
+                                echo 'Invalid output';
                                 exit;
                             }
 
@@ -386,9 +386,9 @@ class ProfileController extends Controller
 
                                 User::model()->sendMessage(1, $subject, $message, Message::IMPORTANCE_1 );
 
-                                Yii::app()->user->setFlash('profileMessageFail', 'Произошла неожиданная ошибка<br />
-                                                            Информация об ошибке отправлена администратору сайта<br />
-                                                            Администратор свяжется с Вами в ближайшее время');
+                                Yii::app()->user->setFlash('profileMessageFail', 'An unexpected error <br />
+                                                            The error information sent to the site administrator<br />
+                                                            The administrator will contact you shortly');
 
                                 $this->redirect($this->createUrl('/user/profile'));
 
@@ -397,7 +397,7 @@ class ProfileController extends Controller
                                 $transaction = new UserTransaction();
                                 $transaction->amount = -UserTransaction::model()->replaceComma($_POST['output_money']);
                                 $transaction->user_id = $user->id;
-                                $transaction->reason = 'Вывод средств на кошелек Perfect Money';
+                                $transaction->reason = 'Withdraw the purse Perfect Money';
                                 $transaction->amount_type = UserTransaction::AMOUNT_TYPE_OUTPUT;
                                 $transaction->payment_id = $payment_id;
                                 $transaction->save();
@@ -413,19 +413,19 @@ class ProfileController extends Controller
                                 $outputTransaction->save();
 
 
-                                Yii::app()->user->setFlash('profileMessage', 'Вывод успешно завершен');
+                                Yii::app()->user->setFlash('profileMessage', 'Withdrawal is successfully completed');
                             }
                         }
 
                     } else {
-                        Yii::app()->user->setFlash('profileMessageFail', 'Неверно указана сумма');
+                        Yii::app()->user->setFlash('profileMessageFail', 'Incorrectly state the amount');
                     }
 
                 } else {
-                    Yii::app()->user->setFlash('profileMessageFail', 'Укажите в настройках аккаунта кошелек Perfect Money');
+                    Yii::app()->user->setFlash('profileMessageFail', 'Please indicate in your account settings purse Perfect Money');
                 }
             } else {
-                Yii::app()->user->setFlash('profileMessageFail', 'Не верный секретный код');
+                Yii::app()->user->setFlash('profileMessageFail', UserModule::t('Invalid secret code'));
             }
 
 
