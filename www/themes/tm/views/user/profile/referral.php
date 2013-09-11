@@ -1,4 +1,4 @@
-<?php $this->pageTitle = UserModule::t("referral");;
+<?php $this->pageTitle = UserModule::t("Referrals");;
 /*$this->breadcrumbs=array(
     UserModule::t("Profile") => array('/profile'),
     UserModule::t("Партнерская программа"),
