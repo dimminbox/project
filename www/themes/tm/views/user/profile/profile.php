@@ -79,39 +79,15 @@ if ( Yii::app()->params['reinvest'] == true && $user->deposit != null ) {
 }
 ?>
 
-<!--p>
-<strong>Ваш баланс:</strong>
-<?php echo (float)$user->amount; ?> бубликов.<br />
-<?php echo CHtml::link(UserModule::t('Cash in'), '#', array('onclick' => '$("#recharge_amount").dialog("open"); return false;',)); ?><br />
-<?php echo CHtml::link(UserModule::t('Cash out'), '#', array('onclick' => '$("#output_money").dialog("open"); return false;',)); ?>
 
-<strong>Внутренний кошелек:</strong> <?php echo $user->internal_purse; ?><br />
-<strong>Всего пополнено:</strong> <?php echo (float)$user->paymentAmount; ?><br />
-<strong>Всего инвестировано:</strong> <?php echo (float)$user->investmentAmount; ?><br />
-<strong>Всего заработано:</strong> <?php echo (float)$user->earningsAmount; ?><br />
-<strong>Всего выведено:</strong> <?php echo (float)abs($user->outputAmount); ?><br />
-<strong>Партнерская программа:</strong> <?php echo (float)$user->ReferralAmount; ?><br />
-</p-->
-
-<!--p>
-
-    <br />
-
-</p>
-
-<p>
-    <?php echo CHtml::link(UserModule::t('Transfer cash'), '#', array('onclick' => '$("#transfer").dialog("open"); return false;',)); ?>
-    <br />
-
-</p-->
 
 <?php $this->renderPartial('_recharge_amount', array('deposit' => $deposit)) ?>
 <?php $this->renderPartial('_outputmoney', array('model' => $user)) ?>
 
 <?php $this->renderPartial('_transfer', array('transfer' => $transfer,'model' => $user)) ?>
-<!-- Левый блок -->
+<!-- left block -->
 <div class="span6">
-    <!-- 1 виджет -->
+    <!-- 1 widget -->
     <div class="widget stacked">
 
         <div class="widget-header">
@@ -160,15 +136,15 @@ if ( Yii::app()->params['reinvest'] == true && $user->deposit != null ) {
 
     </div>
     <!-- /widget -->
-    <!-- Конец первого виджета -->
-    <!-- Второй виджет -->
+    <!-- end 1 widget -->
+    <!-- 2 widget -->
 
     <div class="widget widget-nopad stacked">
 
         <div class="widget-header">
             <i class="icon-money"></i>
 
-            <h3><?php echo UserModule::t('Investment plans')?></h3>
+            <h3><?php echo UserModule::t('Investment programs')?></h3>
         </div>
         <!-- /widget-header -->
 
@@ -180,9 +156,9 @@ if ( Yii::app()->params['reinvest'] == true && $user->deposit != null ) {
 
                         <div class="news-item-detail">
 
-                            Срок депозита: <?php echo $depositPlan->type; ?><br />
-                            Процент: <?php echo $depositPlan->percent; ?>%<br />
-                            Мин.сумма: <?php echo $depositPlan->min_amount; ?>$<br />
+                            <?php echo UserModule::t('Program period')?>: <?php echo $depositPlan->type; ?><br />
+                            <?php echo UserModule::t('Daily percentage profit')?>: <?php echo $depositPlan->percent; ?>%<br />
+                            <?php echo UserModule::t('Minimum amount')?>: <?php echo $depositPlan->min_amount; ?>$<br />
                             <p class="news-item-preview">
                                 <?php echo $depositPlan->description; ?>
                             </p>
@@ -225,7 +201,7 @@ if ( Yii::app()->params['reinvest'] == true && $user->deposit != null ) {
 
                                 <?php echo $form->hiddenField($investment,'deposit_type_id', array('value' => $depositPlan->id) ); ?>
                                 <div class='modal_form_button'>
-                                    <?php echo CHtml::submitButton('Инвестировать',array('class'=>'btn btn-large btn-primary')); ?>
+                                    <?php echo CHtml::submitButton(UserModule::t('Invest'),array('class'=>'btn btn-large btn-primary')); ?>
                                 </div>
 
                                 <?php $this->endWidget(); ?>
@@ -244,44 +220,12 @@ if ( Yii::app()->params['reinvest'] == true && $user->deposit != null ) {
 
     </div>
     <!-- /widget -->
-    <!-- Конец Второй виджет -->
-    <!-- Третий виджет -->
-    <div class="widget stacked">
+    <!-- end 2 widget -->
 
-        <div class="widget-header">
-            <i class="icon-file"></i>
-
-            <h3>Content</h3>
-        </div>
-        <!-- /widget-header -->
-
-        <div class="widget-content">
-
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                ex ea commodo consequat.</p>
-
-
-            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
-                laborum.</p>
-
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                ex ea commodo consequat.Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
-                deserunt mollit anim id est laborum.</p>
-
-        </div>
-        <!-- /widget-content -->
-
-    </div>
-    <!-- /widget -->
-    <!-- Третий виджет -->
 </div> <!-- /span6 -->
-<!-- Конец левого блока -->
+<!-- end left block -->
 
-<!-- Правый блок -->
+<!-- right block -->
 <div class="span6">
 
 <?php if ($chart != null) : ?>
@@ -291,7 +235,7 @@ if ( Yii::app()->params['reinvest'] == true && $user->deposit != null ) {
             <i class="icon-signal"></i>
 
             <h3><?php echo UserModule::t('Profit charts for')?>
-                <?php echo User::model()->declension(count($chart['days']), count($chart['days']) . ' ' . UserModule::t('day'), ' ' . UserModule::t('last') . count($chart['days']) . ' ' . UserModule::t('day'), ' ' . UserModule::t('last') . count($chart['days']) . ' ' .UserModule::t('days')) ?> </h3>
+                <?php echo User::model()->declension(count($chart['days']), count($chart['days']) . ' ' . UserModule::t('day'), ' ' . UserModule::t('last') . ' ' . count($chart['days']) . ' ' . UserModule::t('day'), ' ' . UserModule::t('last') . ' ' . count($chart['days']) . ' ' .UserModule::t('days')) ?> </h3>
         </div>
         <!-- /widget-header -->
 
@@ -345,175 +289,7 @@ if ( Yii::app()->params['reinvest'] == true && $user->deposit != null ) {
 </div>
 <?php endif; ?>
 
-    <div class="widget stacked">
 
-        <div class="widget-header">
-            <i class="icon-bookmark"></i>
-            <h3>Quick Shortcuts</h3>
-        </div> <!-- /widget-header -->
-
-        <div class="widget-content">
-
-            <div class="shortcuts">
-                <a href="javascript:;" class="shortcut">
-                    <i class="shortcut-icon icon-list-alt"></i>
-                    <span class="shortcut-label">Apps</span>
-                </a>
-
-                <a href="javascript:;" class="shortcut">
-                    <i class="shortcut-icon icon-bookmark"></i>
-                    <span class="shortcut-label">Bookmarks</span>
-                </a>
-
-                <a href="javascript:;" class="shortcut">
-                    <i class="shortcut-icon icon-signal"></i>
-                    <span class="shortcut-label">Reports</span>
-                </a>
-
-                <a href="javascript:;" class="shortcut">
-                    <i class="shortcut-icon icon-comment"></i>
-                    <span class="shortcut-label">Comments</span>
-                </a>
-
-                <a href="javascript:;" class="shortcut">
-                    <i class="shortcut-icon icon-user"></i>
-                    <span class="shortcut-label">Users</span>
-                </a>
-
-                <a href="javascript:;" class="shortcut">
-                    <i class="shortcut-icon icon-file"></i>
-                    <span class="shortcut-label">Notes</span>
-                </a>
-
-                <a href="javascript:;" class="shortcut">
-                    <i class="shortcut-icon icon-picture"></i>
-                    <span class="shortcut-label">Photos</span>
-                </a>
-
-                <a href="javascript:;" class="shortcut">
-                    <i class="shortcut-icon icon-tag"></i>
-                    <span class="shortcut-label">Tags</span>
-                </a>
-            </div> <!-- /shortcuts -->
-
-        </div> <!-- /widget-content -->
-
-    </div> <!-- /widget -->
-
-
-
-
-
-
-
-    <div class="widget stacked widget-table action-table">
-
-        <div class="widget-header">
-            <i class="icon-th-list"></i>
-            <h3>Table</h3>
-        </div> <!-- /widget-header -->
-
-        <div class="widget-content">
-
-            <table class="table table-striped table-bordered">
-                <thead>
-                <tr>
-                    <th>Engine</th>
-                    <th>Browser</th>
-                    <th class="td-actions"></th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>Trident</td>
-                    <td>Internet
-                        Explorer 4.0</td>
-                    <td class="td-actions">
-                        <a href="javascript:;" class="btn btn-small btn-warning">
-                            <i class="btn-icon-only icon-ok"></i>
-                        </a>
-
-                        <a href="javascript:;" class="btn btn-small">
-                            <i class="btn-icon-only icon-remove"></i>
-                        </a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Trident</td>
-                    <td>Internet
-                        Explorer 5.0</td>
-                    <td class="td-actions">
-                        <a href="javascript:;" class="btn btn-small btn-warning">
-                            <i class="btn-icon-only icon-ok"></i>
-                        </a>
-
-                        <a href="javascript:;" class="btn btn-small">
-                            <i class="btn-icon-only icon-remove"></i>
-                        </a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Trident</td>
-                    <td>Internet
-                        Explorer 5.5</td>
-                    <td class="td-actions">
-                        <a href="javascript:;" class="btn btn-small btn-warning">
-                            <i class="btn-icon-only icon-ok"></i>
-                        </a>
-
-                        <a href="javascript:;" class="btn btn-small">
-                            <i class="btn-icon-only icon-remove"></i>
-                        </a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Trident</td>
-                    <td>Internet
-                        Explorer 5.5</td>
-                    <td class="td-actions">
-                        <a href="javascript:;" class="btn btn-small btn-warning">
-                            <i class="btn-icon-only icon-ok"></i>
-                        </a>
-
-                        <a href="javascript:;" class="btn btn-small">
-                            <i class="btn-icon-only icon-remove"></i>
-                        </a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Trident</td>
-                    <td>Internet
-                        Explorer 5.5</td>
-                    <td class="td-actions">
-                        <a href="javascript:;" class="btn btn-small btn-warning">
-                            <i class="btn-icon-only icon-ok"></i>
-                        </a>
-
-                        <a href="javascript:;" class="btn btn-small">
-                            <i class="btn-icon-only icon-remove"></i>
-                        </a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Trident</td>
-                    <td>Internet
-                        Explorer 5.5</td>
-                    <td class="td-actions">
-                        <a href="javascript:;" class="btn btn-small btn-warning">
-                            <i class="btn-icon-only icon-ok"></i>
-                        </a>
-
-                        <a href="javascript:;" class="btn btn-small">
-                            <i class="btn-icon-only icon-remove"></i>
-                        </a>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-
-        </div> <!-- /widget-content -->
-
-    </div> <!-- /widget -->
 
 </div> <!-- /span6 -->
-<!-- Конец правого блока -->
+<!-- end right block -->
