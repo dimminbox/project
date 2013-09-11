@@ -21,7 +21,7 @@ $this->menu = array(
             <i class="icon-exchange"></i>
 
             <h3>
-                Ваши операции
+                <?php echo UserModule::t('Your transactions')?>
             </h3></div>
         <div class="widget-content">
 
@@ -29,10 +29,10 @@ $this->menu = array(
                 <thead>
                 <tr>
                     <td>№</td>
-                    <td>Дата</td>
-                    <td>Сумма операции</td>
-                    <td>Тип операции</td>
-                    <td>Остаток</td>
+                    <td>Date</td>
+                    <td>Transaction amount</td>
+                    <td>Type of transaction</td>
+                    <td>Amount</td>
                 </tr>
                 </thead>
                 <?php
