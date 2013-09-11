@@ -25,7 +25,7 @@
 
     <body>
 
-    <!-- Верхний блок -->
+    <!-- Top block -->
 <div class="navbar navbar-inverse navbar-fixed-top">
 
     <div class="navbar-inner">
@@ -37,7 +37,7 @@
             </a>
 
             <a class="brand" href="<?php echo Yii::app()->createAbsoluteUrl('/site/index') ?>">
-                Логотип
+                Logo
             </a>
             <div class="stat stat-time">
                 <span class="stat-value"><?php echo date('H:i:s')?></span>
@@ -51,9 +51,9 @@
 
 </div> <!-- /navbar -->
 
-    <!-- Конец верхний блок -->
+    <!-- end top block -->
 
-    <!-- Менюшка -->
+    <!-- Menu -->
 
 <div class="subnavbar">
 
@@ -111,27 +111,6 @@
                             $this->createUrl('/user/logout'), array('onclick'=>'javascript: return confirm("Exit?");')) ?>
                     </li>
 
-                   <!-- <li class="dropdown">
-                        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="icon-external-link"></i>
-                            <span>Extra Pages</span>
-                            <b class="caret"></b>
-                        </a>
-
-                        <ul class="dropdown-menu">
-                            <li><a href="http://jumpstartuidemo.com/themes/base/login.html">Login</a></li>
-                            <li><a href="http://jumpstartuidemo.com/themes/base/signup.html">Signup</a></li>
-                            <li><a href="http://jumpstartuidemo.com/themes/base/error.html">Error</a></li>
-                            <li class="dropdown-submenu">
-                                <a tabindex="-1" href="http://jumpstartuidemo.com/themes/base/index.html#">Dropdown menu</a>
-                                <ul class="dropdown-menu">
-                                    <li><a tabindex="-1" href="http://jumpstartuidemo.com/themes/base/index.html#">Second level link</a></li>
-                                    <li><a tabindex="-1" href="http://jumpstartuidemo.com/themes/base/index.html#">Second level link</a></li>
-                                    <li><a tabindex="-1" href="http://jumpstartuidemo.com/themes/base/index.html#">Second level link</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>-->
 
                 </ul>
             </div> <!-- /.subnav-collapse -->
@@ -142,7 +121,7 @@
 
 </div> <!-- /subnavbar -->
 
-    <!-- Конец Менюшка -->
+    <!-- End menu -->
 
 <div class="main">
 
@@ -169,24 +148,5 @@
 
 </div> <!-- /footer -->
 
-
-
-
-
-<!-- Le javascript
-================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
-<script src="jquery-1.8.3.min.js"></script>
-<script src="jquery-ui-1.10.0.custom.min.js"></script>
-<script src="bootstrap.min.js"></script>
-
-<script src="jquery.flot.js"></script>
-<script src="jquery.flot.pie.js"></script>
-<script src="jquery.flot.resize.js"></script>
-
-<script src="Application.js"></script>
-
-<script src="area.js"></script>
-<script src="donut.js"></script>
 
 </body></html>

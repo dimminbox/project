@@ -21,7 +21,7 @@ class DepositForm extends CFormModel {
     public function attributeLabels()
     {
         return array(
-            'PAYMENT_AMOUNT'=>'Введите сумму в долларах (USD):',
+            'PAYMENT_AMOUNT'=>'Amount to add:',
         );
     }
 

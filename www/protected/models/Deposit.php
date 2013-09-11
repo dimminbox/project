@@ -76,7 +76,7 @@ class Deposit extends CActiveRecord
 			'id' => 'ID',
 			'user_id' => 'Пользователь',
 			'deposit_type_id' => 'Время депозита',
-			'deposit_amount' => 'Сумма депозита',
+			'deposit_amount' => Yii::t('deposit', 'Deposit amount'),
             'expire' => 'Дата окончания депозита',
             'reinvest' => 'Реинвестирование',
 			'status' => 'Статус',
