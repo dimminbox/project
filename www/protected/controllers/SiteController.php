@@ -36,6 +36,77 @@ class SiteController extends Controller
 		$this->render('index');
 	}
 
+    public function actionAjaxWindowPayments() {
+
+        $file = Yii::app()->basePath . '/pay_json.txt';
+        $fileJson = fopen($file, 'r');
+        $json = fread($fileJson, 1000);
+        fclose($fileJson);
+
+        $data = CJSON::decode($json);
+
+        $render = '<table>';
+
+        foreach( $data['payments'] as $transaction ) {
+            $render .= '<tr>';
+                $render .= '<td>' . date('d.m.y h:i', $transaction['time']) . '</td>';
+                $render .= '<td>' . $transaction['name'] . '</td>';
+                $render .= '<td>' . $transaction['amount'] . ' $</td>';
+            $render .= '</tr>';
+        }
+
+        $render .= '</table>';
+
+        echo $render;
+    }
+
+    public function actionDemonWindowPayments() {
+
+        $min_time = 60;
+        $max_time = 60*60*3;
+        $time = time() - rand($min_time, $max_time);
+
+        $file = Yii::app()->basePath . '/pay_json.txt';
+        $fileJson = fopen($file, 'r');
+        $json = fread($fileJson, 1000);
+        fclose($fileJson);
+        $data = CJSON::decode($json);
+
+        $criteria = new CDbCriteria();
+        $criteria->condition = 'amount_type = ' . UserTransaction::AMOUNT_TYPE_OUTPUT;
+        $criteria->limit = 10;
+        $criteria->order = 'id DESC';
+        $transactions = UserTransaction::model()->findAll($criteria);
+
+        $paymentsData = array();
+        $paymentsData['time'] = $time;
+
+        $i = 0;
+
+        foreach( $transactions as $transaction ) {
+
+            if ( $transaction->id > $data['last_real_id']  ) {
+                $i++;
+                if ( $i == end($transactions) ) {
+                    $paymentsData['last_real_id'] = $transaction->id;
+                }
+
+                $paymentsData['payments'][] = array(
+                    'id' => $transaction->id,
+                    'time' => strtotime($transaction->time),
+                    'name' => $transaction->user->username,
+                    'amount' => $transaction->amount,
+                );
+            }
+        }
+        if ( $i > 0) {
+            $fileJson = fopen($file, 'w');
+            fwrite($fileJson, CJSON::encode($paymentsData));
+            fclose($fileJson);
+        }
+
+    }
+
 	/**
 	 * This is the action to handle external exceptions.
 	 */
