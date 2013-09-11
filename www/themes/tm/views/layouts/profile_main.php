@@ -4,7 +4,7 @@
 <html lang="ru"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
 
-    <title></title>
+    <title><?php echo CHtml::encode($this->pageTitle); ?></title>
     <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->theme->baseUrl; ?>/css/styles.css" />
     <?php Yii::app()->bootstrap->register(); ?>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -85,7 +85,7 @@
                     <?php endif; ?>
                     <li <?php echo ( $this->active == 'operations') ? 'class="active"' : ''?>>
                         <?php echo CHtml::link(
-                            '<i class="icon-exchange"></i><span>' . UserModule::t('Operations') . '</span>',
+                            '<i class="icon-exchange"></i><span>' . UserModule::t('Transactions') . '</span>',
                             $this->createUrl('/user/profile/operations')) ?>
                     </li>
 

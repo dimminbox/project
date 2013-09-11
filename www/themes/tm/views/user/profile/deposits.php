@@ -44,9 +44,9 @@ $this->menu=array(
                 <?php if ( Yii::app()->params['reinvest'] ) :?>
                 <td><?php
                     if ( $deposit->reinvest == Deposit::REINVEST_YES ) {
-                        echo 'Да';
+                        echo UserModule::t('Yes');
                     } elseif ( $deposit->reinvest == Deposit::REINVEST_NO ) {
-                        echo 'Нет';
+                        echo UserModule::t('No');
                     } else {
                         echo '';
                     }
@@ -54,8 +54,8 @@ $this->menu=array(
                 <?php endif; ?>
 
                 <td><?php if ( $deposit->status == 1 )
-                            { echo 'Действует'; }
-                        else { echo 'Закрыт'; }
+                            { echo UserModule::t('Active'); }
+                        else { echo UserModule::t('Completed'); }
                 ?></td>
             </tr>
 

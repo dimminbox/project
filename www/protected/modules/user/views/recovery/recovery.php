@@ -22,7 +22,7 @@ $this->layout = '//layouts/login';
 	<?php echo CHtml::errorSummary($form); ?>
 	
 	<div>
-		<?php echo CHtml::activeTextField($form,'login_or_email',array('placeholder' => 'Логин или email')); ?>
+		<?php echo CHtml::activeTextField($form,'login_or_email',array('placeholder' => UserModule::t('Login or email'))); ?>
 		<p class="hint"><?php echo UserModule::t("Please enter your login or email addres."); ?></p>
 	</div>
 
