@@ -33,7 +33,7 @@ class DemonController extends AdminController
                                 $transaction->user_id = $user->id;
                                 $transaction->amount = $percentAmount;
                                 $transaction->amount_type = UserTransaction::AMOUNT_TYPE_EARNINGS;
-                                $transaction->reason = 'Начисление процентов с депозита';
+                                $transaction->reason = Yii::t('demon', 'Profit of deposits');
                                 $transaction->save();
 
 
@@ -49,7 +49,7 @@ class DemonController extends AdminController
                                 $transaction->user_id = $user->id;
                                 $transaction->amount = $deposit->deposit_amount;
                                 $transaction->amount_type = UserTransaction::AMOUNT_TYPE_BACK_INVESTMENT;
-                                $transaction->reason = 'Возврат депозита №' . $deposit->id . ' по окончании срока действия';
+                                $transaction->reason = Yii::t('demon', 'Refund of a deposit №') . $deposit->id;
                                 $transaction->save();
                             }
                         }
@@ -94,7 +94,7 @@ class DemonController extends AdminController
                             $transaction->amount = $summ * Referral::REFERRAL_PERCENT;
                             $transaction->amount_type = UserTransaction::AMOUNT_TYPE_REFERRAL;
                             $transaction->user_id = $user->id;
-                            $transaction->reason = 'Начисление реферального процента от ' . $referral->username;
+                            $transaction->reason = Yii::t('demon', 'Profit referral of') . ' ' . $referral->username;
                             $transaction->save();
 
                         } else {
