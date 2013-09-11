@@ -79,7 +79,7 @@ $this->menu = array(
                     <?php echo $form->error($model, 'perfect_purse'); ?>
                 </div>
 
-                <?php echo CHtml::link('Изменить пароль', $this->createAbsoluteUrl('/user/profile/changepassword')); ?>
+                <?php echo CHtml::link(UserModule::t('Change password'), $this->createAbsoluteUrl('/user/profile/changepassword')); ?>
                 <br/>
 
                 <div>

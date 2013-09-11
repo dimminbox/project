@@ -1,9 +1,5 @@
 <?php
-$this->pageTitle=Yii::app()->name . ' - Полный список операций';
-$this->breadcrumbs=array(
-    UserModule::t("Profile") => array('/profile'),
-    'Все депозиты',
-);
+$this->pageTitle=Yii::app()->name . ' - ' . UserModule::t('Deposits');
 $this->menu=array(
 #array('label'=>UserModule::t('List User'), 'url'=>array('/user')),
 #array('label'=>UserModule::t('Investment'), 'url'=>array('/user/deposit')),
@@ -19,20 +15,20 @@ $this->menu=array(
         <div class="widget-header">
             <i class="icon-money"></i>
             <h3>
-                Ваши дерозиты
+                <?php echo UserModule::t('Your deposits')?>
             </h3></div>
         <div class="widget-content">
 <table class="table table-bordered table-striped">
         <thead>
         <tr>
             <td>№</td>
-            <td>Сумма</td>
-            <td>Срок</td>
-            <td>Процент</td>
-            <td>Дата создания</td>
-            <td>Дата окончания</td>
-            <?php echo ( Yii::app()->params['reinvest'] ) ? '<td>Реинвест</td>' : '' ?>
-            <td>Состояние</td></tr>
+            <td>Amount</td>
+            <td>Program period</td>
+            <td>Percent</td>
+            <td>Start date</td>
+            <td>Exception date</td>
+            <?php echo ( Yii::app()->params['reinvest'] ) ? '<td>Reinvest</td>' : '' ?>
+            <td>Status</td></tr>
         </thead>
         <?php
         foreach ($models as $deposit): ?>

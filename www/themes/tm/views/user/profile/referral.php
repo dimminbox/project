@@ -22,7 +22,7 @@ $this->menu = array(
             <i class="icon-group"></i>
 
             <h3>
-                Партнерская программа
+                <?php echo UserModule::t('Referral program')?>
             </h3></div>
         <div class="widget-content">
             <?php if (Yii::app()->user->hasFlash('profileMessage')): ?>
@@ -32,24 +32,23 @@ $this->menu = array(
             <?php endif; ?>
 
             <p>
-                <strong>Ваша реферальная
-                    ссылка:</strong> <?php echo CHtml::textField('referral_link', Yii::app()->request->hostInfo . '/?ref=' . $user->username) ?>
+                <strong><?php echo UserModule::t('Referral code')?>:</strong> <?php echo CHtml::textField('referral_link', Yii::app()->request->hostInfo . '/?ref=' . $user->username) ?>
                 <br/>
-                <strong>Процентная ставка: <?php echo Referral::REFERRAL_PERCENT * 100 . ' %'; ?></strong><br/>
+                <strong><?php echo UserModule::t('Your profit')?>: <?php echo Referral::REFERRAL_PERCENT * 100 . ' %'; ?></strong><br/>
             </p>
             </p>
             <p>
 
-            <h2>Список рефералов:</h2>
+            <h2>List of referrals:</h2>
             </p>
             <?php if (!empty($user->refs)) : ?>
                 <table class="table table-bordered table-striped">
                     <thead>
                     <tr>
                         <td>№</td>
-                        <td>Имя реферрала</td>
-                        <td>Сумма депозитов</td>
-                        <td>Заработанная сумма</td>
+                        <td>Name</td>
+                        <td>Deposits</td>
+                        <td>Profit</td>
                     </tr>
                     </thead>
 
@@ -64,7 +63,7 @@ $this->menu = array(
 
                 </table>
             <?php else : ?>
-                У Вас нет приглашенных инвесторов
+                <?php echo UserModule::t('You have not referrals')?>
             <?php endif ?>
         </div>
     </div>

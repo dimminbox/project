@@ -1,10 +1,5 @@
 <?php
-$this->pageTitle = Yii::app()->name . ' - Полный список операций';
-/*$this->breadcrumbs=array(
-    UserModule::t("Profile") => array('/profile'),
-    'Полный список операций',
-);*/
-
+$this->pageTitle = Yii::app()->name . ' - ' . UserModule::t('Transactions');
 $this->menu = array(
 #array('label'=>UserModule::t('List User'), 'url'=>array('/user')),
 #array('label'=>UserModule::t('Investment'), 'url'=>array('/user/deposit')),
