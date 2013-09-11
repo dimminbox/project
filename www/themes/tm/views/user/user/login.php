@@ -18,12 +18,12 @@ $this->layout = '//layouts/login';
 
                 <div class='field'>
                     <?php echo CHtml::activeLabelEx($model, 'username'); ?>
-                    <?php echo CHtml::activeTextField($model, 'username', array('class' => 'login', 'placeholder' => 'Логин')) ?>
+                    <?php echo CHtml::activeTextField($model, 'username', array('class' => 'login', 'placeholder' => UserModule::t('Login'))) ?>
                 </div>
 
                 <div class='field'>
                     <?php echo CHtml::activeLabelEx($model, 'password'); ?>
-                    <?php echo CHtml::activePasswordField($model, 'password', array('class' => 'login', 'placeholder' => 'Пароль')) ?>
+                    <?php echo CHtml::activePasswordField($model, 'password', array('class' => 'login', 'placeholder' => UserModule::t('Password'))) ?>
                 </div>
 
                 <div>
