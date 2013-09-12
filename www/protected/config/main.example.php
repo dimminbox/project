@@ -28,6 +28,7 @@ return array(
     // autoloading model and component classes
     'import'=>array(
         'ext.imperavi-redactor-widget.*',
+        'ext.widgets.window-payment.*',
         'ext.widgets.news-widget.*',
         'ext.bootstrap.*',
         'ext.yii-chartjs.*',
