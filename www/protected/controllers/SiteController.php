@@ -64,7 +64,7 @@ class SiteController extends Controller
 
         $min_time = 60;
         $max_time = 60*60*3;
-        $time = time() - rand($min_time, $max_time);
+        //$time = time() - rand($min_time, $max_time);
 
         $file = Yii::app()->basePath . '/pay_json.txt';
         $fileJson = fopen($file, 'r');
@@ -73,37 +73,83 @@ class SiteController extends Controller
         $data = CJSON::decode($json);
 
         $criteria = new CDbCriteria();
-        $criteria->condition = 'amount_type = ' . UserTransaction::AMOUNT_TYPE_OUTPUT;
+        $criteria->condition = 'amount_type = ' . UserTransaction::AMOUNT_TYPE_OUTPUT . ' AND id > ' . $data['last_real_id'];
         $criteria->limit = 10;
-        $criteria->order = 'id DESC';
+        $criteria->order = 'id ASC';
         $transactions = UserTransaction::model()->findAll($criteria);
+        $real = false;
+        if ( !empty($transactions)) {
 
-        $paymentsData = array();
-        $paymentsData['time'] = $time;
+            $data['time'] = time() + rand($min_time, $max_time);
 
-        $i = 0;
+            $i = 0;
 
-        foreach( $transactions as $transaction ) {
+            $last_real_id = $data['last_real_id'];
+            $total = count($transactions)-1;
 
-            if ( $transaction->id > $data['last_real_id']  ) {
-                $i++;
-                if ( $i == end($transactions) ) {
-                    $paymentsData['last_real_id'] = $transaction->id;
+            foreach( $transactions as $transaction ) {
+
+                if ( $transaction->id > $last_real_id  ) {
+
+                    if ( $i == $total ) {
+                        $data['last_real_id'] = $transaction->id;
+                    }
+
+                    $user = array(
+                        'id' => $transaction->id,
+                        'time' => strtotime($transaction->time),
+                        'name' => $transaction->user->username,
+                        'amount' => (float)abs($transaction->amount),
+                    );
+                    array_unshift($data['payments'], $user);
+                    $i++;
+                }
+            }
+
+            if ( $i > 0) {
+
+
+                for($c=10, $users = count($data['payments']);$c<$users;$c++) {
+                    unset($data['payments'][$c]);
                 }
 
-                $paymentsData['payments'][] = array(
-                    'id' => $transaction->id,
-                    'time' => strtotime($transaction->time),
-                    'name' => $transaction->user->username,
-                    'amount' => $transaction->amount,
-                );
+                $fileJson = fopen($file, 'w');
+                fwrite($fileJson, CJSON::encode($data));
+                fclose($fileJson);
+
             }
+
+            $real = true;
+
         }
-        if ( $i > 0) {
-            $fileJson = fopen($file, 'w');
-            fwrite($fileJson, CJSON::encode($paymentsData));
-            fclose($fileJson);
+
+
+        if ( $real == false && time() > $data['time'] ) {
+
+                $file = Yii::app()->basePath . '/pay_users.txt';
+                $fileUsers = file($file);
+
+                $user = array_rand($fileUsers);
+
+                $user = array(
+                    'id' => 0,
+                    'time' => time(),
+                    'name' => $fileUsers[$user],
+                    'amount' => rand(3,150),
+                );
+                array_unshift($data['payments'], $user);
+
+
+                unset($data['payments'][10]);
+
+                $file = Yii::app()->basePath . '/pay_json.txt';
+                $fileJson = fopen($file, 'w');
+                fwrite($fileJson, CJSON::encode($data));
+                fclose($fileJson);
         }
+
+
+
 
     }
 
