@@ -48,6 +48,25 @@
 
         </div>
     </div>
+
+</section>
+<section id="header-plans">
+    <div class="main-plans">
+        <div class="plan">
+            <span class="plan-title">START</span>
+            <hr />
+            <div>
+                Daily Profit 50%<br />
+                Amount $10 - $299<br />
+                Period 10 working days
+            </div>
+
+        </div>
+        <div class="plan">2</div>
+        <div class="plan">3</div>
+        <div class="plan">4</div>
+    </div>
+    <div style="clear:both"></div>
 </section>
 <!--==============================content================================-->
 <section id="content" class="border subpage-content">

@@ -91,7 +91,59 @@ ul.menu li a:hover, ul.menu li.current a {color:#a83715;}
 .sub-page-banner strong+strong+strong+strong {margin-top:-34px !important;}
 .font-1 { font-size:50px; line-height:60px; letter-spacing:-3px;}
 .font-2 {font-size:100px; line-height:120px; letter-spacing:-4px;}
+#header-plans {
+    width:940px;margin:0 auto;
+    padding: 5px;
+}
 
+.plan {
+    background-color: #ffffff;
+    width: 210px;
+    float:left;
+    border: 2px solid #666666;
+    padding: 5px;
+    margin: 0 5px 0 5px;
+    -webkit-border-radius: 7px;
+    -moz-border-radius: 7px;
+    -khtml-border-radius: 7px;
+    border-radius: 7px;
+}
+.plan-title {
+    font-weight: bold;
+    font-size: 18px;
+}
+.plan:hover {
+    border: 2px solid #d34c1d;
+}
+.plan:hover hr {
+    height: 1px;
+    background: #d34c1d;
+    font-size: 0;
+    border: 0;
+    margin-bottom: 5px;
+}
+.plan:hover .plan-title {
+    color: #d34c1d;
+}
+
+.plan hr {
+    height: 1px;
+    background: #666666;
+    font-size: 0;
+    border: 0;
+    margin-bottom: 5px;
+}
+.percent {
+    font-size: 24px;
+    background:url(../images/header35.gif) 0 0 repeat;
+    color: #fff;
+    font-weight: normal;
+    padding: 3px 12px 3px 12px;
+    -webkit-border-radius: 7px;
+    -moz-border-radius: 7px;
+    -khtml-border-radius: 7px;
+    border-radius: 7px;
+}
 /*********************************content*************************************/
 #content { background:#fff; width:100%; padding-bottom:42px;}
 .border {border-top:#f4f4f4 10px solid;}
