@@ -33,8 +33,6 @@ $this->breadcrumbs = array(
                 'validateOnSubmit' => true,
             ),
         )); ?>
-        <?php echo $form->errorSummary($model); ?>
-
         <div class="row">
             <?php //echo $form->labelEx($model,'name'); ?>
             <label for="ContactForm_name" class="required"><strong>Name <span class="required">*</span></strong>
@@ -57,21 +55,22 @@ $this->breadcrumbs = array(
         </div>
 
         <div class="row">
+            <label for="ContactForm_message" class="required"><strong>Message<span class="required">*</span></strong>
             <?php //echo $form->labelEx($model,'body'); ?>
-            <?php echo $form->textArea($model, 'body', array('rows' => 6, 'cols' => 50)); ?>
+            <?php echo $form->textArea($model, 'body'); ?>
             <?php echo $form->error($model, 'body'); ?>
         </div>
 
         <?php if (CCaptcha::checkRequirements()): ?>
             <div class="row">
-                <?php echo $form->labelEx($model, 'verifyCode'); ?>
-                <div>
+                <label for="ContactForm_code"><strong>Verification Code<span class="required">*</span></strong>
+                <div id="code">
                     <?php $this->widget('CCaptcha'); ?>
                     <?php echo $form->textField($model, 'verifyCode'); ?>
                 </div>
                 <div
                     class="hint"><?php echo Yii::t('news', 'Please enter the letters as they are shown in the image above') ?>
-                    .
+
                     <br/><?php echo Yii::t('news', 'Letters are not case-sensitive') ?>.
                 </div>
                 <?php echo $form->error($model, 'verifyCode'); ?>
