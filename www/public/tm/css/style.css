@@ -63,7 +63,7 @@ ul.list-1 li a:hover {color:#1e1e1e;}
 .h2 {padding-bottom:11px;}
 
 /*********************************header*************************************/
-header {width:100%; background:url(../images/header-bg.gif) 0 0 repeat; margin:0 auto; z-index:101; position:relative; z-index:100;}
+header {width:100%; background:url(../images/header35.gif) 0 0 repeat; margin:0 auto; z-index:101; position:relative; z-index:100;}
 
 h1 {float:left; margin:16px 0 16px 0px;}
 
@@ -72,7 +72,7 @@ ul.menu li {float:left; line-height:20px; margin:0px 0 0px 40px;}
 ul.menu li a {font-size:16px; line-height:20px; color:#fff; display:inline-block; }
 ul.menu li a:hover, ul.menu li.current a {color:#a83715;}
 
-#header-content {width:100%; background:url(../images/header-bg.gif) 0 0 repeat; margin:0 auto; }
+#header-content {width:100%; background:url(../images/header35.gif) 0 0 repeat; margin:0 auto; }
 .sub-page-banner {width:940px; height:369px; margin:30px 0 30px 0;}
 .page2-banner {background:url(../images/page2-banner.jpg) 0 0px no-repeat;}
 .page3-banner {background:url(../images/page3-banner.jpg) 0 0px no-repeat;}
