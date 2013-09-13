@@ -142,3 +142,34 @@ dl dd a:hover {text-decoration:underline;}
 #form label strong {font-weight:normal; color:#1e1e1e; float:left; display:inline-block; width:80px; padding-top:2px;}
 .btns {text-align:right; width:580px; padding-top:20px;}
 .btns a {display:inline-block; margin:0 0px 0 10px;}
+#payments {
+    border: 1px solid #000000;
+    padding: 2px;
+
+}
+#payments_table {
+    width:294px;
+    border-collapse:collapse;
+}
+#payments_table th {
+    text-align:center;
+    padding-top:5px;
+    padding-bottom:4px;
+    background-color:#d34c1d;
+    color:#ffffff;
+}
+#payments_table th
+{
+    font-size:1em;
+    border:1px solid #ffffff;
+    padding:3px 7px 2px 7px;
+}
+#payments_table td
+{
+    font-size:1em;
+    border:1px solid #d34c1d;
+    padding:3px 7px 2px 7px;
+}
+#payments_table .alt {
+    background-color: #cccccc;
+}
