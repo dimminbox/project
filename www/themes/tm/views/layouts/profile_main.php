@@ -41,8 +41,6 @@
                 <span class="stat-value"><?php echo date('H:i:s')?></span>
             </div>
 
-
-
         </div> <!-- /container -->
 
     </div> <!-- /navbar-inner -->
