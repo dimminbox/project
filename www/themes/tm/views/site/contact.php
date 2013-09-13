@@ -65,6 +65,7 @@ $this->breadcrumbs = array(
             <div class="row">
                 <label for="ContactForm_code"><strong>Verification Code<span class="required">*</span></strong>
                 <div id="code">
+                    <?php echo $form->error($model, 'verifyCode'); ?>
                     <?php $this->widget('CCaptcha'); ?>
                     <?php echo $form->textField($model, 'verifyCode'); ?>
                 </div>
@@ -73,7 +74,7 @@ $this->breadcrumbs = array(
 
                     <br/><?php echo Yii::t('news', 'Letters are not case-sensitive') ?>.
                 </div>
-                <?php echo $form->error($model, 'verifyCode'); ?>
+
             </div>
         <?php endif; ?>
 

@@ -36,9 +36,7 @@
                 <i class="icon-cog"></i>
             </a>
 
-            <a class="brand" href="<?php echo Yii::app()->createAbsoluteUrl('/site/index') ?>">
-                Logo
-            </a>
+            <a class="brand" href="/"><img src="<?php echo Yii::app()->request->baseUrl; ?>/public/tm/images/logo.png" alt=""></a>
             <div class="stat stat-time">
                 <span class="stat-value"><?php echo date('H:i:s')?></span>
             </div>
