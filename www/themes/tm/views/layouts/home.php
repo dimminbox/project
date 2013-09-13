@@ -44,7 +44,7 @@
 </header>
 <section id="header-content">
     <div class="main">
-        <div class="sub-page-banner page2-banner">
+        <div class="home-banner home-page-banner1">
 
         </div>
     </div>
