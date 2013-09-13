@@ -45,11 +45,18 @@ class SiteController extends Controller
 
         $data = CJSON::decode($json);
 
-        $render = '<table>';
+        $render = '<table id="payments_table">';
+        $render .= '<tr><th>Time</th><th>Name</th><th>Amount</th></tr>';
+        $i = 0;
 
         foreach( $data['payments'] as $transaction ) {
-            $render .= '<tr>';
-                $render .= '<td>' . date('d.m.y h:i', $transaction['time']) . '</td>';
+            $i++;
+            $class = '';
+            if ( is_int($i/2) ){
+                $class = 'class = "alt"';
+            }
+            $render .= '<tr ' . $class . '>';
+                $render .= '<td>' . date('d.m h:i', $transaction['time']) . '</td>';
                 $render .= '<td>' . $transaction['name'] . '</td>';
                 $render .= '<td>' . $transaction['amount'] . ' $</td>';
             $render .= '</tr>';
