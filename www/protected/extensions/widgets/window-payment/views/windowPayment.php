@@ -1,3 +1,4 @@
+<h2 class="left-1"><?php echo Yii::t('site','Last Payments') ?></h2>
 <div id="payments"></div>
 
 <script>

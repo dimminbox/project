@@ -173,3 +173,13 @@ dl dd a:hover {text-decoration:underline;}
 #payments_table .alt {
     background-color: #cccccc;
 }
+
+.question {
+    display: block;
+    font-weight: bold;
+    margin: 5px 0 0 10px;
+}
+.answer {
+    display: block;
+    margin: 10px 0 10px 25px;
+}
