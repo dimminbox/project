@@ -33,9 +33,6 @@ $this->breadcrumbs = array(
                 'validateOnSubmit' => true,
             ),
         )); ?>
-
-        <p class="note"><span class="required">*</span> <?php echo Yii::t('site', 'required fields') ?> .</p>
-
         <?php echo $form->errorSummary($model); ?>
 
         <div class="row">
