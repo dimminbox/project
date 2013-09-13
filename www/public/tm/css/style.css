@@ -188,3 +188,6 @@ dl dd a:hover {text-decoration:underline;}
     display: block;
     margin: 10px 0 10px 25px;
 }
+.errorSummary, .errorMessage {
+    color: red;
+}
