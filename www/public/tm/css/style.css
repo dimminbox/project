@@ -72,13 +72,18 @@ ul.menu li {float:left; line-height:20px; margin:0px 0 0px 40px;}
 ul.menu li a {font-size:16px; line-height:20px; color:#fff; display:inline-block; }
 ul.menu li a:hover, ul.menu li.current a {color:#a83715;}
 
-#header-content {width:100%; background:url(../images/header-content-bg.gif) 0 0 repeat; margin:0 auto; }
+#header-content {width:100%; background:url(../images/header-bg.gif) 0 0 repeat; margin:0 auto; }
 .sub-page-banner {width:940px; height:369px; margin:30px 0 30px 0;}
 .page2-banner {background:url(../images/page2-banner.jpg) 0 0px no-repeat;}
 .page3-banner {background:url(../images/page3-banner.jpg) 0 0px no-repeat;}
 .page4-banner {background:url(../images/page4-banner.jpg) 0 0px no-repeat;}
 .page5-banner {background:url(../images/page5-banner.jpg) 0 0px no-repeat;}
-
+.home-banner {
+    width:940px; height:369px; margin:30px 0 30px 0;
+}
+.home-page-banner1 {
+    background:url(../images/banner1.jpg) 0 0px no-repeat;
+}
 .sub-page-banner p {padding:47px 0 0 80px;}
 .sub-page-banner strong { display:block; color:#fff; margin-top:-34px; }
 .sub-page-banner strong:first-child {margin-top:0 !important;}
