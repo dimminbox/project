@@ -32,7 +32,7 @@
         </div>
         <nav>
             <ul class="menu">
-                <li><?php echo CHtml::link(Yii::t('site','Home'), Yii::app()->request->baseUrl)?></li>
+                <li><?php echo CHtml::link(Yii::t('site','Home'),  $this->createUrl('site/index'))?></li>
                 <li><?php echo CHtml::link(Yii::t('site','About'), $this->createUrl('about')) ?></li>
                 <li><?php echo CHtml::link(Yii::t('site','Referral'), $this->createAbsoluteUrl('referral')) ?></li>
                 <li><?php echo CHtml::link(Yii::t('site','FAQ'), $this->createAbsoluteUrl('faq')) ?></li>
