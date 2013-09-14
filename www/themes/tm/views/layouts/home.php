@@ -52,21 +52,26 @@
 </section>
 <section id="header-plans">
     <div class="main-plans">
+
+        <?php foreach( DepositType::getDepositTypes() as $depositType ) :?>
         <div class="plan">
-            <span class="plan-title">START</span>
+            <span class="plan-title"><?php echo $depositType->type; ?></span>
             <hr />
             <div>
-                Daily Profit 50%<br />
-                Amount $10 - $299<br />
-                Period 10 working days
+                <span class="profit">DAILY PROFIT</span> <span class="percent"><?php echo 100 * $depositType->percent; ?>%*</span>
+
+                <span class="other">
+                    Amount <i>$<?php echo $depositType->min_amount; ?> - $<?php echo $depositType->max_amount; ?></i><br />
+                    Period <i><?php echo $depositType->days; ?> working days</i>
+                </span>
+
             </div>
 
         </div>
-        <div class="plan">2</div>
-        <div class="plan">3</div>
-        <div class="plan">4</div>
+        <?php endforeach; ?>
     </div>
     <div style="clear:both"></div>
+    * Percentage of the total income of the investor return on investment
 </section>
 <!--==============================content================================-->
 <section id="content" class="border subpage-content">

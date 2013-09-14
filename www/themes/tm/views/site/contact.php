@@ -20,8 +20,8 @@ $this->breadcrumbs = array(
 <?php else: ?>
 
     <p class='p1'>
-        В любой момент вы можете обратится к экспертам Cronofunds.com, заполнив приведенную ниже форму. <br/>
-        Пожалуйста, указывайте достоверные данные. Максимальный срок ответа - 3 рабочих дня.
+        At any moment you can apply to Cronofunds experts, filled the form below. Please give valid data.
+        Maximum  term  of answer – 3 working days
     </p>
 
     <div class="form">

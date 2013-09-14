@@ -114,4 +114,11 @@ class DepositType extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+
+    public static function getDepositTypes() {
+
+        $depositTypes = DepositType::model()->findAll();
+
+        return $depositTypes;
+    }
 }

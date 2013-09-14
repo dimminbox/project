@@ -97,12 +97,13 @@ ul.menu li a:hover, ul.menu li.current a {color:#a83715;}
 }
 
 .plan {
+    position: relative;
     background-color: #ffffff;
     width: 210px;
     float:left;
     border: 2px solid #666666;
     padding: 5px;
-    margin: 0 5px 0 5px;
+    margin: 5px 5px 0 5px;
     -webkit-border-radius: 7px;
     -moz-border-radius: 7px;
     -khtml-border-radius: 7px;
@@ -125,7 +126,9 @@ ul.menu li a:hover, ul.menu li.current a {color:#a83715;}
 .plan:hover .plan-title {
     color: #d34c1d;
 }
-
+.plan:hover .percent {
+    background: #d34c1d;
+}
 .plan hr {
     height: 1px;
     background: #666666;
@@ -133,7 +136,18 @@ ul.menu li a:hover, ul.menu li.current a {color:#a83715;}
     border: 0;
     margin-bottom: 5px;
 }
+.profit {
+    display: block;
+    position: absolute;
+    left: 10px;
+    top: 45px;
+    font-weight: bold;
+}
 .percent {
+    display: block;
+    position: absolute;
+    right: 10px;
+    top: 40px;
     font-size: 24px;
     background:url(../images/header35.gif) 0 0 repeat;
     color: #fff;
@@ -143,6 +157,16 @@ ul.menu li a:hover, ul.menu li.current a {color:#a83715;}
     -moz-border-radius: 7px;
     -khtml-border-radius: 7px;
     border-radius: 7px;
+}
+.other {
+    display: block;
+    margin: 60px 0 0 5px;
+    font-weight: bold;
+}
+.other i {
+    font-style: normal;
+    font-size: 18px;
+    font-weight: normal;
 }
 /*********************************content*************************************/
 #content { background:#fff; width:100%; padding-bottom:42px;}

@@ -8,23 +8,39 @@ $this->breadcrumbs=array(
 ?>
 <h2 class='h2'><?php echo Yii::t('news','Referral') ?></h2>
 
-<p class='p1'>
+<div>
 
-    1. Основные<br />
-    1.1. Каждый пользователь, зарегистрированный на сайте cronofunds.com, именуемый в дальнейшем Инвестор, принимает участие в реферальной программе.<br />
-    1.2. Каждому Инвестору присваивается реферальная ссылка типа _____________________ . Персональная реферальная ссылка доступна Инвестору в личном кабинете. Передавая свою реферальную ссылку, а также распространяя ее любыми доступными способами Инвестор принимает все условия данного соглашения.<br />
-    1.3. Инвестор считается привлеченным ( далее — Привлеченный инвестор), если он последовательно выполнил следующие действия:<br />
-    - получил приглашения от Инвестора в виде реферальной ссылки.<br />
-    - перешел по реферальной ссылке и зарегистрировался на сайте cronofunds.com, указав достоверные данные при регистрации своего аккаунта.<br />
+    <span class='question'>
+        1. Basis
+    </span>
+    <span class="answer">
+        1.1 Every user registered on the site cronofunds.com hereinafter referred to as the Investor,
+        participate in referral program<br />
+        1.2 The referral link as http://cronofunds.com/?ref=username is appropriated to every investor. The personal referral
+        link is available to the Investor in his personal cabinet. Passing your referral
+        link and extending in different ways Investor accept all the conditions of this agreement.<br />
+        1.3 Investor is considered involved (further Involved investor) if he accomplished the following actions<br />
+         - Receive an invitation from Investor in the form of a referral link.<br />
+         - Click on the referral link and register on the site cronofunds.com indicated vali data during the registration of your account.
+    </span>
+</div>
+<div>
 
+    <span class='question'>
+        2. Payment period and amount of remuneration to Investor according to the referral program
+    </span>
+    <span class="answer">
+        2.1 Remuneration payment according to the referral program is daily on weekdays at 13:00 (London time). Amount of
+        referral remuneration  - <?php echo 100 * Referral::REFERRAL_PERCENT; ?>%  from daily income of Involved investor.
+    </span>
+</div>
+<div>
 
-    2. Сроки и размер оплаты вознаграждений Инвестору по реферальной программе.<br />
-    Оплата вознаграждений по реферальной программе производится ежедневно по будням в 20:00 (время московское). Размер реферального вознаграждения — 8% от ежедневной доходности (выплаты) Привлеченного инвестора.<br />
-
-
-    3. Ответственность сторон:<br />
-
-
-    3.1. Инвестору запрещено регистрировать самого себя по реферальной ссылке. В случае обнаружения ( IP, MAC и т.д.) подобных действий выплаты Инвестору по реферальной программе прекращаются.<br />
-
-</p>
+    <span class='question'>
+        3. Responsibilities:
+    </span>
+    <span class="answer">
+         3.1 Investor is prohibited to register himself  by the referral link. In case of detection (IP, MAC etc.)
+        such actions payments for the referral program are stopped.
+    </span>
+</div>

@@ -7,7 +7,7 @@
     </div>
     <div class="grid_4">
 
-        <?php $this->widget('newsWidget'); ?>
+        <?php //$this->widget('newsWidget'); ?>
         <?php $this->widget('windowPayment'); ?>
 
     </div>
