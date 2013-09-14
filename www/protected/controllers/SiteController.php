@@ -86,7 +86,7 @@ class SiteController extends Controller
         $transactions = UserTransaction::model()->findAll($criteria);
         $real = false;
         $data['time'] = time() + rand($min_time, $max_time);
-        
+
         if ( !empty($transactions)) {
 
             $i = 0;
