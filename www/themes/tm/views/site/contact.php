@@ -79,7 +79,7 @@ $this->breadcrumbs = array(
         <?php endif; ?>
 
 
-        <button class="button btn btn-warning btn-large">
+        <button class="">
             Send
         </button>
 

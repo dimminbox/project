@@ -8,8 +8,6 @@
     <link rel="stylesheet" type="text/css" media="screen" href="<?php echo Yii::app()->request->baseUrl; ?>/public/tm/css/style.css">
     <link rel="stylesheet" type="text/css" media="screen" href="<?php echo Yii::app()->request->baseUrl; ?>/public/tm/css/grid_12.css">
     <?php Yii::app()->clientScript->registerCoreScript('cookie'); ?>
-    <link href="<?php echo Yii::app()->request->baseUrl; ?>/public/tm/profile/css/signin.css" rel="stylesheet">
-    <link href="<?php echo Yii::app()->request->baseUrl; ?>/public/tm/profile/css/bootstrap.min.css" rel="stylesheet">
     <!--[if lt IE 8]>
     <div style=' clear: both; text-align:center; position: relative;'>
         <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">

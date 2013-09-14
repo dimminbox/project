@@ -115,6 +115,7 @@ ul.menu li a:hover, ul.menu li.current a {color:#a83715;}
 }
 .plan:hover {
     border: 2px solid #d34c1d;
+    cursor: pointer;
 }
 .plan:hover hr {
     height: 1px;
