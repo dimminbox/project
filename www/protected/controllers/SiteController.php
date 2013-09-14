@@ -56,7 +56,7 @@ class SiteController extends Controller
                 $class = 'class = "alt"';
             }
             $render .= '<tr ' . $class . '>';
-                $render .= '<td>' . date('d.m h:i', $transaction['time']) . '</td>';
+                $render .= '<td>' . date('d.m H:i', $transaction['time']) . '</td>';
                 $render .= '<td>' . $transaction['name'] . '</td>';
                 $render .= '<td>' . $transaction['amount'] . ' $</td>';
             $render .= '</tr>';
@@ -85,9 +85,9 @@ class SiteController extends Controller
         $criteria->order = 'id ASC';
         $transactions = UserTransaction::model()->findAll($criteria);
         $real = false;
-        if ( !empty($transactions)) {
+        $data['time'] = time() + rand($min_time, $max_time);
 
-            $data['time'] = time() + rand($min_time, $max_time);
+        if ( !empty($transactions)) {
 
             $i = 0;
 
