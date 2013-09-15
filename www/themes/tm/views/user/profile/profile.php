@@ -16,12 +16,12 @@ $this->menu = array(
 ?>
 
 <?php if (Yii::app()->user->hasFlash('profileMessage')): ?>
-    <div class="success" style="text-align:center;padding:10px;color:green;font-weight:bold;border:1px solid green">
+    <div class="success" style="margin: 0 auto 25px auto;width:60%;text-align:center;padding:10px;color:green;font-weight:bold;border:2px solid green">
         <?php echo Yii::app()->user->getFlash('profileMessage'); ?>
     </div>
 <?php endif; ?>
 <?php if (Yii::app()->user->hasFlash('profileMessageFail')): ?>
-    <div class="fail" style="text-align:center;padding:10px;color:red;font-weight:bold;border:1px solid red">
+    <div class="fail" style="margin: 0 auto 25px auto;width:60%;text-align:center;padding:10px;color:red;font-weight:bold;border:2px solid red">
         <?php echo Yii::app()->user->getFlash('profileMessageFail'); ?>
     </div>
 <?php endif; ?>

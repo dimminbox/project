@@ -38,6 +38,10 @@ return array(
     '<language:(en)>/profile/edit' => '/user/profile/edit',
     'profile/edit' => '/user/profile/edit',
 
+    'profile/depositSuccess' => '/user/profile/depositSuccess',
+    'profile/depositFail' => '/user/profile/depositFail',
+    'profile/depositStatus' => '/user/profile/depositStatus',
+
     '<language:(en)>/profile/edit/changepassword' => '/user/profile/changepassword',
     'profile/edit/changepassword' => '/user/profile/changepassword',
 
