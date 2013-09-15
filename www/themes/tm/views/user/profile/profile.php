@@ -111,7 +111,7 @@ if ( Yii::app()->params['reinvest'] == true && $user->deposit != null ) {
                 <!-- /stat -->
 
                 <div class="stat"><?php echo UserModule::t('Your cash')?>:
-                    <span class="stat-value"><?php echo (float)$user->amount; ?>$</span>
+                    <span class="stat-value">$<?php echo (float)$user->amount; ?></span>
 
                 </div>
                 <!-- /stat -->
@@ -139,33 +139,105 @@ if ( Yii::app()->params['reinvest'] == true && $user->deposit != null ) {
     <!-- end 1 widget -->
     <!-- 2 widget -->
 
+    <?php if ($chart != null) : ?>
+        <div class="widget stacked">
+
+            <div class="widget-header">
+                <i class="icon-signal"></i>
+
+                <h3><?php echo UserModule::t('Profit charts for')?>
+                    <?php echo User::model()->declension(count($chart['days']), count($chart['days']) . ' ' . UserModule::t('day'), ' ' . UserModule::t('last') . ' ' . count($chart['days']) . ' ' . UserModule::t('day'), ' ' . UserModule::t('last') . ' ' . count($chart['days']) . ' ' .UserModule::t('days')) ?> </h3>
+            </div>
+            <!-- /widget-header -->
+
+            <div class="widget-content">
+                <?php
+                $datasets = array();
+                $chartsTitle = '';
+
+                if (isset($chart['deposits'])) {
+                    $strokeColor = 'green';
+                    $datasets[] = array(
+                        "fillColor" => "transparent",
+                        "strokeColor" => $strokeColor,
+                        "pointColor" => "rgba(220,220,220,1)",
+                        "pointStrokeColor" => $strokeColor,
+                        "data" => $chart['deposits'],
+                    );
+                    $chartsTitle .= '<span style="color:' . $strokeColor . '">' . UserModule::t('Deposits') . '</span><br />';
+                }
+                if (isset($chart['referral'])) {
+                    $strokeColor = 'blue';
+                    $datasets[] = array(
+                        "fillColor" => "transparent",
+                        "strokeColor" => $strokeColor,
+                        "pointColor" => "rgba(220,220,220,1)",
+                        "pointStrokeColor" => $strokeColor,
+                        "data" => $chart['referral'],
+                    );
+                    $chartsTitle .= '<span style="color:' . $strokeColor . '">' . UserModule::t('Referral program') . '</span><br />';
+                }
+
+                $this->widget(
+                    'chartjs.widgets.ChLine',
+                    array(
+                        'width' => 540,
+                        'height' => 300,
+                        'htmlOptions' => array(),
+                        'labels' => $chart['days'],
+                        'datasets' => $datasets,
+                        'options' => array()
+                    )
+                );
+
+                echo $chartsTitle;
+                ?>
+
+            </div>
+
+        </div>
+
+
+    <?php endif; ?>
+
+</div> <!-- /span6 -->
+<!-- end left block -->
+
+<!-- right block -->
+<div class="span6">
+
+    <?php foreach ( $listDeposits as $depositPlan ) : ?>
     <div class="widget widget-nopad stacked">
 
         <div class="widget-header">
             <i class="icon-money"></i>
 
-            <h3><?php echo UserModule::t('Investment programs')?></h3>
+            <h3><?php echo UserModule::t('Investment program')?> - <?php echo $depositPlan->type; ?></h3>
         </div>
         <!-- /widget-header -->
 
         <div class="widget-content">
 
             <ul class="news-items">
-                <?php foreach ( $listDeposits as $depositPlan ) : ?>
+
                     <li>
 
-                        <div class="news-item-detail">
-
-                            <?php echo UserModule::t('Program period')?>: <?php echo $depositPlan->type; ?><br />
-                            <?php echo UserModule::t('Daily percentage profit')?>: <?php echo $depositPlan->percent; ?>%<br />
-                            <?php echo UserModule::t('Minimum amount')?>: <?php echo $depositPlan->min_amount; ?>$<br />
-                            <p class="news-item-preview">
+                        <div style="margin: 0 auto">
+                            <div style="float:left;margin: 0 0 0 10px">
+                                <?php echo UserModule::t('Daily profit')?>: <?php echo 100 * $depositPlan->percent; ?>%*<br />
+                                <?php echo UserModule::t('Amount')?>: $<?php echo $depositPlan->min_amount; ?> - $<?php echo $depositPlan->max_amount; ?>
+                            </div>
+                            <div style="float:left; margin: 0 30px 0 30px">
+                                <?php echo UserModule::t('Period') ?>: <?php echo $depositPlan->days; ?> working days<br />
+                                <?php echo UserModule::t('Total return') ?>: ~<?php echo $depositPlan->total_return; ?>%
+                            </div>
+                                <p class="news-item-preview">
                                 <?php echo $depositPlan->description; ?>
                             </p>
                         </div>
 
                         <div class="news-item-date">
-                            <?php echo CHtml::link(UserModule::t('Invest'), '#', array('onclick' => '$("#investment' . $depositPlan->id . '").dialog("open"); return false;',)); ?>
+                            <?php echo CHtml::link(UserModule::t('Invest'), '#', array('class'=>'btn','onclick' => '$("#investment' . $depositPlan->id . '").dialog("open"); return false;',)); ?>
 
 
                             <?php
@@ -176,7 +248,7 @@ if ( Yii::app()->params['reinvest'] == true && $user->deposit != null ) {
                                         'title'    => 'Deposit: ' . $depositPlan->type . ' - ' . $depositPlan->percent . '%',
                                         'autoOpen' => false,
                                         'modal'    => 'true',
-                                        'width'    => '250',
+                                        'width'    => '350',
                                         'height'   => 'auto',
                                         'resizable'=> false,
                                     ),
@@ -211,7 +283,7 @@ if ( Yii::app()->params['reinvest'] == true && $user->deposit != null ) {
 
                         </div>
                     </li>
-                <?php endforeach; ?>
+
 
             </ul>
 
@@ -219,77 +291,12 @@ if ( Yii::app()->params['reinvest'] == true && $user->deposit != null ) {
         <!-- /widget-content -->
 
     </div>
+    <?php endforeach; ?>
     <!-- /widget -->
     <!-- end 2 widget -->
 
-</div> <!-- /span6 -->
-<!-- end left block -->
-
-<!-- right block -->
-<div class="span6">
-
-<?php if ($chart != null) : ?>
-    <div class="widget stacked">
-
-        <div class="widget-header">
-            <i class="icon-signal"></i>
-
-            <h3><?php echo UserModule::t('Profit charts for')?>
-                <?php echo User::model()->declension(count($chart['days']), count($chart['days']) . ' ' . UserModule::t('day'), ' ' . UserModule::t('last') . ' ' . count($chart['days']) . ' ' . UserModule::t('day'), ' ' . UserModule::t('last') . ' ' . count($chart['days']) . ' ' .UserModule::t('days')) ?> </h3>
-        </div>
-        <!-- /widget-header -->
-
-        <div class="widget-content">
-            <?php
-            $datasets = array();
-            $chartsTitle = '';
-
-            if (isset($chart['deposits'])) {
-                $strokeColor = 'green';
-                $datasets[] = array(
-                    "fillColor" => "transparent",
-                    "strokeColor" => $strokeColor,
-                    "pointColor" => "rgba(220,220,220,1)",
-                    "pointStrokeColor" => $strokeColor,
-                    "data" => $chart['deposits'],
-                );
-                $chartsTitle .= '<span style="color:' . $strokeColor . '">' . UserModule::t('Deposits') . '</span><br />';
-            }
-            if (isset($chart['referral'])) {
-                $strokeColor = 'blue';
-                $datasets[] = array(
-                    "fillColor" => "transparent",
-                    "strokeColor" => $strokeColor,
-                    "pointColor" => "rgba(220,220,220,1)",
-                    "pointStrokeColor" => $strokeColor,
-                    "data" => $chart['referral'],
-                );
-                $chartsTitle .= '<span style="color:' . $strokeColor . '">' . UserModule::t('Referral program') . '</span><br />';
-            }
-
-            $this->widget(
-                'chartjs.widgets.ChLine',
-                array(
-                    'width' => 540,
-                    'height' => 300,
-                    'htmlOptions' => array(),
-                    'labels' => $chart['days'],
-                    'datasets' => $datasets,
-                    'options' => array()
-                )
-            );
-
-            echo $chartsTitle;
-            ?>
-
-        </div>
-
-    </div>
 
 </div>
-<?php endif; ?>
-
-
 
 </div> <!-- /span6 -->
 <!-- end right block -->

@@ -6,7 +6,7 @@ $this->beginWidget(
             'title'    => 'Инвестирование',
             'autoOpen' => false,
             'modal'    => 'true',
-            'width'    => '250',
+            'width'    => '350',
             'height'   => 'auto',
             'resizable'=> false,
         ),

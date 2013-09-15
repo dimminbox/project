@@ -12,6 +12,7 @@
  * @property integer $max_amount
  * @property string $description
  * @property integer $status
+ * @property float $total_return
  */
 class DepositType extends CActiveRecord
 {
@@ -35,7 +36,7 @@ class DepositType extends CActiveRecord
 		return array(
 			array('percent, min_amount, max_amount', 'numerical'),
 			array('type', 'length', 'max'=>255),
-            array('days, description, status', 'safe'),
+            array('days, description, status, total_return', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, type, percent', 'safe', 'on'=>'search'),
@@ -68,6 +69,7 @@ class DepositType extends CActiveRecord
             'min_amount' => 'Минимальная сумма',
             'max_amount' => 'Максимальная сумма',
             'status' => 'Статус',
+            'total_return' => 'Total return'
 
 		);
 	}
@@ -98,6 +100,7 @@ class DepositType extends CActiveRecord
         $criteria->compare('days',$this->days);
 		$criteria->compare('percent',$this->percent);
         $criteria->compare('status',$this->status);
+        $criteria->compare('total_return', $this->total_return);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

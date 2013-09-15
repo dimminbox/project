@@ -160,6 +160,49 @@ class ProfileController extends Controller
 
         if ( isset($_POST['Deposit']) ) {
 
+            $depositAmount = $_POST['Deposit']['deposit_amount'];
+            $depositId = $_POST['Deposit']['deposit_type_id'];
+
+            if ( $depositId == 2 ) {
+                if ( $depositAmount >= 10 && $depositAmount <= 299 ) {
+                    $deposit_amount = $depositAmount;
+                } else {
+                    Yii::app()->user->setFlash('profileMessageFail', 'Incorrect amount.<br />
+                                                The amount should be in the range from $10 to $299');
+                    $this->redirect($this->createUrl('/user/profile'));
+                }
+            }
+
+            if ( $depositId == 3 ) {
+                if ( $depositAmount >= 300 && $depositAmount <= 1999 ) {
+                    $deposit_amount = $depositAmount;
+                } else {
+                    Yii::app()->user->setFlash('profileMessageFail', 'Incorrect amount.<br />
+                                                The amount should be in the range from $300 to $1999');
+                    $this->redirect($this->createUrl('/user/profile'));
+                }
+            }
+
+            if ( $depositId == 4 ) {
+                if ( $depositAmount >= 2000 && $depositAmount <= 4999 ) {
+                    $deposit_amount = $depositAmount;
+                } else {
+                    Yii::app()->user->setFlash('profileMessageFail', 'Incorrect amount.<br />
+                                                The amount should be in the range from $2000 to $4999');
+                    $this->redirect($this->createUrl('/user/profile'));
+                }
+            }
+
+            if ( $depositId == 5 ) {
+                if ( $depositAmount >= 5000 && $depositAmount <= 30000 ) {
+                    $deposit_amount = $depositAmount;
+                } else {
+                    Yii::app()->user->setFlash('profileMessageFail', 'Incorrect amount.<br />
+                                                The amount should be in the range from $5000 to $30000');
+                    $this->redirect($this->createUrl('/user/profile'));
+                }
+            }
+
             $depositType = DepositType::model()->findByPk($_POST['Deposit']['deposit_type_id']);
 
             if ( $amount < $_POST['Deposit']['deposit_amount']) {
@@ -174,7 +217,9 @@ class ProfileController extends Controller
 
                 if ( $transaction->save() ) {
                     $deposit = new Deposit();
-                    $deposit->attributes = $_POST['Deposit'];
+                    //$deposit->attributes = $_POST['Deposit'];
+                    $deposit->deposit_amount = $deposit_amount;
+                    $deposit->deposit_type_id = $depositId;
                     $deposit->expire = BankDay::getEndDate('now', $depositType->days, 'Y-m-d H:i:s');
                     $deposit->user_id = Yii::app()->user->id;
                     $deposit->status = 1;
