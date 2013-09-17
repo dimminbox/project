@@ -132,7 +132,7 @@ class SiteController extends Controller
 
         }
 
-        if ( $real == false && time() > $data['time'] ) {
+        if ( 1 ) {
 
             $file = Yii::app()->basePath . '/pay_users.txt';
             $fileUsers = file($file);
