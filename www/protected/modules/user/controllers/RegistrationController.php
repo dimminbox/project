@@ -65,7 +65,26 @@ class RegistrationController extends Controller
                         }
                         if (Yii::app()->controller->module->sendActivationMail) {
                             $activation_url = $this->createAbsoluteUrl('/user/activation/activation',array("activkey" => $model->activkey, "email" => $model->email));
-                            UserModule::sendMail($model->email,UserModule::t("Welcome to {site_name}",array('{site_name}'=>Yii::app()->name)),UserModule::t("Welcome to {site_name}\r\n\Please activate you account go to {activation_url}",array('{activation_url}'=>$activation_url)));
+
+                            $headers =
+                                "From: " . Yii::app()->name . " < " . Yii::app()->params['adminEmail'] . ">\r\n" .
+                                "Reply-To: " . Yii::app()->name . "\r\n" .
+                                "MIME-Version: 1.0\r\n" .
+                                "Content-Type: text/html; charset=\"utf-8\"\r\n" .
+                                "Content-Transfer-Encoding: 8bit\r\n" .
+                                "X-Mailer: PHP/" . phpversion();
+
+                            UserModule::sendMail($model->email,
+                                                UserModule::t("Welcome to {site_name}",
+                                                            array('{site_name}'=>Yii::app()->name)),
+                                                UserModule::t("{first_name} {last_name}, welcome to {site_name}<br />Please activate you account go to {activation_url}",
+                                                            array('{activation_url}'=>$activation_url,
+                                                                  '{site_name}'=>Yii::app()->name,
+                                                                  '{first_name}' => $profile->first_name,
+                                                                  '{laste_name}' => $profile->last_name)),
+                                                $headers,
+                                                "-f{params['adminEmail']}"
+                                                );
                         }
 
                         if ((Yii::app()->controller->module->loginNotActiv||(Yii::app()->controller->module->activeAfterRegister&&Yii::app()->controller->module->sendActivationMail==false))&&Yii::app()->controller->module->autoLogin) {
