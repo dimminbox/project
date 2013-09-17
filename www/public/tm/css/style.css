@@ -94,6 +94,7 @@ ul.menu li a:hover, ul.menu li.current a {color:#a83715;}
 #header-plans {
     width:940px;margin:0 auto;
     padding: 5px;
+
 }
 
 .plan {
@@ -101,7 +102,7 @@ ul.menu li a:hover, ul.menu li.current a {color:#a83715;}
     background-color: #ffffff;
     width: 210px;
     float:left;
-    border: 2px solid #666666;
+    border: 2px solid #333;
     padding: 5px;
     margin: 15px 5px 0 5px;
     -webkit-border-radius: 7px;
@@ -112,6 +113,7 @@ ul.menu li a:hover, ul.menu li.current a {color:#a83715;}
 .plan-title {
     font-weight: bold;
     font-size: 18px;
+    color: #333;
 }
 .plan:hover {
     border: 2px solid #d34c1d;
@@ -132,7 +134,7 @@ ul.menu li a:hover, ul.menu li.current a {color:#a83715;}
 }
 .plan hr {
     height: 1px;
-    background: #666666;
+    background: #333;
     font-size: 0;
     border: 0;
     margin-bottom: 5px;
@@ -147,17 +149,17 @@ ul.menu li a:hover, ul.menu li.current a {color:#a83715;}
 .percent {
     display: block;
     position: absolute;
-    right: 10px;
+    right: 0px;
     top: 40px;
     font-size: 24px;
-    background:url(../images/header35.gif) 0 0 repeat;
+    background: #333;
     color: #fff;
     font-weight: normal;
-    padding: 3px 12px 3px 12px;
-    -webkit-border-radius: 7px;
-    -moz-border-radius: 7px;
-    -khtml-border-radius: 7px;
-    border-radius: 7px;
+    padding: 3px 22px 3px 12px;
+    -webkit-border-radius: 7px 0 0 7px;
+    -moz-border-radius: 7px 0 0 7px;
+    -khtml-border-radius: 7px 0 0 7px;
+    border-radius: 7px 0 0 7px;
 }
 .other {
     display: block;

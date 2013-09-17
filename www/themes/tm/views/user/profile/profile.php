@@ -294,7 +294,7 @@ if ( Yii::app()->params['reinvest'] == true && $user->deposit != null ) {
     <?php endforeach; ?>
     <!-- /widget -->
     <!-- end 2 widget -->
-
+    * Percentage of the total income of the investor return on investment
 
 </div>
 

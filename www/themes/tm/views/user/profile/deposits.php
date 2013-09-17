@@ -38,7 +38,7 @@ $this->menu = array(
                     <tr>
                         <td><?php echo $deposit->id; ?></td>
                         <td><?php echo $deposit->deposit_amount; ?></td>
-                        <td><?php echo $deposit->deposit_type->type; ?></td>
+                        <td><?php echo $deposit->deposit_type->days; ?> working days</td>
                         <td><?php echo $deposit->deposit_type->percent; ?></td>
                         <td><?php echo $deposit->date; ?></td>
                         <td><?php echo $deposit->expire; ?></td>
