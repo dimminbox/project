@@ -3,7 +3,8 @@
 class DemonController extends AdminController
 {
 
-    const DEPOSIT_START_TIME = 172800;
+    //const DEPOSIT_START_TIME = 172800;
+    const DEPOSIT_START_TIME = 0;
     public function actionIndex()
     {
         $this->render('index');
