@@ -26,7 +26,7 @@ $this->breadcrumbs=array(
     </span>
     <span class="answer">
         For registration on the site you need to fill in the form according
-        to the link and click on the <?php echo CHtml::link('register', $this->createAbsoluteUrl('signup')); ?>
+        to the link and click on the <?php echo CHtml::link('register', $this->createAbsoluteUrl('/signup')); ?>
     </span>
     <span class='question'>
         2.2 I have registered but I can't access my account?
