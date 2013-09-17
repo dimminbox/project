@@ -81,7 +81,7 @@ class RegistrationController extends Controller
                                                             array('{activation_url}'=>$activation_url,
                                                                   '{site_name}'=>Yii::app()->name,
                                                                   '{first_name}' => $profile->first_name,
-                                                                  '{laste_name}' => $profile->last_name)),
+                                                                  '{last_name}' => $profile->last_name)),
                                                 $headers,
                                                 "-f{params['adminEmail']}"
                                                 );
