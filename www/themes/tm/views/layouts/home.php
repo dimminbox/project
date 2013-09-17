@@ -63,7 +63,7 @@
                 <span class="other">
                     Amount <i>$<?php echo $depositType->min_amount; ?> - $<?php echo $depositType->max_amount; ?></i><br />
                     Period <i><?php echo $depositType->days; ?> working days</i><br />
-                    Principal: returned
+                    Principal: return
                 </span>
 
             </div>
