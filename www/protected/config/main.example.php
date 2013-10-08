@@ -10,7 +10,7 @@ Yii::setPathOfAlias('bootstrap', dirname(__FILE__).'/../extensions/bootstrap');
 
 return array(
     'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
-    'name'=>'Cronofunds.com',
+    'name'=>'Cronofunds',
     'theme' => 'tm',
     //'sourceLanguage'=>'de',
     'language' => 'en',
@@ -60,18 +60,19 @@ return array(
             'tableProfileFields' => 'hyip_profiles_fields',
             # encrypting method (php hash function)
             'hash' => 'md5',
+            'sendSmsActivation' => true,
             # send activation email
             'sendActivationMail' => true,
             # allow access for non-activated users
             'loginNotActiv' => false,
             # activate user on registration (only sendActivationMail = false)
-            'activeAfterRegister' => true,
+            'activeAfterRegister' => false,
             # automatically login from registration
             'autoLogin' => true,
             # registration path
             'registrationUrl' => array('/user/registration'),
             # recovery password path
-            'recoveryUrl' => array('/user/recovery'),
+            'recoveryUrl' => array('/user/recovery/smsRecovery'),
             # login form path
             'loginUrl' => array('/user/login'),
             # page after login
@@ -117,7 +118,7 @@ return array(
         ),
         'request'=>array(
             'enableCookieValidation'=>true,
-            'enableCsrfValidation'=>true,
+            'enableCsrfValidation'=>false,
         ),
         'urlManager'=>array(
             'class'=>'application.components.UrlManager',
@@ -144,10 +145,10 @@ return array(
         // uncomment the following to use a MySQL database
 
         'db'=>array(
-            'connectionString' => 'mysql:host=localhost;dbname=project',
+            'connectionString' => 'mysql:host=localhost;dbname=cronofunds',
             'emulatePrepare' => true,
             'username' => 'root',
-            'password' => 'root',
+            'password' => '82zczrnhw',
             'charset' => 'utf8',
             'tablePrefix' => 'hyip_',
         ),
