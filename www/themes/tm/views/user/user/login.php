@@ -7,9 +7,15 @@ $this->layout = '//layouts/login';
 ?>
 <div class="container">
     <div class="account-container stacked">
+
         <div class="content clearfix">
             <h1><?php echo UserModule::t("Login"); ?></h1>
 
+            <?php if (Yii::app()->user->hasFlash('activation')): ?>
+                <div class="success">
+                    <?php echo Yii::app()->user->getFlash('activation'); ?>
+                </div>
+            <?php endif ?>
             <div class="login-fields"><p>
                     <?php echo CHtml::beginForm(); ?>
 
@@ -58,32 +64,16 @@ $this->layout = '//layouts/login';
                     );
                     ?>
                 </div>
-                </div>
-
-
             </div>
-            <!-- form -->
 
 
         </div>
-        <!-- .actions -->
+        <!-- form -->
+
+
     </div>
-    <!-- /content -->
+    <!-- .actions -->
 </div>
-</div>
-<!-- /account-container -->
-<!-- /login-extra -->
-
-<!-- Le javascript
-================================================== -->
-
-<!-- Placed at the end of the document so the pages load faster -->
-<script src="./js/libs/jquery-1.8.3.min.js"></script>
-<script src="./js/libs/jquery-ui-1.10.0.custom.min.js"></script>
-<script src="./js/libs/bootstrap.min.js"></script>
-<script src="./js/Application.js"></script>
-<script src="./js/signin.js"></script><a id="back-to-top" href="#top" style="display: none;"><i
-        class="icon-chevron-up"></i></a></body></html>
+<!-- /content -->
 
 
-<div class="form">

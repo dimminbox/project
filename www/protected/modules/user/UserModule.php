@@ -27,6 +27,8 @@ class UserModule extends CWebModule
 	 * @desc hash method (md5,sha1 or algo hash function http://www.php.net/manual/en/function.hash.php)
 	 */
 	public $hash='md5';
+
+    public $sendSmsActivation=true;
 	
 	/**
 	 * @var boolean
@@ -169,7 +171,18 @@ class UserModule extends CWebModule
 		else
 			return hash($hash,$string);
 	}
-	
+
+    public static function smsCode() {
+        return rand(111111,999999);
+    }
+
+    public static function validatePhone($str) {
+
+        $order = array('-', ' ', '+', '(', ')');
+
+        return (int)str_replace($order, '', $str);
+    }
+
 	/**
 	 * @param $place
 	 * @return boolean 

@@ -42,7 +42,8 @@ class RegistrationController extends Controller
                 if($model->validate()&&$profile->validate())
                 {
                     $soucePassword = $model->password;
-                    $model->activkey=UserModule::encrypting(microtime().$model->password);
+                    $model->activkey=UserModule::smsCode();
+                    //$model->activkey=UserModule::encrypting(microtime().$model->password);
                     $model->password=UserModule::encrypting($model->password);
                     $model->verifyPassword=UserModule::encrypting($model->verifyPassword);
                     $model->superuser=0;
@@ -63,6 +64,12 @@ class RegistrationController extends Controller
                             $referral->save();
 
                         }
+
+                        if (Yii::app()->controller->module->sendSmsActivation) {
+                            $message = 'Activation code: ' . $model->activkey;
+                            //Sms::send($profile->telefone, $message);
+                        }
+
                         if (Yii::app()->controller->module->sendActivationMail) {
                             $activation_url = $this->createAbsoluteUrl('/user/activation/activation',array("activkey" => $model->activkey, "email" => $model->email));
 
@@ -86,7 +93,7 @@ class RegistrationController extends Controller
                                                 "-f{params['adminEmail']}"
                                                 );
                         }
-
+                        /*
                         if ((Yii::app()->controller->module->loginNotActiv||(Yii::app()->controller->module->activeAfterRegister&&Yii::app()->controller->module->sendActivationMail==false))&&Yii::app()->controller->module->autoLogin) {
                             $identity=new UserIdentity($model->username,$soucePassword);
                             $identity->authenticate();
@@ -103,11 +110,44 @@ class RegistrationController extends Controller
                                 Yii::app()->user->setFlash('registration',UserModule::t("Thank you for your registration. Please check your email."));
                             }
                             $this->refresh();
+                        }*/
+
+                        if ( $model->status == User::STATUS_NOACTIVE ) {
+                            Yii::app()->user->setState('id_for_activation', $model->id);
+                            $this->redirect('activation');
                         }
                     }
                 } else $profile->validate();
             }
             $this->render('/user/registration',array('model'=>$model,'profile'=>$profile));
         }
+    }
+
+    public function actionSmsActivation() {
+
+
+        if (isset($_POST['User']['activkey']) ) {
+
+            $find = User::model()->notsafe()->findByPk(Yii::app()->user->id_for_activation);
+
+            if ( $_POST['User']['activkey'] == $find->activkey  ) {
+
+                    $find->activkey = UserModule::smsCode();
+                    $find->status = 1;
+                    $find->save();
+                Yii::app()->user->setFlash('activation',UserModule::t("You account is activated."));
+                $this->redirect('/user/login');
+
+
+            } else {
+                Yii::app()->user->setFlash('errorActivationCode',UserModule::t("Invalid activation code."));
+            }
+
+        } else {
+            $user = User::model()->findByPk(Yii::app()->user->id_for_activation);
+            $this->render('/user/smsActivation',array('model'=>$user));
+        }
+
+
     }
 }

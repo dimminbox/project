@@ -177,7 +177,7 @@ return array(
     // using Yii::app()->params['paramName']
     'params'=>array(
         // this is used in contact page
-        'adminEmail'=>'yborschev@gmail.com',
+        'adminEmail'=>'cronojhon@gmail.com',
         'CronSecretPhrase' => '7g65dwrh78wc6r7wgxr637TY6xhYUGYTYf9867HGVhghj',
         'AccountID' => '3140075',
         'payee_account' => 'U4330448',

@@ -11,6 +11,9 @@ return array(
     '<language:(en)>/signup' => '/user/registration',
     'signup' => '/user/registration',
 
+    '<language:(en)>/activation' => '/user/registration/smsActivation',
+    'activation' => '/user/registration/smsActivation',
+
     '<language:(en)>/faq' => '/site/faq',
     'faq' => '/site/faq',
 

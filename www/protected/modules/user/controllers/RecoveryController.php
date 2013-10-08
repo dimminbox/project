@@ -30,7 +30,7 @@ class RecoveryController extends Controller
 								Yii::app()->user->setFlash('recoveryMessage',UserModule::t("New password is saved."));
 								$this->redirect(Yii::app()->controller->module->recoveryUrl);
 							}
-						} 
+						}
 						$this->render('changepassword',array('form'=>$form2));
 		    		} else {
 		    			Yii::app()->user->setFlash('recoveryMessage',UserModule::t("Incorrect recovery link."));
@@ -42,7 +42,7 @@ class RecoveryController extends Controller
 			    		if($form->validate()) {
 			    			$user = User::model()->notsafe()->findbyPk($form->user_id);
 							$activation_url = 'http://' . $_SERVER['HTTP_HOST'].$this->createUrl(implode(Yii::app()->controller->module->recoveryUrl),array("activkey" => $user->activkey, "email" => $user->email));
-							
+
 							$subject = UserModule::t("You have requested the password recovery site {site_name}",
 			    					array(
 			    						'{site_name}'=>Yii::app()->name,
@@ -52,9 +52,9 @@ class RecoveryController extends Controller
 			    						'{site_name}'=>Yii::app()->name,
 			    						'{activation_url}'=>$activation_url,
 			    					));
-							
+
 			    			UserModule::sendMail($user->email,$subject,$message);
-			    			
+
 							Yii::app()->user->setFlash('recoveryMessage',UserModule::t("Please check your email. An instructions was sent to your email address."));
 			    			$this->refresh();
 			    		}
@@ -63,5 +63,122 @@ class RecoveryController extends Controller
 		    	}
 		    }
 	}
+
+    public function actionSmsRecovery() {
+
+        if (Yii::app()->user->id) {
+            $this->redirect(Yii::app()->controller->module->returnUrl);
+        } else {
+
+            if(isset($_POST['UserChangePassword'])) {
+                $form2 = new UserChangePassword;
+                $form2->attributes=$_POST['UserChangePassword'];
+                $find = User::model()->notsafe()->findByPk(Yii::app()->user->id_for_activation);
+                if($form2->validate()) {
+                    $find->password = Yii::app()->controller->module->encrypting($form2->password);
+                    $find->activkey=UserModule::smsCode();
+                    if ($find->status==0) {
+                        $find->status = 1;
+                    }
+                    $find->save();
+                    Yii::app()->user->setFlash('activation',UserModule::t("New password is saved."));
+                    $this->redirect('/user/login');
+                }
+            }
+
+            if (!empty($_POST['User']['activkey']) ) {
+
+                $find = User::model()->notsafe()->findByPk(Yii::app()->user->id_for_activation);
+
+                if ( $_POST['User']['activkey'] == $find->activkey  ) {
+
+                    $form2 = new UserChangePassword;
+
+                    $this->render('changepassword',array('form'=>$form2));
+
+                } else {
+                    Yii::app()->user->setFlash('errorActivationCode',UserModule::t("Invalid activation code."));
+                    $this->render('/user/smsActivation',array('model'=>$find));
+                }
+
+            } else {
+                if ( !empty($_POST['phone']) ) {
+
+                    $phone = UserModule::validatePhone($_POST['phone']);
+                    $user = Profile::model()->findByAttributes(array('telefone'=>$phone));
+                    $find = User::model()->notsafe()->findByPk($user->user_id);
+
+                    if ( $find == null ) {
+                        Yii::app()->user->setFlash('recoveryMessage',UserModule::t("Phone not found."));
+                        $this->refresh();
+                    } else {
+                        //Sms::send($user->telefone, 'Activation code: ' . $find->activkey);
+                        Yii::app()->user->setState('id_for_activation', $user->user_id);
+                        $this->render('/user/smsActivation',array('model'=>$find));
+                    }
+
+                } else {
+                    $this->render('smsRecovery');
+                }
+            }
+        }
+/*
+
+        $form = new UserRecoveryForm;
+
+        if (Yii::app()->user->id) {
+            $this->redirect(Yii::app()->controller->module->returnUrl);
+        } else {
+            if (isset($_POST['User']['activkey']) ) {
+
+                $find = User::model()->notsafe()->findByPk(Yii::app()->user->id_for_activation);
+
+                if ( $_POST['User']['activkey'] == $find->activkey  ) {
+
+                    $form2 = new UserChangePassword;
+
+                    $this->render('changepassword',array('form'=>$form2));
+
+                } else {
+                    Yii::app()->user->setFlash('errorActivationCode',UserModule::t("Invalid activation code."));
+                }
+
+            } else {
+                if(isset($_POST['UserChangePassword'])) {
+                    $form2 = new UserChangePassword;
+                    $form2->attributes=$_POST['UserChangePassword'];
+                    $find = User::model()->notsafe()->findByPk(Yii::app()->user->id_for_activation);
+                    if($form2->validate()) {
+                        $find->password = Yii::app()->controller->module->encrypting($form2->password);
+                        $find->activkey=UserModule::smsCode();
+                        if ($find->status==0) {
+                            $find->status = 1;
+                        }
+                        $find->save();
+                        Yii::app()->user->setFlash('recoveryMessage',UserModule::t("New password is saved."));
+                        $this->redirect(Yii::app()->controller->module->recoveryUrl);
+                    }
+                }
+
+                if ( !empty($_POST['phone']) ) {
+                    $phone = (int)$_POST['phone'];
+                    $find = User::model()->notsafe()->findByAttributes(array('telefone'=>$phone));
+
+                    if ( $find == null ) {
+                        Yii::app()->user->setFlash('recoveryMessage',UserModule::t("Phone not found."));
+                        $this->refresh();
+                    } else {
+                        Sms::send($find->telefone, 'Activation code: ' . $find->activkey);
+                        $this->render('/user/smsActivation',array('model'=>$find));
+                    }
+
+                } else {
+
+                }
+
+            }
+
+        } */
+    }
 
 }

@@ -20,7 +20,7 @@ class DemonController extends AdminController
             foreach( $users as $user ) {
                 if ( isset($user->deposit) ) {
                     $deposits = Deposit::model()->findAllByAttributes(array('user_id' => $user->id));
-
+                    $summ = 0;
                     foreach( $deposits as $deposit ) {
 
                         if ( $deposit->status == 1 && $deposit->expire > date('Y-m-d H:i:s', time()) ) {
@@ -36,7 +36,7 @@ class DemonController extends AdminController
                                 $transaction->amount_type = UserTransaction::AMOUNT_TYPE_EARNINGS;
                                 $transaction->reason = Yii::t('demon', 'Profit of deposits');
                                 $transaction->save();
-
+                                $summ += $percentAmount;
 
                             } else {
                                 continue;
@@ -55,6 +55,11 @@ class DemonController extends AdminController
                             }
                         }
                     }
+                    if ( $summ > 0 ) {
+                        $message = '$' . $summ;
+                        Sms::send($user->profile->telefone, $message);
+                    }
+
                 } else {
                     continue;
                 }
