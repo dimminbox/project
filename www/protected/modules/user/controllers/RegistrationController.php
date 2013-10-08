@@ -67,7 +67,7 @@ class RegistrationController extends Controller
 
                         if (Yii::app()->controller->module->sendSmsActivation) {
                             $message = 'Activation code: ' . $model->activkey;
-                            //Sms::send($profile->telefone, $message);
+                            Sms::send($profile->telefone, $message);
                         }
 
                         if (Yii::app()->controller->module->sendActivationMail) {

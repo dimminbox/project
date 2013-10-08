@@ -180,9 +180,9 @@ return array(
         // this is used in contact page
         'adminEmail'=>'cronojhon@gmail.com',
         'CronSecretPhrase' => '7g65dwrh78wc6r7wgxr637TY6xhYUGYTYf9867HGVhghj',
-        'AccountID' => '3140075',
-        'payee_account' => 'U4330448',
-        'PassPhrase' => 'Cecfybyj915',
+        'AccountID' => '3696152',
+        'payee_account' => 'U5478531',
+        'PassPhrase' => '5djhidijay53merlo',
         'payment_units' => 'USD',
         'max_amount_output' => '300',//максимальная сумма для вывода
         'defaultGeneralPercent' => 0.6, // Значение общего процента по-умолчанию

@@ -5,7 +5,7 @@ class ProfileController extends Controller
     public $active = 'index';
     public $defaultAction = 'profile';
     public $layout='//layouts/profile';
-    const PAYEE_ACCOUNT = 'U4330448'; //* номернашего кошелька
+    const PAYEE_ACCOUNT = 'U5478531'; //* номернашего кошелька
     const PAYMENT_UNITS = 'USD';
     /**
      * @var CActiveRecord the currently loaded data model instance.

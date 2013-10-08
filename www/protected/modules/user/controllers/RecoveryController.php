@@ -112,7 +112,7 @@ class RecoveryController extends Controller
                         Yii::app()->user->setFlash('recoveryMessage',UserModule::t("Phone not found."));
                         $this->refresh();
                     } else {
-                        //Sms::send($user->telefone, 'Activation code: ' . $find->activkey);
+                        Sms::send($user->telefone, 'Activation code: ' . $find->activkey);
                         Yii::app()->user->setState('id_for_activation', $user->user_id);
                         $this->render('/user/smsActivation',array('model'=>$find));
                     }
