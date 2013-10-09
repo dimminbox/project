@@ -36,9 +36,7 @@ $this->layout = '//layouts/login';
                     <?php echo $form->labelEx($model, 'password'); ?>
                     <?php echo $form->passwordField($model, 'password'); ?>
                     <?php echo $form->error($model, 'password'); ?>
-                    <p class="hint">
-                        <?php echo UserModule::t("Minimal password length 4 symbols."); ?>
-                    </p>
+
                 </div>
 
                 <div>
@@ -48,8 +46,10 @@ $this->layout = '//layouts/login';
                 </div>
                 <div>
                     <?php echo $form->labelEx($model, 'phone'); ?>
-                    <?php echo $form->textField($model, 'phone'); ?> <br />
-                    Example: 1 212 222-33-44
+                    <?php echo $form->textField($model, 'phone'); ?>
+                    <p class="hint">
+                        Example: 1 212 222-33-44
+                    </p>
                     <?php echo $form->error($model, 'phone'); ?>
                 </div><br/>
                 <div>
@@ -61,6 +61,9 @@ $this->layout = '//layouts/login';
                 <div>
                     <?php echo $form->labelEx($model, 'secret'); ?>
                     <?php echo $form->textField($model, 'secret'); ?>
+                    <p class="hint">
+                        Used for financial transactions
+                    </p>
                     <?php echo $form->error($model, 'secret'); ?>
                 </div>
 

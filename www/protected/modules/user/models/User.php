@@ -27,6 +27,7 @@ class User extends CActiveRecord
      * @var integer $internal_purse
      * @var string $perfect_purse
      * @var string $secret
+     * @var integer $type
      */
 
     /**
@@ -55,11 +56,11 @@ class User extends CActiveRecord
         // will receive user inputs.CConsoleApplication
         return ((get_class(Yii::app())=='CConsoleApplication' || (get_class(Yii::app())!='CConsoleApplication' && Yii::app()->getModule('user')->isAdmin()))?array(
             array('username', 'length', 'max'=>20, 'min' => 3,'message' => UserModule::t("Incorrect username (length between 3 and 20 characters).")),
-            array('password', 'length', 'max'=>128, 'min' => 4,'message' => UserModule::t("Incorrect password (minimal length 4 symbols).")),
+            array('password', 'length', 'max'=>128, 'min' => 6,'message' => UserModule::t("Incorrect password (minimal length 6 symbols).")),
             array('secret', 'length', 'max'=>128, 'min' => 3 ),
             array('email', 'email'),
             array('internal_purse', 'unique'),
-            array('perfect_purse, ','safe'),
+            array('perfect_purse, type','safe'),
             array('phone', 'unique', 'message' => UserModule::t("This user's phone already exists.")),
             array('username', 'unique', 'message' => UserModule::t("This user's name already exists.")),
             array('email', 'unique', 'message' => UserModule::t("This user's email address already exists.")),
@@ -120,6 +121,7 @@ class User extends CActiveRecord
             'secret' => UserModule::t("Secret"),
             'phone' => UserModule::t("Phone"),
             'birthday' => UserModule::t("birthday"),
+            'type' => UserModule::t("type"),
         );
     }
 
@@ -139,7 +141,7 @@ class User extends CActiveRecord
                 'condition'=>'superuser=1',
             ),
             'notsafe'=>array(
-                'select' => 'id, username, password, phone, email, activkey, create_at, lastvisit_at, internal_purse, perfect_purse, superuser, status',
+                'select' => 'id, username, password, phone, email, activkey, create_at, lastvisit_at, internal_purse, perfect_purse, superuser, status, type',
             ),
         );
     }
@@ -148,7 +150,7 @@ class User extends CActiveRecord
     {
         return CMap::mergeArray(Yii::app()->getModule('user')->defaultScope,array(
             'alias'=>'user',
-            'select' => 'user.id, user.username, user.email, user.create_at, user.lastvisit_at, user.internal_purse, user.perfect_purse, user.superuser, user.status, secret',
+            'select' => 'user.id, user.username, user.email, user.create_at, user.lastvisit_at, user.internal_purse, user.perfect_purse, user.superuser, user.status, secret, type',
         ));
     }
 
@@ -194,6 +196,7 @@ class User extends CActiveRecord
         $criteria->compare('secret',$this->secret);
         $criteria->compare('phone',$this->phone);
         $criteria->compare('birthday',$this->birthday);
+        $criteria->compare('type',$this->type);
 
         return new CActiveDataProvider(get_class($this), array(
             'criteria'=>$criteria,

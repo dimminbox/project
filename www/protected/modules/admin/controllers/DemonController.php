@@ -56,7 +56,7 @@ class DemonController extends AdminController
                         }
                     }
                     if ( $summ > 0 ) {
-                        $message = '$' . $summ;
+                        $message = 'Esteemed ' . $user->profile->firstname . '! Percents from the deposit are received on your account in sum $' . $summ;
                         Sms::send($user->phone, $message);
                     }
 
@@ -110,7 +110,7 @@ class DemonController extends AdminController
                     }
 
                     if ( $countSumm > 0 ) {
-                        $message = '$' . $countSumm;
+                        $message = 'Esteemed ' . $user->profile->firstname . '! Referral percents are received on your account in sum $' . $summ;
                         Sms::send($user->phone, $message);
                     }
 
