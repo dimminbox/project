@@ -45,6 +45,7 @@ class UserIdentity extends CUserIdentity
             $this->setState('email', $record->email);
             $this->setState('name', $record->name);
             $this->setState('role', $record->role->name);
+            $this->setState('perfect_purse', $record->perfect_purse);
             $this->errorCode=self::ERROR_NONE;
         }
 

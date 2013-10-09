@@ -19,6 +19,7 @@
                 $attributes = array(
                     'username',
                     'secret',
+                    'phone'
                 );
 
                 $profileFields=ProfileField::model()->forOwner()->sort()->findAll();

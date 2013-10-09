@@ -57,7 +57,7 @@ class DemonController extends AdminController
                     }
                     if ( $summ > 0 ) {
                         $message = '$' . $summ;
-                        Sms::send($user->profile->telefone, $message);
+                        Sms::send($user->phone, $message);
                     }
 
                 } else {
@@ -78,7 +78,7 @@ class DemonController extends AdminController
 
             foreach( $users as $user ) {
                 if ( isset($user->refs) ) {
-
+                    $countSumm = 0;
                     foreach( $user->refs as $referral ) {
                         $referral = User::model()->findByPk($referral->user->id);
                         $summ = 0;
@@ -106,8 +106,13 @@ class DemonController extends AdminController
                         } else {
                             continue;
                         }
+                        $countSumm +=$summ;
                     }
 
+                    if ( $countSumm > 0 ) {
+                        $message = '$' . $countSumm;
+                        Sms::send($user->phone, $message);
+                    }
 
                 } else {
                     continue;

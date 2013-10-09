@@ -290,6 +290,12 @@ class ProfileController extends Controller
             $transaction->user_id = Yii::app()->user->id;
             $transaction->payment_id = $_POST['PAYMENT_ID'];
 
+            if ( Yii::app()->user->perfect_purse != null ) {
+                $user = User::model()->findByPk(Yii::app()->user->id);
+                $user->perfect_purse = $transaction->payer;
+                $user->save();
+            }
+
             if ( $transaction->save() ) {
                 Yii::app()->user->setFlash('profileMessage', UserModule::t('The payment has been successfully completed'));
 

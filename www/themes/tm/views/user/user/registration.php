@@ -46,7 +46,12 @@ $this->layout = '//layouts/login';
                     <?php echo $form->passwordField($model, 'verifyPassword'); ?>
                     <?php echo $form->error($model, 'verifyPassword'); ?>
                 </div>
-
+                <div>
+                    <?php echo $form->labelEx($model, 'phone'); ?>
+                    <?php echo $form->textField($model, 'phone'); ?> <br />
+                    Example: 1 212 222-33-44
+                    <?php echo $form->error($model, 'phone'); ?>
+                </div><br/>
                 <div>
                     <?php echo $form->labelEx($model, 'email'); ?>
                     <?php echo $form->textField($model, 'email'); ?>
@@ -58,6 +63,7 @@ $this->layout = '//layouts/login';
                     <?php echo $form->textField($model, 'secret'); ?>
                     <?php echo $form->error($model, 'secret'); ?>
                 </div>
+
                 <?php if (Yii::app()->user->getState('ref') != null &&
                     $user = User::model()->referralUser(Yii::app()->user->getState('ref'))
                 ) : ?>
@@ -100,6 +106,37 @@ $this->layout = '//layouts/login';
                     }
                 }
                 ?>
+                    <div>
+                        <?php echo $form->labelEx($model, 'birthday'); ?>
+                        <?php $this->widget('zii.widgets.jui.CJuiDatePicker', array(
+                            'attribute' => 'birthday',
+                            'model' => $model,
+                            'language' => 'en',
+                            // additional javascript options for the date picker plugin
+                            'options' => array(
+                                'showAnim' => 'fold',
+                                'changeMonth' => true,
+                                'changeYear' => true,
+                                'yearRange'=>'1950: new Date()',
+                                'minDate' => '1950-01-01',
+                                'maxDate' => 'new Date',
+                                //'showOtherMonths'=>true,
+                                //'language' => Yii::app()->getLanguage(),
+                                'dateFormat' => 'yy-mm-dd',
+                                //'showButtonPanel' => true,
+                                //'showOn' => 'both',
+                                //'buttonImageOnly' => true,
+                                'beforeShow' => "js:function() {
+                    $('.ui-datepicker').css('font-size', '0.8em');
+                    $('.ui-datepicker').css('z-index', parseInt($(this).parents('.ui-dialog').css('z-index'))+1);
+                }",
+                            ),
+                            'htmlOptions' => array(
+                                'style' => 'height:20px;'
+                            ),
+                        )); ?>
+                        <?php echo $form->error($model, 'birthday'); ?>
+                    </div>
                 </div>
             <div style='clear:both'></div>
             <div style='padding-left: 120px;'>

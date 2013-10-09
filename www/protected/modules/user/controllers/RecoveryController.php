@@ -105,15 +105,14 @@ class RecoveryController extends Controller
                 if ( !empty($_POST['phone']) ) {
 
                     $phone = UserModule::validatePhone($_POST['phone']);
-                    $user = Profile::model()->findByAttributes(array('telefone'=>$phone));
-                    $find = User::model()->notsafe()->findByPk($user->user_id);
+                    $find = User::model()->notsafe()->findByAttributes(array('phone'=>$phone));
 
                     if ( $find == null ) {
                         Yii::app()->user->setFlash('recoveryMessage',UserModule::t("Phone not found."));
                         $this->refresh();
                     } else {
-                        Sms::send($user->telefone, 'Activation code: ' . $find->activkey);
-                        Yii::app()->user->setState('id_for_activation', $user->user_id);
+                        Sms::send($find->phone, 'Activation code: ' . $find->activkey);
+                        Yii::app()->user->setState('id_for_activation', $find->id);
                         $this->render('/user/smsActivation',array('model'=>$find));
                     }
 

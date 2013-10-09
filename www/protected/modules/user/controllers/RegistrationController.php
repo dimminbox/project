@@ -50,6 +50,7 @@ class RegistrationController extends Controller
                     $model->internal_purse = mt_rand(10000, 99999) . mt_rand(10000, 99999);
                     $model->status=((Yii::app()->controller->module->activeAfterRegister)?User::STATUS_ACTIVE:User::STATUS_NOACTIVE);
                     $model->secret = $_POST['RegistrationForm']['secret'];
+                    $model->phone = UserModule::validatePhone($_POST['RegistrationForm']['phone']);
 
                     if ($model->save()) {
 
@@ -62,12 +63,11 @@ class RegistrationController extends Controller
                             $referral->user_id = $_POST['RegistrationForm']['referrer_id'];
                             $referral->ref_id = $model->id;
                             $referral->save();
-
                         }
 
                         if (Yii::app()->controller->module->sendSmsActivation) {
                             $message = 'Activation code: ' . $model->activkey;
-                            Sms::send($profile->telefone, $message);
+                            Sms::send($model->phone, $message);
                         }
 
                         if (Yii::app()->controller->module->sendActivationMail) {
