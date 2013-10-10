@@ -34,7 +34,7 @@ class DemonController extends AdminController
                                 $transaction->user_id = $user->id;
                                 $transaction->amount = $percentAmount;
                                 $transaction->amount_type = UserTransaction::AMOUNT_TYPE_EARNINGS;
-                                $transaction->reason = Yii::t('demon', 'Profit of deposits');
+                                $transaction->reason = Yii::t('demon', 'Profit of deposits #') . $deposit->id;;
                                 $transaction->save();
                                 $summ += $percentAmount;
 
@@ -50,7 +50,7 @@ class DemonController extends AdminController
                                 $transaction->user_id = $user->id;
                                 $transaction->amount = $deposit->deposit_amount;
                                 $transaction->amount_type = UserTransaction::AMOUNT_TYPE_BACK_INVESTMENT;
-                                $transaction->reason = Yii::t('demon', 'Refund of a deposit №') . $deposit->id;
+                                $transaction->reason = Yii::t('demon', 'Refund of a deposit #') . $deposit->id;
                                 $transaction->save();
                             }
                         }
