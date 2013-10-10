@@ -97,10 +97,12 @@ class GeneralPercentController extends AdminController
 
             $model->date = $date;
 			$model->json_days = $json;
-
-			if($model->save())
+            //var_dump($model->json_days);die;
+			if($model->save()) {
                 Yii::app()->user->setFlash('adminSuccessMessage', 'Создано!');
-				$this->redirect(array('index','id'=>$model->id));
+                $this->redirect(array('index','id'=>$model->id));
+            }
+
 
 		}
 
