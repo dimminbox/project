@@ -6,3 +6,4 @@
 /www/assets
 
 /www/protected/runtime
+protected/images/photos/*

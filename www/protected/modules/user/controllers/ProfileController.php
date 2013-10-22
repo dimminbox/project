@@ -289,15 +289,17 @@ class ProfileController extends Controller
     //экшн удачной оплаты perfect money
     public function actionDepositSuccess() {
         $transaction = new UserTransactionsIncomplete();
-        if ( isset($_POST) ) {
+        if ( !empty($_POST['PAYMENT_AMOUNT']) && !empty($_POST['PAYER_ACCOUNT']) && !empty($_POST['V2_HASH']) && !empty($_POST['PAYMENT_ID']) ) {
             $transaction->amount = $_POST['PAYMENT_AMOUNT'];
             $transaction->payer = $_POST['PAYER_ACCOUNT'];
             $transaction->hash = $_POST['V2_HASH'];
             $transaction->user_id = Yii::app()->user->id;
             $transaction->payment_id = $_POST['PAYMENT_ID'];
 
-            if ( Yii::app()->user->perfect_purse != null ) {
-                $user = User::model()->findByPk(Yii::app()->user->id);
+            $user = User::model()->findByPk(Yii::app()->user->id);
+
+            if ( $user->perfect_purse == null ) {
+
                 $user->perfect_purse = $transaction->payer;
                 $user->save();
             }
