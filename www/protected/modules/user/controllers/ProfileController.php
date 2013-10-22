@@ -114,7 +114,7 @@ class ProfileController extends Controller
         $deposit = new DepositForm();
 
         $deposit->PAYEE_ACCOUNT = Yii::app()->params['payee_account'];
-        $deposit->PAYEE_NAME = 'project';
+        $deposit->PAYEE_NAME = Yii::app()->name;
         $deposit->PAYMENT_ID = uniqid(Yii::app()->user->id + time());
         $deposit->PAYMENT_UNITS = Yii::app()->params['payment_units'];
         $deposit->PAYMENT_AMOUNT = 100;
@@ -288,8 +288,10 @@ class ProfileController extends Controller
     }
     //экшн удачной оплаты perfect money
     public function actionDepositSuccess() {
-        $transaction = new UserTransactionsIncomplete();
+
         if ( !empty($_POST['PAYMENT_AMOUNT']) && !empty($_POST['PAYER_ACCOUNT']) && !empty($_POST['V2_HASH']) && !empty($_POST['PAYMENT_ID']) ) {
+            var_dump($_POST['V2_HASH']);die;
+            $transaction = new UserTransactionsIncomplete();
             $transaction->amount = $_POST['PAYMENT_AMOUNT'];
             $transaction->payer = $_POST['PAYER_ACCOUNT'];
             $transaction->hash = $_POST['V2_HASH'];
@@ -318,7 +320,7 @@ class ProfileController extends Controller
     public function actionDepositStatus() {
         $transactionInComlete = UserTransactionsIncomplete::model()->findByAttributes(array('payment_id' => $_POST['PAYMENT_ID']));
 
-        define('ALTERNATE_PHRASE_HASH',  '748GH678GFH896HJ465GH9ZQP');
+        define('ALTERNATE_PHRASE_HASH',  'S7cnmaT786kURd');
         // Path to directory to save logs. Make sure it has write permissions.
         define('PATH_TO_LOG',  'protected/runtime/deposit/');
         $alternate = strtoupper(md5(ALTERNATE_PHRASE_HASH));
