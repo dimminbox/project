@@ -290,7 +290,7 @@ class ProfileController extends Controller
     public function actionDepositSuccess() {
 
         if ( !empty($_POST['PAYMENT_AMOUNT']) && !empty($_POST['PAYER_ACCOUNT']) && !empty($_POST['V2_HASH']) && !empty($_POST['PAYMENT_ID']) ) {
-            var_dump($_POST['V2_HASH']);die;
+            //var_dump($_POST['V2_HASH']);die;
             $transaction = new UserTransactionsIncomplete();
             $transaction->amount = $_POST['PAYMENT_AMOUNT'];
             $transaction->payer = $_POST['PAYER_ACCOUNT'];
@@ -330,7 +330,7 @@ class ProfileController extends Controller
             $_POST['PAYMENT_BATCH_NUM'].':'.
             $_POST['PAYER_ACCOUNT'].':'. $alternate .':'.
             $_POST['TIMESTAMPGMT'];
-
+        mail('cronojhon@gmail.com','test',$string);
         $hash=strtoupper(md5($string));
 
         if($hash==$_POST['V2_HASH']){ // proccessing payment if only hash is valid
